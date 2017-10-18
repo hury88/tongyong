@@ -27,9 +27,15 @@ return [
         // 数据库名
         'database'        => 'tongyong',
         // 数据库用户名
+<<<<<<< HEAD
         'username'        => 'tongyasddas',
         // 数据库密码
         'password'        => '1234',
+=======
+        'username'        => 'tongyong',
+        // 数据库密码
+        'password'        => '123',
+>>>>>>> bf780654e59862ee72a93d4aec77b1eaf4578f3c
         // 数据库连接端口
         'hostport'        => '3306',
         // 数据库连接参数
