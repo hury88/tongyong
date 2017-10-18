@@ -29,7 +29,7 @@ return [
         // 数据库用户名
         'username'        => 'tongyasddas',
         // 数据库密码
-        'password'        => '123',
+        'password'        => '1234',
         // 数据库连接端口
         'hostport'        => '3306',
         // 数据库连接参数
