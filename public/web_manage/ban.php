@@ -22,18 +22,15 @@ if(isset($_GET['showtype'])){//主动传值优先级最大
 }*/
 
 //条件
-$map = array('pid'=>0,'catname'=>array('neq','辅助栏目'));
-
-########################分页配置开始
-    $psize   =   I('get.psize',30,'intval');
-    $pageConfig = array(
-        /*条件*/'where' => $map,
-        /*排序*/'order' => 'disorder desc, id ASC',
-        /*条数*/'psize' => $psize,
-        /*表  */'table' => $table,
-    );
-	list($data,$pagestr) = Page::paging($pageConfig);
-########################分页配置结束
+$map = array();
+$tree = new Tree(M('news_cats')->field("id,catname")->where("pid=0 and id<6")->select());
+$cate = $tree->spanning();
+$dropdown =  '<select name="pid" id="" class="select1">%s</select>';
+$option = '<option value="0">无（属一级栏目）</option>';
+$color = array('#0B0000','#0E8A5F','#7FD7A2');
+$spancer = array('','&nbsp;├','&nbsp;&nbsp;└└');
+echo "<pre>";
+var_dump($cate);exit();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,28 +62,23 @@ $map = array('pid'=>0,'catname'=>array('neq','辅助栏目'));
                          </tr>
 <!-- #################################################################################################################### -->
 
-   <?php
-    foreach ($data as $key => $bd) :
-
-        @extract($bd);
-/*
-        if (in_array($id, [2])) {
-            continue;
-        }*/
-
-        {//生成修改地址
-            $query = queryString(true);
-            $query['id'] = $id;
-            $editUrl = getUrl($query,$showname.'_pro');
-        }
-        //时间
-    ?>
+<?php
+foreach ($data as $key => $bd) :
+    @extract($bd);
+    {
+        $query = queryString(true);
+        $query['id'] = $id;
+        $editUrl = getUrl($query,$showname.'_pro');
+    }
+?>
                      <tbody>
                         <tr>
                             <td><?=$key+1?></td>
                             <td><?=$catname?></td>
-                            <td> <img src="<?=src($img1)?>" width="80" /> 导航图 : <img src="<?=src($img2)?>" width="80" /> </td>
-<!-- #################################################################################################################### -->
+                            <td>
+                                <?php if($id<>5){?><img src="<?=src($img1)?>" width="80" /> <?php }?>
+                                <?php if($id<6){?> 导航图 : <img src="<?=src($img2)?>" width="80" /> <?php }?>
+                            </td>
                             <td>
                                 <a href="<?=$editUrl?>" class="thick ">编辑</a>|
                                 <a data-class="btn-danger" class="json <?=$isgood==1?'btn-danger':'' ?>" data-url="isgood&id=<?=$id?>"><?=Config::get('webarr.isgood')[$isgood] ?></a>|

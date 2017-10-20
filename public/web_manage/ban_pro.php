@@ -3,7 +3,7 @@ require './include/common.inc.php';
 require WEB_ROOT.'./include/chkuser.inc.php';
 $id= I('get.id', 0, 'intval');
 
-if($row=M('news_cats')->where("id=$id")->find()){
+if($row=M('news_cats')->where("id=".$id)->find()){
     extract($row);
 }
 if(IS_POST)
@@ -51,7 +51,7 @@ if(IS_POST)
                             <ul class="forminfo">
 						<form name="form1" method="post" action="" onSubmit="return checkcats(this)" enctype="multipart/form-data">
 							<li class="fade"><label>所属栏目<b>*</b></label><?=$row['catname']?></li>
-                            <?php printImgHtml('类型一','img1','362X59') ?>
+                            <?php printImgHtml('顶部banner图','img1','1920*495') ?>
                             <?php printImgHtml('导航配图','img2','215*150') ?>
                             <input type="hidden" name="id" value="<?=$id?>" />
  							<li class="fade"><label>&nbsp;</label><input type="submit" class="btn" value="提  交"/></li>

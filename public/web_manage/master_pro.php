@@ -14,7 +14,7 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 	$id = I('get.id',0,'intval');
 	$img = I('get.img');
 	$path = ROOT_PATH.I('get.path');
-	M($table)->where("id=$id")->setField($img,'');
+	M($table)->where("id=".$id)->setField($img,'');
 	@unlink($path);
 	JsError('删除成功!');
 }
