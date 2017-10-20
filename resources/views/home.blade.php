@@ -1,17 +1,14 @@
-<?php
-    print_r($config);
- ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <title>首页</title>
     <link rel="shortcut icon" href="index_style/img/xi.ico" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="index_style/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="index_style/css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="index_style/css/jquery.hiSlider.min.css"/>
-    <link rel="stylesheet" type="text/css" href="index_style/css/chopslider.css"/>
-    <script type="text/javascript" src="index_style/js/jquery-1.10.1.min.js"></script>
+    {!! HTML::style('index_style/css/common.css')  !!}
+    {!! HTML::style('index_style/css/index.css')  !!}
+    {!! HTML::style('index_style/css/jquery.hiSlider.min.css')  !!}
+    {!! HTML::style('index_style/css/chopslider.css')  !!}
+    {!! HTML::script('index_style/js/jquery-1.10.1.min.js')  !!}
 </head>
 
 <body>

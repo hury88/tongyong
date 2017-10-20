@@ -77,9 +77,8 @@ class HomeController extends Controller
 
         // $this->createTags();
         $panel = 'hello world';
-        $config = DB::table('config')->get();
         // return view('home', compact('panel', 'suggestion', 'allWishes', 'events', 'tagsCloud', 'jumbotronClasses', 'i', 'banner'));
-        return view('home', compact('panel','config'));
+        return view('home', compact('panel'));
     }
 
     private function createTags()

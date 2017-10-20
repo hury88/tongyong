@@ -4,6 +4,7 @@ namespace app\Providers;
 
 use App\Category;
 use App\Company;
+use App\Config;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $table = 'company';
+        // $config_fields = \Schema::getColumnListing('config');
+        $config = Config::find(1);
+        // $config = array_walk(array, funcname)
+        // print_r($config_fields);
+        /*$table = 'company';
 
         if (\Schema::hasTable($table)) {
             try {
@@ -40,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
             \View::share('main_company', $main_company);
             \View::share('categories_menu', $menu);
             \View::share('config', $menu);
-        }
+        }*/
     }
 
     /**
