@@ -39,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
 
             \View::share('main_company', $main_company);
             \View::share('categories_menu', $menu);
+            \View::share('config', $menu);
         }
     }
 

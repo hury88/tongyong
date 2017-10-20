@@ -1,3 +1,6 @@
+<?php
+    print_r($config);
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

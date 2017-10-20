@@ -6,6 +6,7 @@ Desktop.ini
 /node_modules/*
 /storage/files/*
 composer.lock
-.idea/
+/.idea/
 *.log
 .project
+/.tags
