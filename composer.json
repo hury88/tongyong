@@ -43,7 +43,7 @@
 			"App\\": "app/"
 		},
 		"files": [
-			"fundation/helpers.php"
+			"app/fundation/helpers.php"
 		]
 	},
 	"autoload-dev": {

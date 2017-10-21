@@ -18,12 +18,7 @@
     </div>
     <div class="f_btm">
         <p><span>友情链接：</span>
-            <a href="javascript:void(0);">中国农业发展集团有限公司</a>
-            <a href="javascript:void(0);">中水集团远洋股份有限公司</a>
-            <a href="javascript:void(0);">中国农业发展集团有限公司</a>
-            <a href="javascript:void(0);">中水集团远洋股份有限公司</a>
-            <a href="javascript:void(0);">中国农业发展集团有限公司</a>
-            <a href="javascript:void(0);">中水集团远洋股份有限公司</a>
+            {{!! v_show([47,67],'<a href="@linkurl@">@title@</a>',$limit=null) !!}}
         </p>
     </div>
 </div>
