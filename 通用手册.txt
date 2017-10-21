@@ -1,0 +1,134 @@
+1.全局变量如何定义 比如kw_config表的值
+  app\Providers\AppServiceProvider@boot
+
+array (
+
+  '登录注册/登录'                                               Sign in/sign in
+  '登录注册/第三方绑定账号成功'                                 Login/Third party binding account successful
+  '登录注册/第三方登录后账号绑定'                               Login Registration/Third party login after account binding
+  '登录注册/企业注册'                                           Login Registration/Enterprise registration
+  '登录注册/使用帮助'                                           Sign in/Use Help
+  '登录注册/学生注册'                                           Sign in Registration/Student registration
+  '登录注册/找回密码-密码成功找回'                              Login/Retrieve password-password successfully retrieved
+  '登录注册/找回密码-确认账号'                                  Login/Retrieve password-confirm account
+  '登录注册/找回密码-手机安全验证'                              Login/Retrieve password-Mobile security verification
+  '登录注册/找回密码-邮箱安全验证'                              Login/Retrieve password-mailbox security verification
+  '登录注册/找回密码-重置密码'                                  Sign In/Retrieve password-reset password
+
+
+  '个人中心/订单中心- 订单支付 订单详情'                        Personal Center/Order Center-order Payment order details
+  '个人中心/订单中心- 我的报名表国际教育报名'                   Personal Center/Order Center-my Registration Form International Education application
+  '个人中心/订单中心- 我的报名表职业培训报名'                   Personal Center/Order Center-my registration form for vocational training
+  '个人中心/订单中心- 我的报名表职业证书报名'                   Personal Center/Order Center-My Registration Form Professional Certificate registration
+  '个人中心/订单中心- 我的订单'                                 Personal Center/Order Center-my order
+  '个人中心/订单中心--订单支付'                                 Personal Center/Order Center--order payment
+  '个人中心/订单中心--付款成功'                                 Personal Center/Order Center-payment success
+  '个人中心/订单中心--我的订单---申请退款'                      Personal Center/Order Center---------Application for refund
+  '个人中心/个人中心职业培训、职业证书、国际教育-报名表查看页面'                                 Personal Center/Personal Center vocational Training, Vocational certificate, international Education-Entry Form view page
+  '个人中心/简历中心- 我的收藏'                                 Personal Center/CV Center-my favorites
+  '个人中心/简历中心-我的简历 - 附加信息收起状态'               Personal Center/CV Center-my resume-additional information to be collected
+  '个人中心/简历中心-我的简历 - 简历预览'                       Personal Center/CV Center-my resume-resume preview
+  '个人中心/简历中心-我的求职- 工作邀请'                        Personal Center/CV Center-my job offer-job invitation
+  '个人中心/简历中心-我的求职- 简历投递记录'                    Personal Center/CV Center-My job search-Resume posting record
+  '个人中心/简历中心-我的求职- 简历投递记录反馈查看'            Personal Center/CV Center-My job search-Resume delivery record feedback view
+  '个人中心/简历中心-我的求职- 谁下载了我的简历'                Personal Center/CV Center-My job search-who downloaded my CV
+  '个人中心/简历中心-我的求职- 我的简历'                        Personal Center/CV Center-My job search-my resume
+  '个人中心/账户设置-安全设置'                                  Personal Center/Account Settings-security settings
+  '个人中心/账户设置-基本资料-修改手机号'                       Personal Center/Account Settings-Basic information-Modify the mobile phone number
+  '个人中心/账户设置-基本资料'                                  Personal Center/Account Settings-basic informatio
+  '个人中心/账户设置-未实名认证'                                Personal Center/Account Settings-no real name certification
+  '个人中心/账户设置-消息管理 详情'                             Personal Center/Account Settings-message management details
+  '个人中心/账户设置-消息管理'                                  Personal Center/Account Settings-message management
+  '个人中心/账户设置-已实名认证'                                Personal Center/Account Settings-real-name certification
+
+
+  '国际教育/国际联合办学'                             International education/International Joint School
+  '国际教育/国际留学'                                 International education/International study
+  '国际教育/国际留学具体学院介绍'                     Introduction of international Education/International Study Institute
+  '国际教育/国际留学新闻'                             International education/International study news
+  '国际教育/国际留学新闻详情'                         International education/International Study News details
+  '国际教育/国际留学学院介绍'                         Introduction of international Education/International Study Institute
+  '国际教育/国际夏令营页面 特色线路推荐列表页'        International education/International Summer Camp page featured line recommended list page
+  '国际教育/国际夏令营页面 线路详情'                  International education/International Summer Camp page line details
+  '国际教育/国际夏令营页面'                           International education/International Summer Camp page
+  '国际教育/国际游学'                                 International education/International School tour
+
+
+  '简单页面/法律申明'          Simple page/Legal statement
+  '简单页面/联系我们'          Simple page/Contact us
+  '简单页面/企业文化'          Simple page/Corporate culture
+  '简单页面/搜索'              Simple page/search
+  '简单页面/新闻动态'          Simple page/news dynamic
+  '简单页面/意见反馈'          Simple page/comments feedback
+
+
+  '企业会员/安全设置'                                 Enterprise Membership/Security settings
+  '企业会员/订单管理'                                 Enterprise member/Order management
+  '企业会员/高端招聘 - 未发布'                        Corporate member/high-end recruitment-unpublished
+  '企业会员/高端招聘 - 未实名认证'                    Enterprise member/High-end recruitment-not real-name certification
+  '企业会员/高端招聘 - 招聘中'                        Corporate member/High-end recruitment-recruitment
+  '企业会员/高端招聘-已结束'                          Corporate member/high-end recruitment-closed
+  '企业会员/简历管理--简历收件箱全部'                 Corporate member/Resume management-resume inbox all
+  '企业会员/简历管理-简历收件箱-应聘简历'             Corporate member/Resume management-resume inbox-Apply for resumes
+  '企业会员/简历管理-已下载简历'                      Corporate member/Resume management-download resume
+  '企业会员/简历收件箱-具体一份简历'                  Corporate member/Resume Inbox-specific resume
+  '企业会员/企业会员首页'                             Enterprise member/Enterprise Member homepage
+  '企业会员/实名认证'                                 Enterprise member/real-name certification
+  '企业会员/系统消息'                                 Enterprise member/System message
+  '企业会员/系统消息详情'                             Corporate member/System message details
+  '企业会员/已实名认证'                               Enterprise members/have real-name certification
+  '企业会员/用户管理-修改手机号'                      Enterprise member/user management-Modify the mobile phone number
+  '企业会员/用户管理-修改邮箱号'                      Enterprise member/user management-Modify the mailbox number
+  '企业会员/用户管理'                                 Enterprise member/user management
+  '企业会员/院校信息发布列表'                         Enterprise Member/College information publishing list
+  '企业会员/院校信息发布信息'                         Enterprise Member/institution information Release information
+  '企业会员/证书管理'                                 Enterprise Membership/certificate management
+  '企业会员/证书信息--专升本信息--发布信息--常见问题' Corporate Member/Certificate information--promotion of this information--release information--Frequently asked questions
+  '企业会员/证书信息-考研信息'                        Enterprise Member/Certificate information-postgraduate information
+  '企业会员/证书信息发布列表'                         Enterprise Membership/Certificate information publishing list
+  '企业会员/职业培训管理 - 在线学习'                  Enterprise Member/vocational training management-online learning
+  '企业会员/职业培训管理---企业培训发布'              Enterprise Member/Vocational training management---enterprise training release
+  '企业会员/职业培训管理-企业培训列表-查看报名人数'   Enterprise Member/vocational training management-Enterprise Training List-View enrollment number
+  '企业会员/职业培训管理-企业培训列表'                Enterprise Member/vocational training management-Enterprise training list
+
+
+  '首页/index'                                  Home/index
+
+
+  '职业培训/职业培训- 技能培训'                                 Vocational training/vocational training-skills trainin
+  '职业培训/职业培训- 企业培训'                                 Vocational training/vocational training-enterprise Trainin
+  '职业培训/职业培训--培训机构'                                 Vocational training/vocational training-training institutions
+  '职业培训/职业培训--在线学习'                                 Vocational training/vocational training-online learning
+  '职业培训/职业培训-视频课程详情'                                  Vocational training/vocational Training-Video course details
+  '职业培训/职业培训-文字课程详情'                                  Vocational training/vocational training-Details of the text course
+  '职业培训/职业培训'                                 Vocational training/vocational trainin
+  '职业培训/职业培训企业培训详情'                                 Vocational training/vocational training enterprise training details
+  '职业培训/职业培训在线学习详情大纲'                                 Vocational training/vocational training online learning details outline
+  '职业培训/职业培训在线学习详情讲师介绍'                                 Vocational training/vocational training online learning Details Lecturer Introduction
+  '职业培训/职业培训在线学习详情评价'                                 Detailed evaluation of vocational training/vocational training online learning
+  '职业培训/职业培训在线学习详情学习资料'                                 Vocational training/vocational training online learning details study materials
+
+
+  '职业招聘/单个企业详情介绍'                                 Job offers/individual business details
+  '职业招聘/单个企业详情培训-企业培训'                                  Job recruitment/Individual enterprise details Training-Corporate Trainin
+  '职业招聘/单个企业详情培训-在线学习'                                  Vocational recruitment/Individual enterprise details Training-online learning
+  '职业招聘/单个企业详情培训-职业证书'                                  Vocational recruitment/Individual enterprise details Training-Career certificate
+  '职业招聘/单个企业详情招聘'                                 Job recruitment/individual enterprise details recruitment
+  '职业招聘/高端招聘 申请职位'                                  Career Recruitment/High-end recruitment application position
+  '职业招聘/高端招聘 申请职位成功'                                  Career Recruitment/High-end recruitment application position success
+  '职业招聘/高端招聘 详情'                                  Career/High-end recruitment details
+  '职业招聘/高端招聘-选择职能类别'                                  Job recruitment/High-end recruitment-Select a functional category
+  '职业招聘/高端招聘列表'                                 Career Recruitment/High-end recruitment list
+  '职业招聘/求职者平台'                                  Career recruitment/Job seeker platform
+  '职业招聘/院校信息发布'                                 Professional Recruitment/institution information release
+
+
+  '职业证书/考研信息'                                 Vocational certificate/Postgraduate information
+  '职业证书/职业证书-职业资格信息-证书类别及详情'                                  Vocational Certificate/Occupation Certificate-Professional qualification information-Certificate category and details
+  '职业证书/职业证书-专升本信息 常见问题'                                  Professional Certificate/Professional certificate-Special promotion this information FAQ
+  '职业证书/职业证书-专升本信息 热门专业'                                  Professional Certificate/Professional certificate-Promotion of this information hot professional
+  '职业证书/职业证书-专升本信息'                                 Vocational Certificate/Professional Certificate-Special promotion this information
+  '职业证书/职业资格信息'                                 Vocational Certificate/Vocational qualification informatio
+
+
+)
