@@ -4,10 +4,6 @@ require WEB_ROOT.'./include/chkuser.inc.php';
 $table = 'news_cats';
 $showname = 'ban';
 
-$id    =   I('get.id', 0,'intval');
-$pid   =   I('get.pid',0,'intval');
-$ty    =   I('get.ty', 0,'intval');
-$tty   =   I('get.tty',0,'intval');
 
 /*$classname='<a href="javascript:void()">'.get_catname($pid,'news_cats').'</a> <span>></span> <a href="javascript:void()">'.get_catname($ty,"news_cats").'</a>';
 $zid=$ty;
@@ -22,16 +18,10 @@ if(isset($_GET['showtype'])){//主动传值优先级最大
 }*/
 
 //条件
-$map = array();
-$tree = new Tree(M('news_cats')->field("id,catname")->where("pid=0 and id<6")->select());
-$cate = $tree->spanning();
-$dropdown =  '<select name="pid" id="" class="select1">%s</select>';
-$option = '<option value="0">无（属一级栏目）</option>';
-$color = array('#0B0000','#0E8A5F','#7FD7A2');
-$spancer = array('','&nbsp;├','&nbsp;&nbsp;└└');
-echo "<pre>";
-var_dump($cate);exit();
-?>
+
+		//树型结构类
+
+	 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,26 +53,53 @@ var_dump($cate);exit();
 <!-- #################################################################################################################### -->
 
 <?php
-foreach ($data as $key => $bd) :
-    @extract($bd);
-    {
-        $query = queryString(true);
-        $query['id'] = $id;
-        $editUrl = getUrl($query,$showname.'_pro');
+$tree = new Tree(M('news_cats')->field("id,pid,catname,img1,img2")->where("pid not in (1,2,5) and id<>36 and id<>44 and id<>47")->order('id asc')->select());
+//实现无限极分类
+$cate = $tree->spanning();
+//echo "<pre>";
+//var_dump($cate);
+$color = array('#0B0000','#0E8A5F','#7FD7A2');
+$spancer = array('','&nbsp;├','&nbsp;&nbsp;└└');
+$i=0;
+while( list(,$v) = each($cate) ):
+    $id  = $v['id'];
+    $level = $v['level'];
+    // dump($v);
+    $pid = 0;
+    $ty  = 0;
+    $tty = 0;
+
+    if($level==0){
+        $pid = $id;
+    }elseif($level==1){
+        $pid = $v['pid'];
+        $ty  = $id;
+    }elseif($level==2){
+        $pid = $v['pid'];
+        $tty = $id;
     }
+
+//foreach ($data as $key => $bd) :kw_news
+//    @extract($bd);
+//    {
+//        $query = queryString(true);
+//        $query['id'] = $id;
+//        $editUrl = getUrl($query,$showname.'_pro');
+//    }
 ?>
                      <tbody>
                         <tr>
-                            <td><?=$key+1?></td>
-                            <td><?=$catname?></td>
+                            <td><?=$v['id']?></td>
+                            <td><?=$v['catname']?></td>
                             <td>
-                                <?php if($id<>5){?><img src="<?=src($img1)?>" width="80" /> <?php }?>
-                                <?php if($id<6){?> 导航图 : <img src="<?=src($img2)?>" width="80" /> <?php }?>
+                                <?php if($v['id']<>5){?>banner图<img src="<?=src($v['img1'])?>" width="80" /> <?php }?>
+                                <?php if($v['id']<6){?> 导航图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
+                                <?php if($v['id']==60||in_array($pid,array(12,15))){?> 二级栏目列表图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
                             </td>
                             <td>
-                                <a href="<?=$editUrl?>" class="thick ">编辑</a>|
-                                <a data-class="btn-danger" class="json <?=$isgood==1?'btn-danger':'' ?>" data-url="isgood&id=<?=$id?>"><?=Config::get('webarr.isgood')[$isgood] ?></a>|
-                                <a data-class="btn-warm" class="json <?=$isstate==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$id?>"><?=Config::get('webarr.isstate')[$isstate] ?></a>|
+                                <a href="ban_pro.php?id=<?=$v['id']?>" class="thick ">编辑</a>|
+<!--                                <a data-class="btn-danger" class="json --><?//=$isgood==1?'btn-danger':'' ?><!--" data-url="isgood&id=--><?//=$id?><!--">--><?//=Config::get('webarr.isgood')[$isgood] ?><!--</a>|-->
+<!--                                <a data-class="btn-warm" class="json --><?//=$isstate==1?'':'btn-warm' ?><!--" data-url="isstate&id=--><?//=$id?><!--">--><?//=Config::get('webarr.isstate')[$isstate] ?><!--</a>|-->
                             </td>
                         </tr>
-<?php endforeach?></tbody></table> </div> </div> </div> </div> </body> </html> <?php include('js/foot'); ?>
+<?php endwhile;  $pagestr='';?></tbody></table> </div> </div> </div> </div> </body> </html> <?php include('js/foot'); ?>

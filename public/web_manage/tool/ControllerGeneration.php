@@ -1,7 +1,7 @@
 <?php
-require '../../core/run.php';
+require '../core/run.php';
 
-$data = M('news_cats')->field('id,path,showtype')->where('`catname`<>"辅助栏目" and `pid`=0')->order('id asc')->select();
+$data = M('news_cats')->field('id,path,showtype,catname')->where('`catname`<>"辅助栏目" and `pid`=0')->order('id asc')->select();
 
 define('HOME_PATH', APP_PATH . 'home' . DS);
 define('APPS', APP_PATH . 'app' . DS);
@@ -14,13 +14,24 @@ foreach ($data as $key => $row) {
 	$ty = getNextId($id);
 	$tys = M('news_cats')->where('pid='.$id)->getField('id,catname',true);
 	$tysif = '';
+    $var .= <<<T
+	'pid' => $id, //$catname \n
+T;
 	foreach ($tys as $rty => $catname) {
 		$tysif .= "<?php elseif (\$ty==$rty): //$catname ?>\n";
+		$var .= <<<T
+	    'ty' => $rty, //$catname \n
+T;
+	    $ttys = M('news_cats')->where('pid='.$rty)->getField('id,catname',true);
+	    foreach ($ttys as $rtty => $catname) {
+            $var .= <<<T
+	        'tty' => $rtty, //$catname \n
+T;
+	    }
+
 	}
 	$tysif .= '<?php endif ?>';
-	$var .= <<<T
-	'$path' => $id, \n
-T;
+
 // 所有列表页
 $indexTpl = <<<T
 <?php include DOCTYPE ?>
@@ -72,7 +83,8 @@ $var
 ];\n
 T;
 #生成首页
-$html->open('tpls/class/app.index.tpl')->saftSave(HOME_PATH . 'index/index' . EXT);
+$html->string($var)->saftSave(HOME_PATH . 'map' . EXT);
+/*$html->open('tpls/class/app.index.tpl')->saftSave(HOME_PATH . 'index/index' . EXT);
 $html->string($var)->saftSave(HOME_PATH . 'map' . EXT);
 #生成头部底部
 $html->open('tpls/home/doctype.tpl')->saftSave(HOME_PATH . 'doctype' . EXT);
@@ -93,7 +105,7 @@ $html->open('tpls/class/V.tpl')->saftSave(APPS . 'V' . EXT);
 $html->open('tpls/class/View.tpl')->saftSave(APPS . 'View' . EXT);
 $html->open('tpls/class/NewsList.tpl')->saftSave(APPS . 'NewsList' . EXT);
 $html->open('tpls/class/SingleInformation.tpl')->saftSave(APPS . 'SingleInformation' . EXT);
-$html->open('tpls/class/PictureList.tpl')->saftSave(APPS . 'PictureList' . EXT);
+$html->open('tpls/class/PictureList.tpl')->saftSave(APPS . 'PictureList' . EXT);*/
 
 
 echo '初始化完成!';

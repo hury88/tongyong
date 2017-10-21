@@ -52,7 +52,14 @@ if(IS_POST)
 						<form name="form1" method="post" action="" onSubmit="return checkcats(this)" enctype="multipart/form-data">
 							<li class="fade"><label>所属栏目<b>*</b></label><?=$row['catname']?></li>
                             <?php printImgHtml('顶部banner图','img1','1920*495') ?>
-                            <?php printImgHtml('导航配图','img2','215*150') ?>
+                            <?php if($id<6){
+                                printImgHtml('导航配图','img2','215*150');
+                            }elseif(in_array($pid,array(12,15))){
+                                printImgHtml('二级栏目列表图','img2','230*410');
+                            }elseif($id==60){
+                                printImgHtml('一级首页右侧图片','img2','457*250');
+                            }?>
+
                             <input type="hidden" name="id" value="<?=$id?>" />
  							<li class="fade"><label>&nbsp;</label><input type="submit" class="btn" value="提  交"/></li>
 							</form>
