@@ -1,42 +1,32 @@
 <!DOCTYPE html>
-<html lang="{{ App::getLocale() }}" ng-app="AntVel">
+<html lang="{{ App::getLocale() }}">
 <head>
-	@section('metaLabels')
+	@section('head_meta')
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<base href="/">
-		<meta name="description" content="">
-		<meta name="author" content="">
 	@show
 
-	<link rel="icon" href="favicon.ico">
-	<title>@section('title'){{ $main_company['website_name']}} @show</title>
+	{{-- SEO --}}
+	<title>@section('title'){{ $boot_config['sitename'] }} @show</title>
+	<meta name="keywords" content="{{ $boot_config['keywords'] }}">
+	<meta name="description" content="{{ $boot_config['description'] }}">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
-	<script type="text/javascript">
-	FileAPI = {
-		debug: true
-	};
-	</script>
-
-	{{-- Antvel CSS files --}}
-	{!! Html::style('/antvel-bower/bootstrap/dist/css/bootstrap.css') !!}
+	{{-- CSS files --}}
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
 	@section('css')
-		{!! Html::style('/antvel-bower/angular-notify/dist/angular-notify.min.css') !!}
-		{!! Html::style('/antvel-bower/font-awesome/css/font-awesome.min.css') !!}
-		{!! Html::style('/css/carousel.css') !!}
-		{!! Html::style('/css/angucomplete-alt.css') !!}
-		{!! Html::style('/css/app.css') !!}
+		<link rel="stylesheet" type="text/css" href="index/css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="index/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="index/css/jquery.hiSlider.min.css"/>
+		<link rel="stylesheet" type="text/css" href="index/css/chopslider.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('/index/css/chopslider.css') }}"/>
 	@show
 
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 </head>
 <body>
-
-<section class = "@yield('page_class', 'home')">
+@yield('body_next_label', '<div class="pager-wrap personal-center">')
 
 	{{-- Navigation bar section --}}
 	@section('navigation')

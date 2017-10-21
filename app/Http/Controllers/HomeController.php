@@ -2,83 +2,28 @@
 
 namespace app\Http\Controllers;
 
-/*
- * Antvel - Home Controller
- *
- * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
- */
-
-use App\FreeProduct;
-use App\Helpers\productsHelper;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
-use App\Order;
-use App\Product;
+use App\News;
+// use App\FreeProduct;
+// use App\Helpers\productsHelper;
+// use App\Order;
+
+// use App\Product;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        /*$panel = [
-            'center' => [
-                'width' => 10,
-            ],
-            'left' => [
-                'width' => 2,
-                'class' => 'home-no-padding',
-            ],
-        ];
 
-        $helperProd = new productsHelper();
+        $news = new News();
 
-        $carousel = $helperProd->suggest('carousel');
-        $viewed = $helperProd->suggest('viewed', 8);
-        $categories = $helperProd->suggest('categories');
-        $purchased = $helperProd->suggest('purchased');
+        // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
+        $carousel = $news->v_list([47,48]);
 
-        $suggestion = [
-            'carousel'   => $carousel,
-            'viewed'     => $viewed,
-            'categories' => $categories,
-            'purchased'  => $purchased,
-        ];
+        // dd($carousel);
 
-        $helperProd->resetHaystack(); //reseting session id validator
-
-        $events = [];
-        if (config('app.offering_free_products')) {
-            $events = FreeProduct::getNextEvents([
-                'id',
-                'description',
-                'min_participants',
-                'max_participants',
-                'participation_cost',
-                'start_date',
-                'end_date',
-            ], 4, date('Y-m-d'));
-        }
-
-        $tagsCloud = ProductsController::getTopRated(0, 20, true);
-
-        $allWishes = '';
-        $user = \Auth::user();
-        if ($user) {
-            $allWishes = Order::ofType('wishlist')->where('user_id', $user->id)->where('description', '<>', '')->get();
-        }
-
-        $i = 0; //carousel implementation
-        $jumbotronClasses = ['jumbotron-box-left', 'jumbotron-box-right']; //carousel implementation
-
-        $banner = [
-            '/img/banner/01.png',
-            '/img/banner/02.png',
-            '/img/banner/03.png',
-            '/img/banner/04.png',
-        ];*/
-
-        // $this->createTags();
-        $panel = 'hello world';
-        // return view('home', compact('panel', 'suggestion', 'allWishes', 'events', 'tagsCloud', 'jumbotronClasses', 'i', 'banner'));
-        return view('home', compact('panel'));
+        return view('home', compact('carousel'));
     }
 
     private function createTags()

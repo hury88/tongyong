@@ -2,10 +2,11 @@
 
 namespace app\Providers;
 
-use App\Category;
-use App\Company;
-use App\Config;
+// use App\Category;
+// use App\Company;
+// use App\Config;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,8 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $config_fields = \Schema::getColumnListing('config');
-        $config = Config::find(1);
+        $config = DB::table('config')->where('id',1)->first();
+        view()->share('boot_config', $config);
         // $config = array_walk(array, funcname)
         // print_r($config_fields);
         /*$table = 'company';
