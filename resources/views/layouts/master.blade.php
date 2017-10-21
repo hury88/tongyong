@@ -26,7 +26,6 @@
 
 	{{-- Breadcrumbs section --}}
 	@section('breadcrumbs')
-		<div class="row">&nbsp;</div>
 	@show
 
 	{{-- Content page --}}
