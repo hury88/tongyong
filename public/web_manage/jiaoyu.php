@@ -203,8 +203,7 @@ if($cid){
         </td>
         <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
         <td><?=$img1?></td>
-        <td><?=$title?><span class="fr"><?php echo $name ?></span></td>
-        <td><?=$hits?></td>
+        <td><?=$title?></td>
         <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
             <td><?=$title?><!-- <span class="fr"><a href="link.php?showtype=6&istop=<?php echo $id ?>">下属列表</a></span> --></td>
             <td><a href="pic.php?ti=<?=$id?>">图集(<?php echo M('pic')->where("ti=$id and isstate=1")->count()?>条)</a></td>
@@ -233,7 +232,7 @@ if($cid){
                 <td><?=$img1?></td>
             <?php } if($ty==64){?>
                 <td> <?=Config::get('webarr.infotypeid')[$infotypeid]?> </td>
-            <? }?>
+            <?php }?>
 
             <td><?=$title?></td>
             <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
