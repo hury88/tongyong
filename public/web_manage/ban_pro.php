@@ -51,8 +51,11 @@ if(IS_POST)
                             <ul class="forminfo">
 						<form name="form1" method="post" action="" onSubmit="return checkcats(this)" enctype="multipart/form-data">
 							<li class="fade"><label>所属栏目<b>*</b></label><?=$row['catname']?></li>
-                            <?php printImgHtml('顶部banner图','img1','1920*495') ?>
-                            <?php if($id<6){
+                            <?php
+                            if($v['id']<>5) {
+                                printImgHtml('顶部banner图', 'img1', '1920*495');
+                            }
+                            if($id<6){
                                 printImgHtml('导航配图','img2','215*150');
                             }elseif(in_array($pid,array(12,15))){
                                 printImgHtml('二级栏目列表图','img2','230*410');

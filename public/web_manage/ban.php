@@ -53,7 +53,7 @@ if(isset($_GET['showtype'])){//主动传值优先级最大
 <!-- #################################################################################################################### -->
 
 <?php
-$tree = new Tree(M('news_cats')->field("id,pid,catname,img1,img2")->where("pid not in (1,2,5) and id<>36 and id<>44 and id<>47")->order('id asc')->select());
+$tree = new Tree(M('news_cats')->field("id,pid,catname,img1,img2")->where("pid not in (1,2,5) and id not in (36,44,47,24,25,29,30)")->order('id asc')->select());
 //实现无限极分类
 $cate = $tree->spanning();
 //echo "<pre>";
