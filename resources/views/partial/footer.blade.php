@@ -1,65 +1,121 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-4 col-sm-4 col-md-4 menu">
-			<?php $menu=\Menu::help(true); ?>
-			<h3>{{ trans('globals.company_label') }}</h3>
-			<ul>
-				@foreach ($menu as $item)
-					<li><a href = '{{ $item['route'] }}'>{{ $item['text'] }}</a></li>
-				@endforeach
-			</ul>
-		</div>
+<div id="footer">
+    <div class="f_title">
+        <p class="fl">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号 </p>
+        <ul class="fl">
+            <li>
+                <a href="javascript:;" style="border-left: none;"> 联系我们</a>
+            </li>
+            <li>
+                <a href="javascript:;">企业文化</a>
+            </li>
+            <li>
+                <a href="javascript:;">法律声明</a>
+            </li>
+            <li>
+                <a href="javascript:;" class="active">技术支持：科威网络</a>
+            </li>
+        </ul>
+    </div>
+    <div class="f_btm">
+        <p><span>友情链接：</span>
+            <a href="javascript:;">中国农业发展集团有限公司</a>
+            <a href="javascript:;">中水集团远洋股份有限公司</a>
+            <a href="javascript:;">中国农业发展集团有限公司</a>
+            <a href="javascript:;">中水集团远洋股份有限公司</a>
+            <a href="javascript:;">中国农业发展集团有限公司</a>
+            <a href="javascript:;">中水集团远洋股份有限公司</a>
+        </p>
+    </div>
+</div>
+<!--悬浮框-->
+<div class="kf_online">
+    <ul>
+        <li class="key_call">
+            <a href="###">
+                <i></i>
 
-		<div class="col-xs-4 col-sm-4 col-md-4 menu">
-			<h3>{{ trans('globals.social_label') }}</h3>
-			<ul>
-				<li><a href="https://www.facebook.com/{{ $main_company['facebook'] }}" target="_blank">{{ trans('globals.facebook_label') }}</a></li>
-				<li><a href="https://twitter.com/{{ $main_company['twitter'] }}" target="_blank">{{ trans('globals.twitter_label') }}</a></li>
-				<li><a href="https://plus.google.com/u/0/{{ $main_company['google_plus'] }}" target="_blank">{{ trans('globals.google_label') }}</a></li>
-			</ul>
-		</div>
+                <p>在线咨询</p>
+            </a>
 
-		<div class="col-xs-4 col-sm-4 col-md-4 newsletter" ng-controller = "NewslettersCtrl">
-			@if (\Auth::user())
-				<p>{{ trans('globals.reach_us_msg') }}</p>
-				<p><strong><a href="/contact"><span class="glyphicon glyphicon-envelope"></span>&nbsp;{{ trans('globals.send_a_email_label') }}</a></strong></p>
-			@else
-				<div class="signup clearfix">
-					<p>{{ trans('user.newsletter_sign_up') }}</p>
-					<form>
-						<input type="text" ng-model = "newsEmail"  class = "form-control input-sm" placeholder = "{{ trans('user.your_email_address_label') }}">
-						<input type="button" ng-click = "save()" value = "{{ trans('user.sign_up_label') }}">
-					</form>
-				</div>
-			@endif
-		</div>
+            <div>
+                <dl>
+                    <dt>业务咨询</dt>
+                    <dd>
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794817&amp;site=qq&amp;menu=yes"
+                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>尹艳阳</span></a>
+                    </dd>
+                    <dd>
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355612692&amp;site=qq&amp;menu=yes"
+                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>彭华</span></a>
+                    </dd>
+                    <dd>
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794812&amp;site=qq&amp;menu=yes"
+                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>陈禹杰</span></a>
+                    </dd>
+                    <dd>
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355724253&amp;site=qq&amp;menu=yes"
+                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>熊飞</span></a>
+                    </dd>
+                </dl>
 
-	</div>
+            </div>
 
-	<div class="row credits">
-		<div class="col-md-12">
-			{{ trans('globals.power_by_label') }}&nbsp;<a href="http://antvel.com">{{ trans('globals.antvel_eCommerce') }}</a>
-		</div>
-	</div>
+        </li>
+        <li class="key_act">
+            <a href="###">
+                <i></i>
 
+                <p>意见反馈</p>
+            </a>
+
+        </li>
+        <li class="key_kf">
+            <a href="###">
+                <i></i>
+
+                <p>常见问题</p>
+            </a>
+
+        </li>
+        <li class="key_link">
+            <a href="###">
+                <i></i>
+
+                <p>APP下载</p>
+            </a>
+        </li>
+        <li class="key_wx">
+            <a href="###">
+                <i></i>
+
+                <p>官方微信</p>
+            </a>
+
+            <div>
+                <img src="img/02index-2.jpg" width="156" height="193"/>
+            </div>
+
+        </li>
+        <li class="key_fx">
+            <a href="###">
+                <i></i>
+
+                <p>分享</p>
+            </a>
+
+            <div>
+                <a href="###"></a>
+                <a href="###"></a>
+            </div>
+        </li>
+        <li class="key_top">
+            <a href="###">
+                <i></i>
+
+                <p>返回顶部</p>
+            </a>
+
+        </li>
+    </ul>
 </div>
 
-@section('scripts')
-    @parent
-        <script>
-            (function(app){
-	                app.controller('NewslettersCtrl', function($scope, $window, notify)
-					{
-					  	$scope.newsEmail = '';
-					  	$scope.save = function()
-					  	{
-					  		if ($scope.newsEmail.trim() != '') {
-					  			$window.location.href = '/register?email='+$scope.newsEmail;
-					  		} else {
-					  			notify({ duration:5000, messageTemplate: '<strong>{{ trans('globals.validation_error_label') }}</strong><br><br><p>{{ trans('globals.newsletter_email_error') }}</p>', classes: 'alert alert-danger' });
-					  		}
-					  	};
-					});
-            })(angular.module("AntVel"));
-        </script>
-    @stop

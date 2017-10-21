@@ -1,5 +1,5 @@
 <div id="nav" class="clearfix">
-    <h1 class="fl"><a href="###"> <img src="img/logo.png"/>中国职业培训网 <span>合 肥</span></a></h1>
+    <h1 class="fl"><a href="###"> <img src="index/img/logo.png"/>中国职业培训网 <span>合 肥</span></a></h1>
     <div class="mian_nav fr">
         <ul class="list">
             <li>
@@ -28,7 +28,7 @@
                     <span></span>
 
                     <div class="show">
-                        <a href="javascript:;"><img src="img/list.png"/></a>
+                        <a href="javascript:;"><img src="index/img/list.png"/></a>
                     </div>
                 </div>
             </li>
@@ -58,7 +58,7 @@
             </li>
         </ul>
         <p class="fl">
-            <a href="###"><img src="img/bug.png"/></a>
+            <a href="###"><img src="index/img/bug.png"/></a>
         </p>
     </div>
 </div>

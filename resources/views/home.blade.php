@@ -1,9 +1,20 @@
 @extends('layouts.master')
+
+@section('title'){{ trans('globals.home') }} - @parent @stop
+@section('css')
+    <link rel="stylesheet" type="text/css" href="index/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="index/css/jquery.hiSlider.min.css"/>
+    <link rel="stylesheet" type="text/css" href="index/css/chopslider.css"/>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+@stop
+@section('bodyNextLabel')
 <body>
-@yield('body_next_label', '<div class="container">')
-    @section('navigation')
-        @parent
-    @show
+    <div class="container">
+@stop
+@section('content')
+    {{-- -------------------------------------------------- --}}
+    {{-- -------------------- carousel -------------------- --}}
+    {{-- -------------------------------------------------- --}}
     <script src="index/js/jquery.id.chopslider-2.2.0.free.min.js"></script>
     <script src="index/js/jquery.id.cstransitions-1.2.min.js"></script>
     <div id="container">
@@ -78,7 +89,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> {{-- end container --}}
 <!--职业招聘-->
 <div class="warp">
     <div class="radius">
@@ -1741,165 +1752,50 @@
     </div>
 
 </div>
+
 <script type="text/javascript" src="index/js/jquery.hiSlider.min.js"></script>
 <!--轮播-->
 <script type="text/javascript">
     $('.hiSlider1').hiSlider();
 </script>
-<div id="footer">
-    <div class="f_title">
-        <p class="fl">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号 </p>
-        <ul class="fl">
-            <li>
-                <a href="javascript:;" style="border-left: none;"> 联系我们</a>
-            </li>
-            <li>
-                <a href="javascript:;">企业文化</a>
-            </li>
-            <li>
-                <a href="javascript:;">法律声明</a>
-            </li>
-            <li>
-                <a href="javascript:;" class="active">技术支持：科威网络</a>
-            </li>
-        </ul>
-    </div>
-    <div class="f_btm">
-        <p><span>友情链接：</span>
-            <a href="javascript:;">中国农业发展集团有限公司</a>
-            <a href="javascript:;">中水集团远洋股份有限公司</a>
-            <a href="javascript:;">中国农业发展集团有限公司</a>
-            <a href="javascript:;">中水集团远洋股份有限公司</a>
-            <a href="javascript:;">中国农业发展集团有限公司</a>
-            <a href="javascript:;">中水集团远洋股份有限公司</a>
-        </p>
-    </div>
-</div>
+@stop {{-- end content --}}
 
-<!--悬浮框-->
-<div class="kf_online">
-    <ul>
-        <li class="key_call">
-            <a href="###">
-                <i></i>
 
-                <p>在线咨询</p>
-            </a>
+@section('footer')
+   @parent
+@stop
 
-            <div>
-                <dl>
-                    <dt>业务咨询</dt>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794817&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="index/img/q1.gif" width="33" height="29"> <span>尹艳阳</span></a>
-                    </dd>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355612692&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="index/img/q1.gif" width="33" height="29"> <span>彭华</span></a>
-                    </dd>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794812&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="index/img/q1.gif" width="33" height="29"> <span>陈禹杰</span></a>
-                    </dd>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355724253&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="index/img/q1.gif" width="33" height="29"> <span>熊飞</span></a>
-                    </dd>
-                </dl>
-
-            </div>
-
-        </li>
-        <li class="key_act">
-            <a href="###">
-                <i></i>
-
-                <p>意见反馈</p>
-            </a>
-
-        </li>
-        <li class="key_kf">
-            <a href="###">
-                <i></i>
-
-                <p>常见问题</p>
-            </a>
-
-        </li>
-        <li class="key_link">
-            <a href="###">
-                <i></i>
-
-                <p>APP下载</p>
-            </a>
-        </li>
-        <li class="key_wx">
-            <a href="###">
-                <i></i>
-
-                <p>官方微信</p>
-            </a>
-
-            <div>
-                <img src="index/img/02index-2.jpg" width="156" height="193"/>
-            </div>
-
-        </li>
-        <li class="key_fx">
-            <a href="###">
-                <i></i>
-
-                <p>分享</p>
-            </a>
-
-            <div>
-                <a href="###"></a>
-                <a href="###"></a>
-            </div>
-        </li>
-        <li class="key_top">
-            <a href="###">
-                <i></i>
-
-                <p>返回顶部</p>
-            </a>
-
-        </li>
-    </ul>
-</div>
-
-<script type="text/javascript">
-    var centerx = 350;
-    var centery = 350;
-    var r = 300;
-    var oimages = document.getElementById("radius").getElementsByTagName("div"); //图片集合
-    var cnt = oimages.length;
-    var da = 360 / cnt;
-    var a0 = 0;
-    var timer;
-    for (var i = 0; i < cnt; i++) {
-        oimages[i].onmouseover = stop;
-        oimages[i].onmouseout = start;
-    }
-
-    function posimgs() {
+@section('scripts')
+    <script type="text/javascript">
+        var centerx = 350;
+        var centery = 350;
+        var r = 300;
+        var oimages = document.getElementById("radius").getElementsByTagName("div"); //图片集合
+        var cnt = oimages.length;
+        var da = 360 / cnt;
+        var a0 = 0;
+        var timer;
         for (var i = 0; i < cnt; i++) {
-            oimages[i].style.left = centerx + r * Math.cos((da * i + a0) / 180 * Math.PI) + "px";
-            oimages[i].style.top = centery + r * Math.sin((da * i + a0) / 180 * Math.PI) + "px";
+            oimages[i].onmouseover = stop;
+            oimages[i].onmouseout = start;
         }
-    }
-    posimgs();
 
-    function start() {
-        timer = window.setInterval("posimgs();a0++;", 100);
-    }
+        function posimgs() {
+            for (var i = 0; i < cnt; i++) {
+                oimages[i].style.left = centerx + r * Math.cos((da * i + a0) / 180 * Math.PI) + "px";
+                oimages[i].style.top = centery + r * Math.sin((da * i + a0) / 180 * Math.PI) + "px";
+            }
+        }
+        posimgs();
 
-    function stop() {
-        window.clearInterval(timer);
-    }
-    start();
-</script>
-<script type="text/javascript" src="index/js/main.js"></script>
-</body>
+        function start() {
+            timer = window.setInterval("posimgs();a0++;", 100);
+        }
 
-</html>
+        function stop() {
+            window.clearInterval(timer);
+        }
+        start();
+    </script>
+    <script type="text/javascript" src="index/js/main.js"></script>
+@stop

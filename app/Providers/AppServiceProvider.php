@@ -4,7 +4,7 @@ namespace app\Providers;
 
 // use App\Category;
 // use App\Company;
-// use App\Config;
+use App\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 
@@ -17,36 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $config = DB::table('config')->where('id',1)->first();
+        $config = Config::find(1)->toArray();
         view()->share('boot_config', $config);
-        // $config = array_walk(array, funcname)
-        // print_r($config_fields);
-        /*$table = 'company';
 
-        if (\Schema::hasTable($table)) {
-            try {
-                $main_company = Company::find(1);
-            } catch (ModelNotFoundException $e) {
-                $main_company = Company::defaultCompany();
-            }
-
-            $categories_menu = \Cache::remember('categories_mothers', 25, function () {
-                return Category::select('id', 'name')
-                  ->childsOf('mothers')
-                  ->actives()
-                  ->get()->toArray();
-            });
-
-            $menu = [];
-
-            foreach ($categories_menu as $value) {
-                $menu[$value['id']] = $value;
-            }
-
-            \View::share('main_company', $main_company);
-            \View::share('categories_menu', $menu);
-            \View::share('config', $menu);
-        }*/
     }
 
     /**
