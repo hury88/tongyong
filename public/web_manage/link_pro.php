@@ -51,7 +51,7 @@ $opt = new Output;//输出流  输出表单元素
 										// ->img('配图','img1')
 										->input('名称','title')
 										->verify('')->input('跳链','linkurl')
-										->verify('')->textarea('备注','content')
+//										->verify('')->textarea('备注','content')
 									;break;
 								case 5://＜＞＜＞关联单条信息＜＞＜＞
 									$count=M('news')->where("pid=$pid and ty=$ty and tty=$tty and tty<>0")->count();

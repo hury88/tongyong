@@ -1,6 +1,6 @@
 <div id="footer">
     <div class="f_title">
-        <p class="fl">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号 </p>
+        <p class="fl">{{$boot_config['copyright']}} </p>
         <ul class="fl">
             <li>
                 <a href="javascript:;" style="border-left: none;"> 联系我们</a>
@@ -12,18 +12,18 @@
                 <a href="javascript:;">法律声明</a>
             </li>
             <li>
-                <a href="javascript:;" class="active">技术支持：科威网络</a>
+                <a href="http://www.semfw.cn" target="_blank" class="active">技术支持：科威网络</a>
             </li>
         </ul>
     </div>
     <div class="f_btm">
         <p><span>友情链接：</span>
-            <a href="javascript:;">中国农业发展集团有限公司</a>
-            <a href="javascript:;">中水集团远洋股份有限公司</a>
-            <a href="javascript:;">中国农业发展集团有限公司</a>
-            <a href="javascript:;">中水集团远洋股份有限公司</a>
-            <a href="javascript:;">中国农业发展集团有限公司</a>
-            <a href="javascript:;">中水集团远洋股份有限公司</a>
+            <a href="javascript:void(0);">中国农业发展集团有限公司</a>
+            <a href="javascript:void(0);">中水集团远洋股份有限公司</a>
+            <a href="javascript:void(0);">中国农业发展集团有限公司</a>
+            <a href="javascript:void(0);">中水集团远洋股份有限公司</a>
+            <a href="javascript:void(0);">中国农业发展集团有限公司</a>
+            <a href="javascript:void(0);">中水集团远洋股份有限公司</a>
         </p>
     </div>
 </div>
@@ -40,6 +40,7 @@
             <div>
                 <dl>
                     <dt>业务咨询</dt>
+
                     <dd>
                         <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794817&amp;site=qq&amp;menu=yes"
                            target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>尹艳阳</span></a>

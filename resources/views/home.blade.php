@@ -20,28 +20,19 @@
     <div id="container">
         <div class="wrapper">
             <div id="slider">
-                <div class="slide cs-activeSlide">
-                    <a href="http://www.baidu.com"><img src="img/banner3_02.png" alt="photo #1"/></a>
-                </div>
-                <div class="slide">
-                    <a href="###"><img src="img/banner.png" alt="photo #2"/> </a>
-                </div>
-                <div class="slide">
-                    <a href="###"><img src="img/banner6.png" alt="photo #3"/> </a>
-                </div>
-                <div class="slide">
-                    <a href="###"><img src="img/bg_member.jpg" alt="photo #4"/> </a>
-                </div>
-                <div class="slide">
-                    <a href="###"><img src="img/bg_xnet.jpg" alt="photo #5"/></a>
-                </div>
+                @foreach ($carousel as $post)
+                    <div class="slide cs-activeSlide">
+                        <a href="{{ $post->linkurl }}"><img src="uploadfile/upload/{{ $post->img1 }}" alt="{{ $post->title }}"/></a>
+                    </div>
+
+                @endforeach
+
             </div>
             <div class="pagination">
+                @foreach ($carousel as $post)
                 <span class="slider-pagination"></span>
-                <span class="slider-pagination"></span>
-                <span class="slider-pagination"></span>
-                <span class="slider-pagination"></span>
-                <span class="slider-pagination"></span>
+                @endforeach
+
             </div>
         </div>
     </div>

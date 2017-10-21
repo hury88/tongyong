@@ -25,13 +25,14 @@ class News extends Model
     protected $fillable = [
     ];
 
-    public function v_list($where=[],$field=['*'])
+    public function v_list($where=[],$field=['*'],$num=null)
     {
 
         return $this->parseWhere($where)
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')
+            ->take($num)
             ->get($field);
     }
     /**

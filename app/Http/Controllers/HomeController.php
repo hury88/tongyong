@@ -19,7 +19,7 @@ class HomeController extends Controller
         $news = new News();
 
         // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
-        $carousel = $news->v_list([47,48]);
+        $carousel = $news->v_list([47,48],["linkurl","img1","title"]);
 
         // dd($carousel);
 
