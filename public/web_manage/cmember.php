@@ -1,7 +1,7 @@
 <?php
 require './include/common.inc.php';
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = $showname = 'usr';
+$table = $showname = 'cmember';
 
 //条件
 $map = array();
