@@ -94,7 +94,8 @@ while( list(,$v) = each($cate) ):
                             <td>
                                 <?php if($v['id']<>5){?>banner图<img src="<?=src($v['img1'])?>" width="80" /> <?php }?>
                                 <?php if($v['id']<6){?> 导航图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
-                                <?php if($v['id']==60||in_array($pid,array(12,15))){?> 二级栏目列表图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
+                                <?php if($v['id']==57||$v['id']==60){?> 二级列表显示图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
+                                <?php if(in_array($pid,array(12,15))){?> 二级栏目列表图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
                             </td>
                             <td>
                                 <a href="ban_pro.php?id=<?=$v['id']?>" class="thick ">编辑</a>|

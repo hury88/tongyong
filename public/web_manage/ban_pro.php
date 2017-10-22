@@ -59,6 +59,8 @@ if(IS_POST)
                                 printImgHtml('导航配图','img2','215*150');
                             }elseif(in_array($pid,array(12,15))){
                                 printImgHtml('二级栏目列表图','img2','230*410');
+                            }elseif($id==57){
+                                printImgHtml('一级首页左侧图片','img2','370*370');
                             }elseif($id==60){
                                 printImgHtml('一级首页右侧图片','img2','457*250');
                             }?>
