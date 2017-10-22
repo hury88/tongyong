@@ -2,8 +2,8 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'education';
+$showname = 'education';
 
 //条件
 $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
@@ -12,18 +12,12 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
 $cid =   I('get.cid',0,'intval');
-$certificate_lid =   I('get.certificate_lid',0,'intval');
-$infotypeid =   I('get.infotypeid',0,'intval');
-$trainingid =   I('get.trainingid',0,'intval');
 if(!empty($cid)){
     $map['cid'] =$cid;
     $cname=v_id($cid,"name","cmember");
 }else{
     $cname='管理员';
 }
-if(!empty($certificate_lid)) $map['certificate_lid'] = $certificate_lid;
-if(!empty($infotypeid)) $map['infotypeid'] = $infotypeid;
-
 if(!empty($tty)) $map['tty'] = $tty;
 ###########################筛选开始
 ########################分页配置开始
@@ -54,7 +48,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
             <input type="hidden" name="tty" value="<?=$tty?>" />
             <!-- <b>显示</b><input style="width:50px;" name="psize" type="text" class="dfinput" value="<?=$psize?>"/>条 -->
             <!-- <b>编号</b><input name="id" type="text" class="dfinput" value="<?=$id?>"/> -->
-        <?php if ($pid<5): ?>
+
             <input type="hidden" name="cid" id="cid"  value="0">
              选择企业： <input type="text" id="cname" class="dfinput" value="<?=$cname?>">
             <div class="qyxf" style="display: none">
@@ -62,51 +56,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
                     <li data-id="0">平台管理员</li>
                 </ul>
             </div>
-        <?php endif ?>
-              <?php if ($tty==54) {
-                  $d = config('webarr.certificate');
-                  Output::select2($d, '选择证书类型', 'certificate_lid');
-              }elseif($ty==64){
-                  $d = config('webarr.infotypeid');
-                  Output::select2($d, '院校信息类型', 'infotypeid');
-              }elseif($pid==2){
-                  $d = config('webarr.trainingid');
-                  Output::select2($d, '培训方式', 'trainingid');
-              } ?>
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>
-            <script type="text/javascript">
-                $(function(){
-
-                    $(".qyxf ul").on("click","li",function(){
-
-                        var cid=$(this).data("id");
-                        var cname=$(this).html();
-                        $("#cid").val(cid)
-                        $("#cname").val(cname)
-                        $(".qyxf").hide()
-                    })
-                })
-
-                $("#cname").click(function(){
-                    $("#cname").val('')
-                    var key=$(this).val()
-                    $.get("include/json.php?action=xzqy&key="+key, function (data) {
-                      //  alert(data)
-                        $(".qyxf ul").html(data)
-                    })
-                    $(".qyxf").show()
-                })
-                $("#cname").keyup(function(){
-                    var key=$(this).val()
-                    $.get("include/json.php?action=xzqy&key="+key, function (data) {
-                      //  alert(data)
-                        $(".qyxf ul").html(data)
-                    })
-                    $(".qyxf").show()
-                })
-            </script>
     <div class="zhengwen clr">
       <div class="zhixin clr">
         <ul class="toolbar">
@@ -115,10 +67,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <a href="?<?=queryString()?>" class="zhixin_a2 fl"></a><!-- 刷新  -->
         <a href="<?=getUrl(queryString(true),$showname.'_pro')?>" target="righthtml" class="zhixin_a3 fl"></a><!-- 添加  -->
         <input id="del" type="button" class="zhixin_a4 fl"/><!-- 删除  -->
-        <?php if (false && 5 == $showtype): // || 3 == $pid ?>
-        <a style="background:none;border:1px solid;line-height:28px;text-align:center" href="content.php?<?=queryString()?>" class="fl">编辑详情</a>
-    <?php endif ?>
-</div>
+    </div>
 </div>
 <div class="neirong clr">
     <table cellpadding="0" cellspacing="0" class="table clr">
@@ -126,23 +75,19 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <td onclick="selectAll(document.getElementById('sall'))" style="font-size:8px;cursor:pointer" width="24px">全选</td>
         <td width="24px">编号</td> <td width="200px">操作</td>
 
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/    if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
+    <?php if ($tty<>22){?>
         <td> 图 </td>
+    <?php }?>
         <td> 标题 <span class="fr"></td>
-        <!-- <td> 浏览次数 </td> -->
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
-        <td> 标题 </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
-        <td> 名称 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==11):/*＜＞＜＞图文列表＜＞＜＞*/?>
-        <!-- <td width="24px"> 配图 </td> -->
-        <td> 配图 </td>
-        <td> 信息 </td>
-   <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
-       <td> 问题 </td>
+           <?php if (in_array($tty,array(24,25,29,30))){?>
+           <td> 详情页图片 </td>
+           <td> 目的地 </td>
+           <?php }?>
+    <?php if (in_array($tty,array(21,24,25,29,30,33,34))){?>
+        <td> 报名人数 </td>
+    <?php }?>
 
-   <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
-           <td width="10%">发布者</td>
+    <td width="10%">发布者</td>
     <td width="10%">发布时间</td>
 </tr>
 <?php
@@ -169,26 +114,24 @@ if($cid){
         <td><?=$id?></td>
         <td>
             <a href="<?=$editUrl?>" class="thick ">编辑</a>|
-            <?php if ($ty==10 || $showtype==1): //团队?>
-                <a data-class="btn-warm" class="json <?=$istop==1?'btn-warm':'' ?>" data-url="isindex&id=<?=$id?>"><?=config('webarr.isindex')[$istop] ?></a>|
-            <?php endif ?>
+
             <a data-class="btn-danger" class="json <?=$isgood==1?'btn-danger':'' ?>" data-url="isgood&id=<?=$id?>"><?=Config::get('webarr.isgood')[$isgood] ?></a>|
             <a data-class="btn-warm" class="json <?=$isstate==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$id?>"><?=Config::get('webarr.isstate')[$isstate] ?></a>|
             <!-- <a href="<?=$editUrl?>" class="thick edits">编辑</a>| -->
             <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
         </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
+        <?php if($tty<>22){?>
         <td><?=$img1?></td>
+        <?php }?>
         <td><?=$title?></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
-            <td><?=$title?></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
-        <td><?=$title?><span class="fr" style="display:none"><?php echo M('news')->where("istop=$id")->count(); ?></span></td>
-<!-- <td><span data-content="<?=$introduce?>" class="lookinfo layui-btn layui-btn-primary layer-demolist">查看简介</span></td> -->
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
-            <!-- <td width="24px"> 配图 </td> -->
-            <td> <?=$title?> </td>
-<?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
+        <?php if(in_array($tty,array(24,25,29,30))){?>
+
+            <td><a href="pic.php?ti=<?php echo $id?>">图集(<?php echo M('pic')->where("ti=$id")->count(); ?>)</a></td>
+            <td><?=$destination?></td>
+        <?php }?>
+        <?php if(in_array($tty,array(21,24,25,29,30,33,34))){?>
+        <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty;?>">共有（<?php echo M('enroll')->where("bid=".$id." and typeid=".$tty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid={$id} and typeid={$tty} and isstate=0")->count(); ?>未审核)</a></td>
+        <?php }?>
 
      <td><?=$publisher?></td>
      <td><?=$time?></td>

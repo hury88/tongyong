@@ -25,8 +25,6 @@ if(!empty($certificate_lid)) $map['certificate_lid'] = $certificate_lid;
 if(!empty($infotypeid)) $map['infotypeid'] = $infotypeid;
 
 if(!empty($tty)) $map['tty'] = $tty;
-###########################筛选开始
-########################分页配置开始
 $psize   =   I('get.psize',30,'intval');
 $pageConfig = array(
     /*条件*/'where' => $map,

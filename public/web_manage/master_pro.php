@@ -74,35 +74,7 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 				// ->ifs($ty==28)->input('QQ','ftitle')->endifs()
 			;
 			break;
-		case 9://＜＞＜＞产品＜＞＜＞
-				// $d = M('news')->where('pid=1 and ty=23')->order(config('other.order'))->getField('id,title');Output::select($d,'小游戏','istop');
-			//复选框
-			// $d = M('news')->where(m_gWhere(14,19))->getField('id,title');
-			(!isset($name) || ! $name ) && $name = '';
-			$opt
-				//单选框
-				// ->choose('类型','istop')->radio('木纹',1,2)->radio('石纹',2)->flur()
-				//复选框
-				// ->choose('标签','relative')->checkboxSet($d)->flur()
-				// ->img('列表图','img1',$ty)
-				->img('列表图','img1')
-				// ->ifs($ty<>14)->img('二维码','img1')->endifs()
-				// ->ifs($ty==14)->img('二维码','img2','165*165')->endifs()
-				// ->cache()->input('标题','title')->input('副标题','ftitle')->verify('')->input('浏览次数','hits')->flur()
-				->input('标题', 'title')
-				->input('摘要', 'ftitle')
-				->choose('培训方式','trainingid')->radioSet(Config::get('webarr.trainingid'))->flur()
-				->input('购买链接', 'source')
-				->display('inline')->input('价格', 'price')
-				->textarea('介绍', 'description')
-				->editor('Specifications')
-				->editor('Accessories','content2')
-				->editor('Advantages','content3')
-				// ->time('项目名','sendtime')
-				// ->input('售价','price')->input('电话','name')->flur()
-			;
 
-			break;
 		case 10://＜＞＜＞产品分类＜＞＜＞
 			$opt
 				->cache()->input('名称','title')->flur();
@@ -120,49 +92,14 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 				// ->editor('信息内容')
 			;
 			break;
-		case 12://＜＞＜＞路线＜＞＜＞
-			$opt
-				->img('配图','img1')
-				// ->ifs($istop==1)->img('配图','img2','387*253')->endifs()
-				->input('标题','title')
-				->input('推荐人群', 'ftitle')
-				->input('目的地','destination')
-				->input('席位情况','introduce')
-				->cache()->time('游学开始时间', 'starttime')->time('游学结束时间', 'endtime')->flur()
-				->cache()->time('报名开始时间', 'bstarttime')->time('报名结束时间', 'bendtime')->flur()
-				// ->cache()->input('点赞数','dotlike')->input('分享数','share')->flur()
-				// ->textarea('简介','introduce')
-				->editor('路线详情')
-				->editor('详情介绍','content2')
-			;
-			break;
-		case 13://＜＞＜＞报名新闻＜＞＜＞
-			if($tty<>60){
-				$opt->img('配图','img1');
-			}
-			if($ty==64){
-				$opt->choose('所属分类','infotypeid')->radioSet(Config::get('webarr.infotypeid'))->flur();
 
-			}
-			$opt
-				->input('标题','title')
-//
-				->editor('信息内容')
-			;
-			break;
 		case 15://＜＞＜＞问答＜＞＜＞
 			$opt
 				->input('标题','title')
 				->editor('答案')
 			;
 			break;
-		case 16://＜＞＜＞职业证书＜＞＜＞
-			$opt
-				->input('证书名称','title')
-				->choose('所属分类','certificate_lid')->radioSet(Config::get('webarr.certificate'))->flur()
-				->editor('详情')
-			;
-			break;
+
 	}
 
 
