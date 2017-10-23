@@ -53,11 +53,13 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                 //echo $showtype;
               $ppid=$bd2['id'];
               $showtype=$bd2['showtype'];
-              if(!empty($bd2['linkurl']))
-                $linkurl = $bd2['linkurl'];
-              else
-                $linkurl = getUrl(array('pid'=>$bd2['pid'],'ty'=>$bd2['id']),Config::get('webarr.showtype2')[$showtype]);
-
+              if(!empty($bd2['linkurl'])) {
+                  $linkurl = $bd2['linkurl'];
+              }elseif($showtype==10) {
+                  $linkurl = getUrl(array('typeid' => $bd2['id'], 'pid' => 0), Config::get('webarr.showtype2')[$showtype]);
+              }else{
+                  $linkurl = getUrl(array('pid' => $bd2['pid'], 'ty' => $bd2['id']), Config::get('webarr.showtype2')[$showtype]);
+              }
 
               // $counts=get_son_count($ppid);
               $counts=M('news_cats')->where("pid=$ppid and isstate=1")->count();
@@ -73,10 +75,14 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                 $data3 = M('news_cats')->where(array('pid'=>$ppid,'showtype'=>array('neq',5),'isstate'=>1,'id'=>array('in',$_SESSION['Admin_SmallMyMenu'])))->order('disorder desc,id asc')->select();
               foreach ($data3 as $key3 => $bd3) {
                 $showtype2=$bd3['showtype'];
-                if(!empty($bd3['linkurl']))
+                if(!empty($bd3['linkurl'])){
                   $linkurl2=$bd3['linkurl'];
-                else
-                  $linkurl2 = getUrl(array('pid'=>$pid,'ty'=>$ppid,'tty'=>$bd3['id']),Config::get('webarr.showtype2')[$showtype]);
+                }elseif($showtype==10) {
+                    $linkurl2 = getUrl(array('typeid' => $bd3['id'], 'pid' => 0), Config::get('webarr.showtype2')[$showtype]);
+                }else{
+                    $linkurl2 = getUrl(array('pid'=>$pid,'ty'=>$ppid,'tty'=>$bd3['id']),Config::get('webarr.showtype2')[$showtype]);
+                }
+
                 ?>
                 <li class="pro_type2" style="padding-left:20px;"><a href="<?php echo $linkurl2?>" target="righthtml"><?php echo $bd3['catname']?></a></li>
                 <?php }//三级循环结束?>

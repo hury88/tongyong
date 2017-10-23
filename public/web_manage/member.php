@@ -49,7 +49,6 @@ list($data,$pagestr) = Page::paging($pageConfig);
                    <a href="?<?=queryString()?>" class="zhixin_a2 fl"></a><!-- 刷新  -->
                    <a href="<?=getUrl(queryString(true),$showname.'_pro')?>" target="righthtml" class="zhixin_a3 fl"></a><!-- 添加  -->
                    <input id="del" type="button" class="zhixin_a4 fl"/><!-- 删除  -->
-                   <a href="javascript:history.back()" style="background:none;border:1px solid;line-height:35px;text-align:center" class="fl">返回</a>
             </div>
             <div class="neirong clr">
                 <table cellpadding="0" cellspacing="0" class="table clr">
@@ -80,7 +79,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
                 <td>
                     <a href="<?=$editUrl?>" class="thick ">编辑</a>|
                     <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>|
-                    <a href="order.php?usrid=<?php echo $id ?>">订单(<?php echo M(Order::TABLE)->where("usrid=$id")->count() ?>)</a>
+                    <a href="">会员信息</a>
                 </td>
                 <td><img src="<?=config('pic.usr_upload') . $headimg?>"></td>
                 <td><?php echo $region . '-' . $firstname .' '. $lastname?></td>

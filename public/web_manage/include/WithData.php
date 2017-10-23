@@ -193,6 +193,67 @@ class WithData
         $this->logUpdate = '更新信息: '.$fields['title'];
         return $fields;
     }
+    public function certificate()
+    {
+        $istop = I('post.istop',0,'intval');
+
+        $relative = isset($_POST['relative']) && is_array($_POST['relative'])?implode(',',$_POST['relative']):'';
+        $fields = array(
+            'pid'				=>		I('pid', 0, 'intval'),
+            'ty'				=>		I('ty' , 0, 'intval'),
+            'tty'				=>		I('tty', 0, 'intval'),
+            'certificate_lid'				=>		I('certificate_lid', 0, 'intval'),
+            'infotypeid'				=>		I('infotypeid', 0, 'intval'),
+            'trainingid'				=>		I('trainingid', 0, 'intval'),
+            'title'				=>		I('post.title','','trim,htmlspecialchars'),
+            'ftitle'			=>		I('post.ftitle','','trim,htmlspecialchars'),
+            'content'			=>		I('post.content',''),
+            'content2'       	=>		I('post.content2',''),
+            'content3'       	=>		I('post.content3',''),
+            'content4'       	=>		I('post.content4',''),
+            'content5'       	=>		I('post.content5',''),
+            'name'				=>		I('post.name','','trim'),
+            'source'			=>		I('post.source','','trim,htmlspecialchars'),
+            'destination'			=>		I('post.destination','','trim,htmlspecialchars'),
+            'relative'			=>		$relative,
+            'introduce'			=>		I('post.introduce','','trim,htmlspecialchars'),
+            'price'				=>		I('post.price','','trim,htmlspecialchars'),
+            'linkurl'			=>		I('post.linkurl','','trim,htmlspecialchars'),
+            'link1'				=>		I('post.link1','','trim,htmlspecialchars'),
+            'link2'				=>		I('post.link2','','trim,htmlspecialchars'),
+            #资讯
+            'begin'      	=>		I('post.begin','','trim,htmlspecialchars'),
+            //SEO
+            'seotitle'		    =>		I('post.seotitle','','trim'),
+            'keywords'		    =>		I('post.keywords','','trim'),
+            'description'		=>		I('post.description','','trim'),
+
+            'disorder'      	=>		I('post.disorder',0,'intval'),
+            'hits'      		=>		I('post.hits',1,'intval'),
+            'istop'      	 	=>		I('post.istop',0,'intval'),
+            'isgood'      	 	=>		I('post.isgood',0,'intval'),
+            'sendtime'      	=>		I('post.sendtime',0,'strtotime'),
+            'starttime'      	=>		I('post.starttime',0,'strtotime'),
+            'endtime'      	=>		I('post.endtime',0,'strtotime'),
+            'bstarttime'      	=>		I('post.bstarttime',0,'strtotime'),
+            'bendtime'      	=>		I('post.bendtime',0,'strtotime'),
+
+        );
+        /*if ($fields['ty'] == 9 && empty($fields['istop'])) {
+            ajaxReturn(-1,'请选择案例分类');
+        }*/
+        uppro('img1',$fields,'ajax');
+        uppro('img2',$fields,'ajax');
+        uppro('img3',$fields,'ajax');
+        uppro('img4',$fields,'ajax');
+        uppro('img5',$fields,'ajax');
+        uppro('img6',$fields,'ajax');
+        uppro('file',$fields,'file');
+        // uppro('img5',$fields,'water',$water_path);
+        $this->logInsert = "添加信息: ".$fields['title'];
+        $this->logUpdate = '更新信息: '.$fields['title'];
+        return $fields;
+    }
 	/**
 	 * [config config.php]
 	 * @return [type] [提交过来的]
@@ -302,6 +363,7 @@ class WithData
 			'showtype'    =>	 	I('post.showtype',1,'intval'),
 			'disorder'    =>	 	I('post.disorder',0,'intval'),
 			'iscats'      =>	 	I('post.iscats',0,'intval'),
+            'content'		=>	I('post.content',''),
 		);
 
 		uppro('img1',$fields,'ajax');
@@ -318,7 +380,28 @@ class WithData
 
 		return $fields;
 	}
+    public function nature()
+    {
+        $fields=array(
+            'pid' 		  => 		I('post.pid',0,'intval'),
+            'typeid' 		  => 		I('post.typeid',0,'intval'),
+            'catname'     => 		I('post.catname','','trim'),
+            'catname2'    => 		I('post.catname2','','trim'),
+            'linkurl'     =>	 	I('post.linkurl','','trim'),
+            'hits'  =>	 	0,
+            'isgood'    =>	 	I('post.showtype',1,'intval'),
+            'disorder'    =>	 	I('post.disorder',0,'intval'),
+            'isstate'      =>	 	1,
+        );
 
+        uppro('img1',$fields,'ajax');
+        uppro('img2',$fields,'ajax');
+
+        $this->logInsert = '添加类别分类'.$fields['catname'];
+        $this->logUpdate = '编辑类别分类'.$fields['catname'];
+
+        return $fields;
+    }
 	public function pic()
 	{
 		$fields = array(
