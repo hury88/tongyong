@@ -57,12 +57,13 @@ array (
   '国际教育/国际游学'                                 International education/International School tour
 
 
-  '简单页面/法律申明'          Simple page/Legal statement
-  '简单页面/联系我们'          Simple page/Contact us
-  '简单页面/企业文化'          Simple page/Corporate culture
-  '简单页面/搜索'              Simple page/search
-  '简单页面/新闻动态'          Simple page/news dynamic
-  '简单页面/意见反馈'          Simple page/comments feedback
+  '简单页面/法律申明'          About/Legal
+  '简单页面/联系我们'          About/Contact
+  '简单页面/企业文化'          About/Culture
+  '简单页面/搜索'              News/search
+  '简单页面/新闻详情'          News/view
+  '简单页面/教育新闻'         News/news dynamic
+  '简单页面/意见反馈'          About/Comments
 
 
   '企业会员/安全设置'                                 Enterprise Membership/Security settings
