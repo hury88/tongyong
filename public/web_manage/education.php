@@ -78,6 +78,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
     <?php if ($tty<>22){?>
         <td> 图 </td>
     <?php }?>
+           <?php if ($tty==21){?>
+               <td>logo 图 </td>
+           <?php }?>
         <td> 标题 <span class="fr"></td>
            <?php if (in_array($tty,array(24,25,29,30))){?>
            <td> 详情页图片 </td>
@@ -100,6 +103,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
                             #时间
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
+    $img2 =  '<img src="'.src($img2).'" width="80" />';
 if($cid){
     $publisher=v_id($cid,"name","cmember");
 }else{
@@ -111,7 +115,7 @@ if($cid){
 <tbody>
     <tr>
         <td><input id="delid<?=$id?>" name="del[]" value="<?=$id?>" type="checkbox"><i class="layui-i">&nbsp;</i></td>
-        <td><?=$id?></td>
+        <td><?=$key+1?></td>
         <td>
             <a href="<?=$editUrl?>" class="thick ">编辑</a>|
 
@@ -123,6 +127,9 @@ if($cid){
         <?php if($tty<>22){?>
         <td><?=$img1?></td>
         <?php }?>
+        <?php if($tty==21){?>
+            <td><?=$img2?></td>
+        <?php }?>
         <td><?=$title?></td>
         <?php if(in_array($tty,array(24,25,29,30))){?>
 
@@ -130,7 +137,7 @@ if($cid){
             <td><?=$destination?></td>
         <?php }?>
         <?php if(in_array($tty,array(21,24,25,29,30,33,34))){?>
-        <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty;?>">共有（<?php echo M('enroll')->where("bid=".$id." and typeid=".$tty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid={$id} and typeid={$tty} and isstate=0")->count(); ?>未审核)</a></td>
+        <td><a href="enroll.php?bid=<?php echo $id?>&typeid=<?php echo $tty;?>">共有（<?php echo M('enroll')->where("bid=".$id." and typeid=".$tty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid={$id} and typeid={$tty} and isstate=0")->count(); ?>未审核)</a></td>
         <?php }?>
 
      <td><?=$publisher?></td>
@@ -139,3 +146,7 @@ if($cid){
 <?php endforeach?>
 <?php include('js/foot'); ?>
 <!-- <td><?=$img1?><a class="lookPic" href="javascript:;" data-id="<?=$id?>">添加更多图片(<?=M('pic')->where("ti=$id")->count()?>个)</a></td> -->
+
+
+
+

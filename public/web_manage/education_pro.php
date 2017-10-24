@@ -2,8 +2,8 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'education';
+$showname = 'education';
 $istop = I('get.istop',0,'intval');
 if (!empty($id) ) { //显示页面 点击修改  只传了id
 	$row = M($table)->find($id);
@@ -49,10 +49,14 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 <?php if($tty<>22){
     $opt ->img('配图','img1');
 }
+if($tty==21){
+    $opt ->img('学员logo图','img2',"100*120");
+}
     $opt->input('标题','title');
 if(in_array($tty,array(24,25,29,30))){
     $opt
     ->input('推荐人群', 'ftitle')
+    ->input('出发地','from')
     ->input('目的地','destination')
     ->input('席位情况','introduce')
     ->cache()->time('游学开始时间', 'starttime')->time('游学结束时间', 'endtime')->flur()

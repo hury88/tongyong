@@ -24,8 +24,8 @@ list($data,$pagestr) = Page::paging($pageConfig);
 	<title>图片</title>
 	<?php include('js/head'); ?>
 
-	<link rel="stylesheet" href="/public/dropzone/dropzone.css">
-	<script src="/public/dropzone/dropzone.min.js"></script>
+	<link rel="stylesheet" href="./public/dropzone/dropzone.css">
+	<script src="./public/dropzone/dropzone.min.js"></script>
 </head>
 
 <body>
@@ -72,7 +72,8 @@ list($data,$pagestr) = Page::paging($pageConfig);
             <td onclick="selectAll(document.getElementById('sall'))" style="font-size:8px;cursor:pointer" width="24px">全选</td>
             <td width="24px">编号</td><td width="100px">操作</td>
             <td> 配图 </td>
-            <!-- <td> 标题 </td> -->
+             <td> 标题 </td>
+             <td> 更新时间 </td>
           </tr>
           <tbody>
            <?php
@@ -92,10 +93,12 @@ list($data,$pagestr) = Page::paging($pageConfig);
            <td><?=$key+1?></td>
            <td>
              <a href="<?=$editUrl?>" class="thick ">编辑</a>|
+               <a data-class="btn-warm" class="json <?=$isstate==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$id?>"><?=Config::get('webarr.isstate')[$isstate] ?></a>|
              <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
            </td>
-           <td><?=$img1,$img2?> </td>
-           <!-- <td><?=$title?> </td> -->
+           <td><?=$img1?> </td>
+            <td><?=$title?> </td>
+            <td><?=date("Y-m-d H:i:s"),$sendtime?> </td>
          </tr>
 
        <?php endforeach;include('js/foot'); ?>

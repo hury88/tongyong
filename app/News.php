@@ -37,7 +37,6 @@ class News extends Model
 
     public function v_list($where=[],$field=['*'],$num=null)
     {
-
         return $this->parseWhere($where)
             ->latest('isgood')
             ->latest('disorder')
@@ -45,7 +44,7 @@ class News extends Model
             ->take($num)
             ->get($field);
     }
-    /**
+    /*
      * [parseWhere 解析条件]
      * @param  [type] $where [description]
      * @return [type]        [description]

@@ -53,7 +53,7 @@ if(isset($_GET['showtype'])){//主动传值优先级最大
 <!-- #################################################################################################################### -->
 
 <?php
-$tree = new Tree(M('news_cats')->field("id,pid,catname,img1,img2")->where("pid not in (1,2,5) and id not in (36,44,47,24,25,29,30)")->order('id asc')->select());
+$tree = new Tree(M('news_cats')->field("id,pid,catname,img1,img2")->where("pid not in (1,2,5) and id not in (36,44,47,24,25,27,29,30)")->order('id asc')->select());
 //实现无限极分类
 $cate = $tree->spanning();
 //echo "<pre>";
@@ -92,7 +92,7 @@ while( list(,$v) = each($cate) ):
                             <td><?=$v['id']?></td>
                             <td><?=$v['catname']?></td>
                             <td>
-                                <?php if($v['id']<>5){?>banner图<img src="<?=src($v['img1'])?>" width="80" /> <?php }?>
+                                <?php if($id<>5&&$id<>3&&$id<>4) {?>banner图<img src="<?=src($v['img1'])?>" width="80" /> <?php }?>
                                 <?php if($v['id']<6){?> 导航图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
                                 <?php if($v['id']==57||$v['id']==60){?> 二级列表显示图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>
                                 <?php if(in_array($pid,array(12,15))){?> 二级栏目列表图 : <img src="<?=src($v['img2'])?>" width="80" /> <?php }?>

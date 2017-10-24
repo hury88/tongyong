@@ -190,7 +190,7 @@ if($cid){
 <tbody>
     <tr>
         <td><input id="delid<?=$id?>" name="del[]" value="<?=$id?>" type="checkbox"><i class="layui-i">&nbsp;</i></td>
-        <td><?=$id?></td>
+        <td><?=$key+1?></td>
         <td>
             <a href="<?=$editUrl?>" class="thick ">编辑</a>|
             <?php if ($ty==10 || $showtype==1): //团队?>

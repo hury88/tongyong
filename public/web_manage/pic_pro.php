@@ -34,12 +34,12 @@ $opt = new Output;//输出流  输出表单元素
 						<div class="formtext">Hi，<b><?=$_SESSION['Admin_UserName']?></b>，欢迎您使用信息发布功能！</div>
 						<!-- 表单提交 --><form id="dataForm" class="layui-form" method="post" enctype="multipart/form-data">
 						<?php Style::output();Style::submitButton();
-							(!isset($title) || ! $title ) && $title = M('news')->where("id=$ti")->getField('title');
+
 							$opt
 							->img('列表图配图','img1')
 							// ->img('点击大图','img2')
-							// ->verify('')->input('标题','title')
-							->ifs($ti==24)->word('细节图文字')->editor()->endifs()
+							 ->input('标题','title')
+//							->ifs($ti==24)->word('细节图文字')->editor()->endifs()
 							->hide('ti')
 
 

@@ -138,34 +138,35 @@ class WithData
 
         $relative = isset($_POST['relative']) && is_array($_POST['relative'])?implode(',',$_POST['relative']):'';
         $fields = array(
-            'pid'				=>		I('pid', 0, 'intval'),
-            'ty'				=>		I('ty' , 0, 'intval'),
-            'tty'				=>		I('tty', 0, 'intval'),
-            'certificate_lid'				=>		I('certificate_lid', 0, 'intval'),
-            'infotypeid'				=>		I('infotypeid', 0, 'intval'),
-            'trainingid'				=>		I('trainingid', 0, 'intval'),
-            'title'				=>		I('post.title','','trim,htmlspecialchars'),
-            'ftitle'			=>		I('post.ftitle','','trim,htmlspecialchars'),
-            'content'			=>		I('post.content',''),
-            'content2'       	=>		I('post.content2',''),
-            'content3'       	=>		I('post.content3',''),
-            'content4'       	=>		I('post.content4',''),
-            'content5'       	=>		I('post.content5',''),
-            'name'				=>		I('post.name','','trim'),
-            'source'			=>		I('post.source','','trim,htmlspecialchars'),
-            'destination'			=>		I('post.destination','','trim,htmlspecialchars'),
-            'relative'			=>		$relative,
-            'introduce'			=>		I('post.introduce','','trim,htmlspecialchars'),
-            'price'				=>		I('post.price','','trim,htmlspecialchars'),
-            'linkurl'			=>		I('post.linkurl','','trim,htmlspecialchars'),
-            'link1'				=>		I('post.link1','','trim,htmlspecialchars'),
-            'link2'				=>		I('post.link2','','trim,htmlspecialchars'),
-            #资讯
-            'begin'      	=>		I('post.begin','','trim,htmlspecialchars'),
-            //SEO
-            'seotitle'		    =>		I('post.seotitle','','trim'),
-            'keywords'		    =>		I('post.keywords','','trim'),
-            'description'		=>		I('post.description','','trim'),
+            'pid'                =>    		I('pid', 0, 'intval'),
+            'ty'                 =>    		I('ty' , 0, 'intval'),
+            'tty'                =>    		I('tty', 0, 'intval'),
+            'certificate_lid'  =>   		I('certificate_lid', 0, 'intval'),
+            'infotypeid'        =>    		I('infotypeid', 0, 'intval'),
+            'trainingid'        =>    		I('trainingid', 0, 'intval'),
+            'title'              =>    		I('post.title','','trim,htmlspecialchars'),
+            'ftitle'             =>    		I('post.ftitle','','trim,htmlspecialchars'),
+            'content'            =>    		I('post.content',''),
+            'content2'           =>    		I('post.content2',''),
+            'content3'           =>    		I('post.content3',''),
+            'content4'           =>    		I('post.content4',''),
+            'content5'           =>    		I('post.content5',''),
+            'name'                =>    		I('post.name','','trim'),
+            'source'              =>    		I('post.source','','trim,htmlspecialchars'),
+            'destination'        =>    		I('post.destination','','trim,htmlspecialchars'),
+            'from'        =>    		I('post.from','','trim,htmlspecialchars'),
+            'relative'            =>    		$relative,
+            'introduce'           =>    		I('post.introduce','','trim,htmlspecialchars'),
+            'price'                =>    		I('post.price','','trim,htmlspecialchars'),
+            'linkurl'              =>    		I('post.linkurl','','trim,htmlspecialchars'),
+            'link1'                =>    		I('post.link1','','trim,htmlspecialchars'),
+            'link2'                =>    		I('post.link2','','trim,htmlspecialchars'),
+                        #资讯
+            'begin'      	      =>    		I('post.begin','','trim,htmlspecialchars'),
+                        //SEO
+            'seotitle'		      =>    		I('post.seotitle','','trim'),
+            'keywords'		      =>    		I('post.keywords','','trim'),
+            'description'		  =>    		I('post.description','','trim'),
 
             'disorder'      	=>		I('post.disorder',0,'intval'),
             'hits'      		=>		I('post.hits',1,'intval'),
@@ -174,7 +175,7 @@ class WithData
             'sendtime'      	=>		I('post.sendtime',0,'strtotime'),
             'starttime'      	=>		I('post.starttime',0,'strtotime'),
             'endtime'      	=>		I('post.endtime',0,'strtotime'),
-            'bstarttime'      	=>		I('post.bstarttime',0,'strtotime'),
+            'bstarttime'      =>		I('post.bstarttime',0,'strtotime'),
             'bendtime'      	=>		I('post.bendtime',0,'strtotime'),
 
         );
@@ -406,10 +407,12 @@ class WithData
 	{
 		$fields = array(
 			'ti'			=>	I('post.ti',0,'intval'),
-			'title'			=>	I('post.title',''),
-			'content'			=>	I('post.content',''),
+			'disorder'		=>	I('post.disorder',0,'intval'),
+			'title'		=>	I('post.title',''),
+			'content'		=>	I('post.content',''),
 			'linkurl'		=>	I('post.linkurl','','trim,htmlspecialchars'),
 			'sendtime'		=>	I('post.sendtime',0,'strtotime'),
+            'isstate'      =>	 	1,
 		);
 		uppro('img1',$fields,'ajax');
 		uppro('img2',$fields,'ajax');

@@ -52,7 +52,7 @@ if(IS_POST)
 						<form name="form1" method="post" action="" onSubmit="return checkcats(this)" enctype="multipart/form-data">
 							<li class="fade"><label>所属栏目<b>*</b></label><?=$row['catname']?></li>
                             <?php
-                            if($v['id']<>5) {
+                            if($id<>5&&$id<>3&&$id<>4&&$id<>27) {
                                 printImgHtml('顶部banner图', 'img1', '1920*495');
                             }
                             if($id<6){

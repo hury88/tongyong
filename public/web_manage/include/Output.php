@@ -332,21 +332,27 @@ HTML;
 	}
 
 	// 生成图片
-	public function img($lablename, $imgname, $ty='')
+	public function img($lablename, $imgname, $tys='')
 	{
 		global $$imgname;
 
 		if(!$lablename || !$imgname) exit('图片字段名为空');
 
-		if (empty($ty)) {
-			global $ty;
-			$imgsize = v_news_cats($ty, 'imgsize');
+		if (empty($tys)) {
+			global $tty;
+			$imgsize = v_news_cats($tty, 'imgsize');
+
 			if (! $imgsize) {
-				global $pid;
-				$imgsize = v_news_cats($pid, 'imgsize');
+				global $ty;
+				$imgsize = v_news_cats($ty, 'imgsize');
+                if (! $imgsize) {
+                    global $pid;
+                    $imgsize = v_news_cats($pid, 'imgsize');
+
+                }
 			}
 		} else {
-			$imgsize = $ty;
+			$imgsize = $tys;
 		}
 
 		//替换映射
