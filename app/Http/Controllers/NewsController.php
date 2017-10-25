@@ -16,6 +16,10 @@ use App\Http\Requests\ContactFormRequest;
 
 class NewsController extends Controller
 {
+    public function about_tongyong()
+    {
+        return view('home', compact('carousel'));
+    }
     public function education($pid=5,$ty=16)
     {
         $this->newslist($pid,$ty);
