@@ -1002,7 +1002,7 @@ class Router implements RegistrarContract, BindingRegistrar
         // $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
         $this->group(['prefix' => 'register'], function(){
             $this->get('', function(){return view('auth.register-person'); });
-            $this->get('person', function(){return view('auth.register-peroson'); });
+            $this->get('person', function(){return view('auth.register-person'); });
             $this->get('org', function(){return view('auth.register-org'); });
         });
         $this->post('register', 'Auth\RegisterController@register');

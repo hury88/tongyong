@@ -26,13 +26,13 @@ if (!function_exists('v_show')) {
 		return $list;
 	}
 }
-	function v_id($id,$field='',$table='news')
+	function v_id($id,$field='*',$table='news')
 	{
-		$db = DB::table($table)->where('id',$id);
-	    if ($field) {
-	        return isset($db->first([$field])->$field) ? $db->$field : null;
+		$db = DB::table($table)->where('id',$id)->first([$field]);
+	    if ($field == '*') {
+	        return $db;
 	    } else {
-	        return $db->first();
+	        return  $db ? $db->$field : null;
 	    }
 	}
 	//为了获取方便增加 查询news表函数
@@ -226,4 +226,15 @@ T
 T
 ];
 		UNSET($url,$catname,$breadTemp,$bread);*/
+	}
+
+	function responseJson($state,$title,$message,$redirect=false){
+	    $arr = [
+	    	'state' => $state,
+	    	'title' => $title,
+	    	'message' => $message,
+	    ];
+	    $redirect && $arr['redirect'] = $redirect;
+	    unset($state,$title,$message,$redirect);
+	    return response()->json($arr);
 	}

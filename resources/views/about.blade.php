@@ -7,7 +7,7 @@
 @stop
 @section('bodyNextLabel')
 <body>
-    <div class="container">
+    <div class="pager-wrap personal-center">
 @stop
 @section('content')
 <div class="yijianAll">
