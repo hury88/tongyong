@@ -3,6 +3,7 @@
 @section('title') @parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/jiandanyemian.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common_jiandanyemian.css"/>
 @stop
 @section('bodyNextLabel')
 <body>
