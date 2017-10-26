@@ -20,28 +20,13 @@ class NewsController extends Controller
     {
         return view('home', compact('carousel'));
     }
-    public function education($pid=5,$ty=16)
-    {
-        $this->newslist($pid,$ty);
-    }
-    public function company($pid=5,$ty=17)
-    {
-        $this->newslist($pid,$ty);
-    }
-    public function industry($pid=5,$ty=18)
-    {
-       $this->newslist($pid,$ty);
-    }
-    public function Lately($pid=5,$ty=19)
-    {
-        $this->newslist($pid,$ty);
-    }
-    private function newslist($pid,$ty)
+
+    private function newslist()
     {
         $news = new News();
 
         // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
-        $newslist = $news->v_list([$pid,$ty],["title","sendtime","img1","content"]);
+        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["title","sendtime","img1","content"]);
         foreach ($newslist as $v){
             $v['introduction']=cutstr(strip_tags($v['content']),500);
             $v['img1']=img($v['img1']);
@@ -50,7 +35,7 @@ class NewsController extends Controller
         $list['hot_info']=$this->hot_info();
         $list['new_job']=$this->new_job();
         $list['hot_train']=$this->hot_train();
-        return view('list', compact('list'));
+        return view('news/list', compact('list'));
     }
 
     private function hot_info()
@@ -69,7 +54,7 @@ class NewsController extends Controller
     {
         $news = new Training();
         $str = $news->v_list([2],["title","img1","price","id","address","pid"],10);
-        $str[0]['img1']="uploadfile/upload/". $str[0]['img1'];
+        $str[0]['img1']=img($str[0]['img1']);
         return $str;
     }
 }

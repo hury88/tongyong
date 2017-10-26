@@ -1,41 +1,47 @@
 @extends('layouts.master')
 
-@section('page_class')@parent- {{ trans('about.contact_us') }}@endsection
-
-{{-- NAVBAR --}}
-@section('navigation')
-  @include('partial.navigation_basic')
-@endsection
-
-{{-- CONTENT --}}
-@section('content')
-<div class="container-fluid">
-  <div class="row col-md-12">
-    <div class="panel panel-default">
-
-      <div class="panel-heading clearfix">
-        <h4 class="panel-title pull-left" style="padding-top: 7.5px;"><span class="glyphicon glyphicon-envelope"></span> {{trans('about.contact')}}</h4>
-      </div>
-      <div class="panel-body">
-        <div class="col-sm-12 col-md-12 col-lg-6">
-          @include('about.info')
-          @include('about.map')
+@section('title') @parent @stop
+@section('css')
+  <link rel="stylesheet" type="text/css" href="/css/jiandanyemian.css"/>
+@stop
+@section('bodyNextLabel')
+  <body>
+  <div class="container">
+    @stop
+    @section('content')
+      <div class="yijianAll">
+        <div class="yijian" style="margin-top: 67px;">
+          <div class="yijianLeft">
+            <ul>
+              @foreach($left as $row)
+                <li {!! $GLOBALS['ty']==$row->id ? ' class="yijianon"' :'' !!}> <a href="{{u('about', $row->path)}}">{{$row->catname}}<i>></i></a> </li>
+              @endforeach
+            </ul>
+          </div>
+          <div class="yijianRight">
+            <div class="sousuoMb">
+              <span class="sousuoMb2" style="color: #444344;">{{$GLOBALS['ty_data']->catname}}</span>
+              <span class="sousuoMb1">
+                    <a href="javascript:void(0);"><img src="/img/sqzwtop.png"/>所在位置：</a>
+                    <a href="/">首页></a>
+                    <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
+                </span>
+            </div>
+            @section('about_content')
+              <div class="qiyewenhua">
+                {!! isset($content) ? $content : '' !!}
+              </div>
+            @show
+          </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-6">
-          @include('about.contact_form')
-        </div>
       </div>
-    </div>
-  </div>
-</div>
-@endsection
-{{-- Pie de pagina --}}
+@stop {{-- end content --}}
+
+
 @section('footer')
-@parent
-@endsection
-{{-- Angular --}}
-@section('before.angular') @endsection
-{{-- Javascript --}}
+  @parent
+@stop
+
 @section('scripts')
-@parent
-@endsection
+  @parent
+@stop

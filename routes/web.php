@@ -42,6 +42,7 @@ Route::group(['prefix' => 'home'], function () {
 
 //about
 require __DIR__.'/web/about.php';
-
+//News
+require __DIR__.'/web/news.php';
 //utilities
 // require __DIR__.'/web/utilities.php';

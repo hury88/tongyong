@@ -533,7 +533,7 @@ a:hover{
 	line-height: 30px;
 }
 .key_call div dl dd img{
-	vertical-align:bottom
+	vertical-align:bottom;
 	margin-right: 10px;
 }
 .key_call div dl a{
