@@ -3,13 +3,13 @@
         <p class="fl">{{$boot_config['copyright']}} </p>
         <ul class="fl">
             <li>
-                <a href="javascript:;" style="border-left: none;"> 联系我们</a>
+                <a target="_blank" href="{{u('about', 'contact')}}" style="border-left: none;"> 联系我们</a>
             </li>
             <li>
-                <a href="javascript:;">企业文化</a>
+                <a target="_blank" href="{{u('about', 'culture')}}">企业文化</a>
             </li>
             <li>
-                <a href="javascript:;">法律声明</a>
+                <a target="_blank" href="{{u('about', 'legal')}}">法律声明</a>
             </li>
             <li>
                 <a href="http://www.semfw.cn" target="_blank" class="active">技术支持：科威网络</a>
