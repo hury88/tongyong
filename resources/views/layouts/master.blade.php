@@ -10,7 +10,7 @@
 	<meta name="description" content="{{ $boot_config['description'] }}">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	{{-- CSS files --}}
-	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/common.css"/>
 @yield('css')
 
 </head>
@@ -38,7 +38,7 @@
 	@show
 </body>
 @section('scripts')
-	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript">
 	    //	导航下拉
 	    $('.mian_nav .list>li').hover(function() {
