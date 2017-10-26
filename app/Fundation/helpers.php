@@ -87,22 +87,32 @@ if (!function_exists('v_show')) {
 			$GLOBALS['ty'] = $db_ty->id;
 			$GLOBALS['ty_path'] = $uri[1];
 			$GLOBALS['ty_data'] =  $db_ty;
-		} elseif($level == 2 || $level == 3) {
-			$db_pid = v_path($uri[0]);
-			$GLOBALS['pid'] =  $db_pid->id;
-			$GLOBALS['pid_path'] = $uri[0];
-			$GLOBALS['pid_data'] = $db_pid;
-
-			$db_ty = v_path($uri[1], $db_pid->id);
-			$GLOBALS['ty'] = $db_ty->id;
-			$GLOBALS['ty_path'] = $uri[1];
-			$GLOBALS['ty_data'] = $db_ty;
-
-			if ($level==3) {
-				$db_tty = v_path($uri[2], $db_ty->id);
-				$GLOBALS['tty'] = $db_tty->id;
-				$GLOBALS['tty_data'] = $db_tty;
-				$GLOBALS['tty_path'] = $uri[2];
+		} elseif($level == 2) {
+			if ( $db_pid = v_path($uri[0]) ) {
+				$GLOBALS['pid'] =  $db_pid->id;
+				$GLOBALS['pid_path'] = $uri[0];
+				$GLOBALS['pid_data'] = $db_pid;
+				if ( $db_ty = v_path($uri[1], $db_pid->id) ) {
+					$GLOBALS['ty'] = $db_ty->id;
+					$GLOBALS['ty_path'] = $uri[1];
+					$GLOBALS['ty_data'] = $db_ty;
+				}
+			}
+		} elseif($level == 3) {
+			if ( $db_pid = v_path($uri[0]) ) {
+				$GLOBALS['pid'] =  $db_pid->id;
+				$GLOBALS['pid_path'] = $uri[0];
+				$GLOBALS['pid_data'] = $db_pid;
+				if ( $db_ty = v_path($uri[1], $db_pid->id) ) {
+					$GLOBALS['ty'] = $db_ty->id;
+					$GLOBALS['ty_path'] = $uri[1];
+					$GLOBALS['ty_data'] = $db_ty;
+					if ( $db_tty = v_path($uri[2], $db_ty->id) ) {
+						$GLOBALS['tty'] = $db_tty->id;
+						$GLOBALS['tty_data'] = $db_tty;
+						$GLOBALS['tty_path'] = $uri[2];
+					}
+				}
 			}
 
 		} else {
