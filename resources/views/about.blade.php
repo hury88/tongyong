@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title'){{ trans('globals.home') }} - @parent @stop
+@section('title') @parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/jiandanyemian.css"/>
 @stop

@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 @show
 	{{-- SEO --}}
-	<title>@section('title') {{ $boot_config['sitename'] }} @show</title>
+	<title>@section('title') {{ implode(' - ', $boot_title) }} @show</title>
 	<meta name="keywords" content="{{ $boot_config['keywords'] }}">
 	<meta name="description" content="{{ $boot_config['description'] }}">
 	<link rel="shortcut icon" href="favicon.ico" type="/image/x-icon"/>

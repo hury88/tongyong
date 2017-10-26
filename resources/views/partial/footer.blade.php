@@ -58,7 +58,7 @@
 
         </li>
         <li class="key_act">
-            <a href="###">
+            <a target="_blank" href="{{u('about', 'feedback')}}">
                 <i></i>
 
                 <p>意见反馈</p>
@@ -66,7 +66,7 @@
 
         </li>
         <li class="key_kf">
-            <a href="###">
+            <a target="_blank" href="{{u('about', 'problem')}}">
                 <i></i>
 
                 <p>常见问题</p>
