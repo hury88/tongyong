@@ -25,7 +25,7 @@ class NewsCats extends Model
     ];
 
     // 获取导航 默认返回全部 传pid则返回对应子级
-    public function getNavigation($field = ['catname,path'], $pid = null)
+    public function getNavigation($field = ['catname','path'], $pid = null)
     {
         if (is_null($pid)) {
             return $this->where('id', '<=', 5)

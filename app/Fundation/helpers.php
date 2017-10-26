@@ -3,6 +3,7 @@
 use App\News;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use App\Http\FileController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -109,13 +110,24 @@ if (!function_exists('v_show')) {
 		}
 	}
 
-	function img($filepath, $width = 0, $height = 0)
+	function img($img,$nopic=false, $width = 0, $height = 0)
 	{
-		static $file;
-		if (is_null($file)) {
-			$file = new FileController;
-		}
-		$file->img;
+            $upload ='/uploadfile/upload/';
+            $imgPath = $upload .$img;
+            if(empty($img)){
+                if(!$nopic)$nopic = "/uploadfile/nopic.jpg";
+                $path = $nopic;
+                unset($nopic);
+            }else{
+                $path= $imgPath;
+            }
+            // if(Request::instance()->isMobile()){
+                return $path;
+//		static $file;
+//		if (is_null($file)) {
+//			$file = new FileController;
+//		}
+//		$file->img;
 	    // return $filepath . "?imageView2/1/w/{$width}/h/{$height}";
 	}
 
