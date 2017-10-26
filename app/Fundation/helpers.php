@@ -26,22 +26,26 @@ if (!function_exists('v_show')) {
 		return $list;
 	}
 }
-	function v_id($id,$field='',$table='news')
+	function v_id($id,$field='*',$table='news')
 	{
-		$db = DB::table($table)->where('id',$id);
-	    if ($field) {
-	        return isset($db->first([$field])->$field) ? $db->$field : null;
+		$db = DB::table($table)->where('id',$id)->first([$field]);
+	    if ($field == '*') {
+	        return $db;
 	    } else {
-	        return $db->first();
+	        return  $db ? $db->$field : null;
 	    }
 	}
 	//为了获取方便增加 查询news表函数
-	function v_news($pid,$ty,$field='title'){
-		$db = DB::table('news')->where('pid', $pid)->where('ty', $ty)->first([$field]);
-		if (is_array($field)) {
+	function v_news($pid,$ty,$field='*',$tty=null){
+		$db = DB::table('news')->where('pid', $pid)->where('ty', $ty);
+		if ($tty) {
+			$db->where('tty', $tty);
+		}
+		$db->first([$field]);
+		if ($field == '*') {
 		    return $db;
 		} else {
-		    return isset($db->$field) ? $db->$field : null;
+		    return $db->columns ? $db->$field : null;
 		}
 	}
 	//为了获取方便增加 查询news_cats表函数

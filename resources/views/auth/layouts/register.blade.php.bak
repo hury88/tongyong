@@ -8,15 +8,14 @@
 <body>
 	<div class="pager_wrap login_wrap">
 @stop
-@section('navigation')
-	&nbsp;
-@show
 @section('content')
+	@section('navigation')
+	@stop
     <div class="register-box">
         <div class="login-header">
             <div class="login-header-l fl">
                 <a class="login-logo" href="javascript:void(0)">
-                    <img src="img/login-logo.png" alt=""/>
+                    <img src="/img/login-logo.png" alt=""/>
                     中国职业培训网
                 </a>
                 <a class="login-address" href="javascript:void(0)">合肥</a>
@@ -121,6 +120,8 @@
 @show
 
 
+
+@section('footer')
 <div class="register-cover"></div>
 <div class="register-mask">
   <div class="mask-header">
@@ -147,12 +148,9 @@
         <p style="color: #666;line-height:26px;">“爱读爱看”网不对会员所发布信息的删除或储存失败负责。“爱读爱看”网有判定会员的行为是否符合“爱读爱看”网服务条款的要求和精神的保留权利，</p>
     </div>
 </div>
-
-@section('footer')
-	&nbsp;
-@stop
+@show
 
 @section('scripts')
 <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/js/js_dengluzhuce.js"></script>
-@stop
+@show
