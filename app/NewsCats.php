@@ -24,33 +24,19 @@ class NewsCats extends Model
     protected $fillable = [
     ];
 
-    public static function v($id,$field=['*'])
+    // 获取导航 默认返回全部 传pid则返回对应子级
+    public function getNavigation($field = ['catname','path'], $pid = null)
     {
-        if (is_array($field)) {
-            return $this->find($id,$field);
+        if (is_null($pid)) {
+            return $this->where('id', '<=', 5)
+                ->orderBy('disorder', 'desc')
+                ->orderBy('id', 'asc')
+                ->get($field);
+        } else {
+            return $this->where('pid',$pid)
+                ->orderBy('disorder', 'desc')
+                ->orderBy('id', 'asc')
+                ->get($field);
         }
-        return $this->find($id,$field)->$field;
-
-    }
-    /**
-     * [parseWhere 解析条件]
-     * @param  [type] $where [description]
-     * @return [type]        [description]
-     */
-    private function parseWhere($where)
-    {
-        if ($count = count($where)) {
-            if($count == 1) {
-                return self::where('pid','=',$where[0]);
-            } elseif($count == 2 && $where[1]) {
-                return self::where('pid','=',$where[0])->where('ty','=',$where[1]);
-            } elseif($where[2]) {
-                return self::where('pid','=',$where[0])
-                        ->where('ty','=',$where[1])
-                        ->where('tty','=',$where[2]);
-            }
-        }
-        throw new Exception('Model:News 条件解析出错 in parseWhere');
-
     }
 }

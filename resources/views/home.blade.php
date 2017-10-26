@@ -2,10 +2,10 @@
 
 @section('title'){{ trans('globals.home') }} - @parent @stop
 @section('css')
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="css/jquery.hiSlider.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/chopslider.css"/>
-    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.hiSlider.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/chopslider.css"/>
+    <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 @stop
 @section('bodyNextLabel')
 <body>
@@ -15,8 +15,8 @@
     {{-- -------------------------------------------------- --}}
     {{-- -------------------- carousel -------------------- --}}
     {{-- -------------------------------------------------- --}}
-    <script src="js/jquery.id.chopslider-2.2.0.free.min.js"></script>
-    <script src="js/jquery.id.cstransitions-1.2.min.js"></script>
+    <script src="/js/jquery.id.chopslider-2.2.0.free.min.js"></script>
+    <script src="/js/jquery.id.cstransitions-1.2.min.js"></script>
     <div id="container">
         <div class="wrapper">
             <div id="slider">
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="content">
-        <h2><i><img src="img/bxo-logo.png" alt=""/></i>高端职业培训首选平台</h2>
+        <h2><i><img src="/img/bxo-logo.png" alt=""/></i>高端职业培训首选平台</h2>
         <p>为近万名学生轻松解决就业烦恼、成功塑造就业未来</p>
         <ul class="clearfix">
             <li>
@@ -89,19 +89,19 @@
                 <h2>高端招聘</h2>
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="img/zhi_10.png" alt=""/>
+                <img src="/img/zhi_10.png" alt=""/>
             </div>
             <div class="oDiv1 o1">
                 <h2>院校信息发布</h2>
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="img/zhi_03.png" alt=""/>
+                <img src="/img/zhi_03.png" alt=""/>
             </div>
             <div class="oDiv2 o1">
                 <h2>求职者平台</h2>
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务 ...</p>
                 <a href="###">更多>></a>
-                <img src="img/zhi_07.png" alt=""/>
+                <img src="/img/zhi_07.png" alt=""/>
             </div>
 
             <div class="oDiv3 o1">
@@ -109,14 +109,14 @@
 
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="img/zhi_15.png" alt=""/>
+                <img src="/img/zhi_15.png" alt=""/>
             </div>
             <div class="oDiv4 o1">
                 <h2>高端招聘</h2>
 
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="img/zhi_19.png" alt=""/>
+                <img src="/img/zhi_19.png" alt=""/>
             </div>
         </div>
         <div class="ra_con">
@@ -126,7 +126,7 @@
         </div>
     </div>
     <div class="ad">
-        <a href="###"><img src="img/ad.png"/></a>
+        <a href="###"><img src="/img/ad.png"/></a>
     </div>
 </div>
 <!--新工作发布会-->
@@ -152,82 +152,82 @@
             <div class="list_con">
                 <ul class="oul1 clearfix">
                     <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
+                        <img src="/img/l-1.png" width="124" height="62"/>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
+                        <a href="###"><img src="/img/l-2.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
+                        <a href="###"><img src="/img/l-3.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
+                        <a href="###"><img src="/img/l-4.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
+                        <a href="###"><img src="/img/l-5.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
+                        <a href="###"><img src="/img/l-6.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
+                        <a href="###"><img src="/img/l-7.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
+                        <a href="###"><img src="/img/l-8.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
+                        <a href="###"><img src="/img/l-9.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
+                        <a href="###"><img src="/img/l-10.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
+                        <a href="###"><img src="/img/l-11.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
+                        <a href="###"><img src="/img/l-12.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
+                        <a href="###"><img src="/img/l-13.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
+                        <a href="###"><img src="/img/l-14.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
@@ -321,258 +321,82 @@
             <div class="list_con">
                 <ul class="oul1 clearfix">
                     <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
+                        <img src="/img/l-1.png" width="124" height="62"/>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
+                        <a href="###"><img src="/img/l-2.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
+                        <a href="###"><img src="/img/l-3.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
+                        <a href="###"><img src="/img/l-4.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
+                        <a href="###"><img src="/img/l-5.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
+                        <a href="###"><img src="/img/l-6.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
+                        <a href="###"><img src="/img/l-7.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
+                        <a href="###"><img src="/img/l-8.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
+                        <a href="###"><img src="/img/l-9.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
+                        <a href="###"><img src="/img/l-10.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
+                        <a href="###"><img src="/img/l-11.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
+                        <a href="###"><img src="/img/l-12.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
+                        <a href="###"><img src="/img/l-13.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
+                        <a href="###"><img src="/img/l-14.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
-
-                        <div></div>
-                    </li>
-
-                </ul>
-                <table>
-
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="list_con">
-                <ul class="oul1 clearfix">
-                    <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
@@ -673,258 +497,82 @@
             <div class="list_con">
                 <ul class="oul1 clearfix">
                     <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
+                        <img src="/img/l-1.png" width="124" height="62"/>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
+                        <a href="###"><img src="/img/l-2.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
+                        <a href="###"><img src="/img/l-3.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
+                        <a href="###"><img src="/img/l-4.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
+                        <a href="###"><img src="/img/l-5.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
+                        <a href="###"><img src="/img/l-6.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
+                        <a href="###"><img src="/img/l-7.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
+                        <a href="###"><img src="/img/l-8.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
+                        <a href="###"><img src="/img/l-9.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
+                        <a href="###"><img src="/img/l-10.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
+                        <a href="###"><img src="/img/l-11.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
+                        <a href="###"><img src="/img/l-12.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
+                        <a href="###"><img src="/img/l-13.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
+                        <a href="###"><img src="/img/l-14.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
-
-                        <div></div>
-                    </li>
-
-                </ul>
-                <table>
-
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>信德瑞和投资咨询</td>
-                        <td>市场销售</td>
-                        <td>2人</td>
-                        <td> 4K-6K</td>
-                        <td>北京</td>
-                        <td>
-                            <a href="###">查看更多职位>></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="list_con">
-                <ul class="oul1 clearfix">
-                    <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
-
-                        <div></div>
-                    </li>
-                    <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
@@ -1025,82 +673,434 @@
             <div class="list_con">
                 <ul class="oul1 clearfix">
                     <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
+                        <img src="/img/l-1.png" width="124" height="62"/>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
+                        <a href="###"><img src="/img/l-2.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
+                        <a href="###"><img src="/img/l-3.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
+                        <a href="###"><img src="/img/l-4.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
+                        <a href="###"><img src="/img/l-5.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
+                        <a href="###"><img src="/img/l-6.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
+                        <a href="###"><img src="/img/l-7.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
+                        <a href="###"><img src="/img/l-8.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
+                        <a href="###"><img src="/img/l-9.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
+                        <a href="###"><img src="/img/l-10.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
+                        <a href="###"><img src="/img/l-11.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
+                        <a href="###"><img src="/img/l-12.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
+                        <a href="###"><img src="/img/l-13.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
+                        <a href="###"><img src="/img/l-14.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
+
+                        <div></div>
+                    </li>
+
+                </ul>
+                <table>
+
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="list_con">
+                <ul class="oul1 clearfix">
+                    <li>
+                        <img src="/img/l-1.png" width="124" height="62"/>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-2.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-3.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-4.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-5.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-6.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-7.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-8.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-9.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-10.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-11.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-12.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-13.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-14.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-15.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-15.png"/></a>
+
+                        <div></div>
+                    </li>
+
+                </ul>
+                <table>
+
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>信德瑞和投资咨询</td>
+                        <td>市场销售</td>
+                        <td>2人</td>
+                        <td> 4K-6K</td>
+                        <td>北京</td>
+                        <td>
+                            <a href="###">查看更多职位>></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="list_con">
+                <ul class="oul1 clearfix">
+                    <li>
+                        <img src="/img/l-1.png" width="124" height="62"/>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-2.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-3.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-4.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-5.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-6.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-7.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-8.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-9.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-10.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-11.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-12.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-13.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-14.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-15.png"/></a>
+
+                        <div></div>
+                    </li>
+                    <li>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
@@ -1204,82 +1204,82 @@
             <div class="list_con">
                 <ul class="oul1 clearfix">
                     <li>
-                        <img src="img/l-1.png" width="124" height="62"/>
+                        <img src="/img/l-1.png" width="124" height="62"/>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-2.png"/></a>
+                        <a href="###"><img src="/img/l-2.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-3.png"/></a>
+                        <a href="###"><img src="/img/l-3.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-4.png"/></a>
+                        <a href="###"><img src="/img/l-4.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-5.png"/></a>
+                        <a href="###"><img src="/img/l-5.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-6.png"/></a>
+                        <a href="###"><img src="/img/l-6.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-7.png"/></a>
+                        <a href="###"><img src="/img/l-7.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-8.png"/></a>
+                        <a href="###"><img src="/img/l-8.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-9.png"/></a>
+                        <a href="###"><img src="/img/l-9.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-10.png"/></a>
+                        <a href="###"><img src="/img/l-10.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-11.png"/></a>
+                        <a href="###"><img src="/img/l-11.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-12.png"/></a>
+                        <a href="###"><img src="/img/l-12.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-13.png"/></a>
+                        <a href="###"><img src="/img/l-13.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-14.png"/></a>
+                        <a href="###"><img src="/img/l-14.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
                     <li>
-                        <a href="###"><img src="img/l-15.png"/></a>
+                        <a href="###"><img src="/img/l-15.png"/></a>
 
                         <div></div>
                     </li>
@@ -1384,7 +1384,7 @@
 
     </div>
     <div class="ad">
-        <a href="###"><img src="img/ad1.png"/></a>
+        <a href="###"><img src="/img/ad1.png"/></a>
     </div>
 </div>
 
@@ -1462,7 +1462,7 @@
         </ul>
     </div>
     <div class="ad">
-        <a href="###"><img src="img/ad3_03.jpg"/></a>
+        <a href="###"><img src="/img/ad3_03.jpg"/></a>
     </div>
 </div>
 <!--职业证书-->
@@ -1472,12 +1472,12 @@
     <div class="id_title"><span></span>职业证书</div>
 
     <div class="hovertree">
-        <img src="img/books.png" class="active"/>
-        <img src="img/books.png"/>
-        <img src="img/books.png"/>
-        <img src="img/books.png"/>
-        <img src="img/books.png"/>
-        <img src="img/books.png"/>
+        <img src="/img/books.png" class="active"/>
+        <img src="/img/books.png"/>
+        <img src="/img/books.png"/>
+        <img src="/img/books.png"/>
+        <img src="/img/books.png"/>
+        <img src="/img/books.png"/>
     </div>
     <p class="y_btn">
         <span class="active"></span>
@@ -1489,7 +1489,7 @@
     </p>
 
     <div class="ad">
-        <a href="###"><img src="img/ad4.png"/></a>
+        <a href="###"><img src="/img/ad4.png"/></a>
     </div>
 </div>
 <div class="style">
@@ -1503,20 +1503,20 @@
             </div>
         </div>
         <div class="fr alink">
-            <a href="###"><img src="img/zhi.png" width="21" height="21"/>了解更多详情</a>
+            <a href="###"><img src="/img/zhi.png" width="21" height="21"/>了解更多详情</a>
         </div>
         <div style="clear: both;"></div>
         <div class="style_btn clearfix">
             <div class="s_banner fl">
                 <ul class="hiSlider hiSlider1">
                     <li data-title="美国加州州立大学富尔顿分校招生官来访" class="hiSlider-item">
-                        <a href="###"><img src="img/s-b_07.jpg" alt="11111"></a>
+                        <a href="###"><img src="/img/s-b_07.jpg" alt="11111"></a>
                     </li>
                     <li data-title="美国加州州立大学富尔顿分校招生官来访" class="hiSlider-item">
-                        <a href="###"><img src="img/s-b_07.jpg" alt="22222"></a>
+                        <a href="###"><img src="/img/s-b_07.jpg" alt="22222"></a>
                     </li>
                     <li data-title="美国加州州立大学富尔顿分校招生官来访" class="hiSlider-item">
-                        <a href="###"><img src="img/s-b_07.jpg" alt="33333"></a>
+                        <a href="###"><img src="/img/s-b_07.jpg" alt="33333"></a>
                     </li>
 
                 </ul>
@@ -1744,7 +1744,7 @@
 
 </div>
 
-<script type="text/javascript" src="js/jquery.hiSlider.min.js"></script>
+<script type="text/javascript" src="/js/jquery.hiSlider.min.js"></script>
 <!--轮播-->
 <script type="text/javascript">
     $('.hiSlider1').hiSlider();
@@ -1789,5 +1789,5 @@
         start();
 
     </script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
 @stop

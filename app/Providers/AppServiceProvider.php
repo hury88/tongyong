@@ -5,7 +5,9 @@ namespace app\Providers;
 // use App\Category;
 // use App\Company;
 use App\Config;
+use App\News;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,11 +17,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
         $config = Config::find(1)->toArray();
+        path2ptt($request->path());
+        bread();
         view()->share('boot_config', $config);
-
     }
 
     /**

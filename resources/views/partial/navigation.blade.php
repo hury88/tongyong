@@ -1,49 +1,30 @@
 <div id="nav" class="clearfix">
-    <h1 class="fl"><a href="###"> <img src="img/logo.png"/>中国职业培训网 <span>合 肥</span></a></h1>
+    <h1 class="fl"><a href="/"> <img src="{{img($boot_config['logo1'])}}"/>{{$boot_config['sitename']}} <span>合 肥</span></a></h1>
     <div class="mian_nav fr">
         <ul class="list">
             <li>
-                <a href="javascript:;">首页 </a>
+                <a href="/">首页 </a>
             </li>
-            <li>
-                <a href="javascript:;"> 职业招聘 </a>
-                <div class="dump">
-                    <ul class="fl">
-                        <li>
-                            <a href="javascript:;" class="active">高端招聘</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">企业招聘</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">校园招聘</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">求职者平台</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">院校信息发布</a>
-                        </li>
-                    </ul>
-                    <span></span>
+            <?php $newsCats  = new \App\NewsCats;?>
+            @foreach ($newsCats->getNavigation(["id", 'img2','catname','path']) as $yiji)
+                <li>
+                    <a href="{{u($yiji->path)}}"> {{$yiji->catname}} </a>
+                    <div class="dump">
+                        <ul class="fl">
+                            @foreach ($newsCats->getNavigation(['catname','path'],$yiji->id) as $erji)
+                            <li>
+                                <a href="{{u($yiji->path, $erji->path)}}"> {{$erji->catname}}</a>
+                            </li>
+                            @endforeach
 
-                    <div class="show">
-                        <a href="javascript:;"><img src="img/list.png"/></a>
+                        </ul>
+                        <span></span>
+                        <div class="show">
+                            <a href="javascript:;"><img src="/uploadfile/upload/{{$yiji->img2}}"/></a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <a href="javascript:;">职业培训 </a>
-            </li>
-            <li>
-                <a href="javascript:;">职业证书 </a>
-            </li>
-            <li>
-                <a href="javascript:;"> 国际教育 </a>
-            </li>
-            <li>
-                <a href="javascript:;">新闻动态 </a>
-            </li>
+                </li>
+            @endforeach
         </ul>
         <div class="use">
             <ul class="fl">
