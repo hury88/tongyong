@@ -32,7 +32,7 @@
                 <a href="javascript:;" style="margin-left: 30px;">搜索</a>
             </li>
             <li>
-                <a href="javascript:;" style="margin-left: 15px;">注册</a>
+                <a href="{{}}" style="margin-left: 15px;">注册</a>
             </li>
             <li>
                 <a href="javascript:;">登录</a>
