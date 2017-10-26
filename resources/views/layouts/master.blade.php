@@ -10,7 +10,7 @@
 	<meta name="description" content="{{ $boot_config['description'] }}">
 	<link rel="shortcut icon" href="favicon.ico" type="/image/x-icon"/>
 	{{-- CSS files --}}
-	<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+
 @yield('css')
 
 </head>

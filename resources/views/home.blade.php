@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/jquery.hiSlider.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/chopslider.css"/>
     <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/common_shouye.css"/>
     <style>
         #nav {background-color:rgba(0,0,0,.5)}
     </style>
