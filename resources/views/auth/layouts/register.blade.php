@@ -37,7 +37,8 @@
     <div class="pager_wrap register-wrap">
         <div class="login-register-box register-content">
            <div class="register-header">
-               @yield('register_header')
+               <h1 class="fl">我是学生加入中国职业培训网</h1>
+               <a class="register-cate fr" href="javascript:;"><img src="img/qiye.png"/>我是企业</a>
                <div class="clearfix"></div>
            </div>
             <div class="register-detials">
@@ -51,7 +52,9 @@
                     <div class="register-tab-content">
                         <div class="register-content-box" style="display:block;">
                             <form>
-                            	@yield('form')
+                                <div class="register-form-div">
+                                    <input type="text" placeholder="请输入真实姓名"/>
+                                </div>
                                 <div class="register-form-div">
                                     <input type="text" placeholder="请输入手机号"/>
                                 </div>
@@ -67,7 +70,13 @@
                                     <input type="password" placeholder="请确认密码"/>
                                     <a href="javascript:;"></a>
                                 </div>
-                                @yield('protocal')
+                                <div class="company-agreement">
+                                    <label>
+                                        <input type="radio" name="property-type" value="我已阅读并接受《中国职业培训网个人会员注册协议》"/>
+                                        <span></span>
+                                    </label>
+                                    <p class="agreement-content">我已阅读并接受<b>《中国职业培训网个人会员注册协议》</b></p>
+                                </div>
                                 <div class="register-form-inp">
                                     <input type="submit" value="注册"/>
                                 </div>
@@ -93,7 +102,13 @@
                                     <input type="password" placeholder="请确认密码"/>
                                     <a href="javascript:;"></a>
                                 </div>
-                                @yield('protocal')
+                                <div class="company-agreement">
+                                    <label>
+                                        <input type="radio" name="property-type" value="我已阅读并接受《中国职业培训网个人会员注册协议》"/>
+                                        <span></span>
+                                    </label>
+                                    <p class="agreement-content">我已阅读并接受<b>《中国职业培训网个人会员注册协议》</b></p>
+                                </div>
                                 <div class="register-form-inp">
                                     <input type="submit" value="注册"/>
                                 </div>
@@ -118,7 +133,7 @@
             <p class="login-footer-p">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号<span>|</span><b>技术支持：科威网络</b></p>
         </div>
     </div>
-@show
+@endsection
 
 
 <div class="register-cover"></div>

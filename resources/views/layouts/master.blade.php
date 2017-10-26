@@ -8,11 +8,8 @@
 	<title>@section('title') {{ implode(' - ', $boot_title) }} @show</title>
 	<meta name="keywords" content="{{ $boot_config['keywords'] }}">
 	<meta name="description" content="{{ $boot_config['description'] }}">
-	<link rel="shortcut icon" href="favicon.ico" type="/image/x-icon"/>
-	{{-- CSS files --}}
-
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 @yield('css')
-
 </head>
 @yield('bodyNextLabel', '
 <body>
