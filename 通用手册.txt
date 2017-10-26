@@ -201,8 +201,8 @@ array=[
        37=>"about/Contact",                                     ===联系我们
        ],
     44=>[                                                       ===会员管理
-        45=>"news/member",                                      ===个人会员
-        46=>"news/cmember",                                     ===企业会员
+        45=>"member/usr",                                      ===个人会员
+        46=>"member/org",                                     ===企业会员
         ],
 ]
 
