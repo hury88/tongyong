@@ -18,7 +18,7 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-//user account verification
+/*//user account verification
 Route::get('verification/{token}', 'UserController@accountVerification');
 
 // home control
@@ -192,9 +192,10 @@ Route::group(['prefix' => 'wpanel', 'roles' => 'admin', 'middleware' => ['auth',
 });
 
 /*
+ *
  * WISH LISTS
  * here you will be able to find all the routes related to users wish list
- */
+ * /
 
 Route::group(['prefix' => 'wishes', 'roles' => array_keys(trans('globals.roles')), 'middleware' => ['auth', 'roles']], function () {
 
@@ -278,4 +279,4 @@ Route::post('contact', ['as' => 'contact_store', 'uses' => 'AboutController@stor
 Route::get('about', ['as' => 'about', 'uses' => 'AboutController@about']);
 Route::get('refunds', ['as' => 'refunds', 'uses' => 'AboutController@refunds']);
 Route::get('privacy', ['as' => 'privacy', 'uses' => 'AboutController@privacy']);
-Route::get('terms', ['as' => 'terms', 'uses' => 'AboutController@terms']);
+Route::get('terms', ['as' => 'terms', 'uses' => 'AboutController@terms']);*/
