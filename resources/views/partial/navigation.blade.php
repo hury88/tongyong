@@ -38,10 +38,10 @@
                 <a href="javascript:void(0);" style="margin-left: 30px;">搜索</a>
             </li>
             <li>
-                <a href="{{ route('register')}}" style="margin-left: 15px;">注册</a>
+                <a href="{{ u('register')}}" style="margin-left: 15px;">注册</a>
             </li>
             <li>
-                <a href="{{ route('login')}}">登录</a>
+                <a href="{{ u('login')}}">登录</a>
             </li>
         </ul>
         <p class="fl">

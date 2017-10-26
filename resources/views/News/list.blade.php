@@ -2,8 +2,8 @@
 
 @section('title') @parent @stop
 @section('css')
-  <link rel="stylesheet" type="text/css" href="css/common_jiandanyemian.css"/>
-  <link rel="stylesheet" type="text/css" href="css/jiandanyemian.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/common_jiandanyemian.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/jiandanyemian.css"/>
 @stop
 @section('bodyNextLabel')
     <body>
@@ -13,123 +13,33 @@
             <div class="yijianAll" style="margin-top: 67px;">
                 <div class="xwdt">
                     <p class="xwdtmbx">
-                        <a href="">
-                            <img src="img/sqzwtop.png"/>所在位置：首页 > 新闻动态
-                        </a>
+                        <a href="/"><img src="/img/sqzwtop.png"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
                     </p>
                     <div class="xwdtAll">
                         <div class="xwdtTit">
-                            <i>新闻动态</i>
+                            <i>{{$GLOBALS['ty_data']->catname}}</i>
                             <span>
-              	  	  	<a href="" class="xwdton">教育新闻</a>
-              	  	  	<a href="">公司新闻</a>
-              	  	  	<a href="">行业新闻</a>
-              	  	  	<a href="">近期活动</a>
-              	  	  </span>
+                                @foreach($left as $row)
+                                    <a {!! $GLOBALS['ty']==$row->id ? ' class="xwdton"' :'' !!} href="{{u('news', $row->path)}}">{{$row->catname}}</a>
+                                @endforeach
+
+              	  	        </span>
                         </div>
                         <div class="xwdtCon">
                             <div class="xwdtConall">
                                 <div class="xwdtConleft">
                                     <ul>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt1.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt2.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt3.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt1.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt2.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt3.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt1.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt2.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtConleftleft">
-                                                <img src="img/xwdt3.jpg"/>
-                                            </div>
-                                            <div class="xwdtConleftright">
-                                                <p class="po1">
-                                                    <a href="">侠客岛：作死的险资大鳄姚振华 不会是最后一个  <i>2017-07-07</i></a>
-                                                </p>
-                                                <p class="po2"><a href="">基金经理老鼠仓，说好保本变巨亏，买基金被坑请到【基金曝光台】！信用卡无故遭盗刷，银行存款变保险，理财被骗请猛戳【金融曝光台】！两会前夕，历来是观察中国政策走向的一个时间窗口。今年此时，猛料不断，最震撼者莫过于宝能系老大姚振华的猝然倒下。...</a></p>
-                                            </div>
-                                        </li>
+                                        @foreach($list['newslist'] as $val)
+                                            <li>
+                                                <div class="xwdtConleftleft">
+                                                    <img src="{{img($val->img1)}}"/>
+                                                </div>
+                                                <div class="xwdtConleftright">
+                                                    <p class="po1"><a href="{{route($GLOBALS['ty_path'],$val->id)}}">{{$val->title}} <i>{{date("Y-m-d",$val->sendtime)}}</i></a></p>
+                                                    <p class="po2"><a href="{{route($GLOBALS['ty_path'],$val->id)}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val->content)), 240, '...') !!}</a></p>
+                                                </div>
+                                            </li>
+                                          @endforeach
                                     </ul>
                                 </div>
                                 <div class="xwdtConright">
@@ -145,46 +55,12 @@
                                                 </div>
                                             </div>
                                             <div class="xwdtBom">
+                                                 @foreach($list['hot_info'] as $v1)
                                                 <p>
-                                                    <a href="">本科统考英语、计算机轻松过</a>
-                                                    <i>07-01</i>
+                                                    <a href="{{route($GLOBALS['ty_path'],$val->id)}}">{{str_limit($v1->title,25,"...")}}</a>
+                                                    <i>{{date("m-d",$v1->sendtime)}}</i>
                                                 </p>
-                                                <p>
-                                                    <a href="">2016成考最新复习资料下载</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">学历与学位的区别</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">7月成考报名指南</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">北京理工大学现代远程高等</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">本科统考英语、计算机轻松过</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">2016成考最新复习资料下载	</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">学历与学位的区别	</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">7月成考报名指南	</a>
-                                                    <i>07-01</i>
-                                                </p>
-                                                <p>
-                                                    <a href="">北京理工大学现代远程高等...	</a>
-                                                    <i>07-01</i>
-                                                </p>
+                                                 @endforeach
                                             </div>
                                         </li>
                                         <li>
@@ -227,7 +103,7 @@
                                                 </div>
                                                 <div class="xwdtTopright">
                                                     <p class="ps1">热门培训</p>
-                                                    <p class="ps2">New Job</p>
+                                                    <p class="ps2">Popular Training</p>
                                                 </div>
                                             </div>
                                             <div class="xwdtBom">
@@ -279,38 +155,7 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
-
-
-      <div class="yijianAll">
-        <div class="yijian" style="margin-top: 67px;">
-          <div class="yijianLeft">
-            <ul>
-              @foreach($left as $row)
-                <li {!! $GLOBALS['ty']==$row->id ? ' class="yijianon"' :'' !!}> <a href="{{u('about', $row->path)}}">{{$row->catname}}<i>></i></a> </li>
-              @endforeach
-            </ul>
-          </div>
-          <div class="yijianRight">
-            <div class="sousuoMb">
-              <span class="sousuoMb2" style="color: #444344;">{{$GLOBALS['ty_data']->catname}}</span>
-              <span class="sousuoMb1">
-                    <a href="javascript:void(0);"><img src="/img/sqzwtop.png"/>所在位置：</a>
-                    <a href="/">首页></a>
-                    <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
-                </span>
-            </div>
-            @section('about_content')
-              <div class="qiyewenhua">
-                {!! isset($content) ? $content : '' !!}
-              </div>
-            @show
-          </div>
-        </div>
-      </div>
 @stop {{-- end content --}}
 
 

@@ -44,6 +44,10 @@ class News extends Model
             ->take($num)
             ->get($field);
     }
+    public function v_id_arr($id)
+    {
+        return $this->find($id)->attributes;
+    }
     /*
      * [parseWhere 解析条件]
      * @param  [type] $where [description]
