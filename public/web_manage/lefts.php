@@ -78,9 +78,9 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                 if(!empty($bd3['linkurl'])){
                   $linkurl2=$bd3['linkurl'];
                 }elseif($showtype==10) {
-                    $linkurl2 = getUrl(array('typeid' => $bd3['id'], 'pid' => 0), Config::get('webarr.showtype2')[$showtype]);
+                    $linkurl2 = getUrl(array('typeid' => $bd3['id'], 'pid' => 0), Config::get('webarr.showtype2')[$showtype2]);
                 }else{
-                    $linkurl2 = getUrl(array('pid'=>$pid,'ty'=>$ppid,'tty'=>$bd3['id']),Config::get('webarr.showtype2')[$showtype]);
+                    $linkurl2 = getUrl(array('pid'=>$pid,'ty'=>$ppid,'tty'=>$bd3['id']),Config::get('webarr.showtype2')[$showtype2]);
                 }
 
                 ?>

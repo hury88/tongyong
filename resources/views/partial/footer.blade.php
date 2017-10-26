@@ -23,10 +23,26 @@
     </div>
 </div>
 <!--悬浮框-->
+<style type="text/css">
+    .key_wx div{
+        position: absolute;
+        top: 0;
+        left: -157px;
+        background: url(/img/fx_03.png) no-repeat 160px 150px;
+        display: none;
+    }
+    .key_link div{
+        position: absolute;
+        top: 0;
+        left: -157px;
+        background: url(/img/fx_03.png) no-repeat 160px 150px;
+        display: none;
+    }
+</style>
 <div class="kf_online">
     <ul>
         <li class="key_call">
-            <a href="###">
+            <a href="javascript:void(0);">
                 <i></i>
 
                 <p>在线咨询</p>
@@ -34,24 +50,15 @@
 
             <div>
                 <dl>
-                    <dt>业务咨询</dt>
 
+                    <dt>业务咨询</dt>
+                        <?php $qqarr=explode("|",$boot_config['webqq']);?>
+                    @foreach ($qqarr as $qqv)
                     <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794817&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>尹艳阳</span></a>
+                        <?php $carr=explode("：",$qqv);?>
+                        <a href="http://wpa.qq.com/msgrd?v=3&uin={{$carr[1]}}&site=qq&menu=yes" target="_blank"><img src="/img/q1.gif" width="33" height="29"> <span>{{$carr[0]}}</span></a>
                     </dd>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355612692&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>彭华</span></a>
-                    </dd>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355794812&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>陈禹杰</span></a>
-                    </dd>
-                    <dd>
-                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355724253&amp;site=qq&amp;menu=yes"
-                           target="_blank"><img src="img/q1.gif" width="33" height="29"> <span>熊飞</span></a>
-                    </dd>
+                    @endforeach
                 </dl>
 
             </div>
@@ -74,40 +81,42 @@
 
         </li>
         <li class="key_link">
-            <a href="###">
+            <a href="javascript:void(0);">
                 <i></i>
 
                 <p>APP下载</p>
             </a>
+            <div>
+                <img src="{{img($boot_config['logo2'])}}" width="156" height="193"/>
+            </div>
         </li>
         <li class="key_wx">
-            <a href="###">
+            <a href="javascript:void(0)">
                 <i></i>
 
                 <p>官方微信</p>
             </a>
 
             <div>
-                <img src="img/02index-2.jpg" width="156" height="193"/>
+                <img src="{{img($boot_config['img1'])}}" width="156" height="193"/>
             </div>
 
         </li>
         <li class="key_fx">
-            <a href="###">
+            <a href="javascript:void(0)">
                 <i></i>
 
                 <p>分享</p>
             </a>
 
             <div>
-                <a href="###"></a>
-                <a href="###"></a>
+                <a href="javascript:void(0);" class="qqfx"></a>
+                <a href="javascript:void(0);"  class="wxfx"></a>
             </div>
         </li>
         <li class="key_top">
-            <a href="###">
+            <a href="javascript:void(0);">
                 <i></i>
-
                 <p>返回顶部</p>
             </a>
 

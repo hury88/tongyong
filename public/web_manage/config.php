@@ -62,7 +62,7 @@ $opt = new Output;
 //								->input('在线客服','webqq')
 								// ->input('E-mail','email')
 							->flur()
-							 ->word('多个用“|”隔开;姓名与qq用“:”隔开！例：“尹艳阳：2355794817|彭华：2355612692”')->input("悬浮在线咨询", 'webqq')
+							 ->word('多个用“|”隔开;姓名与qq用“：”隔开！例：“尹艳阳：2355794817|彭华：2355612692”')->input("悬浮在线咨询", 'webqq')
 //							 ->word('Enter your Skype Name')->input('skype', 'link1')
 							// ->word('外链')->input('付款后', 'link1')
 							 ->word('外链')->input('考研咨询链接', 'link2')

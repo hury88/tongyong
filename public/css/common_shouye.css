@@ -509,10 +509,16 @@ a:hover{
 	position: absolute;
 	top: 0;
 	left: -157px;
-	 background: url(../img/fx_03.png) no-repeat 160px 150px;
+	background: url(../img/fx_03.png) no-repeat 160px 150px;
 	 display: none;
 }
-
+.key_link div{
+	position: absolute;
+	top: 0;
+	left: -157px;
+	background: url(../img/fx_03.png) no-repeat 160px 150px;
+	display: none;
+}
 .key_call div{
 	width: 100px;
 	position: absolute;
