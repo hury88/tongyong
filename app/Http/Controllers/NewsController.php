@@ -28,8 +28,11 @@ class NewsController extends Controller
         $viewrow =  $id;
         $news = new News();
         $id_arr=$news->v_id_arr($id);
-
-
+        if($id_arr['cid']){
+            $id_arr['qyname']=v_id($id_arr['cid'],"name","cmember");
+        }else{
+            $id_arr['qyname']="平台管理员";
+        }
         return view('news/view', compact('id_arr'));
 
     }

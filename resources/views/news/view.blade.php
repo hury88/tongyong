@@ -38,7 +38,7 @@
                         color: #666666;
                         text-indent: 2em;
                         line-height: 2;
-                      
+
                     }
                     .liuxuexqyema {
                         width: 100%;
@@ -76,7 +76,7 @@
                     <h3>{{$id_arr['title']}}</h3>
                     <p class="pi1">
                         <span>更新时间：{{date("y-m-d",$id_arr['sendtime'])}} </span>
-                        <span>来源：<i></i></span>
+                        <span>来源：<i>{{$id_arr['qyname']}}</i></span>
                     </p>
                    {!! htmlspecialchars_decode($id_arr['content']) !!}
                     <div class="liuxuexqyema">

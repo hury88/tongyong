@@ -48,6 +48,7 @@ class News extends Model
     {
         return $this->find($id)->attributes;
     }
+
     /*
      * [parseWhere 解析条件]
      * @param  [type] $where [description]
