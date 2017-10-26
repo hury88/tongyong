@@ -1,16 +1,26 @@
 @charset "utf-8";
 /* CSS Document */
 @font-face {
-	font-family: "dolode";
-	src: url("../font/1.otf");
-
+	font-family: "G01bold";
+	src: url("../font/造字工房尚黑G0v1粗体.otf");
 }
 @font-face {
-	font-family: "dolode2";
-	src: url("../font/2.TTF");
-
+	font-family: "youyuan";
+	src: url("../font/幼圆.TTF");
 }
-
+@font-face {
+	font-family: "simsun";
+	src: url("../font/simsun.ttc");
+}
+@font-face {
+	font-family: "fangzheng";
+	src: url("../font/兰亭纤黑_GBK.ttf");
+}
+span,i,b,a{
+	display:inline-block;
+	font-style: normal;
+	font-weight: normal;
+}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,form,
 input,textarea,p,th,td {
 	margin:0;
@@ -30,7 +40,7 @@ em,i,u,b,strong,th{
 	font-style:normal;
 	font-weight:normal;
 }
-input,textarea{
+input,textarea,select,input:focus,textarea:focus,select:focus{
 	outline:none;
 }
 ol,ul {
@@ -46,15 +56,30 @@ h1,h2,h3,h4,h5,h6 {
 a{
 	text-decoration:none;
 }
-
-
+.pager-wrap{
+	width: 100%;
+}
+.login-footer-p{
+	color:#666666;
+	font-size: 12px;
+	text-align: center;
+	font-family: simsun;
+}
+.login-footer-p span{
+	margin:auto 15px auto 11px;
+}
+.login-footer-p b{
+	color: #e71f1b;
+	font-size: 12px;
+	font-family: simsun;
+}
 .clearfix:after{
-		height:0;
-		content:" ";
-		display:block;
-		overflow:hidden;
-		clear:both;
-	}
+	height:0;
+	content:" ";
+	display:block;
+	overflow:hidden;
+	clear:both;
+}
 .clearfix{
 	zoom:1;
 	clear: both;
@@ -75,7 +100,13 @@ input,button{
 a:hover{
 	text-decoration: none;
 }
-
+.pager_wrap{
+	width: 100%;
+}
+.wrap-box{
+	width: 1100px;
+	margin:0 auto;
+}
 .container{
 	width: 100%;
 	min-width: 1240px;
@@ -84,17 +115,13 @@ a:hover{
 	z-index: 200001;
 	overflow: hidden;
 	background:rgba(72,181,109,.3);
-
-
 }
-
-
-
 #nav {
 	width: 100%;
 	height: 67px;
-	background:rgba(0,0,0,.8);
+	background:rgba(0,0,0,.5);
 	position: fixed;
+	top:0;
 	z-index: 200010;
 }
 #nav h1{
@@ -113,21 +140,18 @@ a:hover{
 	display: inline-block;
 	width: 45px;
 	height: 20px;
-    background: #040000;
-    text-align: center;
-    color: #4cb56d;
-    font-size: 12px;
-    border-radius: 10px;
-    line-height: 20px;
-    position: relative;
-    top: -4px;
+	background: #040000;
+	text-align: center;
+	color: #4cb56d;
+	font-size: 12px;
+	border-radius: 10px;
+	line-height: 20px;
+	position: relative;
+	top: -4px;
 }
 #nav .mian_nav{
 	margin-right: 96px;
 }
-
-
-
 .mian_nav .list{
 	float: left;
 }
@@ -261,7 +285,7 @@ a:hover{
 	height: 122px;
 	border-radius: 50%;
 	border: 1px dashed #fff;
-   transition: all 1s;
+	transition: all 1s;
 	-moz-transition: all 1s;
 	-webkit-transition: all 1s;
 	-o-transition: all 1s;
@@ -287,15 +311,15 @@ a:hover{
 	-o-transform:rotate(360deg);
 }
 .container .content ul li a{
- position: absolute;
- width: 146px;
- height: 37px;
- line-height: 37px;
- text-align: center;
- color: #fff;
- left: -15px;
- bottom:-20px;
- font-size: 20px;
+	position: absolute;
+	width: 146px;
+	height: 37px;
+	line-height: 37px;
+	text-align: center;
+	color: #fff;
+	left: -15px;
+	bottom:-20px;
+	font-size: 20px;
 	background: url(../img/in_03.png) no-repeat;
 }
 .container .content .btn{
@@ -353,8 +377,8 @@ a:hover{
 }
 .ad_con div.ad_title h2{
 	color: #ea5955;
-	 margin-top: 20px;
-	 font-size: 16px;
+	margin-top: 20px;
+	font-size: 16px;
 }
 .ad_con div.ad_title p{
 	color: #ea5955;
@@ -410,37 +434,36 @@ a:hover{
 	color: #4cb56d;
 }
 #footer .f_btm p a{
-	 padding-right: 30px;
-	 color: #666;
+	padding-right: 30px;
+	color: #666;
 }
 /*悬浮框*/
 .kf_online {
-    position: absolute;
-    top:415px;
-    right: 45px;
-    width: 58px;
-    z-index: 33;
-    background:#e0e0df;
-    padding: 1px 1px;
-    border-radius: 5px;
-    z-index: 2200000;
+	position: absolute;
+	top:415px;
+	right: 45px;
+	width: 58px;
+	background:#e0e0df;
+	padding: 1px 1px;
+	border-radius: 5px;
+	z-index: 2200000;
 
- }
+}
 
 .key_call,.key_act,.key_link,.key_kf,.key_wx,.key_fx,.key_top{
 	position: relative;
-    height: 49px;
-    background: #fff;
-    cursor: pointer;
-    border-bottom: 1px solid #e0e0df;
-    text-align: center;
-    padding: 4px 0;
+	height: 49px;
+	background: #fff;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0df;
+	text-align: center;
+	padding: 4px 0;
 
 
 }
 .key_call p,.key_act p,.key_kf p,.key_link p,.key_wx p,.key_fx p,.key_top p{
-       color: #5b5c5c;
-      font-size: 12px;
+	color: #5b5c5c;
+	font-size: 12px;
 }
 .kf_online li i{
 	display: block;
@@ -496,21 +519,21 @@ a:hover{
 
 }
 .key_fx div a:nth-child(1){
-		background:url(../img/qq.png) no-repeat;
+	background:url(../img/qq.png) no-repeat;
 }
 .key_fx div a:nth-child(2){
-	    background: url(../img/1.png) no-repeat;
-		background-position: -72px -25px;
+	background: url(../img/1.png) no-repeat;
+	background-position: -72px -25px;
 }
 .kf_online li:hover div{
-   display: block;
+	display: block;
 }
 .key_wx div{
 	position: absolute;
 	top: 0;
 	left: -157px;
-	 background: url(../img/fx_03.png) no-repeat 160px 150px;
-	 display: none;
+	background: url(../img/fx_03.png) no-repeat 160px 150px;
+	display: none;
 }
 
 .key_call div{
@@ -528,7 +551,7 @@ a:hover{
 }
 .key_call div dl dd img{
 	vertical-align:bottom
-	margin-right: 10px;
+margin-right: 10px;
 }
 .key_call div dl a{
 	color: #666;
@@ -541,6 +564,50 @@ a:hover{
 }
 @media (min-width: 1240px) and (max-width: 1406px){
 	.mian_nav .list>li>a {
-    padding: 23px 10px;
+		padding: 23px 10px;
+	}
 }
+.web-pager{
+	height: 35px;
+	text-align: center;
+}
+.web-pager a{
+	width: 33px;
+	height: 33px;
+	line-height: 33px;
+	text-align: center;
+	border-radius: 3px;
+	border:1px solid #c8c8c8;
+	margin-right: 3px;
+	color: #333333;
+}
+.web-pager .pager-now{
+	background: #d71718;
+	color: #fff;
+	border:1px solid  #d71718;
+}
+.web-pager .scrip-a{
+	margin-right:36px;
+}
+.web-pager form{
+	display: inline-block;
+}
+.web-pager .script-span{
+	color: #999999;
+}
+.web-pager .pager-form-inp{
+	width: 41px;
+	height: 33px;
+	border:1px solid #c8c8c8;
+	border-radius: 3px;
+	margin-right:4px;
+}
+.web-pager .pager-form-sub{
+	width: 41px;
+	height: 33px;
+	border:1px solid #c8c8c8;
+	border-radius: 3px;
+	margin-right:4px;
+	background: #fff;
+	color: #333333;
 }
