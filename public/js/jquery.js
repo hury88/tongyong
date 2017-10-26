@@ -67,30 +67,16 @@ function model(thisObj, actionUrl){
      cache: false,
      processData: false,
      contentType: false,
-     success : function(json){
-     	 // json = JSON.parse(json)
-     	 // console.log(json)
-	     s = json.status
-	     m = json.msg
-	     d = json.dom
+     success : function(response){
+	     var state = response.state,
+		     title = response.title,
+		     message = response.message,
+		     redirect = response.redirect;
          $(thisObj).removeAttr('disabled')
          var timer = 2000;
-         console.log(s);
-         console.log(s==200);
-         if(s==200){
-             if (d) {
-             	dialog([2,timer],[m],{cancel:["跳转",d]})
-             	console.log(123213);
-	             /*alert({
-	             	title : m,
-	             	text : "",
-	             	icon : "success",
-	             	button : "跳转",
-             		timer: timer,
-	             })
-	             $(document).on("click", "button.kwj-button", function(){
-		             window.location.href = d;
-	             })*/
+         if(state==200){
+             if (redirect) {
+             	dialog([2,timer],[m],{cancel:["离开本页面",d]})
              } else {
              	// dialog([2,timer],[m],{cancel:[false,d]})
 
@@ -108,7 +94,7 @@ function model(thisObj, actionUrl){
 	             setTimeout(function(){
 	             	$("button.kwj-button").click();
 	             },timer)
-         }else if(s==100){
+         }else if(state==100){
      	    alert({
      	    	title : m,
      	    	text : "",
@@ -131,62 +117,6 @@ function model(thisObj, actionUrl){
             })
          }
 
-         /*if(s==200){
-     		 // layer.open({content: json.msg ,btn: '确定'})
-             // alert(m)
-             if (d) {
-	             alert({
-	             	title : m,
-	             	text : "",
-	             	icon : "success",
-	             	button : "跳转",
-             		timer: timer,
-	             })
-	             $(document).on("click", "button.kwj-button", function(){
-		             window.location.href = d;
-	             })
-             } else {
-             	alert({
-             		title : m,
-             		text : "",
-             		icon : "success",
-             		timer: timer
-             	})
-	             $(document).on("click", "button.kwj-button", function(){
-		             window.location.reload();
-	             })
-	             // window.location.reload()
-             }
-	             setTimeout(function(){
-	             	$("button.kwj-button").click();
-	             },timer)
-         }else if(s==100){
-     	    alert({
-     	    	title : m,
-     	    	text : "",
-     	    	icon : "success",
-     			timer: timer,
-     	    })
-         }else if(s==101){// 发送验证码
-             alert({
-             	title : m,
-             	text : "",
-             	icon : "success",
-         		timer: timer,
-             })
-     	    settime(thisObj,60);
-         }else{
-     		// layer.open({content: json.msg ,btn: '确定'})
-             alert({
-             	title : m,
-             	text : "",
-             	icon : "error",
-             	timer: timer
-             })
-	          $(document).on("click", "button.kwj-button", function(){
-	             form.find("input[name="+d+"]").focus()
-	          })
-         }*/
      },
      error : function(){
      	$(thisObj).removeAttr('disabled');

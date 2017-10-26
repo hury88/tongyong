@@ -23,10 +23,10 @@
             <div class="login-header-r fr">
                 <ul class="login-nav-ul">
                     <li class="login-nav-li">
-                        <a href="javascript:void(0)">首页</a>
+                        <a href="/">首页</a>
                     </li>
                     <li class="login-nav-li">
-                        <a href="javascript:void(0)">使用帮助</a>
+                        <a href="{{u('help')}}">使用帮助</a>
                     </li>
                 </ul>
             </div>

@@ -36,16 +36,12 @@ if (!function_exists('v_show')) {
 	    }
 	}
 	//为了获取方便增加 查询news表函数
-	function v_news($pid,$ty,$field='*',$tty=null){
-		$db = DB::table('news')->where('pid', $pid)->where('ty', $ty);
-		if ($tty) {
-			$db->where('tty', $tty);
-		}
-		$db->first([$field]);
-		if ($field == '*') {
+	function v_news($pid,$ty,$field='title'){
+		$db = DB::table('news')->where('pid', $pid)->where('ty', $ty)->first([$field]);
+		if (is_array($field)) {
 		    return $db;
 		} else {
-		    return $db->columns ? $db->$field : null;
+		    return isset($db->$field) ? $db->$field : null;
 		}
 	}
 	//为了获取方便增加 查询news_cats表函数
@@ -230,4 +226,15 @@ T
 T
 ];
 		UNSET($url,$catname,$breadTemp,$bread);*/
+	}
+
+	function responseJson($state,$title,$message,$redirect=false){
+	    $arr = [
+	    	'state' => $state,
+	    	'title' => $title,
+	    	'message' => $message,
+	    ];
+	    $redirect && $arr['redirect'] = $redirect;
+	    unset($state,$title,$message,$redirect);
+	    return response()->json($arr);
 	}
