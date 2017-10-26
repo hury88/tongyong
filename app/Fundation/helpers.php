@@ -78,15 +78,16 @@ if (!function_exists('v_show')) {
 		$level = count($uri);
 
 		if ($level == 1) {
-			$db_pid = v_path($uri[0]);
-			$GLOBALS['pid'] =  $db_pid->id;
-			$GLOBALS['pid_path'] = $uri[0];
-			$GLOBALS['pid_data'] = $db_pid;
-
-			$db_ty = v_path(null, $db_pid->id);
-			$GLOBALS['ty'] = $db_ty->id;
-			$GLOBALS['ty_path'] = $uri[1];
-			$GLOBALS['ty_data'] =  $db_ty;
+			if ( $db_pid = v_path($uri[0]) ) {
+				$GLOBALS['pid'] =  $db_pid->id;
+				$GLOBALS['pid_path'] = $uri[0];
+				$GLOBALS['pid_data'] = $db_pid;
+				if ( $db_ty = v_path(null, $db_pid->id) ) {
+					$GLOBALS['ty'] = $db_ty->id;
+					$GLOBALS['ty_path'] = $db_ty->path;
+					$GLOBALS['ty_data'] = $db_ty;
+				}
+			}
 		} elseif($level == 2) {
 			if ( $db_pid = v_path($uri[0]) ) {
 				$GLOBALS['pid'] =  $db_pid->id;
