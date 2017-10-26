@@ -194,7 +194,7 @@ array=[
     36=>[                                                       ===关于我们
        38=>"about/Culture",                                     ===企业文化
        41=>"about/problem",                                     ===常见问题
-       40=>"about/Opinion",                                     ===意见反馈
+       40=>"about/feedback",                                     ===意见反馈
        43=>"about/contract",                                    ===服务合同
        39=>"about/Legal",                                       ===法律申明
        42=>"about/agreement",                                   ===用户协议

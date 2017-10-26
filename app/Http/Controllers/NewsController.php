@@ -44,7 +44,7 @@ class NewsController extends Controller
         $newslist = $news->v_list([$pid,$ty],["title","sendtime","img1","content"]);
         foreach ($newslist as $v){
             $v['introduction']=cutstr(strip_tags($v['content']),500);
-            $v['img1']="uploadfile/upload/".$v['img1'];
+            $v['img1']=img($v['img1']);
         }
         $list['newslist']=$newslist;
         $list['hot_info']=$this->hot_info();

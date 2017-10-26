@@ -21,8 +21,11 @@ class AppServiceProvider extends ServiceProvider
     {
         $config = Config::find(1)->toArray();
         path2ptt($request->path());
-        bread();
+        list($boot_bread, $boot_title) = bread();
+        array_push($boot_title, $config['sitename']);
         view()->share('boot_config', $config);
+        view()->share('boot_bread', $boot_bread);
+        view()->share('boot_title', $boot_title);
     }
 
     /**

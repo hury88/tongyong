@@ -1,11 +1,14 @@
 @extends('layouts.master')
 
-@section('title'){{ trans('globals.home') }} - @parent @stop
+@section('title') @parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="/css/jquery.hiSlider.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/chopslider.css"/>
     <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+    <style>
+        #nav {background-color:rgba(0,0,0,.5)}
+    </style>
 @stop
 @section('bodyNextLabel')
 <body>
@@ -22,7 +25,7 @@
             <div id="slider">
                 @foreach ($carousel as $post)
                     <div class="slide cs-activeSlide">
-                        <a href="{{ $post->linkurl }}"><img src="uploadfile/upload/{{ $post->img1 }}" alt="{{ $post->title }}"/></a>
+                        <a href="{{ $post->linkurl }}"><img src="/uploadfile/upload/{{ $post->img1 }}" alt="{{ $post->title }}"/></a>
                     </div>
 
                 @endforeach
