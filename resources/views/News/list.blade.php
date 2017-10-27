@@ -132,27 +132,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="web-pager" style="padding-top: 30px;">
-                                <a class="pager-now" href="javascript:;">1</a>
-                                <a href="javascript:;">2</a>
-                                <a href="javascript:;">3</a>
-                                <a href="javascript:;">4</a>
-                                <a href="javascript:;">5</a>
-                                <a href="javascript:;">6</a>
-                                <a href="javascript:;">7</a>
-                                <a href="javascript:;">8</a>
-                                <a href="javascript:;">9</a>
-                                <a href="javascript:;">10</a>
-                                <span>…</span>
-                                <a href="javascript:;">100</a>
-                                <a href="javascript:;" class="scrip-a"><img src="img/zhizhen.jpg"></a>
-                                <form>
-                                    <span class="script-span">跳转到：</span>
-                                    <input class="pager-form-inp" type="text"/>
-                                    <input class="pager-form-sub" type="button" value="GO">
-                                </form>
-
-                            </div>
+                            @include('partial.paginator')
                         </div>
                     </div>
                 </div>

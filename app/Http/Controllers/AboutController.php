@@ -22,8 +22,8 @@ class AboutController extends Controller
 
 	public function problem()
 	{
-		$list = (new \App\News)->v_list([$GLOBALS['pid'], $GLOBALS['ty']],['title', 'content']);
-        $page=(new \App\News)->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],1,5);
+		$list = (new \App\News)->v_list([$GLOBALS['pid'], $GLOBALS['ty']],['title', 'content'],8);
+        $page=(new \App\News)->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],8,5);
 		return view('about/problem', compact('list','page'));
 
 	}

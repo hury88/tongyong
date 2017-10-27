@@ -98,13 +98,14 @@ class NewsController extends Controller
         $news = new News();
 
         // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
-        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"]);
+        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"],9);
 
         $list['newslist']=$newslist;
         $list['hot_info']=$this->hot_info();
         $list['new_job']=$this->new_job();
         $list['hot_train']=$this->hot_train();
-        return view('news/list', compact('list'));
+        $page=(new \App\News)->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],9,9);
+        return view('news/list', compact('list',"page"));
     }
 
     private function hot_info()
