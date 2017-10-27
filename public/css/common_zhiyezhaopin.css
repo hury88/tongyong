@@ -523,9 +523,9 @@ a:hover{
 }
 
 .key_call div{
-	width: 100px;
+	width: 115px;
 	position: absolute;
-	left: -101px;
+	left: -116px;
 	background: #fff;
 	top: 0;
 	display: none;
@@ -536,7 +536,7 @@ a:hover{
 	line-height: 30px;
 }
 .key_call div dl dd img{
-	vertical-align:bottom
+	vertical-align:bottom;
 margin-right: 10px;
 }
 .key_call div dl a{
@@ -555,7 +555,7 @@ margin-right: 10px;
 }
 
 	
-	.web-pager{
+.web-pager{
     height: 35px;
     text-align: center;
     padding-bottom: 30px;
@@ -603,6 +603,50 @@ margin-right: 10px;
 .web-pager{
 	width: 68%;
     margin: 0 auto;
+}
+
+.web-pager{
+	height: 35px;
+	text-align: center;
+}
+.web-pager a{
+	width: 33px;
+	height: 33px;
+	line-height: 33px;
+	text-align: center;
+	border-radius: 3px;
+	border:1px solid #c8c8c8;
+	margin-right: 3px;
+	color: #333333;
+}
+.web-pager .pager-now{
+	background: #d71718;
+	color: #fff;
+	border:1px solid  #d71718;
+}
+
+.web-pager form{
+	display: inline-block;
+	margin-left: 35px;
+}
+.web-pager .script-span{
+	color: #999999;
+}
+.web-pager .pager-form-inp{
+	width: 41px;
+	height: 33px;
+	border:1px solid #c8c8c8;
+	border-radius: 3px;
+	margin-right:4px;
+}
+.web-pager .pager-form-sub{
+	width: 41px;
+	height: 33px;
+	border:1px solid #c8c8c8;
+	border-radius: 3px;
+	margin-right:4px;
+	background: #fff;
+	color: #333333;
 }
 .kyfdtop img {
     vertical-align: middle;

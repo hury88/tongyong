@@ -523,9 +523,9 @@ a:hover{
 }
 
 .key_call div{
-	width: 100px;
+	width: 115px;
 	position: absolute;
-	left: -101px;
+	left: -116px;
 	background: #fff;
 	top: 0;
 	display: none;
@@ -536,7 +536,7 @@ a:hover{
 	line-height: 30px;
 }
 .key_call div dl dd img{
-	vertical-align:bottom
+	vertical-align:bottom;
 margin-right: 10px;
 }
 .key_call div dl a{

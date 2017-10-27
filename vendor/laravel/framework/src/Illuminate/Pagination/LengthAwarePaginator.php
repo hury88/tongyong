@@ -158,10 +158,32 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($linknum="5")
     {
+        $xnum=floor($linknum/2);  //向下取证
+        if($this->lastPage() <= $linknum){
+            $min_page=1;
+            $max_page=$this->lastPage();
+        }elseif($this->currentPage() <= $xnum ) {
+            $min_page = 1;
+            $max_page = $linknum;
+        }elseif( $this->currentPage() >= $this->lastPage()-2){
+            $min_page = $this->lastPage()-$linknum+1;
+            $max_page = $this->lastPage();
+        }else{
+            if($linknum/2==1){
+                $min_page=$this->currentPage()-$xnum;
+                $max_page=$this->currentPage()+$xnum;
+            }else{
+                $min_page=$this->currentPage()-$xnum+1;
+                $max_page=$this->currentPage()+$xnum;
+            }
+
+        }
         return [
             'total' => $this->total(),
+            'min_page' => $min_page,
+            'max_page' =>$max_page,
             'per_page' => $this->perPage(),
             'current_page' => $this->currentPage(),
             'last_page' => $this->lastPage(),

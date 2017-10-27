@@ -48,6 +48,14 @@ class News extends Model
     {
         return $this->find($id);
     }
+    public function v_pages($where=[],$num=15,$linknum=5){
+        return $this->parseWhere($where)
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->paginate($num)
+            ->toArray($linknum);
+    }
 
     /*
      * [parseWhere 解析条件]
