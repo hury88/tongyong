@@ -120,14 +120,7 @@
                 <p>返回顶部</p>
             </a>
         </li>
-        <script type="text/javascript">
-            $(".key_top").click(function(){
-                var speed=200;
-                $('body,html').animate({ scrollTop: 0 }, speed);
-                return false;
 
-            })
-        </script>
     </ul>
 </div>
 

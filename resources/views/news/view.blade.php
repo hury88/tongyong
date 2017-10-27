@@ -103,4 +103,16 @@
 
     @section('scripts')
     @parent
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $(".kf_online").css("position","fixed")
+                $(".key_top").click(function(){
+                    var speed=200;
+                    $('body,html').animate({ scrollTop: 0 }, speed);
+                    return false;
+                })
+            })
+
+        </script>
     @stop
