@@ -7,6 +7,8 @@ use App\Person;
 use App\User;
 // use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Validator;
+
 class RegisterPersonController extends Controller
 {
     /*
@@ -29,13 +31,20 @@ class RegisterPersonController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * 在构造函数中存储临时返回, 无则为null
+     * @var string
+     */
+    private $return = '';
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
+        $this->return = $this->middleware('App\Http\Middleware\VerifyPersonRegister');
     }
 
     /**
@@ -46,14 +55,21 @@ class RegisterPersonController extends Controller
     protected function register(Request $request)
     {
         # 手机注册
-        $mark = $request->get('mark');
+        if (is_null($this->return)) {
+
+        } elseif(is_array($this->return)) {
+
+        } else {
+            return $this->return;
+        }
+        /*$mark = $request->get('mark');
         if ('telphone' == $mark) {
             return $this->telphoneRegister($request);
-        } elseif('email' == $mark) {
+        } elseif ('email' == $mark) {
             return $this->emailRegister($request);
         } else {
             return handleResponseJson(203, '系统识别不到本次行为,请刷新页面后再试!');
-        }
+        }*/
 
     }
 
@@ -62,20 +78,19 @@ class RegisterPersonController extends Controller
      */
     protected function telphoneRegister($request)
     {
-        $this->validate($request, $this->rules(), ['first_name.required'=>'123123'], function(){
-            return response()->json([
-                'success' => false,
-                'errors' =>  1,
-            ]);
-        });
 
-        $user = $this->createUser($request->all());
 
-        $this->sendRegistrationEmail($request->all());
-
-        auth()->login($user);
-
-        return redirect($this->redirectTo);
+        $message = $request->get('message');
+        $contact = $request->get('contact');
+        if (
+        (new Message)->feedback([
+            'phone' => $contact,
+            'message' => $message,
+        ])
+        ) {
+            return handleResponseJson(200, '感谢您的反馈^_^!');
+        }
+        return handleResponseJson(201, '反馈失败或刷新页面重试');
     }
 
     /**
@@ -103,9 +118,9 @@ class RegisterPersonController extends Controller
     {
         return [
             'first_name' => 'required|max:20|min:3',
-            'last_name'  => 'required|max:20|min:3',
-            'email'      => 'required|email|max:255|unique:users',
-            'password'   => 'required|min:6',
+            'last_name' => 'required|max:20|min:3',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
         ];
     }
 
@@ -113,9 +128,9 @@ class RegisterPersonController extends Controller
     {
         return [
             'first_name' => 'required|max:20|min:3',
-            'last_name'  => 'required|max:20|min:3',
-            'email'      => 'required|email|max:255|unique:users',
-            'password'   => 'required|min:6',
+            'last_name' => 'required|max:20|min:3',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
         ];
     }
 
@@ -129,16 +144,16 @@ class RegisterPersonController extends Controller
     protected function createUser(array $data)
     {
         $user = User::create([
-            'email'       => $data['email'],
-            'nickname'    => $data['email'],
-            'password'    => bcrypt($data['password']),
-            'role'        => 'person',
+            'email' => $data['email'],
+            'nickname' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'role' => 'person',
         ]);
 
         Person::create([
-            'user_id'    => $user->id,
+            'user_id' => $user->id,
             'first_name' => $data['first_name'],
-            'last_name'  => $data['last_name'],
+            'last_name' => $data['last_name'],
         ]);
 
         return $user;
@@ -155,7 +170,7 @@ class RegisterPersonController extends Controller
     {
         $title = trans('user.emails.verification_account.subject');
 
-        $name = $data['first_name'].' '.$data['last_name'];
+        $name = $data['first_name'] . ' ' . $data['last_name'];
 
         \Mail::queue('emails.accountVerification', ['data' => $data, 'title' => $title, 'name' => $name], function ($message) use ($data) {
             $message->to($data['email'])->subject(trans('user.emails.verification_account.subject'));

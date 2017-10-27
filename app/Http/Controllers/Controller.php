@@ -18,7 +18,7 @@ abstract class Controller extends BaseController
         $len = count($arr);
         $keys = array_keys($arr);
         for ($i = 0; $i < $len; $i++) {
-            if ($i !== $key[$i]) {
+            if ($i !== $keys[$i]) {
                 return true;
             }
         }

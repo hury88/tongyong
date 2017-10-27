@@ -37,6 +37,7 @@ return [
     'digits'               => ':attribute 必须是 :digits 位。',
     'digits_between'       => ':attribute 必须在 :min 和 :max 位之间。',
     'email'                => ':attribute 必须是有效的邮箱。',
+    'phone'                => ':attribute 必须是有效的手机号。',
     'filled'               => ':attribute 项必填。',
     'exists'               => '选中的 :attribute 不存在。',
     'image'                => ':attribute 必须是图象。',
@@ -108,10 +109,16 @@ return [
     */
 
     'attributes' => [
+    // 注册
+        'person' => '真实姓名',
+        'telphone' => '手机号',
+        'protocal' => '协议',
+        'password' => '密码',
+        'password2' => '确认密码',
+
         'first_name' => '名',
         'last_name'  => '姓',
         'email'      => '邮箱',
-        'password'   => '密码',
         'nickname'   => '用户名（昵称）',
     ],
 
