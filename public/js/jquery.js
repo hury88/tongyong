@@ -49,13 +49,16 @@ function httpPost(url,data)
 //提交表单
 function model(that, actionUrl){
     //读取信息
-    var hiddenForm = new FormData()
-    var form = $(that).parents('.form')
+    var hiddenForm = new FormData();
+    var form = $(that).parents('.form');
+    if (!actionUrl) actionUrl = form.attr("action");
     form.find('input,textarea,select').each(function(i){
     	if (this.type=="file") {
 	        hiddenForm.append(this.name, this.files[0])
+    	} else if(this.type == 'radio'){
+	        hiddenForm.append(this.name, this.checked);
     	} else {
-	        hiddenForm.append(this.name, this.value)
+	        hiddenForm.append(this.name, this.value);
     	}
     })
     $(that).attr('disabled',true);//按钮锁定
@@ -77,56 +80,10 @@ function model(that, actionUrl){
 		handing(status,state,title,message,redirect,function(){
 	     	$(that).removeAttr('disabled');//解除锁定
 		});
-        /* $(that).removeAttr('disabled')
-         var timer = 2000;
-         if(state==200){
-             if (redirect) {
-             	dialog([2,timer],[m],{cancel:["离开本页面",d]})
-             } else {
-             	// dialog([2,timer],[m],{cancel:[false,d]})
-
-             	alert({
-             		title : m,
-             		text : "",
-             		icon : "success",
-             		timer: timer
-             	})
-	             $(document).on("click", "button.kwj-button", function(){
-		             window.location.reload();
-	             })
-	             // window.location.reload()
-             }
-	             setTimeout(function(){
-	             	$("button.kwj-button").click();
-	             },timer)
-         }else if(state==100){
-     	    alert({
-     	    	title : m,
-     	    	text : "",
-     	    	icon : "success",
-     			timer: timer,
-     	    })
-         }else if(s==101){// 发送验证码
-             alert({
-             	title : m,
-             	text : "",
-             	icon : "success",
-         		timer: timer,
-             })
-     	    settime(that,60);
-         }else{
-     		// layer.open({content: json.msg ,btn: '确定'})
-	 		dialog([1,timer],[m]);
-            $(document).on("click", "button.kwj-button--confirm", function(){
-             form.find("input[name="+d+"]").focus()
-            })
-         }*/
-
      },
      error : function(){
      	$(that).removeAttr('disabled');
- 		 // layer.open({content:'数据提交失败,请按照提示操作!' ,btn: '确定'})
-     	alert('提交出错 : 请刷新页面重试!')
+     	alert('提交出错 : 请刷新页面重试!');
      	$(document).on("click", "button.kwj-button", function(){
 		    window.location.reload();
      	})
@@ -166,13 +123,16 @@ function model_notice(state,title,message,redirect){
 // 处理响应结果中的handle部分
 var
 	h_s = 200,
-	h_w = 303,
+	h_w = 203,
 	h_e = 412;
 function model_handle(state,title,message,redirect){
 	var timer = 3000;
 	switch(state){
 		case h_s:
 		dialog([2,timer],[message, title],{cancel:["确定", false]});
+		break;
+		case h_w:
+		dialog(3,[message, title],{cancel:["取消"],confirm:["刷新", "?"]});
 		break;
 		default:
 		break;
@@ -191,8 +151,6 @@ function notice_warning() {
 function notice_error(title,data) {
 	var errors = "";
 	for(var o in data){
-		console.log(o);
-		console.log(data[o]);
 		errors += "<i style=\"font-size:14px;font-weight:normal\">"+data[o]+"</i>" + '<br />';
 	}
     notie.alert(3, title +'<br />' + errors, 3);

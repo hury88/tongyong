@@ -10,8 +10,9 @@
     <a class="register-cate fr" href="{{u('register', 'person')}}"><img src="/img/student.png"/>我是学生</a>
     @stop {{-- end register_header --}}
 @section('form')
+<form class="form" action="{{url('register/org')}}">
     <div class="register-form-div">
-        <input type="text" placeholder="请输入企业名称"/>
+        <input name="org" type="text" placeholder="请输入企业名称"/>
     </div>
     <div class="register-form-div list1">
        <div class="dd">
@@ -23,13 +24,16 @@
        </div>
    </div>
     <div class="register-form-div">
-       <input type="text" placeholder="请输入联系人姓名"/>
+       <input name="contact" type="text" placeholder="请输入联系人姓名"/>
    </div>
-    @stop {{-- end form (public) --}}
+   @stop
+@section('formEnd')
+</form>
+   @stop {{-- end form (public) --}}
 @section('protocal')
     <div class="company-agreement">
         <label>
-            <input type="radio" name="property-type" value="我已阅读并接受《中国职业培训网企业会员注册协议》"/>
+            <input type="radio" name="protocal" value="我已阅读并接受《中国职业培训网企业会员注册协议》"/>
             <span></span>
         </label>
         <p class="agreement-content">我已阅读并接受<b>《中国职业培训网企业会员注册协议》</b></p>

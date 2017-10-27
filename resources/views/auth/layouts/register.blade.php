@@ -49,54 +49,55 @@
                     </div>
                     <div class="register-tab-content">
                         <div class="register-content-box" style="display:block;">
-                            <form class="form">
-                                @yield('form')
+                            @yield('form')
                                 <div class="register-form-div">
-                                    <input type="text" placeholder="请输入手机号"/>
+                                    <input name="telphone" type="text" placeholder="请输入手机号"/>
                                 </div>
                                 <div class="register-form-dv">
-                                    <input class="form-code-inp" type="text" placeholder="请输入手机验证码"/>
+                                    <input name="yzm" class="form-code-inp" type="text" placeholder="请输入手机验证码"/>
                                     <input class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
                                 <div class="register-form-psw">
-                                    <input type="password" placeholder="请输入您的密码"/>
-                                    <a href="javascript:;"></a>
+                                    <input name="password[]" type="password" placeholder="请输入您的密码"/>
+                                    <!-- <a href="javascript:;"></a> -->
                                 </div>
                                 <div class="register-form-psw">
-                                    <input type="password" placeholder="请确认密码"/>
-                                    <a href="javascript:;"></a>
+                                    <input name="password[]" type="password" placeholder="请确认密码"/>
+                                    <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
                                 @yield('protocal')
                                 <div class="register-form-inp">
-                                    <input type="submit" value="注册"/>
+                                    <input class="submit" type="submit" value="注册"/>
                                 </div>
+                                <input type="hidden" name="mark" value="telphone">
                                 {!! csrf_field() !!}
-                            </form>
+                            @yield('formEnd')
                         </div>
                         <div class="register-content-box" style="display:none;">
-                            <form>
-                                @yield('form')
+                            @yield('form')
                                 @yield('form-org-email')
                                 <div class="register-form-div">
-                                    <input type="text" placeholder="请输入邮箱"/>
+                                    <input name="email" type="text" placeholder="请输入邮箱"/>
                                 </div>
                                 <div class="register-form-dv">
-                                    <input class="form-code-inp" type="text" placeholder="请输入邮箱验证码"/>
+                                    <input name="yzm" class="form-code-inp" type="text" placeholder="请输入邮箱验证码"/>
                                     <input class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
                                 <div class="register-form-psw">
-                                    <input type="password" placeholder="请输入您的密码"/>
-                                    <a href="javascript:;"></a>
+                                    <input name="password[]" type="password" placeholder="请输入您的密码"/>
+                                    <!-- <a href="javascript:;"></a> -->
                                 </div>
                                 <div class="register-form-psw">
-                                    <input type="password" placeholder="请确认密码"/>
-                                    <a href="javascript:;"></a>
+                                    <input name="password[]" type="password" placeholder="请确认密码"/>
+                                    <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
                                 @yield('protocal')
                                 <div class="register-form-inp">
-                                    <input type="submit" value="注册"/>
+                                    <input class="submit" type="submit" value="注册"/>
                                 </div>
-                            </form>
+                                <input type="hidden" name="mark" value="email">
+                                {!! csrf_field() !!}
+                            @yield('formEnd')
                         </div>
                     </div>
                 </div>
@@ -133,4 +134,23 @@
 <script type="text/javascript" src="/js/js_dengluzhuce.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/alert.min.js"></script>
+<script>
+    $(".submit").click(function(){
+        model(this);
+        return false;
+    })
+    // 阅读协议
+    $(".company-agreement label").click(function(){
+        var radio = $(this).children("input[type=radio]");
+        var checkbox = radio.next("span");
+        if (radio.attr("checked")) {
+            radio.removeAttr("checked");
+            checkbox.removeClass("on");
+        } else {
+            radio.attr("checked", true);
+            checkbox.addClass("on");
+        }
+        return false;
+    })
+</script>
 @stop

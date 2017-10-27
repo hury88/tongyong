@@ -274,6 +274,8 @@ ajax 返回错误码
 notice 模块noticeResponseJson
  412 不满足,前提条件失败
 handle 模块handleResponseJson
- 200 成功
+ h_s = 200,成功
+ h_w = 203,警告
+ h_e = 199;错误
 
 

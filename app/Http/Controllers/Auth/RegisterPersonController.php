@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Person;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+// use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-
-class RegisterController extends Controller
+class RegisterPersonController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -20,7 +19,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-    use RegistersUsers;
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after login / registration.
@@ -40,23 +39,49 @@ class RegisterController extends Controller
     }
 
     /**
-     * Show the registration form.
-     *
-     * @return void
-     */
-    protected function showRegistrationForm()
-    {
-        return view('auth.register', [
-            'email' => session()->has('email') ? session()->get('email') : '',
-        ]);
-    }
-
-    /**
      * Process the user registration.
      *
      * @return void
      */
     protected function register(Request $request)
+    {
+        # 手机注册
+        $mark = $request->get('mark');
+        if ('telphone' == $mark) {
+            return $this->telphoneRegister($request);
+        } elseif('email' == $mark) {
+            return $this->emailRegister($request);
+        } else {
+            return handleResponseJson(203, '系统识别不到本次行为,请刷新页面后再试!');
+        }
+
+    }
+
+    /**
+     * 个人会员 手机 注册
+     */
+    protected function telphoneRegister($request)
+    {
+        $this->validate($request, $this->rules(), ['first_name.required'=>'123123'], function(){
+            return response()->json([
+                'success' => false,
+                'errors' =>  1,
+            ]);
+        });
+
+        $user = $this->createUser($request->all());
+
+        $this->sendRegistrationEmail($request->all());
+
+        auth()->login($user);
+
+        return redirect($this->redirectTo);
+    }
+
+    /**
+     * 个人会员 手机 注册
+     */
+    protected function emailRegister($request)
     {
         $this->validate($request, $this->rules());
 
@@ -75,6 +100,16 @@ class RegisterController extends Controller
      * @return array
      */
     protected function rules()
+    {
+        return [
+            'first_name' => 'required|max:20|min:3',
+            'last_name'  => 'required|max:20|min:3',
+            'email'      => 'required|email|max:255|unique:users',
+            'password'   => 'required|min:6',
+        ];
+    }
+
+    protected function messages()
     {
         return [
             'first_name' => 'required|max:20|min:3',

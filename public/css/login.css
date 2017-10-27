@@ -373,7 +373,8 @@
     position: absolute;
     width: 1px;
 }
-input[type=radio]:checked+span {
+/*input[type=radio]:checked+span {*/
+input[type=radio]+span.on {
    background: url(../img/tick.png) no-repeat center;
 }
 input[type=radio]+span{
