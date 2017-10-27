@@ -46,7 +46,7 @@ class News extends Model
     }
     public function v_id_arr($id)
     {
-        return $this->find($id)->attributes;
+        return $this->find($id);
     }
 
     /*

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title') {{$id_arr['title']}}@parent @stop
+@section('title') {{$id_arr->title}}@parent @stop
 @section('css')
 <link rel="stylesheet" type="text/css" href="/css/common_jiandanyemian.css"/>
 <link rel="stylesheet" type="text/css" href="/css/jiandanyemian.css"/>
@@ -13,7 +13,7 @@
     <div class="yijianAll" style="margin-top: 67px;">
         <div class="xwdt">
             <p class="xwdtmbx">
-                <a href="/"><img src="/img/sqzwtop.png"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>> <a href="javascript:void(0);">{{$id_arr['title']}}</a>
+                <a href="/"><img src="/img/sqzwtop.png"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>> <a href="javascript:void(0);">{{$id_arr->title}}</a>
             </p>
             <div class="xwdtAll">
                 <style type="text/css">
@@ -41,18 +41,15 @@
 
                     }
                     .liuxuexqyema {
+                        margin-top: 25px;
                         width: 100%;
                         padding: 5px;
                         background: #f9f9f9;
                         border-bottom: 1px solid #e0e0e0;
                         border-top: 1px solid #e0e0e0;
                     }
-                    .liuxuexqyema p {
-                        padding-bottom: 0;
-                        width: 22%;
-                        margin: 0 auto;
-                    }
-                    .liuxuexqyema p a {
+
+                    .liuxuexqyema a {
                         font-weight: bold;
                         color: #666666;
                     }
@@ -73,17 +70,25 @@
                 </div>
 
                 <div class="xwdtCon">
-                    <h3>{{$id_arr['title']}}</h3>
+                    <h3>{{$id_arr->title}}</h3>
                     <p class="pi1">
-                        <span>更新时间：{{date("y-m-d",$id_arr['sendtime'])}} </span>
-                        <span>来源：<i>{{$id_arr['qyname']}}</i></span>
+                        <span>更新时间：{{date("y-m-d",$id_arr->sendtime)}} </span>
+                        <span>来源：<i>{{$id_arr->qyname}}</i></span>
                     </p>
-                   {!! htmlspecialchars_decode($id_arr['content']) !!}
+                   {!! htmlspecialchars_decode($id_arr->content) !!}
                     <div class="liuxuexqyema">
-                        <p>
-                            <a href="">【上一篇】</a>
-                            <a href="">【下一篇】</a>
-                        </p>
+
+                           @if($id_arr->previd>0)
+                                <a href="{{$id_arr->prevlink}}" style="float: left">【上一篇】{{$id_arr->prev}}</a>
+                            @else
+                                <a href="{{$id_arr->prevlink}}" style="float: left">【已经是第一篇了】</a>
+                            @endif
+                           @if($id_arr->nextid>0)
+                               <a href="{{$id_arr->nextlink}}" style="float: right">【下一篇】{{$id_arr->next}}</a>
+                           @else
+                               <a href="{{$id_arr->nextlink}}" style="float: right">【已经是最后一篇了】</a>
+                           @endif
+                               <div style="clear: both"></div>
                     </div>
                 </div>
             </div>

@@ -28,15 +28,71 @@ class NewsController extends Controller
         $viewrow =  $id;
         $news = new News();
         $id_arr=$news->v_id_arr($id);
-        if($id_arr['cid']){
-            $id_arr['qyname']=v_id($id_arr['cid'],"name","cmember");
+        if($id_arr->cid){
+            $id_arr->qyname=v_id($id_arr->cid,"name","cmember");
         }else{
-            $id_arr['qyname']="平台管理员";
+            $id_arr->qyname="平台管理员";
+        }
+        $arr=$this->newsorder($id);
+        $id_arr->previd=$arr['previd'];
+        $id_arr->nextid=$arr['nextid'];
+        if($id_arr->previd>0){
+            $id_arr->prevlink=route($GLOBALS['ty_path'],$id_arr->previd);
+            $id_arr->prev=v_id($id_arr->previd,"title");
+
+        }else{
+            $id_arr->prevlink='javascript:void(0)';
+        }
+        if($id_arr->nextid>0){
+            $id_arr->nextlink=route($GLOBALS['ty_path'],$id_arr->nextid);
+            $id_arr->next=v_id($id_arr->nextid,"title");
+        }else{
+            $id_arr->nextlink='javascript:void(0);';
         }
         return view('news/view', compact('id_arr'));
 
     }
+    //文章排序
+    protected function newsorder($id)
+    {
+        $arr=array();
+        $news = new News();
+        $ordderlist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id"]);
+        $arr['previd']=$this->getPrevArticleId($id,$ordderlist);
 
+        $arr['nextid']=$this->getNextArticleId($id,$ordderlist);
+
+        return $arr;
+    }
+    protected function getPrevArticleId($id,$ordderlist)
+    {
+        foreach ($ordderlist as $k=>$v){
+
+            if($v->id==$id){
+                $key=$k-1;
+            }
+        }
+        if($key<0){
+            return 0;
+        }else{
+            return $ordderlist[$key]->id;
+        }
+    }
+    protected function getNextArticleId($id,$ordderlist)
+    {
+       foreach ($ordderlist as $k=>$v){
+            if($v->id==$id){
+                $key=$k+1;
+                break;
+            }
+       }
+        if($key==count($ordderlist)){
+            return 0;
+        }else{
+            return $ordderlist[$key]->id;
+        }
+        return $ordderlist[$key]->id;
+    }
     public function newslist()
     {
         $news = new News();
