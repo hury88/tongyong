@@ -47,10 +47,10 @@ function httpPost(url,data)
 }
 
 //提交表单
-function model(thisObj, actionUrl){
+function model(that, actionUrl){
     //读取信息
     var hiddenForm = new FormData()
-    var form = $(thisObj).parents('.form')
+    var form = $(that).parents('.form')
     form.find('input,textarea,select').each(function(i){
     	if (this.type=="file") {
 	        hiddenForm.append(this.name, this.files[0])
@@ -58,7 +58,7 @@ function model(thisObj, actionUrl){
 	        hiddenForm.append(this.name, this.value)
     	}
     })
-    $(thisObj).attr('disabled',true)
+    $(that).attr('disabled',true);//按钮锁定
     $.ajax({
      url  : actionUrl,
      type : "post",
@@ -68,11 +68,16 @@ function model(thisObj, actionUrl){
      processData: false,
      contentType: false,
      success : function(response){
-	     var state = response.state,
-		     title = response.title,
-		     message = response.message,
-		     redirect = response.redirect;
-         $(thisObj).removeAttr('disabled')
+	    var state = response.state,
+		    title = response.title,
+		    message = response.message,
+		    status = response.status,
+		    redirect = response.redirect;
+
+		handing(status,state,title,message,redirect,function(){
+	     	$(that).removeAttr('disabled');//解除锁定
+		});
+        /* $(that).removeAttr('disabled')
          var timer = 2000;
          if(state==200){
              if (redirect) {
@@ -108,20 +113,20 @@ function model(thisObj, actionUrl){
              	icon : "success",
          		timer: timer,
              })
-     	    settime(thisObj,60);
+     	    settime(that,60);
          }else{
      		// layer.open({content: json.msg ,btn: '确定'})
 	 		dialog([1,timer],[m]);
             $(document).on("click", "button.kwj-button--confirm", function(){
              form.find("input[name="+d+"]").focus()
             })
-         }
+         }*/
 
      },
      error : function(){
-     	$(thisObj).removeAttr('disabled');
+     	$(that).removeAttr('disabled');
  		 // layer.open({content:'数据提交失败,请按照提示操作!' ,btn: '确定'})
-     	alert('提交出错 : server 505')
+     	alert('提交出错 : 请刷新页面重试!')
      	$(document).on("click", "button.kwj-button", function(){
 		    window.location.reload();
      	})
@@ -129,6 +134,209 @@ function model(thisObj, actionUrl){
     })
     return false;
 }
+// ajax 处理响应结果
+function handing(status,state,title,message,redirect,callback){
+	if (status == 'notice') {
+		model_notice(state,title,message,redirect);
+	} else if(status == 'handle') {
+		model_handle(state,title,message,redirect);
+	}
+	if(typeof callback == "function")
+	callback();
+}
+// 处理响应结果中的notice部分
+var
+	n_s = 200,
+	n_w = 303,
+	n_e = 412;
+function model_notice(state,title,message,redirect){
+	//notice_success notice_warning notice_error notice_info notice_confirm notice_input
+	switch(state){
+		case n_e:
+		notice_error(title, message);
+		break;
+		case n_w:
+		notice_warning();
+		break;
+		default:
+		break;
+	}
+
+}
+// 处理响应结果中的handle部分
+var
+	h_s = 200,
+	h_w = 303,
+	h_e = 412;
+function model_handle(state,title,message,redirect){
+	var timer = 3000;
+	switch(state){
+		case h_s:
+		dialog([2,timer],[message, title],{cancel:["确定", false]});
+		break;
+		default:
+		break;
+	}
+}
+
+
+function notice_success() {
+    notie.alert(1, 'Success!', 2);
+}
+
+function notice_warning() {
+    notie.alert(2, 'Warning<br><b>with</b><br><i>HTML</i><br><u>included.</u>', 2);
+}
+
+function notice_error(title,data) {
+	var errors = "";
+	for(var o in data){
+		console.log(o);
+		console.log(data[o]);
+		errors += "<i style=\"font-size:14px;font-weight:normal\">"+data[o]+"</i>" + '<br />';
+	}
+    notie.alert(3, title +'<br />' + errors, 3);
+}
+
+function notice_info() {
+    notie.alert(4, 'Information.', 2);
+}
+
+function notice_confirm() {
+    notie.confirm('Are you sure you want to do that?<br><b>That\'s a bold move...</b>', 'Yes', 'Cancel', function() {
+        notie.alert(1, 'Good choice!', 2);
+    });
+}
+
+function notice_input() {
+    notie.input('Please enter your email address:', 'Submit', 'Cancel', 'email', 'name@example.com', function(value_entered) {
+        notie.alert(1, 'You entered: ' + value_entered, 2);
+    });
+}
+
+// dialog([type(,timer)],[text,title],{cancel:[text,url],confirm:[text,url]})
+function dialog(type, config, active)
+{
+	var icon='error',title='错误提示',timer=false,text='',b1='OK',b2=false,outsideClick=true;
+	if (typeof type == 'object') {
+		timer = type[1];
+		type = type[0];
+	}
+		// console.log(timer)
+	if (typeof type != 'undefined') {
+		if (type == 2) {
+			icon='success';
+			title='成功提示';
+		} else if(type == 3) {
+			icon='warning';
+			title='Warning';
+		}
+	}
+	// console.log(timer);
+
+	if (config) {
+		if (typeof config[0] != 'undefined') {
+			text = config[0];
+		}
+		if (typeof config[1] != 'undefined') {
+			title = config[1];
+		}
+	};
+
+	// console.log(typeof active);
+
+	if (typeof active != 'undefined') {
+
+		var cancelBtn = active.hasOwnProperty("cancel");
+		var confirmBtn = active.hasOwnProperty("confirm");
+
+		if (cancelBtn) {
+			// 定义了取消按钮
+		    b1 = active.cancel;
+			if (typeof active.cancel == 'object') {
+			    b1 = active.cancel[0];
+		        if (typeof active.cancel[1] != 'undefined') {
+		    		if (confirmBtn) {
+			    		$(document).on("click", "button.kwj-button--cancel", function(){
+			    			$(document).off("click","button.kwj-button--cancel");
+			    			$(document).off("click","button.kwj-button--confirm");
+    			        	if (active.cancel[1] === false) {
+    						    window.location.reload();
+    			        	} else {
+    						    window.location.href = active.cancel[1];
+    			        	}
+						})
+		        	} else {
+    		    		$(document).on("click", "button.kwj-button--confirm", function(){
+    		    			$(document).off("click","button.kwj-button--cancel");
+    		    			$(document).off("click","button.kwj-button--confirm");
+    			        	if (active.cancel[1] === false) {
+    						    window.location.reload();
+    			        	} else {
+    						    window.location.href = active.cancel[1];
+    			        	}
+    					})
+		        	}
+		        }
+				outsideClick=false;
+			} else {
+	    		$(document).on("click", "button.kwj-button--cancel", function(){
+	    			$(document).off("click","button.kwj-button--cancel");
+	    			$(document).off("click","button.kwj-button--confirm");
+				})
+			}
+		};
+
+		if (confirmBtn) {
+			// 定义了取消按钮
+		    b2 = active.confirm;
+			if (typeof active.confirm == 'object') {
+			    b2 = active.confirm[0];
+			    if (typeof active.confirm[1] != 'undefined') {
+					$(document).on("click", "button.kwj-button--confirm", function(){
+						$(document).off("click","button.kwj-button--cancel");
+						$(document).off("click","button.kwj-button--confirm");
+					    window.location.href = active.confirm[1];
+					})
+			    }
+				outsideClick=false;
+			} else {
+	    		$(document).on("click", "button.kwj-button--confirm", function(){
+	    			$(document).off("click","button.kwj-button--cancel");
+	    			$(document).off("click","button.kwj-button--confirm");
+				})
+			}
+		};
+
+	};
+
+
+	if (b2) {
+		buttons = [b1, b2];
+	} else {
+		buttons = b1;
+	};
+
+	// console.log(buttons);
+
+ 	alert({
+ 		title : title,
+ 		text : text,
+ 		icon : icon,
+ 		buttons : buttons,
+ 		closeOnClickOutside : outsideClick,
+ 		timer: timer
+ 	});
+
+ 	if (timer) {
+ 		setTimeout(function(){
+ 			$("button.kwj-button").click();
+ 		},timer)
+ 	};
+
+}
+
+
 // 倒计时
 function settime(val,countdown) {
       if (countdown == 0) {

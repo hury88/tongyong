@@ -130,4 +130,31 @@ class RegisterController extends Controller
 
         session()->save();
     }
+    /*\Mail::send('emails.contact', compact('thanks', 'title', 'name', 'email', 'message_'),
+            function ($message) use ($request, $company, $from_address, $email) {
+                $message->from($from_address, $company['website_name']);
+                $message->to($email)
+                        ->cc($from_address)
+                        ->subject(trans('about.contact').' :: '.$company['website_name']);
+            });
+        public function registter(Request $request){
+                $messages = [
+                    'email.required' => '邮箱不能为空',
+                    'password.required' => '密码不能为空',
+                    'password2.required' => '确认密码不能为空',
+                ];
+                $validator = Validator::make($request->all(),[
+                    'email' => ['bail','required', 'email', Rule::unique('member')->ignore($user->id)],
+                    'password' => 'required',
+                    'password2' => 'required',
+                ],$messages);
+                $errors = $validator->errors(); // 输出的错误，自己打印看下
+                if ($validator->fails()){
+                     return response()->json([
+                         'success' => false,
+                         'errors' =>  $errors
+                     ]);
+                }
+            }
+    */
 }

@@ -49,7 +49,7 @@
                     </div>
                     <div class="register-tab-content">
                         <div class="register-content-box" style="display:block;">
-                            <form>
+                            <form class="form">
                                 @yield('form')
                                 <div class="register-form-div">
                                     <input type="text" placeholder="请输入手机号"/>
@@ -70,6 +70,7 @@
                                 <div class="register-form-inp">
                                     <input type="submit" value="注册"/>
                                 </div>
+                                {!! csrf_field() !!}
                             </form>
                         </div>
                         <div class="register-content-box" style="display:none;">
@@ -130,4 +131,6 @@
 @section('scripts')
 <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/js/js_dengluzhuce.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/alert.min.js"></script>
 @stop

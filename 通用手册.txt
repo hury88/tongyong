@@ -269,3 +269,11 @@ array=[
 	    'ty' => 46, //企业会员
 
 ];
+
+ajax 返回错误码
+notice 模块noticeResponseJson
+ 412 不满足,前提条件失败
+handle 模块handleResponseJson
+ 200 成功
+
+

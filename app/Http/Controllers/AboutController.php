@@ -54,8 +54,8 @@ class AboutController extends Controller
 	public function store(Request $request)
 	{
 		$messages = [
-		    'message.required' => '请留下您的宝贵意见!',
-		    'contact.required' => '我怎么联系您?',
+		    'message.required' => '意见反馈字段不能为空!',
+		    'contact.required' => '联系方式字段不能为空!',
 		];
 		$validator = Validator::make($request->all(),[
 		    'message' => 'bail|required',
@@ -63,33 +63,20 @@ class AboutController extends Controller
 		],$messages);
 		$errors = $validator->errors(); // 输出的错误，自己打印看下
 		if ($validator->fails()){
-		     return responseJson(-100, '反馈失败', $errors);
+		     return noticeResponseJson(412, '意见反馈提交失败', $errors);
 		}
-	    /*$company = Company::select('contact_email',
-	                              'sales_email',
-	                              'support_email',
-	                              'website_name')
-	                     ->find(1)
-	                     ->toArray();
 
-	    $from_address = $company[$request->get('type_of_request').'_email'];
-	    $name = $request->get('name');
-	    $email = $request->get('email');
-	    $message_ = $request->get('message');
-	    $title = trans('company.email_title_'.$request->get('type_of_request'));
-	    $thanks = trans('company.email_thanks_'.$request->get('type_of_request'));
-
-	    return view('emails.contact', compact('thanks', 'title', 'name', 'email', 'message_'));
-
-	    \Mail::send('emails.contact', compact('thanks', 'title', 'name', 'email', 'message_'),
-	        function ($message) use ($request, $company, $from_address, $email) {
-	            $message->from($from_address, $company['website_name']);
-	            $message->to($email)
-	                    ->cc($from_address)
-	                    ->subject(trans('about.contact').' :: '.$company['website_name']);
-	        });
-
-	    return \Redirect::route('contact')->with('message', $thanks);*/
+		$message = $request->get('message');
+		$contact = $request->get('contact');
+		if (
+			(new Message)->feedback([
+				'phone' => $contact,
+				'message' => $message,
+			])
+		) {
+	        return handleResponseJson(200, '感谢您的反馈^_^!');
+		}
+        return handleResponseJson(201, '反馈失败或刷新页面重试');
 	}
 
 

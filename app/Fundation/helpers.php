@@ -228,11 +228,23 @@ T
 		UNSET($url,$catname,$breadTemp,$bread);*/
 	}
 
-	function responseJson($state,$title,$message,$redirect=false){
+	function handleResponseJson($state,$message,$redirect=false){
+	    $arr = [
+	    	'state' => $state,
+	    	'message' => $message,
+	    	'status' => 'handle',
+	    ];
+	    $redirect && $arr['redirect'] = $redirect;
+	    unset($state,$title,$message,$redirect);
+	    return response()->json($arr);
+	}
+
+	function noticeResponseJson($state,$title,$message,$redirect=false){
 	    $arr = [
 	    	'state' => $state,
 	    	'title' => $title,
 	    	'message' => $message,
+	    	'status' => 'notice',
 	    ];
 	    $redirect && $arr['redirect'] = $redirect;
 	    unset($state,$title,$message,$redirect);
