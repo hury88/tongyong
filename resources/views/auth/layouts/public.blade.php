@@ -37,17 +37,21 @@
     @show
     <div class="pager_wrap @yield('pager_wrap_class', 'register-wrap')">
         <div class="login-register-box @yield('login-register-box_class', 'register-content')">
-           @yield('pager_wrap_content');
+           @yield('pager_wrap_content')
         </div>
         <div class="login-register-box">
             <p class="login-footer-p">{{$boot_config['copyright']}} <span>|</span> <a href="http://www.semfw.cn" target="_blank" class="active"><b>技术支持：科威网络</b></a></p>
         </div>
     </div>
+
 @stop
 
 
 
 @section('footer')
+    @yield('helpscripts')
 @stop
 
-@yield('scripts');
+
+@section('scripts')
+@stop
