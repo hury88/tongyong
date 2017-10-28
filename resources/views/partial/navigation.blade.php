@@ -35,7 +35,7 @@
         <div class="use">
             <ul class="fl">
              <li>
-                <a href="javascript:void(0);" style="margin-left: 30px;">搜索</a>
+                <a href="{{ u('news',"seach")}}" style="margin-left: 30px;">搜索</a>
             </li>
             <li>
                 <a href="{{ u('register')}}" style="margin-left: 15px;">注册</a>

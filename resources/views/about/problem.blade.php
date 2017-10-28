@@ -62,16 +62,16 @@
     <div class="qiyewenhua">
         <div id="content">
             <ul id="expmenu-freebie">
-                @foreach($list as $v)
+                @foreach($page['data'] as $v)
                 <li>
                     <ul class="expmenu">
                         <li>
                             <div class="header">
-                                <span class="label" style="background-image: url(/img/pc.png);height: 25px;">{{$v->title}}</span>
+                                <span class="label" style="background-image: url(/img/pc.png);height: 25px;">{{$v['title']}}</span>
                                 <span class="arrow up"></span>
                             </div>
                             <ul class="menu">
-                                <li>{!! htmlspecialchars_decode($v->content) !!}</li>
+                                <li>{!! htmlspecialchars_decode($v['content']) !!}</li>
                             </ul>
                         </li>
                     </ul>

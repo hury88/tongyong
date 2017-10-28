@@ -4,6 +4,7 @@ namespace app;
 
 use Exception;
 use App\Eloquent\Model;
+use function foo\func;
 
 class News extends Model
 {
@@ -38,6 +39,7 @@ class News extends Model
     public function v_list($where=[],$field=['*'],$num=null)
     {
         return $this->parseWhere($where)
+            ->where('isstate','=' ,'1')
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')
@@ -48,11 +50,25 @@ class News extends Model
     {
         return $this->find($id);
     }
-    public function v_pages($where=[],$num=15,$linknum=5){
+    public function v_pages($where=[],$field=['*'],$num=15,$linknum=5){
         return $this->parseWhere($where)
+            ->where("isstate","=" ,"1")
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')
+            ->select($field)
+            ->paginate($num)
+            ->toArray($linknum);
+    }
+    public function v_seachpages($key,$where=[],$field,$num=15,$linknum=5){
+        return $this
+            ->where('pid','5')
+            ->where('isstate','1')
+            ->where('title','like','%'.$key.'%')
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->select($field)
             ->paginate($num)
             ->toArray($linknum);
     }

@@ -17,6 +17,7 @@
                     </p>
                     <div class="xwdtAll">
                         <div class="xwdtTit">
+
                             <i>{{$GLOBALS['ty_data']->catname}}</i>
                             <span>
                                 @foreach($left as $row)
@@ -29,14 +30,14 @@
                             <div class="xwdtConall">
                                 <div class="xwdtConleft">
                                     <ul>
-                                        @foreach($list['newslist'] as $val)
+                                        @foreach($page['data'] as $val)
                                             <li>
                                                 <div class="xwdtConleftleft">
-                                                    <img src="{{img($val->img1)}}"/>
+                                                    <img src="{{img($val['img1'])}}"/>
                                                 </div>
                                                 <div class="xwdtConleftright">
-                                                    <p class="po1"><a href="{{route($GLOBALS['ty_path'],$val->id)}}">{{$val->title}} <i>{{date("Y-m-d",$val->sendtime)}}</i></a></p>
-                                                    <p class="po2"><a href="{{route($GLOBALS['ty_path'],$val->id)}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val->content)), 240, '...') !!}</a></p>
+                                                    <p class="po1"><a href="{{route($GLOBALS['ty_path'],$val['id'])}}">{{$val['title']}} <i>{{date("Y-m-d",$val['sendtime'])}}</i></a></p>
+                                                    <p class="po2"><a href="{{route($GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}</a></p>
                                                 </div>
                                             </li>
                                           @endforeach
@@ -57,7 +58,7 @@
                                             <div class="xwdtBom">
                                                  @foreach($list['hot_info'] as $v1)
                                                 <p>
-                                                    <a href="{{route($GLOBALS['ty_path'],$val->id)}}">{{str_limit($v1->title,25,"...")}}</a>
+                                                    <a href="{{route($GLOBALS['ty_path'],$v1->id)}}">{{str_limit($v1->title,25,"...")}}</a>
                                                     <i>{{date("m-d",$v1->sendtime)}}</i>
                                                 </p>
                                                  @endforeach

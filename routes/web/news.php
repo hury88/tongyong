@@ -7,6 +7,7 @@ Route::group(['prefix'=>'news'],function(){
     Route::get('education', ['as' => 'education', 'uses' => 'NewsController@newslist']);
     Route::get('industry', ['as' => 'industry', 'uses' => 'NewsController@newslist']);
     Route::get('recent', ['as' => 'recent', 'uses' => 'NewsController@newslist']);
+    Route::get('seach', ['as' => 'seach', 'uses' => 'NewsController@seachlist']);
 
     Route::get('company/{id}', [ 'as'=>'company','uses' => 'NewsController@show']);
     Route::get('education/{id}', [ 'as'=>'education','uses' => 'NewsController@show']);

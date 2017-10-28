@@ -98,14 +98,30 @@ class NewsController extends Controller
         $news = new News();
 
         // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
-        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"],9);
-
-        $list['newslist']=$newslist;
+//        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"],9);
+//
+//        $list['newslist']=$newslist;
         $list['hot_info']=$this->hot_info();
+        $ckey='';
         $list['new_job']=$this->new_job();
         $list['hot_train']=$this->hot_train();
-        $page=(new \App\News)->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],9,9);
-        return view('news/list', compact('list',"page"));
+        $page=$news->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],["id","title","sendtime","img1","content"],9,9);
+        return view('news/list', compact('list',"page","ckey"));
+    }
+    public function seachlist()
+    {
+        if(isset($_GET['key'])){
+            $key=str_limit($_GET['key'],20);
+            $ckey='&key='.$key;
+        }else{
+            $key='';
+            $ckey='';
+        }
+        $news = new News();
+
+        $page=$news->v_seachpages($key,[$GLOBALS['pid']],["id","ty","title","sendtime","cid","content"],9,9);
+
+        return view('news/seach', compact("page","key","ckey"));
     }
 
     private function hot_info()
