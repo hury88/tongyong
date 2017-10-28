@@ -17,13 +17,16 @@ Auth::routes();
 
 // home
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('help', [ 'uses' => 'NewsController@helplist']);
 
 Route::group(['prefix' => 'home'], function () {
     Route::get('/', 'HomeController@index');
 });
 
 //users routes
-// require __DIR__.'/web/users.php';
+ require __DIR__.'/web/users.php';
+//users reg
+ require __DIR__.'/web/reg.php';
 
 //business routes
 // require __DIR__.'/web/business.php';

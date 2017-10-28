@@ -11,6 +11,7 @@
 @section('content')
     @section('navigation')
     @stop
+    @section('tophelp')
     <div class="register-box">
         <div class="login-header">
             <div class="login-header-l fl">
@@ -33,12 +34,13 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="pager_wrap register-wrap">
-        <div class="login-register-box @yield('pager_wrap_class', 'register-content')">
-           @yield('pager_wrap_class');
+    @show
+    <div class="pager_wrap @yield('pager_wrap_class', 'register-wrap')">
+        <div class="login-register-box @yield('login-register-box_class', 'register-content')">
+           @yield('pager_wrap_content');
         </div>
         <div class="login-register-box">
-            <p class="login-footer-p">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号<span>|</span><b>技术支持：科威网络</b></p>
+            <p class="login-footer-p">{{$boot_config['copyright']}} <span>|</span> <a href="http://www.semfw.cn" target="_blank" class="active"><b>技术支持：科威网络</b></a></p>
         </div>
     </div>
 @stop

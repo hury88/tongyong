@@ -119,11 +119,17 @@ class NewsController extends Controller
         }
         $news = new News();
 
-        $page=$news->v_seachpages($key,[$GLOBALS['pid']],["id","ty","title","sendtime","cid","content"],9,9);
+        $page=$news->v_seachpages($key,[$GLOBALS['pid']],["id",'ty',"title","sendtime","cid","content"],9,9);
 
         return view('news/seach', compact("page","key","ckey"));
     }
+    public function helplist()
+    {
+        $news = new News();
 
+        $helplist=$news->v_list([47,69,72],["title","content"]);
+        return view('auth/help', compact("helplist"));
+    }
     private function hot_info()
     {
         $news = new News();
