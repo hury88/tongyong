@@ -142,6 +142,10 @@
 
 @section('footer')
   @parent
+@stop
+
+@section('scripts')
+  @parent
             <script type="text/javascript" src="/js/jquery.js"></script>
             <script type="text/javascript">
                 $(function () {
@@ -154,8 +158,4 @@
                 })
 
             </script>
-@stop
-
-@section('scripts')
-  @parent
 @stop
