@@ -297,6 +297,7 @@ return [
          * App Alieses
          */
 
+        'YZM'      => App\Helpers\YZMHelper::class,
         'Menu'      => App\Helpers\Menu::class,
         'Utility'   => App\Helpers\Utility::class,
     ],

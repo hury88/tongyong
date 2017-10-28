@@ -8,6 +8,7 @@ use App\User;
 // use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Validator;
+use YZM;
 
 class RegisterPersonController extends Controller
 {
@@ -44,7 +45,7 @@ class RegisterPersonController extends Controller
     public function __construct()
     {
         // $this->middleware('guest');
-        $this->return = $this->middleware('App\Http\Middleware\VerifyPersonRegister');
+        $this->middleware('App\Http\Middleware\VerifyPersonRegister');
     }
 
     /**
@@ -54,22 +55,14 @@ class RegisterPersonController extends Controller
      */
     protected function register(Request $request)
     {
-        # 手机注册
-        if (is_null($this->return)) {
-
-        } elseif(is_array($this->return)) {
-
-        } else {
-            return $this->return;
+        list($callback, $id) = $GLOBALS['middleware_request'];
+        $yzm = new YZM($id);
+        if ($yzm->legal()) {
+            return $this->$callback($request);
         }
-        /*$mark = $request->get('mark');
-        if ('telphone' == $mark) {
-            return $this->telphoneRegister($request);
-        } elseif ('email' == $mark) {
-            return $this->emailRegister($request);
-        } else {
-            return handleResponseJson(203, '系统识别不到本次行为,请刷新页面后再试!');
-        }*/
+        #验证码错误
+        return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
+
 
     }
 
@@ -78,7 +71,13 @@ class RegisterPersonController extends Controller
      */
     protected function telphoneRegister($request)
     {
+        #验证码错误
+        if (YZM::verify($request)) {
+            return handleResponseJson(200, '感谢您的反馈^_^!');
+        };
 
+
+        $user = $this->createUser($request->all());
 
         $message = $request->get('message');
         $contact = $request->get('contact');
@@ -107,31 +106,6 @@ class RegisterPersonController extends Controller
         auth()->login($user);
 
         return redirect($this->redirectTo);
-    }
-
-    /**
-     * Return the registration validation rules.
-     *
-     * @return array
-     */
-    protected function rules()
-    {
-        return [
-            'first_name' => 'required|max:20|min:3',
-            'last_name' => 'required|max:20|min:3',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-        ];
-    }
-
-    protected function messages()
-    {
-        return [
-            'first_name' => 'required|max:20|min:3',
-            'last_name' => 'required|max:20|min:3',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-        ];
     }
 
     /**

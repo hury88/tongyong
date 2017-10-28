@@ -58,11 +58,11 @@
                                     <input class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
                                 <div class="register-form-psw">
-                                    <input name="password[]" type="password" placeholder="请输入您的密码"/>
+                                    <input name="password" type="password" placeholder="请输入您的密码"/>
                                     <!-- <a href="javascript:;"></a> -->
                                 </div>
                                 <div class="register-form-psw">
-                                    <input name="password[]" type="password" placeholder="请确认密码"/>
+                                    <input name="password2" type="password" placeholder="请确认密码"/>
                                     <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
                                 @yield('protocal')

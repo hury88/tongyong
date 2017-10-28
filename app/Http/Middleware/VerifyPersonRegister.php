@@ -16,54 +16,60 @@ class VerifyPersonRegister
      */
     public function handle($request, Closure $next)
     {
+//        dd($request->all());
 
+        $mark = $request->get('mark');
+        if ('telphone' == $mark) {
+            // 手机注册
+            $rules = $this->telRules();
 
-        $messages = [
-            'person' => [
-                'required' => '缺少真实姓名',
-                'max:4' => '真实姓名至少4位字符',
-                'max:20' => '真实姓名不能超过20位字符',
-            ],
-            'password' => [
-                'required' => '缺少密码',
-                'max:4' => '密码至少4位字符',
-            ],
-            'password2' => [
-                'required' => '缺少确认密码',
-                'max:4' => '确认密码至少4位字符',
-            ],
-        ];
+        } elseif ('email' == $mark) {
+            // 邮箱注册
+            $rules = $this->mailRules();
 
-        if ('telphone' == $request->get('mark')) {
-            $rules[] = ['telphone' => 'require'];
-//            return $this->telphoneRegister($request);
-        } elseif ('email' == $request->get('mark')) {
-//            return $this->emailRegister($request);
         } else {
             return handleResponseJson(203, '系统识别不到本次行为,请刷新页面后再试!');
         }
 
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        $mark = $request->get('mark');
-
+        $validator = Validator::make($request->all(), $rules);
 
         $errors = $validator->errors(); // 输出的错误，自己打印看下
         if ($validator->fails()) {
-            return noticeResponseJson(412, '意见反馈提交失败', $errors);
+            return noticeResponseJson(412, '提交失败', $errors);
         }
 
-        return null;
+        # 记录处理结果 ['callback', 'id'] # id means email or telphone
+        $GLOBALS['middleware_request'] = [$mark.'Register', $request->get($mark)];
+        return $next($request);
     }
 
-    private function rules()
+    /**
+     * @return 手机注册验证规则|array
+     */
+    private function telRules()
     {
         return [
-            'person' => 'bail|required|max:20|min:3',
+            'person' => 'bail|required|max:5|min:2',
+            'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:member',
             'password' => 'required|min:6',
-            'password2' => 'required|min:6',
+            'password2' => 'required|same:password',
             'protocal' => 'accepted',
-            ['password', 'compare', 'compareAttribute' => 'password2', 'on' => 'register', 'message' => '密码不一致']
+            'yzm' => 'required',
+        ];
+    }
+
+    /**
+     * @return 邮箱注册验证规则|array
+     */
+    private function mailRules()
+    {
+        return [
+            'person' => 'bail|required|max:5|min:2',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'password2' => 'required|same:password',
+            'protocal' => 'accepted',
+            'yzm' => 'required',
         ];
     }
 }

@@ -116,6 +116,8 @@ return [
         'password' => '密码',
         'password2' => '确认密码',
 
+        'yzm' => '验证码',
+
         'first_name' => '名',
         'last_name'  => '姓',
         'email'      => '邮箱',

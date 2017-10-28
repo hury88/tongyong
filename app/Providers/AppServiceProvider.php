@@ -6,6 +6,7 @@ namespace app\Providers;
 // use App\Company;
 use App\Config;
 use App\News;
+use Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
         view()->share('boot_config', $config);
         view()->share('boot_bread', $boot_bread);
         view()->share('boot_title', $boot_title);
+
+        //自定义验证码规则
+        /*Validator::extend('phone', function($attribute, $value, $parameters){
+            return preg_match('/^1[34578][0-9]{9}$/', $value);
+        });*/
     }
 
     /**
