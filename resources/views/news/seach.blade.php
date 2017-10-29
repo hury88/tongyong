@@ -14,7 +14,7 @@
             <div class="sousuoMb">
                 <span class="sousuoMb2">搜索结果页</span>
                 <span class="sousuoMb1">
-                    <a href="/"><img src="/img/sqzwtop.png"/>所在位置：</a>
+                    <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：</a>
                     <a href="/">首页></a>
                     <a href="javascript:void(0);">搜索结果页</a>
     		    </span>

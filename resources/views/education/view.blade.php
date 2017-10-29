@@ -13,7 +13,7 @@
     <div class="yijianAll" style="margin-top: 67px;">
         <div class="xwdt">
             <p class="xwdtmbx">
-                <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>> <a href="javascript:void(0);">{{$id_arr->title}}</a>
+                <a href="/"><img src="/img/sqzwtop.png"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>> <a href="javascript:void(0);">{{$id_arr->title}}</a>
             </p>
             <div class="xwdtAll">
                 <style type="text/css">
@@ -103,5 +103,16 @@
 
     @section('scripts')
     @parent
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $(".kf_online").css("position","fixed")
+                $(".key_top").click(function(){
+                    var speed=200;
+                    $('body,html').animate({ scrollTop: 0 }, speed);
+                    return false;
+                })
+            })
 
+        </script>
     @stop

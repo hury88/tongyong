@@ -13,7 +13,7 @@
             <div class="yijianAll" style="margin-top: 67px;">
                 <div class="xwdt">
                     <p class="xwdtmbx">
-                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
+                        <a href="/"><img src="/img/sqzwtop.png"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
                     </p>
                     <div class="xwdtAll">
                         <div class="xwdtTit">

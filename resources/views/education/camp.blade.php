@@ -23,7 +23,7 @@
             <div class="sousuoMb">
                 <span class="sousuoMb2" style="color: #444344;">{{$GLOBALS['ty_data']->catname}}</span>
                 <span class="sousuoMb1">
-                    <a href="javascript:void(0);"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：</a>
+                    <a href="javascript:void(0);"><img src="/img/sqzwtop.png"/>所在位置：</a>
                     <a href="/">首页></a>
                     <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
                 </span>
@@ -41,7 +41,18 @@
 
 @section('footer')
    @parent
+            <script type="text/javascript" src="/js/jquery.js"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $(".kf_online").css("position","fixed")
+                    $(".key_top").click(function(){
+                        var speed=200;
+                        $('body,html').animate({ scrollTop: 0 }, speed);
+                        return false;
+                    })
+                })
 
+            </script>
 
 
 @stop

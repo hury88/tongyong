@@ -4,6 +4,7 @@ namespace app;
 
 use Exception;
 use App\Eloquent\Model;
+use function foo\func;
 
 class Education extends Model
 {
@@ -37,15 +38,31 @@ class Education extends Model
 
     public function v_list($where=[],$field=['*'],$num=null)
     {
-
         return $this->parseWhere($where)
+            ->where('isstate','=' ,'1')
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')
             ->take($num)
             ->get($field);
     }
-    /**
+    public function v_id_arr($id)
+    {
+        return $this->find($id);
+    }
+    public function v_pages($where=[],$field=['*'],$num=15,$linknum=5){
+        return $this->parseWhere($where)
+            ->where("isstate","=" ,"1")
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->select($field)
+            ->paginate($num)
+            ->toArray($linknum);
+    }
+
+
+    /*
      * [parseWhere 解析条件]
      * @param  [type] $where [description]
      * @return [type]        [description]
@@ -59,8 +76,8 @@ class Education extends Model
                 return self::where('pid','=',$where[0])->where('ty','=',$where[1]);
             } elseif($where[2]) {
                 return self::where('pid','=',$where[0])
-                        ->where('ty','=',$where[1])
-                        ->where('tty','=',$where[2]);
+                    ->where('ty','=',$where[1])
+                    ->where('tty','=',$where[2]);
             }
         }
         throw new Exception('Model:News 条件解析出错 in parseWhere');

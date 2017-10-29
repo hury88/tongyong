@@ -45,5 +45,19 @@
 	    })
 
 	</script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript">
+        $(function () {
+            $(".kf_online").css("position","fixed")
+            $(".kf_online").css("top","50%")
+            $(".kf_online").css("margin-top","-204px")
+            $(".key_top").click(function(){
+                var speed=200;
+                $('body,html').animate({ scrollTop: 0 }, speed);
+                return false;
+            })
+        })
+
+	</script>
 @show
 </html>

@@ -165,25 +165,25 @@ array=[
              55=>"Certificate/Qualifications/Notice",           ===通知公告
         ],
     4=>[                                                        ===国际教育
-        14=>"education/summer_camp/index",                      ===国际夏令营
-            32=>"education/summer_camp/dynamic",                ===实时动态
-            29=>"education/summer_camp/Hot",                    ===火爆线路
-            30=>"education/summer_camp/characteristic",         ===特色线路
-            31=>"education/summer_camp/Marvellous",             ===精彩瞬间
-        13=>"education/Study/index",                            ===国际游学
-            61=>"education/Study/international",                ===国际游学
-            63=>"education/Study/guarantee",                    ===游学保障
-            62=>"education/Study/Answer",                       ===游学解答
-            60=>"education/Study/Route",                        ===游学路线
-        12=>"education/study_abroad/index",                     ===国际留学
-             21=>"education/study_abroad/introduce",            ===学院介绍
-             23=>"education/study_abroad/Notice",               ===活动公告
-             22=>"education/study_abroad/guide",                ===留学指南
-             20=>"education/study_abroad/news",                 ===留学新闻
-        15=>"education/Joint_Education/index",                  ===国际联合办学
-             34=>"education/Joint_Education/domestic",          ===国内院校
-             33=>"education/Joint_Education/international",     ===国际院校
-             35=>"education/Joint_Education/Notice",            ===活动公告
+        14=>"education/camp/index",                      ===国际夏令营
+            32=>"education/camp/dynamic",                ===实时动态
+            29=>"education/camp/Hot",                    ===火爆线路
+            30=>"education/camp/characteristic",         ===特色线路
+            31=>"education/camp/Marvellous",             ===精彩瞬间
+        13=>"education/tour/index",                            ===国际游学
+            61=>"education/tour/international",                ===国际游学
+            63=>"education/tour/guarantee",                    ===游学保障
+            62=>"education/tour/Answer",                       ===游学解答
+            60=>"education/tour/Route",                        ===游学路线
+        12=>"education/study/index",                     ===国际留学
+             21=>"education/study/introduce",            ===学院介绍
+             23=>"education/study/Notice",               ===活动公告
+             22=>"education/study/guide",                ===留学指南
+             20=>"education/study/news",                 ===留学新闻
+        15=>"education/joint/index",                  ===国际联合办学
+             34=>"education/joint/domestic",          ===国内院校
+             33=>"education/joint/international",     ===国际院校
+             35=>"education/joint/Notice",            ===活动公告
         ],
     5=>[                                                        ===新闻动态
         17=>"news/company",                                     ===公司新闻

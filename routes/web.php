@@ -15,7 +15,7 @@
 
 Auth::routes();
 
-// home
+// 首页
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('help', [ 'uses' => 'NewsController@helplist']);
 
@@ -23,13 +23,13 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('/', 'HomeController@index');
 });
 
-//users routes
+//个人中心
  require __DIR__.'/web/users.php';
-//users reg
+//用户注册
  require __DIR__.'/web/reg.php';
 
-//business routes
-// require __DIR__.'/web/business.php';
+//国际教育
+ require __DIR__.'/web/education.php';
 
 //Wpanel Routes
 // require __DIR__.'/web/wpanel.php';
@@ -43,9 +43,9 @@ Route::group(['prefix' => 'home'], function () {
 //orders lists
 // require __DIR__.'/web/orders.php';
 
-//about
+//关于我们
 require __DIR__.'/web/about.php';
-//News
+//新闻动态
 require __DIR__.'/web/news.php';
 //utilities
 // require __DIR__.'/web/utilities.php';
