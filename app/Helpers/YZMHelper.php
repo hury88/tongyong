@@ -22,13 +22,15 @@ class YZMHelper
 		$this->id = md5($id);
 	}
 
+	public function debug() { return $this->debug; }
+
 	public function legal($with_code)
 	{
 		$this->needle = $with_code;
 		if ($this->debug) {
 			return true;
 		} else {
-			return !$this->valid() && $this->verify();
+			return $this->valid() && $this->verify();
 		}
 	}
 
@@ -37,7 +39,7 @@ class YZMHelper
 		if ($session_expire = $this->get(self::$var_expire)) {
 			return $session_expire - time() > 0;
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -55,7 +57,7 @@ class YZMHelper
 
 	public function _YZM()
 	{
-		dd(session()->get(self::$var));
+		// dd(session()->get(self::$var));
 		return 'get:'.$this->needle.',session:'.$this->get(self::$var);
 	}
 
@@ -67,13 +69,10 @@ class YZMHelper
 		return $code;
 	}
 
-	public static function clear($id)
+	public function pop()
 	{
-		$id = md5($id);
-		if (isset($_SESSION[self::$var][$id])) {
-			$_SESSION[self::$var][$id][self::$var_expire] = time();
-			$_SESSION[self::$var][$id][self::$var] = '';
-		}
+		unset(self::$data[$this->id]);
+		$this->sync();
 	}
 
 
@@ -117,6 +116,11 @@ class YZMHelper
 	public function set($var,$val)
 	{
 		self::$data[$this->id][$var] = $val;
+		self::$session->put(self::$var, self::$data);
+		$this->sync();
+	}
+	public function sync()
+	{
 		self::$session->put(self::$var, self::$data);
 	}
 

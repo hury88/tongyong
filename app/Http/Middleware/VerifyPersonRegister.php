@@ -50,7 +50,7 @@ class VerifyPersonRegister
     {
         return [
             'person' => 'bail|required|max:5|min:2',
-            'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:member',
+            'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:users',
             'password' => 'required|min:6',
             'password2' => 'required|same:password',
             'protocal' => 'accepted',

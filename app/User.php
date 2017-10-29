@@ -20,7 +20,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Member extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, SoftDeletes, Notifiable;
 
@@ -29,11 +29,7 @@ class Member extends Model implements AuthenticatableContract, CanResetPasswordC
      *
      * @var string
      */
-    protected $table = 'member';
-
-    // const DELETED_AT='delete_at';
-    // const UPDATED_AT='update_at';
-    // const CREATED_AT = 'create_at';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -43,11 +39,12 @@ class Member extends Model implements AuthenticatableContract, CanResetPasswordC
     protected $fillable = [
        'role',  # enum('person','business') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'person' ,
        'email',  # varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-       'tel',  # char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+       'telphone',  # char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
        'password',  # varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
        'member_name',  # varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '前台用户名' ,
-       'member_level',  # int(11) NOT NULL DEFAULT 1 COMMENT '会员等级' ,
-       'member_point',  # int(11) NOT NULL DEFAULT 0 COMMENT '会员积分' ,
+//       'member_level',  # int(11) NOT NULL DEFAULT 1 COMMENT '会员等级' ,
+//       'member_point',  # int(11) NOT NULL DEFAULT 0 COMMENT '会员积分' ,
+       // 'isstate',
        // 'member_balance',  # decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT '会员余额 备用' ,
     ];
 

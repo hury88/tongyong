@@ -55,28 +55,30 @@ class RegisterPersonController extends Controller
      */
     protected function register(Request $request)
     {
+        // 'App\Http\Middleware\VerifyPersonRegister' 注册的全局变量
         list($callback, $id) = $GLOBALS['middleware_request'];
+
         $yzm = new YZM($id);
         if ($yzm->legal($request->yzm)) {
 //            dd($yzm->_YZM());
-            return $this->$callback($request);
+            return $this->$callback($request, $yzm);
         }
-        #验证码错误
+
         return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
-
-
     }
 
     /**
      * 个人会员 手机 注册
      */
-    protected function telphoneRegister($request)
+    protected function telphoneRegister($request, YZM $yzm)
     {
-        $user = $this->createUser($request->all());
+        $user = $this->createUser('telphone', $request->all());
 
         auth()->login($user);
 
-        return redirect($this->redirectTo);
+        $yzm->pop();
+        
+        return handleResponseJson(200, '注册成功!', $this->redirectTo);
     }
 
     /**
@@ -102,21 +104,13 @@ class RegisterPersonController extends Controller
      *
      * @return User
      */
-    protected function createUser(array $data)
+    protected function createUser($registerStyle, array $data)
     {
-        dd($data);
-        array:8 [  "person" => "胡锐"  "telphone" => "18856924272"  "yzm" => "630287"  "password" => "18856924272"  "password2" => "18856924272"  "protocal" => "true"  "mark" => "telphone"  "_token" => "lW7A6tKdIFJNWcIU3DbUQ3K1qKO55OhUz2d1cE7o"]
         $user = User::create([
-            'email' => $data['email'],
-            'nickname' => $data['email'],
+            $registerStyle => $data[$registerStyle],
+            'member_name' => $data[$registerStyle],
             'password' => bcrypt($data['password']),
             'role' => 'person',
-        ]);
-
-        Person::create([
-            'user_id' => $user->id,
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
         ]);
 
         return $user;
