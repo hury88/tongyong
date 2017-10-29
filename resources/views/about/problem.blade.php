@@ -62,7 +62,7 @@
     <div class="qiyewenhua">
         <div id="content">
             <ul id="expmenu-freebie">
-                @foreach($page['data'] as $v)
+                @foreach($pagenewslist['data'] as $v)
                 <li>
                     <ul class="expmenu">
                         <li>

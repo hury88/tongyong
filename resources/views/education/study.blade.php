@@ -44,13 +44,6 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="pall">
-                                            <p><a href="">刚发布一周！联想Moto Z2F居然官降530元：价格标错了</a></p>
-                                            <p><a href="">还珠格格的空气刘海小青的素颜妆，你们暑假看完就忘了</a></p>
-                                            <p><a href="">刚发布一周！联想Moto Z2F居然官降530元：价格标错</a></p>
-                                            <p><a href="">官方预热海报发布 OPPO R11巴萨定制版将至</a></p>
-                                        </div>
-
                                     </li>
                                     @endforeach
 
@@ -70,7 +63,7 @@
                                         <ul class="gjlhbxConright1">
                                               @foreach($xueyuangood as $val)
                                             <li style="width: 33.3%;float: left;margin-right: 0;">
-                                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(21,"path","news_cats")),$val['id']}}">
+                                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(21,"path","news_cats"),$val['id'])}}">
                                                     <p class="pf2" style="text-align: center"><img src="{{img($val['img2'])}}"/></p>
                                                     <p class="pf1">{{$val['title']}}</p>
                                                     <p>{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 300, '...') !!}</p>
@@ -92,7 +85,7 @@
                                     <div class="gjlhbxConright dguojiliux">
                                         @foreach($zhinangood as $val)
                                         <p>
-                                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(22,"path","news_cats")),$val['id']}}"><i></i>{{$val['title']}}</a>
+                                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(22,"path","news_cats"),$val['id'])}}"><i></i>{{$val['title']}}</a>
                                         </p>
                                           @endforeach
 
@@ -112,12 +105,12 @@
                                              @foreach($gonggaogood as $val)
                                             <li>
                                                 <div class="gjlhbxConright9left">
-                                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(23,"path","news_cats")),$val['id']}}">  <img src="{{img($val['img1'])}}"/></a>
+                                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(23,"path","news_cats"),$val['id'])}}">  <img src="{{img($val['img1'])}}"/></a>
 
                                                 </div>
                                                 <div class="gjlhbxConright9right">
                                                     <p class="ph1">
-                                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(23,"path","news_cats")),$val['id']}}">{{str_limit($val['title'],45,"...")}}</a>
+                                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(23,"path","news_cats"),$val['id'])}}">{{str_limit($val['title'],45,"...")}}</a>
                                                     </p>
                                                     <p>
                                                          <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(23,"path","news_cats"),$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}.</a>

@@ -46,9 +46,9 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 						<input type="hidden" name="pid" value="<?php echo $pid?>" />
 						<input type="hidden" name="ty"  value="<?php echo $ty?>"  />
 						<input type="hidden" name="tty" value="<?php echo $tty?>" />
-<?php if($tty<>22){
+<?php
     $opt ->img('配图','img1');
-}
+
 if($tty==21){
     $opt ->img('学员logo图','img2',"100*120");
 }

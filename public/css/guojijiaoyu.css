@@ -225,7 +225,7 @@
 	float: left;
 }
 .baomingzhongjian .baomingzhongjianRight{
-	width: 30%;
+	width: 213px;
 	float: left;
 }
 .baomingzhongjian .baomingzhongjianRight img{
@@ -905,8 +905,7 @@
 	overflow: hidden;
 }
 .huobaox ul li{
-	    width: 32.4%;
-    width: 32.%;
+	width: 32.4%;
     float: left;
     position: relative;
     margin-right: 10px;
@@ -983,11 +982,12 @@
 .dxinwenwAll .dxinwenwRight{
 	    width: 74%;
     float: left;
-    padding: 30px;
+    padding: 0 30px;
 }
 .dxinwenwAll .dxinwenwRight ul li{
 	width: 50%;
 	float: left;
+	margin-bottom: 30px;
 }
 .dxinwenw1All{
 	overflow: hidden;
