@@ -25,6 +25,7 @@ class VerifyPersonRegister
 
         } elseif ('email' == $mark) {
             // 邮箱注册
+//            dd($request->all());
             $rules = $this->mailRules();
 
         } else {
@@ -65,7 +66,7 @@ class VerifyPersonRegister
     {
         return [
             'person' => 'bail|required|max:5|min:2',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'password2' => 'required|same:password',
             'protocal' => 'accepted',

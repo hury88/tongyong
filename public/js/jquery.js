@@ -45,10 +45,7 @@ function model(that, actionUrl){
      },
      error : function(){
      	$(that).removeAttr('disabled');
-     	alert('提交出错 : 请刷新页面重试!');
-     	$(document).on("click", "button.kwj-button", function(){
-		    window.location.reload();
-     	})
+		dialog(3,["提交出错 : 请刷新页面重试!", "系统错误"],{cancel:"取消",confirm:["刷新", "?"]});
      }
     })
     return false;
@@ -116,8 +113,11 @@ function model_handle(state,title,message,redirect){
 		dialog(2,[message, title],{cancel:"确定"});
 		break;
 		case h_s:
-		if (typeof redirect == 'undefined') {redirect = false};
-		dialog([2,timer],[message, title],{cancel:["确定", redirect]});
+		if (redirect) {
+			dialog([2,timer],[message, title],{cancel:["确定", redirect]});
+		} else {
+			dialog([2,timer],[message, title],{cancel:["确定", false]});
+		}
 		break;
 		case h_w:
 		dialog(3,[message, title],{cancel:["取消"],confirm:["刷新", "?"]});

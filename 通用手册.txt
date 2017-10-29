@@ -1,6 +1,12 @@
 1.全局变量如何定义 比如kw_config表的值
   app\Providers\AppServiceProvider@boot
 2.调用图片:
+  img($filename)
+
+会员
+1.users表 区分会员类型 role
+    个人会员 100
+    企业会员 200
 
 
 

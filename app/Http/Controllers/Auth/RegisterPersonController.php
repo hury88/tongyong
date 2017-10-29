@@ -44,7 +44,7 @@ class RegisterPersonController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('guest');
+//         $this->middleware('guest');
         $this->middleware('App\Http\Middleware\VerifyPersonRegister');
     }
 
@@ -84,17 +84,18 @@ class RegisterPersonController extends Controller
     /**
      * 个人会员 手机 注册
      */
-    protected function emailRegister($request)
+    protected function emailRegister($request, YZM $yzm)
     {
-        $this->validate($request, $this->rules());
-
-        $user = $this->createUser($request->all());
-
-        $this->sendRegistrationEmail($request->all());
+        $user = $this->createUser('email', $request->all());
 
         auth()->login($user);
 
-        return redirect($this->redirectTo);
+        $yzm->pop();
+
+        return handleResponseJson(200, '注册成功!', $this->redirectTo);
+
+        /*$this->sendRegistrationEmail($request->all());
+        return redirect($this->redirectTo);*/
     }
 
     /**
@@ -107,7 +108,7 @@ class RegisterPersonController extends Controller
     protected function createUser($registerStyle, array $data)
     {
         $user = User::create([
-            'id' => 'null',
+//            'id' => 'null',
             $registerStyle => $data[$registerStyle],
             'member_name' => $data[$registerStyle],
             'password' => bcrypt($data['password']),

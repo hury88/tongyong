@@ -18,7 +18,7 @@ class YZMHelper
 	public function __construct($id)
 	{
 		self::init();
-		$this->debug = env('APP_DEBUG', false);
+		// $this->debug = env('APP_DEBUG', false);
 		$this->id = md5($id);
 	}
 
@@ -27,6 +27,7 @@ class YZMHelper
 	public function legal($with_code)
 	{
 		$this->needle = $with_code;
+		// dd($this->_YZM());
 		if ($this->debug) {
 			return true;
 		} else {
@@ -48,7 +49,7 @@ class YZMHelper
 	 */
 	public function verify() {
 		if ( $session_code = $this->get(self::$var) ) {
-			if( $code && strtolower($code) == strtolower($this->needle) ) {
+			if( $this->needle && strtolower($this->needle) == strtolower($this->needle) ) {
 				return true;
 			}
 		}
@@ -102,6 +103,7 @@ class YZMHelper
 		} else {
 			self::$session = session();
 			self::$session->has(self::$var) or self::$session->put(self::$var, []);
+			self::$data = self::$session->get(self::$var, []);
 		}
 	}
 

@@ -54,18 +54,29 @@ Route::group(['middleware' => 'personRegister'], function () {
             if ( $yzm->debug() ) {
                 return handleResponseJson(2011, $response_view);
             } else {
-                return handleResponseJson(2011, '短信验证码发送成功,请注意查收.');
+                return handleResponseJson(2011, '短信验证码发送成功, 请注意查收.');
             }
         } else {
-            return handleResponseJson(412, '验证码获取失败!');
+            return handleResponseJson(412, '发送验证码失败, 请重试!');
         }
     });
     Route::post('/yzm/mail', function (Request $request) {
-        $code = YZM::gneralCode($request->email);
-        if (Send::mail($request->email, 'The captcha from CIP', "Your CAPTCHA is $code")) {
-            return handleResponseJson(200, '验证码已发送至邮箱中');
-        } else {
-            return handleResponseJson(412, '感谢您的反馈^_^!');
+
+        // 生成验证码
+        $yzm = new YZM($request->email);
+        $code = $yzm->push();
+
+        $name = $request->person;
+
+        // 调取验证码短信模板
+        $response_view = view('notify.yzm.email', compact('code', 'name'))->render();
+
+        if (Send::mail($request->email, '验证你的电子邮件地址', $response_view)) {
+
+            return handleResponseJson(2011, '邮件验证码发送成功, 请注意查收.');
         }
+
+        return handleResponseJson(412, '发送邮件失败, 请重试！');
+
     });
 });

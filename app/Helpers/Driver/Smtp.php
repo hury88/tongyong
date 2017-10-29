@@ -1,5 +1,5 @@
 <?php
-namespace app\Helpers\Driver\Smtp;
+namespace app\Helpers\Driver;
 
 /**
  *	Trender: hury
@@ -62,7 +62,7 @@ class Smtp
         if ($cc != "") {
             $header .= "Cc: " . $cc . "\r\n";
         }
-        $header .= "From: $from<" . $from . ">\r\n";
+        $header .= "From: 中国职业培训网<" . $from . ">\r\n";
         $header .= "Subject: " . $subject . "\r\n";
         $header .= $additional_headers;
         $header .= "Date: " . date("r") . "\r\n";
@@ -283,4 +283,3 @@ class Smtp
     }
 
 } // end class
-?>
