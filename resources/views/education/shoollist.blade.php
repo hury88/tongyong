@@ -2,150 +2,72 @@
 
 @section('title') @parent @stop
 @section('css')
-  <link rel="stylesheet" type="text/css" href="/css/common_jiandanyemian.css"/>
-  <link rel="stylesheet" type="text/css" href="/css/jiandanyemian.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/guojijiaoyu.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common_guojijiaoyu.css"/>
 @stop
 @section('bodyNextLabel')
     <body>
     <div class="pager-wrap personal-center">
-@stop
-    @section('content')
-            <div class="yijianAll" style="margin-top: 67px;">
-                <div class="xwdt">
+        @stop
+        @section('breadcrumbs')
+            <div class="gjlhBanner" style="margin-top: 67px;">
+                <img src="{{$banimgsrc}}" style="width: 100%;"/>
+            </div>
+        @stop
+
+        @section('content')
+
+            <div class="gjlhbx">
+                <div class="gjlhbxAll">
                     <p class="xwdtmbx">
-                        <a href="/"><img src="/img/sqzwtop.png"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
+                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}</a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>> <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $GLOBALS['tty_path'])}}">{{$GLOBALS['tty_data']->catname}}</a>
                     </p>
-                    <div class="xwdtAll">
-                        <div class="xwdtTit">
-
-                            <i>{{$GLOBALS['ty_data']->catname}}</i>
-                            <span>
-                                @foreach($left as $row)
-                                    <a {!! $GLOBALS['ty']==$row->id ? ' class="xwdton"' :'' !!} href="{{u('news', $row->path)}}">{{$row->catname}}</a>
-                                @endforeach
-
-              	  	        </span>
+                    <div class="gjlx">
+                        <div class="gjlxLeft">
+                            <h3>{{$GLOBALS['tty_data']->catname}}</h3>
+                            @foreach($newslist as $val)
+                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $GLOBALS['tty_path'],$val->id)}}"><i></i>{{$val->title}}</a>
+                            @endforeach
                         </div>
-                        <div class="xwdtCon">
-                            <div class="xwdtConall">
-                                <div class="xwdtConleft">
-                                    <ul>
-                                        @foreach($page['data'] as $val)
-                                            <li>
-                                                <div class="xwdtConleftleft">
-                                                    <img src="{{img($val['img1'])}}"/>
-                                                </div>
-                                                <div class="xwdtConleftright">
-                                                    <p class="po1"><a href="{{route($GLOBALS['ty_path'],$val['id'])}}">{{$val['title']}} <i>{{date("Y-m-d",$val['sendtime'])}}</i></a></p>
-                                                    <p class="po2"><a href="{{route($GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}</a></p>
-                                                </div>
-                                            </li>
-                                          @endforeach
-                                    </ul>
-                                </div>
-                                <div class="xwdtConright">
-                                    <ul>
-                                        <li>
-                                            <div class="xwdtTop">
-                                                <div class="xwdtTopleft">
-                                                    <img src="img/xwdt4.jpg"/>
-                                                </div>
-                                                <div class="xwdtTopright">
-                                                    <p class="ps1">热门资讯</p>
-                                                    <p class="ps2">Popular information</p>
-                                                </div>
-                                            </div>
-                                            <div class="xwdtBom">
-                                                 @foreach($list['hot_info'] as $v1)
-                                                <p>
-                                                    <a href="{{route($GLOBALS['ty_path'],$v1->id)}}">{{str_limit($v1->title,25,"...")}}</a>
-                                                    <i>{{date("m-d",$v1->sendtime)}}</i>
-                                                </p>
-                                                 @endforeach
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="xwdtTop">
-                                                <div class="xwdtTopleft">
-                                                    <img src="img/xwdt5.jpg"/>
-                                                </div>
-                                                <div class="xwdtTopright">
-                                                    <p class="ps1">最新招聘职位</p>
-                                                    <p class="ps2">New Job</p>
-                                                </div>
-                                            </div>
-                                            <div class="xwdtBom xwdtBom1">
-                                                <div class="">
-                                                    <p><a href="" class="aa1">财务会计助理</a></p>
-                                                    <p><a href="">安徽橙意信息科技有限公司</a></p>
-                                                </div>
-                                                <div class="">
-                                                    <p><a href="" class="aa1">财务会计助理</a></p>
-                                                    <p><a href="">安徽橙意信息科技有限公司</a></p>
-                                                </div>
-                                                <div class="">
-                                                    <p><a href="" class="aa1">财务会计助理</a></p>
-                                                    <p><a href="">安徽橙意信息科技有限公司</a></p>
-                                                </div>
-                                                <div class="">
-                                                    <p><a href="" class="aa1">财务会计助理</a></p>
-                                                    <p><a href="">安徽橙意信息科技有限公司</a></p>
-                                                </div>
-                                                <div class="">
-                                                    <p><a href="" class="aa1">财务会计助理</a></p>
-                                                    <p><a href="">安徽橙意信息科技有限公司</a></p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="xwdtTop">
-                                                <div class="xwdtTopleft">
-                                                    <img src="img/xwdt5.jpg"/>
-                                                </div>
-                                                <div class="xwdtTopright">
-                                                    <p class="ps1">热门培训</p>
-                                                    <p class="ps2">Popular Training</p>
-                                                </div>
-                                            </div>
-                                            <div class="xwdtBom">
-                                                <div class="rmpx">
-                                                    <img src="img/xwdt6.jpg" style="width: 100%;"/>
-                                                    <div class="rmpx0">
-                                                        <img src="img/xwdttime.png"/>
-                                                        <span>共110节 -- 20小时8分钟</span>>
-                                                    </div>
-                                                </div>
-                                                <div class="rmpx1">
-                                                    <p class="pb1">职业技能培训直播课程</p>
-                                                    <p class="pb2">
-                                                        <span>￥29.90 </span>
-                                                        <i><b>45456</b>人已报名</i>
-                                                    </p>
-                                                    <p><a href="">【技能培训】本科统考英语、计算机...	</a></p>
-                                                    <p><a href="">【企业培训】本科统考英语、计算机...</a></p>
-                                                    <p><a href="">【在线学习】学历与学位的区别</a></p>
-                                                    <p><a href="">【企业培训】7月成考报名指南</a></p>
-                                                    <p><a href="">【技能培训】北京理工大学现代远等...</a></p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                        <div class="gjlxRight">
+                            <h4>{{$GLOBALS['tty_data']->catname}}</h4>
+                            @foreach($newslist as $val)
+                            <div class="baoming">
+                                <div class="baomingLeft1">
+                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $GLOBALS['tty_path'],$val->id)}}">
+                                        <i></i>
+                                        {{$val->title}}
+                                    </a>
                                 </div>
                             </div>
-                            @include('partial.paginator')
+                            <div class="baomingCon">
+
+                                <div class="baomingzhongjian">
+                                    <div class="baomingzhongjianLeft">
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $GLOBALS['tty_path'],$val['id'])}}" style="color: #666">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 480, '...') !!}</a>
+                                    </div>
+                                    <div class="baomingzhongjianRight">
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $GLOBALS['tty_path'],$val['id'])}}"><img src="{{img($val['img1'])}}" style="width: 180px;"/></a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
             </div>
-@stop {{-- end content --}}
-
-
-@section('footer')
-  @parent
 @stop
 
-@section('scripts')
-  @parent
 
-@stop

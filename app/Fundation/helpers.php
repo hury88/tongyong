@@ -78,6 +78,7 @@ if (!function_exists('v_show')) {
 			return false;
 		} else {
 			$uri = explode('/', $path);
+			$uri = array_slice($uri, 0, 3);
 		}
 		$level = count($uri);
 		if ($level == 1) {
@@ -118,7 +119,6 @@ if (!function_exists('v_show')) {
 					}
 				}
 			}
-
 		} else {
 			abort(404);
 		}

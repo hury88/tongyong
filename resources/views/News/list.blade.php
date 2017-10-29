@@ -30,7 +30,7 @@
                             <div class="xwdtConall">
                                 <div class="xwdtConleft">
                                     <ul>
-                                        @foreach($page['data'] as $val)
+                                        @foreach($pagenewslist['data'] as $val)
                                             <li>
                                                 <div class="xwdtConleftleft">
                                                     <img src="{{img($val['img1'])}}"/>

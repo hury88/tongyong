@@ -11,8 +11,8 @@ Route::group(['prefix'=>'news'],function(){
 
     Route::get('company/{id}', [ 'as'=>'company','uses' => 'NewsController@show']);
     Route::get('education/{id}', [ 'as'=>'education','uses' => 'NewsController@show']);
-    Route::get('industry/{id}', [ 'as'=>'industry','uses' => 'NewsController@show']);
-    Route::get('recent/{id}', [ 'as'=>'recent','uses' => 'NewsController@show']);
+    Route::get('industry/{id}', [ 'uses' => 'NewsController@show']);
+    Route::get('recent/{id}', [ 'uses' => 'NewsController@show']);
 
 
 });

@@ -1,11 +1,11 @@
 
-<div class="web-pager" data-pages="{{$page['last_page']}}">
+<div class="web-pager" data-pages="{{$pagenewslist['last_page']}}">
 
-        @for($i=$page['min_page'];$i<=$page['max_page'];$i++)
-            <a @if($page['current_page']==$i) class=" pager-now" href="javascript:void(0);" @else href="?page={{$i.$ckey}}" @endif >{{$i}}</a>
+        @for($i=$pagenewslist['min_page'];$i<=$pagenewslist['max_page'];$i++)
+            <a @if($pagenewslist['current_page']==$i) class=" pager-now" href="javascript:void(0);" @else href="?page={{$i.$ckey}}" @endif >{{$i}}</a>
         @endfor
-            @if($page['current_page']<$page['last_page'])
-                <a  href="{{$page['next_page_url'].$ckey}}" class="scrip-a"><img src="/img/zhizhen.jpg"></a>
+            @if($pagenewslist['current_page']<$pagenewslist['last_page'])
+                <a  href="{{$pagenewslist['next_page_url'].$ckey}}" class="scrip-a"><img src="/img/zhizhen.jpg"></a>
             @endif
     <form>
         <span class="script-span">跳转到：</span>

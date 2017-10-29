@@ -75,9 +75,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <td onclick="selectAll(document.getElementById('sall'))" style="font-size:8px;cursor:pointer" width="24px">全选</td>
         <td width="24px">编号</td> <td width="200px">操作</td>
 
-    <?php if ($tty<>22){?>
         <td> 图 </td>
-    <?php }?>
            <?php if ($tty==21){?>
                <td>logo 图 </td>
            <?php }?>
@@ -124,9 +122,8 @@ if($cid){
             <!-- <a href="<?=$editUrl?>" class="thick edits">编辑</a>| -->
             <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
         </td>
-        <?php if($tty<>22){?>
+
         <td><?=$img1?></td>
-        <?php }?>
         <?php if($tty==21){?>
             <td><?=$img2?></td>
         <?php }?>

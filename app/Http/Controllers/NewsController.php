@@ -105,8 +105,8 @@ class NewsController extends Controller
         $ckey='';
         $list['new_job']=$this->new_job();
         $list['hot_train']=$this->hot_train();
-        $page=$news->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],["id","title","sendtime","img1","content"],9,9);
-        return view('news/list', compact('list',"page","ckey"));
+        $pagenewslist=$news->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],["id","title","sendtime","img1","content"],9,9);
+        return view('news/list', compact('list',"pagenewslist","ckey"));
     }
     public function seachlist()
     {
@@ -119,9 +119,9 @@ class NewsController extends Controller
         }
         $news = new News();
 
-        $page=$news->v_seachpages($key,[$GLOBALS['pid']],["id",'ty',"title","sendtime","cid","content"],9,9);
+        $pagenewslist=$news->v_seachpages($key,[$GLOBALS['pid']],["id",'ty',"title","sendtime","cid","content"],9,9);
 
-        return view('news/seach', compact("page","key","ckey"));
+        return view('news/seach', compact("pagenewslist","key","ckey"));
     }
     public function helplist()
     {

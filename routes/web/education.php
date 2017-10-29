@@ -8,10 +8,15 @@ Route::group(['prefix'=>'education'],function(){
     Route::get('camp', ['as' => 'camp', 'uses' => 'EducationController@camp_index']);
     Route::get('joint', ['as' => 'joint', 'uses' => 'EducationController@joint_index']);
 
-    Route::get('study/introduce', ['as' => 'study/introduce', 'uses' => 'EducationController@study_introduce']);
-    Route::get('study/notice', ['as' => 'study/notice', 'uses' => 'EducationController@newslist']);
-    Route::get('study/guide', ['as' => 'study/guide', 'uses' => 'EducationController@study_guide']);
-    Route::get('study/news', ['as' => 'study/news', 'uses' => 'EducationController@newslist']);
+    Route::get('study/introduce', [ 'uses' => 'EducationController@study_introduce']);
+    Route::get('study/notice', [ 'uses' => 'EducationController@newslist']);
+    Route::get('study/guide', ['uses' => 'EducationController@newslist']);
+    Route::get('study/news', ['uses' => 'EducationController@newslist']);
+
+    Route::get('study/news/{id}', [ 'uses' => 'EducationController@view']);
+    Route::get('study/introduce/{id}', [ 'uses' => 'EducationController@introduce_view']);
+    Route::get('study/notice/{id}', [ 'uses' => 'EducationController@view']);
+    Route::get('study/guide/{id}', [ 'uses' => 'EducationController@view']);
 });
 
 
