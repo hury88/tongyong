@@ -27,11 +27,11 @@ class Send
 		return true;
 	}
 
-	public static function sms($phone, $codeTemp)
+	public static function sms($phone, $tpl)
 	{
 		return true;
 		$statusStr = array(
-		        "0" => "短信发送成功",
+		        "0" => "短信	发送成功",
 		        "-1" => "参数不全",
 		        "-2" => "服务器空间不支持,请确认支持curl或者fsocket，联系您的空间商解决或者更换空间！",
 		        "30" => "密码错误",

@@ -116,7 +116,8 @@ function model_handle(state,title,message,redirect){
 		dialog(2,[message, title],{cancel:"确定"});
 		break;
 		case h_s:
-		dialog([2,timer],[message, title],{cancel:["确定", false]});
+		if (typeof redirect == 'undefined') {redirect = false};
+		dialog([2,timer],[message, title],{cancel:["确定", redirect]});
 		break;
 		case h_w:
 		dialog(3,[message, title],{cancel:["取消"],confirm:["刷新", "?"]});

@@ -77,7 +77,7 @@ class RegisterPersonController extends Controller
         auth()->login($user);
 
         $yzm->pop();
-        
+
         return handleResponseJson(200, '注册成功!', $this->redirectTo);
     }
 
@@ -107,6 +107,7 @@ class RegisterPersonController extends Controller
     protected function createUser($registerStyle, array $data)
     {
         $user = User::create([
+            'id' => 'null',
             $registerStyle => $data[$registerStyle],
             'member_name' => $data[$registerStyle],
             'password' => bcrypt($data['password']),
