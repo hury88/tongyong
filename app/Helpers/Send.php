@@ -27,7 +27,7 @@ class Send
 		return true;
 	}
 
-	public static function sms($phone, $postString)
+	public static function sms($phone, $codeTemp)
 	{
 		return true;
 		$statusStr = array(

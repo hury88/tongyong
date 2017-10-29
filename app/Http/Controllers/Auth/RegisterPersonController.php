@@ -57,7 +57,8 @@ class RegisterPersonController extends Controller
     {
         list($callback, $id) = $GLOBALS['middleware_request'];
         $yzm = new YZM($id);
-        if ($yzm->legal()) {
+        if ($yzm->legal($request->yzm)) {
+//            dd($yzm->_YZM());
             return $this->$callback($request);
         }
         #验证码错误
@@ -71,25 +72,11 @@ class RegisterPersonController extends Controller
      */
     protected function telphoneRegister($request)
     {
-        #验证码错误
-        if (YZM::verify($request)) {
-            return handleResponseJson(200, '感谢您的反馈^_^!');
-        };
-
-
         $user = $this->createUser($request->all());
 
-        $message = $request->get('message');
-        $contact = $request->get('contact');
-        if (
-        (new Message)->feedback([
-            'phone' => $contact,
-            'message' => $message,
-        ])
-        ) {
-            return handleResponseJson(200, '感谢您的反馈^_^!');
-        }
-        return handleResponseJson(201, '反馈失败或刷新页面重试');
+        auth()->login($user);
+
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -117,6 +104,8 @@ class RegisterPersonController extends Controller
      */
     protected function createUser(array $data)
     {
+        dd($data);
+        array:8 [  "person" => "胡锐"  "telphone" => "18856924272"  "yzm" => "630287"  "password" => "18856924272"  "password2" => "18856924272"  "protocal" => "true"  "mark" => "telphone"  "_token" => "lW7A6tKdIFJNWcIU3DbUQ3K1qKO55OhUz2d1cE7o"]
         $user = User::create([
             'email' => $data['email'],
             'nickname' => $data['email'],

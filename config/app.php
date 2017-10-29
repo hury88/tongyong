@@ -298,6 +298,7 @@ return [
          */
 
         'YZM'      => App\Helpers\YZMHelper::class,
+        'Send'      => App\Helpers\Send::class,
         'Menu'      => App\Helpers\Menu::class,
         'Utility'   => App\Helpers\Utility::class,
     ],

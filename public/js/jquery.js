@@ -35,7 +35,12 @@ function model(that, actionUrl){
 		    redirect = response.redirect;
 
 		handing(status,state,title,message,redirect,function(){
-	     	$(that).removeAttr('disabled');//解除锁定
+			if (is_yzm(status, state)) {
+				console.log("tt");
+				settime(that, 60);
+			} else {
+		     	$(that).removeAttr('disabled');//解除锁定
+			}
 		});
      },
      error : function(){
@@ -61,6 +66,7 @@ function handing(status,state,title,message,redirect,callback){
 // 处理响应结果中的notice部分
 var
 	n_s = 200,
+	n_i = 201;
 	n_w = 303,
 	n_e = 412;
 function model_notice(state,title,message,redirect){
@@ -73,11 +79,17 @@ function model_notice(state,title,message,redirect){
 	} else { messages = message;}
 
 	switch(state){
-		case n_e:
-		notice_error(title, messages);
+		case n_s:
+		notie.alert(1, title +'<br />' + messages, 3);
 		break;
 		case n_w:
-		notice_warning(title, messages);
+		notie.alert(2, title +'<br />' + messages, 3);
+		break;
+		case n_e:
+		notie.alert(3, title +'<br />' + messages, 3);
+		break;
+		case n_i:
+		notie.alert(4, title +'<br />' + messages, 3);
 		break;
 		default:
 		break;
@@ -87,11 +99,22 @@ function model_notice(state,title,message,redirect){
 // 处理响应结果中的handle部分
 var
 	h_s = 200,
+	h_i = 201;
 	h_w = 203,
 	h_e = 412;
+	h_c = 2011; //验证码
 function model_handle(state,title,message,redirect){
 	var timer = 3000;
 	switch(state){
+		case h_e:
+		dialog([1,timer],[message, title],{cancel:["确定"]});
+		break;
+		case h_i:
+		dialog([2,timer],[message, title],{cancel:["确定"]});
+		break;
+		case h_c:
+		dialog(2,[message, title],{cancel:"确定"});
+		break;
 		case h_s:
 		dialog([2,timer],[message, title],{cancel:["确定", false]});
 		break;
@@ -103,23 +126,10 @@ function model_handle(state,title,message,redirect){
 	}
 }
 
-
-function notice_success() {
-    notie.alert(1, 'Success!', 2);
+function is_yzm(status, state) {
+	return status == 'handle' && state == h_c;
 }
-
-function notice_warning(title, messages) {
-    notie.alert(2, title +'<br />' + messages, 3);
-}
-
-function notice_error(title, messages) {
-    notie.alert(3, title +'<br />' + messages, 3);
-}
-
-function notice_info() {
-    notie.alert(4, 'Information.', 2);
-}
-
+/*
 function notice_confirm() {
     notie.confirm('Are you sure you want to do that?<br><b>That\'s a bold move...</b>', 'Yes', 'Cancel', function() {
         notie.alert(1, 'Good choice!', 2);
@@ -130,11 +140,19 @@ function notice_input() {
     notie.input('Please enter your email address:', 'Submit', 'Cancel', 'email', 'name@example.com', function(value_entered) {
         notie.alert(1, 'You entered: ' + value_entered, 2);
     });
-}
+}*/
 
 // dialog([type(,timer)],[text,title],{cancel:[text,url],confirm:[text,url]})
+$(document).on("click.hr", "button.kwj-button--cancel,button.kwj-button--confirm", function(){
+	$(document).off("click.hr","button.kwj-button--cancel");
+	$(document).off("click.hr","button.kwj-button--confirm");
+	return false;
+})
 function dialog(type, config, active)
 {
+	// $(document).off("click","button.kwj-button--cancel");
+	// $(document).off("click","button.kwj-button--confirm");
+
 	var icon='error',title='错误提示',timer=false,text='',b1='OK',b2=false,outsideClick=true;
 	if (typeof type == 'object') {
 		timer = type[1];
@@ -168,63 +186,57 @@ function dialog(type, config, active)
 		var cancelBtn = active.hasOwnProperty("cancel");
 		var confirmBtn = active.hasOwnProperty("confirm");
 
-		if (cancelBtn) {
+		if (confirmBtn) {
+
+				// 定义了取消按钮
+		    b1 = active.cancel;
+			if (typeof active.cancel == 'object') {
+			    b1 = active.cancel[0];
+		        if (typeof active.cancel[1] != 'undefined') {
+		    		$(document).on("click.hr", "button.kwj-button--cancel", function(){
+			        	if (active.cancel[1] === false) {
+						    window.location.reload();
+			        	} else {
+						    window.location.href = active.cancel[1];
+			        	}
+					})
+		        }
+				outsideClick=false;
+			}
+
+			// 第二个按钮
+		    b2 = active.confirm;
+			if (typeof active.confirm == 'object') {
+			    b2 = active.confirm[0];
+			    if (typeof active.confirm[1] != 'undefined') {
+					$(document).on("click.hr", "button.kwj-button--confirm", function(){
+					    window.location.href = active.confirm[1];
+					})
+			    }
+				outsideClick=false;
+			}
+		} else { // 只定义了取消按钮
 			// 定义了取消按钮
 		    b1 = active.cancel;
 			if (typeof active.cancel == 'object') {
 			    b1 = active.cancel[0];
 		        if (typeof active.cancel[1] != 'undefined') {
-		    		if (confirmBtn) {
-			    		$(document).on("click", "button.kwj-button--cancel", function(){
-			    			$(document).off("click","button.kwj-button--cancel");
-			    			$(document).off("click","button.kwj-button--confirm");
-    			        	if (active.cancel[1] === false) {
-    						    window.location.reload();
-    			        	} else {
-    						    window.location.href = active.cancel[1];
-    			        	}
-						})
-		        	} else {
-    		    		$(document).on("click", "button.kwj-button--confirm", function(){
-    		    			$(document).off("click","button.kwj-button--cancel");
-    		    			$(document).off("click","button.kwj-button--confirm");
-    			        	if (active.cancel[1] === false) {
-    						    window.location.reload();
-    			        	} else {
-    						    window.location.href = active.cancel[1];
-    			        	}
-    					})
-		        	}
-		        }
+		    		$(document).on("click.hr", "button.kwj-button--confirm", function(){
+			        	if (active.cancel[1] === false) {
+						    window.location.reload();
+			        	} else {
+						    window.location.href = active.cancel[1];
+			        	}
+					})
+	        	}
 				outsideClick=false;
-			} else {
+			} /*else {
 	    		$(document).on("click", "button.kwj-button--cancel", function(){
 	    			$(document).off("click","button.kwj-button--cancel");
 	    			$(document).off("click","button.kwj-button--confirm");
 				})
-			}
-		};
-
-		if (confirmBtn) {
-			// 定义了取消按钮
-		    b2 = active.confirm;
-			if (typeof active.confirm == 'object') {
-			    b2 = active.confirm[0];
-			    if (typeof active.confirm[1] != 'undefined') {
-					$(document).on("click", "button.kwj-button--confirm", function(){
-						$(document).off("click","button.kwj-button--cancel");
-						$(document).off("click","button.kwj-button--confirm");
-					    window.location.href = active.confirm[1];
-					})
-			    }
-				outsideClick=false;
-			} else {
-	    		$(document).on("click", "button.kwj-button--confirm", function(){
-	    			$(document).off("click","button.kwj-button--cancel");
-	    			$(document).off("click","button.kwj-button--confirm");
-				})
-			}
-		};
+			}*/
+		}
 
 	};
 

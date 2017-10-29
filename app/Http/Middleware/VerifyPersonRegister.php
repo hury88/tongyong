@@ -35,7 +35,7 @@ class VerifyPersonRegister
 
         $errors = $validator->errors(); // 输出的错误，自己打印看下
         if ($validator->fails()) {
-            return noticeResponseJson(412, '提交失败', $errors);
+            return noticeResponseJson(412, '执行失败', $errors);
         }
 
         # 记录处理结果 ['callback', 'id'] # id means email or telphone
@@ -54,7 +54,7 @@ class VerifyPersonRegister
             'password' => 'required|min:6',
             'password2' => 'required|same:password',
             'protocal' => 'accepted',
-            'yzm' => 'required',
+//            'yzm' => 'required',
         ];
     }
 
@@ -69,7 +69,7 @@ class VerifyPersonRegister
             'password' => 'required|min:6',
             'password2' => 'required|same:password',
             'protocal' => 'accepted',
-            'yzm' => 'required',
+//            'yzm' => 'required',
         ];
     }
 }

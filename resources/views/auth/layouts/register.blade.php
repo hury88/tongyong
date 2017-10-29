@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="register-form-dv">
                                     <input name="yzm" class="form-code-inp" type="text" placeholder="请输入手机验证码"/>
-                                    <input class="form-code-get" type="button" value="获取验证码"/>
+                                    <input id="mobile" class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
                                 <div class="register-form-psw">
                                     <input name="password" type="password" placeholder="请输入您的密码"/>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="register-form-dv">
                                     <input name="yzm" class="form-code-inp" type="text" placeholder="请输入邮箱验证码"/>
-                                    <input class="form-code-get" type="button" value="获取验证码"/>
+                                    <input id="mail" class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
                                 <div class="register-form-psw">
                                     <input name="password" type="password" placeholder="请输入您的密码"/>
@@ -115,7 +115,7 @@
             </div>
         </div>
         <div class="login-register-box">
-            <p class="login-footer-p">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号<span>|</span><b>技术支持：科威网络</b></p>
+            <p class="login-footer-p">{{$boot_config['copyright']}} <span>|</span> <a href="http://www.semfw.cn" target="_blank" class="active"><b>技术支持：科威网络</b></a></p>
         </div>
     </div>
 @stop
@@ -137,6 +137,15 @@
 <script>
     $(".submit").click(function(){
         model(this);
+        return false;
+    })
+
+    $("#mail").click(function(){
+        model(this, "{{u('yzm/mail')}}");
+        return false;
+    })
+    $("#mobile").click(function(){
+        model(this, "{{u('yzm/mobile')}}");
         return false;
     })
     // 阅读协议
