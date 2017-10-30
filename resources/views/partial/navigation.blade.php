@@ -34,19 +34,18 @@
         </ul>
         <div class="use">
             <ul class="fl">
-             <li>
-                <a href="{{ u('news',"seach")}}" style="margin-left: 30px;">搜索</a>
-            </li>
-            <li>
-                <a href="{{ u('register')}}" style="margin-left: 15px;">注册</a>
-            </li>
-            <li>
-                <a href="{{ u('login')}}">登录</a>
-            </li>
-        </ul>
-        <p class="fl">
-            <a href="javascript:void(0)"><img src="/img/bug.png"/></a>
-        </p>
+                <li> <a href="{{ u('news', 'seach')}}" style="margin-left: 30px;">搜索</a> </li>
+            @if(auth()->check())
+                <li> <a href="{{ u('user')}}" style="margin-left: 15px;">会员中心</a> </li>
+                <li> <form action="{{ route('logout')}}" method="post"><a href="javascript:;"><button>退出</button></a>{!! csrf_field() !!}</form> </li>
+            @else
+                <li> <a href="{{ u('register')}}" style="margin-left: 15px;">注册</a> </li>
+                <li> <a href="{{ u('login')}}">登录</a> </li>
+            @endif
+            </ul>
+            <p class="fl">
+                <a href="javascript:void(0)"><img src="/img/bug.png"/></a>
+            </p>
+        </div>
     </div>
-</div>
 </div>

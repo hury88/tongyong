@@ -1,85 +1,94 @@
-@extends('layouts/master')
-
-@section('page_class') wrapper-page @stop
-
-@section('navigation')
-	&nbsp;
+@extends('auth.layouts/public')
+@section('title')会员登陆 @parent @stop
+@section('headMeta')
+@parent    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stop {{--  end meta  --}}
+@section('bodyNextLabel')
+<body class="in_body">
+    <div class="pager_wrap login_wrap">
+@stop
+@section('content')
+    <div class="login-box">
+       <div class="login-header">
+           <div class="login-header-l fl">
+              <a class="login-logo" href="javascript:void(0)">
+                  <img src="img/login-logo.png" alt=""/>
+                  中国职业培训网
+              </a>
+              <a class="login-address" href="javascript:void(0)">合肥</a>
+           </div>
+           <div class="login-header-r fr">
+               <ul class="login-nav-ul">
+                   <li class="login-nav-li">
+                       <a href="javascript:void(0)">首页</a>
+                   </li>
+                   <li class="login-nav-li">
+                       <a href="javascript:void(0)">使用帮助</a>
+                   </li>
+               </ul>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+       <div class="login-content">
+           <div class="login-content-l fl">
+               <h2>高端职业</h2>
+               <h2>培训首选平台</h2>
+               <p>为近万名学生轻松解决就业烦恼、成功塑造就业未来</p>
+           </div>
+           <div class="login-contetn-r fr">
+              <form class="form" method="post" action="{{route('login')}}">
+                 <div class="form-title">
+                     <ul class="form-title-ul">
+                         <li class="form-title-li {{request()->has('person') ? 'active' : ''}}">
+                             <a href="/login?person=true">学生登录</a>
+                         </li>
+                         <li class="form-title-li {{request()->has('org') ? 'active' : ''}}">
+                             <a href="/login?org=true">企业登录</a>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="form-div">
+                     <input name="username" value="{{ old('username') }}" type="text" placeholder="请输入邮箱/手机号"/>
+                 </div>
+                  <div class="form-div">
+                      <input name="password" value="" type="password" placeholder="请输入密码"/>
+                      <a href="javascript:;"></a>
+                  </div>
+                  <div class="form-inp">
+                  	<!-- return model(this) -->
+                      <input onclick="" type="submit" value="登录"/>
+                  </div>
+                  {{ csrf_field() }}
+              </form>
+              <div class="other-link">
+                  <a href="javascript:;">忘记密码?</a><span>|</span><a href="{{u('register', request()->has('org')?'org':'person')}}">用户注册</a>
+              </div>
+               <div class="third-login">
+                   <h3>使用第三方登录</h3>
+                   <div class="third-login-type">
+                       <a class="qq-login" href="javascript:;"></a>
+                       <a class="weibo-login" href="javascript:;"></a>
+                   </div>
+               </div>
+           </div>
+           <div class="clearfix"></div>
+       </div>
+        <div class="login-footer">
+           <p class="login-footer-p">{{$boot_config['copyright']}} <span>|</span> <a href="http://www.semfw.cn" target="_blank" class="active"><b>技术支持：科威网络</b></a></p>
+        </div>
+    </div>
 @stop
 
-@include('partial.message')
-
-@section('content')
-
-	<div class="content_wrapper_header">
-		<h3>
-			<a href="/" title="{{ trans('globals.go_back_label') }}">
-		    	{{ trans('user.sign_in_your_account') }}
-		    </a>
-	    </h3>
-    </div>
-
-	<div class="content_wrapper">
-	    <div class="row" ng-controller="LoginController">
-	    	<div class="col-md-12">
-
-	    		{!! Form::open(['url'=>'/login','name'=>'loginForm', 'class'=>'form-horizontal','role'=>"form",'method'=>"POST"]) !!}
-
-				{{ csrf_field() }}
-
-				<div class="form-group">
-					<h6 class="black_color">{{ trans('user.email_address') }}</h6>
-					<div class="input-group">
-	      				<div class="input-group-addon"><span class="fa fa-envelope-o"></span></div>
-						<input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<h6 class="black_color">{{ trans('user.password_message.do_you_have') }}</h6>
-					<div class="input-group">
-	  					<div class="input-group-addon"><span class="fa fa-lock"></span></div>
-						<input ng-disabled="!havePassword" type="password" class="form-control" name="password">
-					</div>
-					<label>
-						&nbsp;<input name="newuser" type="radio" value="0" ng-click="setHavePassword(true)" checked="havePassword">&nbsp;{{ trans('user.password_message.have') }}
-						<br>
-						&nbsp;<input name="newuser" type="radio" value="1" ng-click="setHavePassword(false)">&nbsp;{{ trans('user.password_message.nohave') }}
-					</label>
-				</div>
-
-				<div class="form-group" style="height: 120px">
-					<h6 class="black_color">{{ trans('user.are_you_human') }}</h6>
-					{!! Recaptcha::render() !!}
-				</div>
-
-				<div class="form-group">
-					<label>
-						<input ng-disabled="!havePassword" type="checkbox" name="remember"> {{ trans('user.remember_me') }}
-						&nbsp;|&nbsp;
-						<a style="100%" href="{{ url('/password/reset') }}">
-						<span class="fa fa-paper-plane-o"></span>&nbsp;
-						{{ trans('user.forgot_your_password') }}?
-					</a>
-					</label>
-				</div>
-
-				<div class="form-group">
-					<hr>
-					<button type="submit" class="btn btn-primary">
-						<span class="fa fa-sign-out"></span>&nbsp;
-						{{ trans('user.sign_in_my_account') }}
-					</button>
-				</div>
-
-				{!! Form::close() !!}
-
-	    	</div> {{-- col --}}
-
-	    </div> {{-- row --}}
-
-	</div> {{-- panel --}}
-@endsection
-
-@section('footer')
-	&nbsp;
-@endsection
+@section('scripts')
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/alert.min.js"></script>
+<script>
+	$(".form-title-li").click(function(){
+		$(this).addClass('active').siblings().removeClass("active");
+		$(".form-div:eq(1) input").val("");
+	})
+@if (count($errors) > 0)
+	model_notice(412, "登陆失败", "@foreach ($errors->all() as $error) {{ $error }}</br> @endforeach");
+@endif
+</script>
+@stop

@@ -118,9 +118,11 @@ return [
 
         'yzm' => '验证码',
 
-        'first_name' => '名',
-        'last_name'  => '姓',
         'email'      => '邮箱',
+        'username'      => '邮箱/手机号',
+        'location'   => '所在地',
+        'org'   => '企业名称',
+        'contact'   => '联系人',
         'nickname'   => '用户名（昵称）',
     ],
 

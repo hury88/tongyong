@@ -278,10 +278,15 @@ array=[
 
 ajax 返回错误码
 notice 模块noticeResponseJson
- 412 不满足,前提条件失败
+  n_s = 200,
+  n_i = 201;
+  n_w = 303,
+  n_e = 412;
 handle 模块handleResponseJson
- h_s = 200,成功
- h_w = 203,警告
- h_e = 199;错误
+  h_s = 200,成功
+  h_i = 201;
+  h_w = 203,警告
+  h_e = 412;错误
+  h_c = 2011; //验证码
 
 

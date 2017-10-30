@@ -26,7 +26,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/user';
+
+    /**
+     * 默认凭据字段
+     * @var string
+     */
+    protected $credentialsField = 'telphone';
 
     /**
      * Create a new controller instance.
@@ -47,13 +53,20 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        if ($request->input('newuser')) {
-            session()->flash('email', $request->input('email'));
+        $rules = $this->rules($request->{$this->getInputUsername()});
+        $this->validate($request, $rules);
 
-            return redirect('/register');
+//        if (auth()->attempt($this->credentials($request), $request->has('remember'))) {
+        if (auth()->attempt($this->credentials($request), true)) {
+//            return redirect($this->redirectTo);
+            return redirect()->intended($this->redirectPath());
         }
 
-        return $this->handle($request);
+        return redirect('/login')
+            ->withInput($request->only($this->getInputUsername()))
+            ->withErrors([
+                $this->getInputUsername() => $this->getFailedLoginMessage(),
+            ]);
     }
 
     /**
@@ -63,19 +76,9 @@ class LoginController extends Controller
      *
      * @return void
      */
-    protected function handle(Request $request)
+    protected function handle(Request $request, $rules)
     {
-        $this->validate($request, $this->rules());
 
-        if (auth()->attempt($this->credentials($request), $request->has('remember'))) {
-            return redirect($this->redirectTo);
-        }
-
-        return redirect('/login')
-            ->withInput($request->only('email', 'remember'))
-            ->withErrors([
-                'email' => $this->getFailedLoginMessage(),
-            ]);
     }
 
     /**
@@ -83,16 +86,23 @@ class LoginController extends Controller
      *
      * @return array
      */
-    protected function rules()
+    protected function rules($val)
     {
-        $rules = [
-            'email'    => 'required|email',
-            'password' => 'required',
-        ];
+        if (strpos($val, '@')) {
+            // 邮箱登陆
+            $rules = [
+                $this->getInputUsername() => 'required|email',
+            ];
+            $this->setCredentialsField('email');
 
-        if (!env('APP_DEBUG')) {
-            $rules['g-recaptcha-response'] = 'required|recaptcha';
+        } else {
+            // 手机登陆
+            $rules = [
+                $this->getInputUsername() => 'required|regex:/^1[34578][0-9]{9}$/',
+            ];
         }
+
+        $rules['password'] = 'required';
 
         return $rules;
     }
@@ -107,7 +117,7 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         return [
-            'email'    => $request->email,
+            $this->getCredentialsField() => $request->{$this->getInputUsername()},
             'password' => $request->password,
         ];
     }
@@ -120,5 +130,31 @@ class LoginController extends Controller
     public function getFailedLoginMessage()
     {
         return trans('user.credentials_do_not_match_our_records');
+    }
+
+    /**
+     * 获取默认凭据字段
+     * @return string
+     */
+    private function getCredentialsField()
+    {
+        return $this->credentialsField;
+    }
+
+    /**
+     * 修改默认凭据字段
+     */
+    private function setCredentialsField($newField)
+    {
+        $this->credentialsField = $newField;
+    }
+
+    /**
+     * 获取账户字段名
+     * @return string
+     */
+    private function getInputUsername()
+    {
+        return 'username';
     }
 }

@@ -82,6 +82,7 @@ return [
         'disable_account_description'  => '禁用账号，您的资料也会同时被删除。',
         'enable_account_description'   => '启用账号，您的资料也会重新启用。',
         'account_disabled_description' => '该账号已被禁用。如果要重新启用，可访问您的资料页进行激活。',
+        'credentials_do_not_match_our_records' => '帐号或密码不能同时匹配',
 
         //password
         'password_message'             => [

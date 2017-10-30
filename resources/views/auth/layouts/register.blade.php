@@ -140,14 +140,14 @@
         return false;
     })
 
-    $("#mail").click(function(){
-        model(this, "{{u('yzm/mail')}}");
-        return false;
+   @yield('send_yzm', '$("#mail").click(function(){
+    model(this, "/yzm/mail");
+    return false;
     })
     $("#mobile").click(function(){
-        model(this, "{{u('yzm/mobile')}}");
-        return false;
-    })
+    model(this, "/yzm/mobile");
+    return false;
+    })')
     // 阅读协议
     $(".company-agreement label").click(function(){
         var radio = $(this).children("input[type=radio]");
