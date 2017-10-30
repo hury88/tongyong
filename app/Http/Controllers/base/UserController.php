@@ -32,8 +32,7 @@ class UserController extends Controller
         $user = \Auth::user();
 
         if ($user) {
-
-            dd($user->role);
+//            dd($user->role);
 
             /*// Validacion de campos unique
             $this->form_rules['email'] .= $user->id;

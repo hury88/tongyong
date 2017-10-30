@@ -85,6 +85,7 @@ function v_pic($pid){
 		} else {
 			$uri = explode('/', $path);
 			$uri = array_slice($uri, 0, 3);
+			$GLOBALS['uri'] = $uri;
 		}
 		$level = count($uri);
 		if ($level == 1) {

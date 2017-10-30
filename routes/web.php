@@ -24,7 +24,9 @@ Route::group(['prefix' => 'home'], function () {
 });
 
 //个人中心
- require __DIR__.'/web/users.php';
+require __DIR__.'/web/users.php';
+//会员中心
+require __DIR__.'/web/business.php';
 //用户注册
  require __DIR__.'/web/reg.php';
 
