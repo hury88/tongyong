@@ -100,13 +100,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     //Role Manage
-
     public function hasRole($role)
     {
+        $user_role = $this->role;
         if (is_array($role)) {
-            return $this->role == array_intersect($this->role, $role);
+            return $user_role == array_intersect($user_role, $role);
         }
-        return in_array($role, $this->role);
+        return in_array($role, $user_role);
     }
 
     public function isAdmin()
@@ -201,4 +201,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         // 011 => [0,1,1]
         return preg_split('//', $this->attributes['role'], -1, PREG_SPLIT_NO_EMPTY);
     }
+
 }

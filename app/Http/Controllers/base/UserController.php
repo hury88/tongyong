@@ -1,20 +1,14 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers\base;
 
-/*
- * Antvel - Users Controller
- *
- * @author  Gustavo Ocanto <gustavoocanto@gmail.com>
- */
-
+use App\Person;
 use App\Business;
 use App\Helpers\File;
 use App\Helpers\userHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductsController;
 use App\Order;
-use App\Person;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -23,10 +17,10 @@ use Illuminate\Support\Facades\Session;
 class UserController extends Controller
 {
     private $form_rules = [
-        'email'                 => 'required|email|unique:users,email,',
-        'nickname'              => 'required|max:255|unique:users,nickname,',
-        'old_password'          => 'required_with:password,password_confirmation',
-        'password'              => 'required_with:old_password,password_confirmation|confirmed|different:old_password',
+        'email' => 'required|email|unique:users,email,',
+        'nickname' => 'required|max:255|unique:users,nickname,',
+        'old_password' => 'required_with:password,password_confirmation',
+        'password' => 'required_with:old_password,password_confirmation|confirmed|different:old_password',
         'password_confirmation' => 'required_with:old_password,password|different:old_password|same:password',
     ];
 
@@ -55,8 +49,7 @@ class UserController extends Controller
         }
     }
 
-
-    /**
+     /**
      * Sube imagen de perfil y background de usuario.
      *
      * @param Request $request [description]
@@ -311,11 +304,11 @@ class UserController extends Controller
     {
         //validating if the token retrieved is valid
         $user = User::select(['id'])
-            ->where(\DB::raw('md5(concat(email, "_", "'.csrf_token().'", "_", email))'), 'LIKE', $token)
+            ->where(\DB::raw('md5(concat(email, "_", "' . csrf_token() . '", "_", email))'), 'LIKE', $token)
             ->first();
 
         if ($user) {
-            $name = $user->name.' '.$user->last_name;
+            $name = $user->name . ' ' . $user->last_name;
             Session::put('message', str_replace('[name]', $name, trans('user.account_verified_ok_message')));
         } else {
             Session::put('messageClass', 'alert alert-danger');

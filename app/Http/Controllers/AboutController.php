@@ -76,7 +76,7 @@ class AboutController extends Controller
 				'message' => $message,
 			])
 		) {
-	        return handleResponseJson(200, '感谢您的反馈^_^!');
+	        return handleResponseJson(200, '感谢您的反馈^_^!', '?');
 		}
         return handleResponseJson(201, '反馈失败或刷新页面重试');
 	}

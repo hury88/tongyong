@@ -9,7 +9,6 @@
 @parent
 @stop
 @section('navigation') @parent @show
-</div>
 @section('content')
 	@include('user.partial.menu_dashboard')
 	@section('user_wrap')
