@@ -2,8 +2,8 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'certificate';
+$showname = 'certificate';
 $istop = I('get.istop',0,'intval');
 if (!empty($id) ) { //显示页面 点击修改  只传了id
 	$row = M($table)->find($id);
@@ -53,6 +53,9 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
                                 ->choose('所属分类','certificate_lid')->radioSet(Config::get('webarr.certificate'))->flur()
                                 ->editor('详情');
                         }else{
+                            if($tty==61){
+                                $opt ->img('学院logo图','img2',"120*120");
+                            }
                             if(in_array($tty,array(59,63))){
                                 $opt->input('问题','title');
                             }else{

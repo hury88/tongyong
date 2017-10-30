@@ -50,7 +50,7 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
     $opt ->img('配图','img1');
 
 if($tty==21){
-    $opt ->img('学员logo图','img2',"100*120");
+    $opt ->img('学院logo图','img2',"100*120");
 }
     $opt->input('标题','title');
 if(in_array($tty,array(24,25,29,30))){
