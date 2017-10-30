@@ -6,7 +6,7 @@
     <div class="left-nav-lists">
         <ul class="left-navlists-ul">
             @foreach(trans('business.menu') as $b_route => $b_m_info)
-            <li class="left-navlists-li {{$GLOBALS['uri'][1] == $b_route ? 'nav-active' : ''}}">
+            <li class="left-navlists-li {{isset($GLOBALS['uri'][1]) && $GLOBALS['uri'][1] == $b_route ? 'nav-active' : ''}}">
             <?php $b_route = trans('business.route_prefiex').$b_route ?>
                 <a href="{{route($b_route)}}">
                     <i class="{{$b_m_info['icon']}}"></i>
