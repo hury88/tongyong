@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div class="tesellBom">
-                                    <span><i>{{App\Enroll::get_count($GLOBALS['pid'],$val['id'],'')}}</i>人已报名</span>
+                                    <span><i>{{$val['enroll_num']}}</i>人已报名</span>
                                     <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $GLOBALS['tty_path'],$val['id'])}}">查看详情>></a>
                                 </div>
                             </li>

@@ -24,17 +24,17 @@
                     <a href='/'><img src='/img/sqzwtop.png' style='vertical-align: middle'/>所在位置：首页 </a>> <a href='{{u($GLOBALS['pid_path'])}}'>{{$GLOBALS['pid_data']->catname}}</a>> <a href='{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}'>{{$GLOBALS['ty_data']->catname}}</a>
                 </p>
                 <div class="huobaox youxuell">
-                    <h3><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(29,'path','news_cats'))}}' style='color: #444'>{{$sanlist[0]['catname']}}推荐</a></h3>
-                    <p>在路上寻找更好的自己<a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(29,'path','news_cats'))}}">更多<img src="/img/gengduo.jpg"></a></p>
+                    <h3><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'])}}' style='color: #444'>{{$sanlist[0]['catname']}}推荐</a></h3>
+                    <p>在路上寻找更好的自己<a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'])}}">更多<img src="/img/gengduo.jpg"></a></p>
                     <ul>
                       @foreach($huobaogood as $key=>$val)
                         <li @if($key==2) class='list1' @endif>
-                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(29,'path','news_cats'),$val['id'])}}">
+                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}">
                                 <img src="{{img($val['img1'])}}"/>
                             </a>
                             <div class="huobaoxlBom">
-                                <p class="p1"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(29,'path','news_cats'),$val['id'])}}">{{$val['title']}}</a></p>
-                                <p class="p2"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(29,'path','news_cats'),$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 80, '...') !!}</a></p>
+                                <p class="p1"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}">{{$val['title']}}</a></p>
+                                <p class="p2"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 80, '...') !!}</a></p>
                             </div>
                         </li>
                        @endforeach
@@ -42,20 +42,20 @@
                 </div>
                 <div class="youxuellAll">
                     <div class="youxuell">
-                        <h3><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(30,'path','news_cats'))}}' style='color: #444'>{{$sanlist[1]['catname']}}</a></h3>
-                        <p>拓展国际视野，丰富人生阅历，培养国际化思维！<a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(30,'path','news_cats'))}}">更多<img src="/img/gengduo.jpg"></a></p>
+                        <h3><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'])}}' style='color: #444'>{{$sanlist[1]['catname']}}</a></h3>
+                        <p>拓展国际视野，丰富人生阅历，培养国际化思维！<a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'])}}">更多<img src="/img/gengduo.jpg"></a></p>
                         <ul>
                             @foreach($tesegood as $key=>$val)
                             <li style="margin-bottom: 15px;">
                                 <div class="tesellTop">
-                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(30,'path','news_cats'),$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
+                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'],$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                     <div class="tesellTop1">
-                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(30,'path','news_cats'),$val['id'])}}">{{$val['title']}}</a>
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'],$val['id'])}}">{{$val['title']}}</a>
                                     </div>
                                 </div>
                                 <div class="tesellBom">
-                                    <span><i>{{App\Enroll::get_count($GLOBALS['pid'],$val['id'],'')}}</i>人已报名</span>
-                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(30,'path','news_cats'),$val['id'])}}">查看详情>></a>
+                                    <span><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'],$val['id'])}}">查看详情>></a>
                                 </div>
                             </li>
                             @endforeach
@@ -66,12 +66,12 @@
                 <!--特效开始-->
                 <div class="s_xueyuan">
                     <div class="s2_xueyuan">
-                        <h3><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(31,'path','news_cats'))}}' style='color: #444'>{{$sanlist[2]['catname']}}</a></h3>
+                        <h3><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[2]['path'])}}' style='color: #444'>{{$sanlist[2]['catname']}}</a></h3>
                         <p class="p1">在路上寻找更好的自己</p>
                         <div class="zoombox clr">
                             @foreach($jincaigood as $key=>$val)
                                 @if($key==0)
-                                <div class="zoompic fl" onclick='javascript:location.href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(31,'path','news_cats'))}}"'><img src="{{img($val['img1'])}}" width="632" height="411" alt="{{$val['title']}}" /></div>
+                                <div class="zoompic fl" onclick='javascript:location.href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[2]['path'])}}"'><img src="{{img($val['img1'])}}" width="632" height="411" alt="{{$val['title']}}" /></div>
                                 @endif
                             @endforeach
                             <div class="sliderbox fl">
@@ -96,8 +96,8 @@
                     <div class="kyzx">
                         <div class="kyfdTit">
                             <p class="p1">
-                                <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(32,'path','news_cats'))}}' style='color: #444'>{{$sanlist[3]['catname']}}</a>
-                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(32,'path','news_cats'),$val['id'])}}" class="span2">更多<img src="/img/zsnext.png"/></a>
+                                <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'])}}' style='color: #444'>{{$sanlist[3]['catname']}}</a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}" class="span2">更多<img src="/img/zsnext.png"/></a>
                             </p>
 
                             <p>最新考研资讯共享</p>
@@ -107,12 +107,12 @@
                         @foreach($dongtaigood as $val)
                         <div class="kyzxCon">
                             <div class="kyzxConleft">
-                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(32,'path','news_cats'),$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                             </div>
                             <div class="kyzxConright">
-                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(32,'path','news_cats'),$val['id'])}}" class="a1">{{$val['title']}}</a>
-                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(32,'path','news_cats'),$val['id'])}}" class="a2">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 80, '...') !!}</a>
-                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(32,'path','news_cats'),$val['id'])}}" class="a3">查看详情</a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}" class="a1">{{$val['title']}}</a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}" class="a2">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 80, '...') !!}</a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}" class="a3">查看详情</a>
                             </div>
                         </div>
                         @endforeach

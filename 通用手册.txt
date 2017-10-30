@@ -147,8 +147,8 @@ array=[
     1=>[                                                        ===职业招聘
         7=>"job/Enterprise",                                    ===企业招聘
         8=>"job/Campus",                                        ===校园招聘
-        6=>"job/high-level",                                        ===高端招聘
-        64=>"job/school"                                            ===院校信息发布
+        6=>"job/high-level",                                    ===高端招聘
+        64=>"job/school"                                        ===院校信息发布
         ],
     2=>[                                                        ===职业培训
         65=>"training/Enterprise",                              ===企业培训
@@ -171,25 +171,25 @@ array=[
              55=>"Certificate/Qualifications/Notice",           ===通知公告
         ],
     4=>[                                                        ===国际教育
-        14=>"education/camp/index",                      ===国际夏令营
-            32=>"education/camp/dynamic",                ===实时动态
-            29=>"education/camp/Hot",                    ===火爆线路
-            30=>"education/camp/characteristic",         ===特色线路
-            31=>"education/camp/Marvellous",             ===精彩瞬间
-        13=>"education/tour/index",                            ===国际游学
-            61=>"education/tour/international",                ===国际游学
-            63=>"education/tour/guarantee",                    ===游学保障
-            62=>"education/tour/Answer",                       ===游学解答
-            60=>"education/tour/Route",                        ===游学路线
-        12=>"education/study/index",                     ===国际留学
-             21=>"education/study/introduce",            ===学院介绍
-             23=>"education/study/Notice",               ===活动公告
-             22=>"education/study/guide",                ===留学指南
-             20=>"education/study/news",                 ===留学新闻
-        15=>"education/joint/index",                  ===国际联合办学
-             34=>"education/joint/domestic",          ===国内院校
-             33=>"education/joint/international",     ===国际院校
-             35=>"education/joint/Notice",            ===活动公告
+        14=>"education/camp/index",                             ===国际夏令营
+            32=>"education/camp/dynamic",                       ===实时动态
+            29=>"education/camp/Hot",                           ===火爆线路
+            30=>"education/camp/characteristic",                ===特色线路
+            31=>"education/camp/marvellous",                    ===精彩瞬间
+        13=>"education/tour/index",                             ===国际游学
+            61=>"education/tour/international",                 ===国际游学
+            63=>"education/tour/guarantee",                     ===游学保障
+            62=>"education/tour/answer",                        ===游学解答
+            60=>"education/tour/route",                         ===游学路线
+        12=>"education/study/index",                            ===国际留学
+             21=>"education/study/introduce",                   ===学院介绍
+             23=>"education/study/notice",                      ===活动公告
+             22=>"education/study/guide",                       ===留学指南
+             20=>"education/study/news",                        ===留学新闻
+        15=>"education/joint/index",                            ===国际联合办学
+             34=>"education/joint/domestic",                    ===国内院校
+             33=>"education/joint/international",               ===国际院校
+             35=>"education/joint/notice",                      ===活动公告
         ],
     5=>[                                                        ===新闻动态
         17=>"news/company",                                     ===公司新闻
@@ -198,17 +198,34 @@ array=[
         19=>"news/recent",                                      ===近期活动
         ],
     36=>[                                                       ===关于我们
-       38=>"about/Culture",                                     ===企业文化
+       37=>"about/contact",                                     ===联系我们
+       38=>"about/culture",                                     ===企业文化
+       39=>"about/legal",                                       ===法律申明
+       40=>"about/feedback",                                    ===意见反馈
        41=>"about/problem",                                     ===常见问题
-       40=>"about/feedback",                                     ===意见反馈
-       43=>"about/contract",                                    ===服务合同
-       39=>"about/Legal",                                       ===法律申明
        42=>"about/agreement",                                   ===用户协议
-       37=>"about/Contact",                                     ===联系我们
+       43=>"about/contract",                                    ===服务合同
        ],
     44=>[                                                       ===会员管理
-        45=>"member/usr",                                      ===个人会员
-        46=>"member/org",                                     ===企业会员
+        45=>"member/usr",                                       ===个人会员
+        46=>"member/org",                                       ===企业会员
+        ],
+    45=>[                                                       ===个人会员
+        1=>'personal/resume',                                   ===我的简历
+               11=>'personal/resume/index',                     ===我的简历
+               12=>'personal/resume/download',                  ===谁下载了我的简历
+               13=>'personal/resume/invitation',                ===工作邀请
+               14=>'personal/resume/collection',                ===我的收藏
+        2=>'personal/order',                                    ===我的订单
+               21=>'personal/order/index',                      ===我的订单
+               22=>'personal/order/train',                      ===职业培训报名表
+               23=>'personal/order/certificate',                ===职业证书报名表
+               15=>'personal/order/education',                  ===国际教育报名表
+         3=>'personal/order/index',                              ===我的订单
+               21=>'personal/order/index',                      ===我的订单
+               22=>'personal/order/train',                      ===职业培训报名表
+               23=>'personal/order/certificate',                ===职业证书报名表
+               15=>'personal/order/education',                  ===国际教育报名表
         ],
 ]
 
