@@ -1,76 +1,28 @@
 <div class="member-safety-left fl">
     <div class="member-logo">
-        <a href="javascript:;"><img src="img/vip-logo.png"/></a>
+        <a href="javascript:;"><img src="/img/vip-logo.png"/></a>
         <a href="javascript:;" class="icon-nav"></a>
     </div>
     <div class="left-nav-lists">
         <ul class="left-navlists-ul">
-            <li class="left-navlists-li nav-active">
-                <a href="javascript:;">
-                    <i class="icon-index"></i>
-                    <p>会员首页</p>
+            @foreach(trans('business.menu') as $b_route => $b_m_info)
+            <li class="left-navlists-li {{$GLOBALS['uri'][1] == $b_route ? 'nav-active' : ''}}">
+            <?php $b_route = trans('business.route_prefiex').$b_route ?>
+                <a href="{{route($b_route)}}">
+                    <i class="{{$b_m_info['icon']}}"></i>
+                    <p>{{$b_m_info['title']}}</p>
                 </a>
+                    @if(isset($b_m_info['next']))
+                    <div class="Two-columns">
+                        <dl>
+                            @foreach($b_m_info['next'] as $index => $category_path_2)
+                            <dt{{isset($GLOBALS['uri'][2]) && $GLOBALS['uri'][2] == $index ? ' class="erji-selected"' : ''}}><a href="{{route($b_route) .'/'. $index }}">{{$category_path_2['title']}}</a></dt>
+                            @endforeach
+                        </dl>
+                    </div>
+                    @endif
             </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-recurit"></i>
-                    <p>招聘</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-resume"></i>
-                    <p>简历管理</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-cultivate"></i>
-                    <p>职业培训管理</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-school"></i>
-                    <p>院校信息发布</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-cerify"></i>
-                    <p>证书管理</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-nation"></i>
-                    <p>国际教育管理</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-certification"></i>
-                    <p>实名认证</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-order"></i>
-                    <p>订单管理</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-user"></i>
-                    <p>用户管理</p>
-                </a>
-            </li>
-            <li class="left-navlists-li">
-                <a href="javascript:;">
-                    <i class="icon-safety"></i>
-                    <p>安全设置</p>
-                </a>
-            </li>
+            @endforeach
         </ul>
     </div>
 </div>

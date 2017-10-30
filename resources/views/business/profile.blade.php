@@ -1,19 +1,23 @@
 @extends('business.layouts.master')
 
-@section('title') @parent @stop
+@section('title') 首页 @parent @stop
 
 @section('main')
 <div class="personal-member-index clearfix">
     <div class="member-index-left fl">
         <div class="member-index-header clearfix">
-            <img class="mem-hearimg" src="img/member-headerimg.png"/>
+            <img class="mem-hearimg" src="/img/member-headerimg.png"/>
             <div class="member-information">
-                <h2>联想集团有限公司<img class="mem-link" src="img/link.png"/>
-                    <i><img class="mem-renzheng" src="img/renzhe.png"/>中国职业培训网认证</i>
+                <h2>{{$user['business_name']}}<a title="{{$user['business_name']}}" href=""><img class="mem-link" src="/img/link.png"/></a>
+                    @if($user['certified'])
+                    <i><img class="mem-renzheng" src="/img/renzhe.png"/>{{$boot_config['sitename']}}认证</i>
+                    @else
+                    <i style="width:88px" class="no-authentication"><img class="mem-renzheng" src="/img/renzhe.png"/>未认证</i>
+                    @endif
+
                 </h2>
-                <span>安徽  合肥</span>
-                <p>公司描述：联想集团公司成立于1984年，由中科院计算所投资20万元人民币和11名科技人员创办，
-                    现已发展成为一家在信息产业内多元化发展的大型企业集团，富有创新性的国际化的科技公司，由联想及原IBM个人电脑事业部所组成。</p>
+                <span>{{$user['location']}}</span>
+                <p>公司描述：{{$user['business_introduction']}}</p>
             </div>
         </div>
         <div class="mem-index-recruit clearfix">
@@ -98,9 +102,7 @@
             </div>
         </div>
         <div class="black36"></div>
-        <div class="login-register-box">
-            <p class="login-footer-p">北京通用领航咨询服务有限公司 版权所有 京ICP备11031804号<span>|</span><b>技术支持：科威网络</b></p>
-        </div>
+        @include('partial.copyright')
     </div>
     <div class="member-index-right fr">
        <div class="mem-message">

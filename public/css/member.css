@@ -88,6 +88,9 @@
 .no-authentication.personal-infor3{
     background: #999899;
 }
+.no-authentication{
+    background: #999899 !important;
+}
 .personal-infor3 img{
     width:19px;
     height: 18px;

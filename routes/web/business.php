@@ -1,48 +1,110 @@
 <?php
+Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth', 'roles']], function () {
+    Route::get('dashboard', 'BusinessController@dashBoard');
 
-Route::group(['roles' => ['business', 'nonprofit', 'admin'], 'middleware' => ['auth', 'roles']], function () {
-    Route::resource('productsGroup', 'ProductsGroupController');
+    Route::get('/', ['as' => 'business', 'uses' => 'BusinessController@profile']);
 
-    Route::get('products/create', ['uses' => 'ProductsController@create', 'as' => 'products.create']);
+    // 左侧栏目
+    foreach (array_keys(trans('business.menu')) as $index) {
+        Route::get($index, ['as' => trans('business.route_prefiex').$index, 'uses' => "BusinessController@$index"]);
+    }
 
-    Route::get('products/{id}/edit', ['uses' => 'ProductsController@edit', 'as' => 'products.edit']);
+    // 招聘路由组
+    Route::group(['prefix' => 'job'], function(){
+        foreach (trans('business.menu.job.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@job');
+        }
+    });
+    // 简历路由组
+    Route::group(['prefix' => 'resume'], function(){
+        foreach (trans('business.menu.resume.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@resume');
+        }
+    });
+    // 职业培训管理
+    Route::group(['prefix' => 'training'], function(){
+        foreach (trans('business.menu.training.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@training');
+        }
+    });
 
-    Route::get('products/downloadExample', ['uses' => 'ProductsController@downloadExample', 'as' => 'products.downloadExample']);
 
-    Route::post('products', ['uses' => 'ProductsController@store', 'as' => 'products.store']);
 
-    Route::post('products/upload', ['uses' => 'ProductsController@upload', 'as' => 'products.upload']);
+   /* Route::post('profile/save', 'UserController@saveProfile');
 
-    Route::post('products/upload_key', ['uses' => 'ProductsController@upload_key', 'as' => 'products.upload_key']);
+    Route::post('profile/disable', 'UserController@disableProfile');
 
-    Route::post('products/upload_software', ['uses' => 'ProductsController@upload_software', 'as' => 'products.upload_software']);
+    Route::post('profile/enable', 'UserController@activeProfile');
 
-    Route::put('products/{id}', ['uses' => 'ProductsController@update', 'as' => 'products.update']);
+    Route::post('upload', 'UserController@upload');*/
 
-    Route::get('modalAllKeys', ['uses' => 'VirtualProductsController@modalAllKeys', 'as' => 'virtualproducts.modalAllKeys']);
+    //Address
+   /* Route::get('address/', 'AddressesController@index'); //list
 
-    Route::get('showAllKeys/{id}', ['uses' => 'VirtualProductsController@showAllKeys', 'as' => 'virtualproducts.showAllKeys']);
+    Route::post('address/default', 'AddressesController@setDefault'); //set default
 
-    Route::get('deleteKey/{id}', ['uses' => 'VirtualProductsController@deleteKey', 'as' => 'virtualproducts.deleteKey']);
+    Route::get('address/create', 'AddressesController@create');  //create form
 
-    Route::post('products/change/status/{id}', ['uses' => 'ProductsController@changeStatus', 'as' => 'products.change_status']);
+    Route::get('address/{id}/edit', 'AddressesController@edit'); //edit form
 
-    Route::get('orders/usersOrders', ['uses' => 'OrdersController@usersOrders', 'as' => 'orders.pendingOrders']);
+    Route::put('address/store', 'AddressesController@store'); //store
+
+    Route::put('address/{id}', 'AddressesController@update'); //update
+
+    Route::post('address/delete', 'AddressesController@destroy'); //delete
+
+    //Store Cart
+
+    Route::get('user/orders/updateQuantity/{orderId}/{orderDetailId}/{newValue}', ['uses' => 'OrdersController@updateQuantity', 'as' => 'orders.update_order_quantity']);
+
+    Route::get('product/save/{product}', ['uses' => 'OrdersController@saveForLater', 'as' => 'orders.save_for_later']);
+
+    Route::get('orders/moveFrom/{origin}/to/{destination}/{productId}', ['uses' => 'OrdersController@moveFromOrder', 'as' => 'orders.move_from_order']);
+
+    Route::get('orders/addToOrder/{orderId}/{productId}', ['uses' => 'OrdersController@addToOrderById', 'as' => 'orders.add_to_order_by_id']);
+
+    Route::get('orders/checkOut/', ['uses' => 'OrdersController@checkOut', 'as' => 'orders.check_out']);
+
+    Route::get('orders/checkOut/address/{addressId}', ['uses' => 'OrdersController@checkOutResume', 'as' => 'orders.check_out_address']);
+
+    Route::get('orders/placeOrder/{type}', ['uses' => 'OrdersController@placeOrder', 'as' => 'orders.place_order']);
+
+    Route::get('orders', ['uses' => 'OrdersController@usersOrders', 'as' => 'orders.show_orders']);
 
     //filtered by dates
-    Route::post('orders/usersOrders', ['uses' => 'OrdersController@usersOrders', 'as' => 'orders.pendingOrders']);
+    Route::post('orders', ['uses' => 'OrdersController@usersOrders', 'as' => 'orders.show_orders']);
 
-    Route::get('orders/start/{order_id}', ['uses' => 'OrdersController@startOrder', 'as' => 'orders.start']);
+    Route::get('orders/cancel/{orderId}', ['uses' => 'OrdersController@cancel', 'as' => 'orders.cancel']);
 
-    Route::get('orders/send/{order_id}', ['uses' => 'OrdersController@sendOrder', 'as' => 'orders.send']);
+    Route::get('orders/showSeller/{orderId}', ['uses' => 'OrdersController@showSellerOrder', 'as' => 'orders.show_seller_order']);
 
-    Route::get('virtualDelivery/{orderId}/{productId}', ['uses' => 'OrdersController@deliveryVirtualProduct', 'as' => 'orders.virtualDelivery']);
+    Route::get('orders/show/{orderId}', ['uses' => 'OrdersController@showOrder', 'as' => 'orders.show_order']);
 
-    Route::get('freeproducts/{OrderId}/create', ['uses' => 'FreeProductsController@create', 'as' => 'freeproducts.create']);
+    Route::get('orders/rate/{orderId}', ['uses' => 'OrdersController@rateOrder', 'as' => 'orders.rate_order']);
 
-    Route::post('freeproducts', ['uses' => 'FreeProductsController@store', 'as' => 'freeproducts.store']);
+    //Route used to login an user and send it back to the product show
 
-    Route::get('products/myProducts', ['uses' => 'ProductsController@myProducts', 'as' => 'products.myProducts']);
+    Route::get('logAndShow/{productId}', ['uses' => 'ProductsController@show', 'as' => 'products.log_and_show']);
 
-    Route::post('/products/delete_img', ['uses' => 'ProductsController@deleteImg', 'as' => 'products.deleteImg']);
+    Route::get('orders/close/{order_id}', ['uses' => 'OrdersController@closeOrder', 'as' => 'orders.close']);
+
+    Route::get('modalSeeKeysPurchased', ['uses' => 'VirtualProductOrdersController@modalSeeKeysPurchased', 'as' => 'VirtualProductOrders.modalSeeKeysPurchased']);
+
+    Route::get('showKeyVirtualProductPurchased/{idProduct}/{idOrder}', ['uses' => 'VirtualProductOrdersController@showKeyVirtualProductPurchased', 'as' => 'VirtualProductOrders.showKeyVirtualProductPurchased']);
+
+    Route::get('orders/comment/{order_id}', ['uses' => 'OrdersController@commentOrder', 'as' => 'orders.comment']);
+
+    Route::post('orders/storeComment', ['uses' => 'OrdersController@storeComment', 'as' => 'orders.store_comment']);
+
+    Route::get('orders/delete/{order_id}/{type}', ['uses' => 'OrdersController@destroy', 'as' => 'orders.delete']);
+
+    //Rates
+    Route::post('rates/seller', ['uses' => 'OrdersController@rateSeller', 'as' => 'orders.rate_seller']);
+
+    Route::post('rates/product', ['uses' => 'OrdersController@rateProduct', 'as' => 'orders.rate_product']);
+
+    //Freeproducts
+    Route::put('freeproducts/subscribe/{id}', ['uses' => 'FreeProductsController@subscribe', 'as' => 'freeproducts.subscribe']);
+
+    Route::get('myFreeProducts', ['uses' => 'FreeProductsController@myFreeProducts', 'as' => 'freeproducts.my_free_products']);*/
 });
