@@ -19,8 +19,13 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/');
+            if($request->method() == 'ajax') {
+                return handleResponseJson(203, '系统检测到您已登录, 进入个人中心', '/user');
+            } else {
+                return redirect('/user');
+            }
         }
+
 
         return $next($request);
     }

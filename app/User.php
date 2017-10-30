@@ -37,15 +37,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = [
-       'role',  # enum('person','business') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'person' ,
-       'email',  # varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-       'telphone',  # char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-       'password',  # varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-       'member_name',  # varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '前台用户名' ,
+        'role',  # enum('person','business') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'person' ,
+        'email',  # varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+        'telphone',  # char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+        'password',  # varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+        'member_name',  # varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '前台用户名' ,
 //       'member_level',  # int(11) NOT NULL DEFAULT 1 COMMENT '会员等级' ,
 //       'member_point',  # int(11) NOT NULL DEFAULT 0 COMMENT '会员积分' ,
-       // 'isstate',
-       // 'member_balance',  # decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT '会员余额 备用' ,
+        // 'isstate',
+        // 'member_balance',  # decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT '会员余额 备用' ,
     ];
 
     /**
@@ -69,11 +69,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function profile()
     {
-        if (in_array($this->role, ['business', 'nonprofit'])) {
-            return $this->hasOne('App\Business');
+        if ($this->isPerson()) {
+            return $this->hasOne('App\Person');
         }
+        return $this->hasOne('App\Business');
 
-        return $this->hasOne('App\Person');
     }
 
     public function addresses()
@@ -104,10 +104,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasRole($role)
     {
         if (is_array($role)) {
-            return in_array($this->attributes['role'], $role);
+            return $this->role == array_intersect($this->role, $role);
         }
-
-        return $this->attributes['role'] == $role;
+        return in_array($role, $this->role);
     }
 
     public function isAdmin()
@@ -117,20 +116,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isPerson()
     {
-        return $this->attributes['role'] == 'person';
+        return $this->hasRole(1);
     }
 
     public function isCompany()
     {
-        return $this->attributes['role'] == 'business';
+        return $this->hasRole(2);
     }
 
-   //Type user Manage
+    //Type user Manage
 
-   public function isTrusted()
-   {
-       return $this->attributes['type'] == 'trusted';
-   }
+    public function isTrusted()
+    {
+        return $this->attributes['type'] == 'trusted';
+    }
 
     //Cart Manage
 
@@ -141,7 +140,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return 0;
         } else {
             $totalItems = 0;
-            foreach ($basicCart->details  as $orderDetail) {
+            foreach ($basicCart->details as $orderDetail) {
                 $totalItems += $orderDetail->quantity;
             }
 
@@ -195,5 +194,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function getRoleAttribute()
+    {
+        // 011 => [0,1,1]
+        return preg_split('//', $this->attributes['role'], -1, PREG_SPLIT_NO_EMPTY);
     }
 }

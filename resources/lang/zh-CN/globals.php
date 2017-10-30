@@ -7,10 +7,10 @@ return [
         'inactive' => '不活跃',
     ],
     'roles' => [
-        'admin'             => '管理员',
-        'business'          => '商家',
-        'nonprofit'         => '非盈利组织',
-        'person'            => '买家',
+        0=> 'admin',// 管理员
+        1 => 'person',// 个人
+        2 => 'business',// 企业
+        4 => 'nonprofit' // 非盈利组织
     ],
 
     'verification' => [

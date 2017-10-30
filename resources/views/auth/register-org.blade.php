@@ -17,6 +17,7 @@
     <div class="register-form-div list1">
        <div class="dd">
            <div class="store-selector">
+               <input type="hidden" name="location" value="安徽合肥高新区"/>
                <div class="text"><div>请选择所在地</div><b></b></div>
                <div onclick="$('.store-selector').removeClass('hover')" class="close"></div>
            </div>
@@ -51,6 +52,15 @@
     @stop {{-- end protocal content --}}
 @section('scripts')
 @parent<script type="text/javascript" src="/js/location.js"></script>
+@section('send_yzm')
+    $("#mail").click(function(){
+    model(this, "{{u('org/yzm/mail')}}");
+    return false;
+    })
+    $("#mobile").click(function(){
+    model(this, "{{u('org/yzm/mobile')}}");
+    return false;
+    })
+@stop {{-- end 发送验证码js --}}
 @stop
-
 

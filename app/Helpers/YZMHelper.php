@@ -6,7 +6,7 @@ class YZMHelper
 	const NUMBER = 1;
 	const MIX = 2;
 	private $debug = false;
-	private static $var = 'yzm';
+    private static $var = 'yzm';
 	private static $var_expire = 'yzm_expire';
 
 	private static $session = null;
@@ -18,7 +18,7 @@ class YZMHelper
 	public function __construct($id)
 	{
 		self::init();
-		// $this->debug = env('APP_DEBUG', false);
+		$this->debug = env('APP_DEBUG', false);
 		$this->id = md5($id);
 	}
 

@@ -32,10 +32,10 @@ class RegisterPersonController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * 在构造函数中存储临时返回, 无则为null
-     * @var string
+     * 用户的角色类型 个人1, 企业2
+     * @var int
      */
-    private $return = '';
+    protected $role = 1;
 
     /**
      * Create a new controller instance.
@@ -68,7 +68,7 @@ class RegisterPersonController extends Controller
     }
 
     /**
-     * 个人会员 手机 注册
+     * 个人会员 手机注册
      */
     protected function telphoneRegister($request, YZM $yzm)
     {
@@ -82,7 +82,7 @@ class RegisterPersonController extends Controller
     }
 
     /**
-     * 个人会员 手机 注册
+     * 个人会员 邮箱注册
      */
     protected function emailRegister($request, YZM $yzm)
     {
@@ -108,11 +108,15 @@ class RegisterPersonController extends Controller
     protected function createUser($registerStyle, array $data)
     {
         $user = User::create([
-//            'id' => 'null',
             $registerStyle => $data[$registerStyle],
-            'member_name' => $data[$registerStyle],
+            'member_name' => $data['person'],
             'password' => bcrypt($data['password']),
-            'role' => 'person',
+            'role' => $this->role,
+        ]);
+
+        Person::create([
+            'user_id'    => $user->id,
+            'real_name'  => $data['person'],
         ]);
 
         return $user;
