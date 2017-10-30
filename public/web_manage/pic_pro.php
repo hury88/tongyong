@@ -36,7 +36,7 @@ $opt = new Output;//输出流  输出表单元素
 						<?php Style::output();Style::submitButton();
 
 							$opt
-							->img('列表图配图','img1')
+							->img('列表图配图','img1','400*400')
 							// ->img('点击大图','img2')
 							 ->input('标题','title')
 //							->ifs($ti==24)->word('细节图文字')->editor()->endifs()
@@ -45,3 +45,4 @@ $opt = new Output;//输出流  输出表单元素
 
 							;include('js/foot');
 						?>
+

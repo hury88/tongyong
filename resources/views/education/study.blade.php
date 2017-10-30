@@ -35,12 +35,12 @@
                                     <li>
                                         <div class="dxinwenw1All">
                                             <div class="dxinwenw1Left">
-                                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(20,"path","news_cats"),$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
+                                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(20,"path","news_cats"),$val['id'])}}"><img src="{{img($val['img1'])}}" width="180"/></a>
                                             </div>
                                             <div class="dxinwenw1Right">
                                                 <p class="jiazhou"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(20,"path","news_cats"),$val['id'])}}">{{str_limit($val['title'],45,"...")}}</a></p>
                                                 <p>
-                                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(20,"path","news_cats"),$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 150, '...') !!}.</a>
+                                                    <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],v_id(20,"path","news_cats"),$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 150, '...') !!}</a>
                                                 </p>
                                             </div>
                                         </div>

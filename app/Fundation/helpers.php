@@ -44,6 +44,12 @@ if (!function_exists('v_show')) {
 		    return isset($db->$field) ? $db->$field : null;
 		}
 	}
+//为了获取方便查询pic表函数
+function v_pic($pid){
+    $db = DB::table('pic')->where('ti', $pid)->get();
+
+    return $db;
+}
 	//为了获取方便增加 查询news_cats表函数
 	function v_news_cats($id, $field='catname'){
 		if ($field == 'catname') {

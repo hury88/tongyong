@@ -65,7 +65,7 @@ if(in_array($tty,array(24,25,29,30))){
     // ->textarea('简介','introduce')
     ->editor('路线详情')
     ->editor('详情介绍','content2');
-}else{
+}elseif($tty<>27){
      $opt->editor('信息内容');
 }
 include('js/foot');
