@@ -496,7 +496,7 @@ a:hover{
 
 }
 .key_fx div a:nth-child(1){
-	background:url(../img/qqs.png) no-repeat;
+	background:url(../img/qqs.png) no-repeat 85%;
 }
 .key_fx div a:nth-child(2){
 	    background: url(../img/1.png) no-repeat;
