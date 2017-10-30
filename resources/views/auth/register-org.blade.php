@@ -1,6 +1,6 @@
 @extends('auth.layouts/register')
 @section('title') 企业@parent @stop
-
+@section('css')@parent    <link rel="stylesheet" type="text/css" href="/plugins/business-location/css/city-picker.css"/>@stop
 @section('bodyNextLabel')
 <body>
     <div class="pager_wrap login_wrap">
@@ -14,7 +14,10 @@
     <div class="register-form-div">
         <input name="org" type="text" placeholder="请输入企业名称"/>
     </div>
-    <div class="register-form-div list1">
+    <div class="register-form-div list1" style="position:relative">
+        <input name="location" class="form-control" readonly type="text" value="江苏省/常州市/溧阳市" data-toggle="city-picker">
+    </div>
+    <!-- <div class="register-form-div list1">
        <div class="dd">
            <div class="store-selector">
                <input type="hidden" name="location" value="安徽合肥高新区"/>
@@ -23,7 +26,7 @@
            </div>
            <div class="store-prompt"><strong></strong></div>
        </div>
-   </div>
+       </div> -->
     <div class="register-form-div">
        <input name="contact" type="text" placeholder="请输入联系人姓名"/>
    </div>
@@ -51,7 +54,9 @@
       </div>
     @stop {{-- end protocal content --}}
 @section('scripts')
-@parent<script type="text/javascript" src="/js/location.js"></script>
+@parent<script type="text/javascript" src="/js/plugins/business-location/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/plugins/business-location/js/city-picker.data.js"></script>
+<script type="text/javascript" src="/plugins/business-location/js/city-picker.js"></script>
 @section('send_yzm')
     $("#mail").click(function(){
     model(this, "{{u('org/yzm/mail')}}");
