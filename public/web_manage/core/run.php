@@ -15,7 +15,7 @@ defined('RUN_PATH') or define('RUN_PATH', APP_PATH . 'runtime' . DS);//储存编
 defined('RUNNEED_PATH') or define('RUNNEED_PATH', CORE_PATH . 'runneed' . DS);
 defined('EXTEND_PATH') or define('EXTEND_PATH', CORE_PATH . 'extend' . DS);
 defined('VENDOR_PATH') or define('VENDOR_PATH', CORE_PATH . 'vendor' . DS);
-defined('CONF_PATH') or define('CONF_PATH', ROOT_PATH .'../../config.inc' . EXT); // 配置文件目录
+defined('CONF_PATH') or define('CONF_PATH', ROOT_PATH .'../../config/config' . EXT); // 配置文件目录
 defined('CONF_EXT') or define('CONF_EXT', EXT); // 配置文件后缀
 defined('ENV_PREFIX') or define('ENV_PREFIX', 'PHP_'); // 环境变量的配置前缀
 

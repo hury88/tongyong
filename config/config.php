@@ -1,5 +1,8 @@
 <?php
-
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+defined('EXT') or define('EXT', '.php');
+defined('CORE_PATH') or define('CORE_PATH', __DIR__ . DS  . 'public' . DS . 'web_manage' . DS . 'core' . DS);
+defined('LOG_PATH') or define('LOG_PATH', CORE_PATH  . 'logs' . DS);
 return [
 
 

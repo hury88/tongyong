@@ -1019,3 +1019,16 @@
 .dxinwenwRight ul .listw{
 	margin-right: 0;
 }
+.zhiyezhengshu ul li{
+	 width: 30%;
+	 float: left;
+	 padding: 0 0 0 0;
+	 line-height: 36px;
+	 border-bottom:1px dashed #dddddd;
+	 height:36px;
+	 text-indent: 1em;
+	 background: url(../img/dian.jpg) no-repeat;
+ }
+.zhiyezhengshu ul li a{
+color:#999;
+}

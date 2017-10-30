@@ -56,7 +56,15 @@
                 return false;
             })
         })
+        $(function(){
 
+            $(".qqfx").click(function () {
+                $(".bdsharebuttonbox .bds_qzone").click();
+            })
+            $(".wxfx").click(function () {
+                $(".bdsharebuttonbox .bds_weixin").click();
+            })
+        })
 	</script>
 @show
 </html>

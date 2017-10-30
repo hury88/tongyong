@@ -3,8 +3,9 @@
 namespace app\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
-use App\Education;
+use App\Certificate;
 use App\NewsCats;
+use App\News;
 use App\Enroll;
 /*
  * Antvel - Company CMS Controller
@@ -14,7 +15,7 @@ use App\Enroll;
 
 use App\Http\Requests\ContactFormRequest;
 
-class EducationController extends Controller
+class CertificateController extends Controller
 {
     public function __construct()
     {
@@ -30,35 +31,33 @@ class EducationController extends Controller
         view()->share('banimgsrc', $banimgsrc);
     }
 
-//国际留学首页
-    public function study_index()
+//职业资格信息首页
+    public function qualifications_index()
     {
 //左侧图片列表
         $sanlist = $this->sanlist();
-//国际留学首页留学新闻
-        $liuxuegood = $this->goodlist([4, 12, 20], ['id', 'title', 'img1', 'content'], 4);
-//国际留学首页学院介绍
-        $xueyuangood = $this->goodlist([4, 12, 21], ['id', 'title', 'img2', 'content'], 3);
-//国际留学首页留学指南
-        $zhinangood = $this->goodlist([4, 12, 22], ['id', 'title', 'content'], 9);
-//国际留学活动公告
-        $gonggaogood = $this->goodlist([4, 12, 23], ['id', 'title', 'img1', 'content'], 4);
-        return view('education/study', compact('sanlist', 'liuxuegood', 'xueyuangood', 'zhinangood', 'gonggaogood'));
+//职业资格信息首页证书管理
+        $zhengshugood1 = $this->goodmanagelist([3, 9, 54],1, ['id', 'title'], 8);
+        $zhengshugood2 = $this->goodmanagelist([3, 9, 54],2, ['id', 'title'], 8);
+        $zhengshugood3 = $this->goodmanagelist([3, 9, 54],3, ['id', 'title'], 8);
+//职业资格信息首页通知公告
+        $gonggaogood = $this->goodlist([3, 9, 55], ['id', 'title', 'img1', 'content'], 4);
+        return view('certificate/qualifications', compact('sanlist', 'zhengshugood1', 'zhengshugood2', 'zhengshugood3', 'gonggaogood'));
     }
-//国际游学首页
-    public function tour_index()
+//职业资格信息首页专升本
+    public function upgraded_index()
     {
 //三级栏目
         $sanlist = $this->sanlist();
-//国际游学首页国际游学
-        $youxuegood = $this->goodlist([4, 13, 24], ['id', 'title', 'img1', 'content'], 5);
-//国际游学首页游学路线
-        $luxiangood = $this->goodlist([4, 13, 25], ['id', 'title', 'img1'], 8);
-//国际游学首页游学解答
-        $zixungood = $this->goodlist([4, 13, 26], ['id', 'title', 'img1', 'content'], 4);
-//国际游学首页游学保障
-        $baozhanggood = $this->goodlist([4, 13, 27], ['id', 'title', 'img1'], 5);
-        return view('education/tour', compact('sanlist','youxuegood', 'luxiangood', 'zixungood', 'baozhanggood'));
+//专升本首页热门专业
+        $zhuanyegood = $this->goodlist([3, 10, 56], ['id', 'title', 'img1'], 8);
+//专升本首页招考院校信息
+        $yuanxiaogood = $this->goodlist([3, 10, 57], ['id', 'title'], 33);
+//专升本首页考研咨询
+        $zixungood = $this->goodlist([3, 10, 58], ['id', 'title', 'img1', 'content'], 4);
+//专升本首页常见问题
+        $wentigood = $this->goodlist([3, 10, 59], ['id', 'title', 'content'], 5);
+        return view('certificate/upgraded', compact('sanlist','zhuanyegood', 'yuanxiaogood', 'zixungood', 'wentigoo'));
     }
     //夏令营首页
     public function camp_index()
@@ -73,7 +72,7 @@ class EducationController extends Controller
         $jincaigood = $this->goodlist([4, 14, 31], ['id', 'title', 'img1', 'content'], 12);
 //夏令营首页首页实时动态
         $dongtaigood = $this->goodlist([4, 14, 32], ['id', 'title', 'img1', 'content'], 4);
-        return view('education/camp', compact('sanlist','huobaogood', 'tesegood', 'jincaigood', 'dongtaigood'));
+        return view('certificate/camp', compact('sanlist','huobaogood', 'tesegood', 'jincaigood', 'dongtaigood'));
     }
 
     //国际联合办学首页
@@ -88,20 +87,21 @@ class EducationController extends Controller
 
 //国际联合办学首页活动公告
         $huodonggood = $this->goodlist([4, 15, 35], ['id', 'title', 'img1', 'content'], 4);
-        return view('education/joint', compact('sanlist','guojigood', 'guoneigood', 'huodonggood'));
+        return view('certificate/joint', compact('sanlist','guojigood', 'guoneigood', 'huodonggood'));
     }
-//路线详情
+//证书详情
     public function show($id)
     {
         $viewrow = $id;
-        $education = new Education();
-        $id_arr = $education->v_id_arr($id);
+        $Certificate = new Certificate();
+        $id_arr = $Certificate->v_id_arr($id);
         if ($id_arr->cid) {
             $id_arr->qyname = v_id($id_arr->cid, 'name', 'cmember');
         } else {
             $id_arr->qyname = '平台管理员';
         }
-        $arr = $this->newsorder($id);
+        $certificate_lid=$id_arr->certificate_lid;
+        $arr = $this->zhengshuorder($id,$certificate_lid);
         $id_arr->previd = $arr['previd'];
         $id_arr->nextid = $arr['nextid'];
         if ($id_arr->previd > 0) {
@@ -117,7 +117,11 @@ class EducationController extends Controller
         } else {
             $id_arr->nextlink = 'javascript:void(0);';
         }
-        return view('education/show', compact('id_arr'));
+        $zhengshugood = $this->goodmanagelist([3, 9, 54],$certificate_lid, ['id', 'title'], 10);
+
+        $huodonggood = (new \App\News)->v_list([5, 19], ['id', 'title','img1','sendtime'], 6);
+       // dd($huodonggood);
+        return view('certificate/show', compact('id_arr','zhengshugood','huodonggood','newslink'));
 
     }
 
@@ -125,8 +129,8 @@ class EducationController extends Controller
     public function view($id)
     {
         $viewrow = $id;
-        $education = new Education();
-        $id_arr = $education->v_id_arr($id);
+        $Certificate = new Certificate();
+        $id_arr = $Certificate->v_id_arr($id);
         if ($id_arr->cid) {
             $id_arr->qyname = v_id($id_arr->cid, 'name', 'cmember');
         } else {
@@ -148,7 +152,7 @@ class EducationController extends Controller
         } else {
             $id_arr->nextlink = 'javascript:void(0);';
         }
-        return view('education/view', compact('id_arr'));
+        return view('certificate/view', compact('id_arr'.'zhengshugood'));
 
     }
 
@@ -156,15 +160,26 @@ class EducationController extends Controller
     protected function newsorder($id)
     {
         $arr = array();
-        $education = new Education();
-        $ordderlist = $education->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id']);
+        $Certificate = new Certificate();
+        $ordderlist = $Certificate->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id']);
         $arr['previd'] = $this->getPrevArticleId($id, $ordderlist);
 
         $arr['nextid'] = $this->getNextArticleId($id, $ordderlist);
 
         return $arr;
     }
+    //证书类排序
+    protected function zhengshuorder($id,$certificate_lid)
+    {
+        $arr = array();
+        $Certificate = new Certificate();
+        $ordderlist = $Certificate->v_zhengshulist([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']],$certificate_lid, ['id']);
+        $arr['previd'] = $this->getPrevArticleId($id, $ordderlist);
 
+        $arr['nextid'] = $this->getNextArticleId($id, $ordderlist);
+
+        return $arr;
+    }
 //上一篇id
     protected function getPrevArticleId($id, $ordderlist)
     {
@@ -201,10 +216,10 @@ class EducationController extends Controller
     //带翻页列表
     public function newslist()
     {
-        $education = new Education();
+        $Certificate = new Certificate();
         $ckey = '';
-        $pagenewslist = $education->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content'], 9, 9);
-        return view('education/newslist', compact('list', 'pagenewslist', 'ckey'));
+        $pagenewslist = $Certificate->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content'], 9, 9);
+        return view('certificate/newslist', compact('list', 'pagenewslist', 'ckey'));
     }
 
     //三级列表信息
@@ -217,32 +232,46 @@ class EducationController extends Controller
     //推荐列表
     public function goodlist($where = [], $field = ['*'], $num = 4)
     {
-        $education = new Education();
-        $goodlist = $education->v_list($where, $field, $num);
+        $Certificate = new Certificate();
+        $goodlist = $Certificate->v_list($where, $field, $num);
         return $goodlist;
     }
-
+    //证书推荐列表
+    public function goodmanagelist($where = [],$certificate_lid, $field = ['*'], $num = 4)
+    {
+        $Certificate = new Certificate();
+        $goodlist = $Certificate->v_zhengshulist($where,$certificate_lid, $field, $num);
+        return $goodlist;
+    }
+    //职业证书列表
+    public function manage_index()
+    {
+        $Certificate = new Certificate();
+        $ckey = '&genre='.$GLOBALS['_GET']['genre'];
+        $pagenewslist = $Certificate->v_zhengshupages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']],$GLOBALS['_GET']['genre'], ['id', 'title'], 45, 9);
+        return view('certificate/managelist', compact('list', 'pagenewslist', 'ckey'));
+    }
 //学院介绍列表
     public function study_introduce()
     {
-        $education = new Education();
-        $newslist = $education->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'img1', 'content']);
-        return view('education/shoollist', compact('newslist'));
+        $Certificate = new Certificate();
+        $newslist = $Certificate->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'img1', 'content']);
+        return view('certificate/shoollist', compact('newslist'));
     }
     //游学路线列表
     public function tourlist()
     {
-        $education = new Education();
+        $Certificate = new Certificate();
         $ckey = '';
-        $pagenewslist = $education->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content'], 16, 9);
-        return view('education/tourlist', compact('list', 'pagenewslist', 'ckey'));
+        $pagenewslist = $Certificate->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content'], 16, 9);
+        return view('certificate/tourlist', compact('list', 'pagenewslist', 'ckey'));
     }
     //学院介绍详情
     public function introduce_view($id)
     {
         $viewrow = $id;
-        $education = new Education();
-        $id_arr = $education->v_id_arr($id);
+        $Certificate = new Certificate();
+        $id_arr = $Certificate->v_id_arr($id);
         if ($id_arr->cid) {
             $id_arr->qyname = v_id($id_arr->cid, 'name', 'cmember');
         } else {
@@ -264,8 +293,8 @@ class EducationController extends Controller
         } else {
             $id_arr->nextlink = 'javascript:void(0);';
         }
-        $newslist = $education->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'img1', 'content']);
-        return view('education/introduce_view', compact('id_arr','newslist'));
+        $newslist = $Certificate->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'img1', 'content']);
+        return view('certificate/introduce_view', compact('id_arr','newslist'));
 
     }
 }

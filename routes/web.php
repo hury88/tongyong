@@ -30,7 +30,8 @@ Route::group(['prefix' => 'home'], function () {
 
 //国际教育
  require __DIR__.'/web/education.php';
-
+//职业证书
+require __DIR__.'/web/certificate.php';
 //Wpanel Routes
 // require __DIR__.'/web/wpanel.php';
 

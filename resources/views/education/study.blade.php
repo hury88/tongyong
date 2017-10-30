@@ -10,7 +10,8 @@
     <div class="pager-wrap personal-center">
 @stop
 @section('breadcrumbs')
-    <div class="gjlhBanner" style="margin-top: 67px;">
+<div class="kyxx">
+    <div class="kyxxbannetr">
         <img src="{{$banimgsrc}}" style="width: 100%;"/>
     </div>
 @stop
@@ -110,10 +111,10 @@
                                                 </div>
                                                 <div class="gjlhbxConright9right">
                                                     <p class="ph1">
-                                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}">{{str_limit($val['title'],45,"...")}}</a>
+                                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}">  {{$val['title']}}</a>
                                                     </p>
                                                     <p>
-                                                         <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}.</a>
+                                                         <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}</a>
                                                     </p>
                                                 </div>
                                             </li>
@@ -129,8 +130,7 @@
                 </div>
             </div>
 
-
-
+</div>
 @stop
 
 
