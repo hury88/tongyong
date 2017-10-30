@@ -52,12 +52,12 @@ class CertificateController extends Controller
 //专升本首页热门专业
         $zhuanyegood = $this->goodlist([3, 10, 56], ['id', 'title', 'img1'], 8);
 //专升本首页招考院校信息
-        $yuanxiaogood = $this->goodlist([3, 10, 57], ['id', 'title'], 33);
+        $yuanxiaogood = $this->goodlist([3, 10, 57], ['id', 'title', 'content'], 29);
 //专升本首页考研咨询
         $zixungood = $this->goodlist([3, 10, 58], ['id', 'title', 'img1', 'content'], 4);
 //专升本首页常见问题
         $wentigood = $this->goodlist([3, 10, 59], ['id', 'title', 'content'], 5);
-        return view('certificate/upgraded', compact('sanlist','zhuanyegood', 'yuanxiaogood', 'zixungood', 'wentigoo'));
+        return view('certificate/upgraded', compact('sanlist','zhuanyegood', 'yuanxiaogood', 'zixungood', 'wentigood'));
     }
     //夏令营首页
     public function camp_index()

@@ -59,11 +59,13 @@
         $(function(){
 
             $(".qqfx").click(function () {
-                $(".bdsharebuttonbox .bds_qzone").click();
+
+                $("#bds_sqq").click();
             })
             $(".wxfx").click(function () {
-                $(".bdsharebuttonbox .bds_weixin").click();
+                $("#bds_weixin").click();
             })
+
         })
 	</script>
 @show
