@@ -51,6 +51,10 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                 <img src="images/bug8.png" />
                 <p>系统设置</p>
             </a>
+            <a href="info.php" target="righthtml">
+                <img src="images/bug5.png" />
+                <p>系统设置</p>
+            </a>
             <a style="opacity:.8;border:2px solid rgba(0,0,0,.1)" id="menu" href="javascript:void(0);">
                 <img src="images/bug2.png" />
                 <p>隐藏菜单</p>

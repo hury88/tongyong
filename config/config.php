@@ -216,6 +216,7 @@ return [
         'showtype2' => ['1' => 'master', '2' => 'content', '3' => 'job', '4' => 'link', '5' => 'master', '6' => 'link', '7' => 'message', '8' => 'link', '9' => 'training', '10' => 'nature', '11' => 'master', '12' => 'education', '13' => 'master', '14' => 'user', '15' => 'master', '16' => 'certificate'],
 
         'isstate'   => ['未审核', '已审核', 'isstate'],
+        'status'   => ['未阅读', '已阅读', 'status'],
         'isgood'    => ['未推荐', '已推荐', 'isgood'],
         'certified'    => ['未认证', '已认证', 'certified'],
         'istop'     => ['未置顶', '置顶', 'istop'],
