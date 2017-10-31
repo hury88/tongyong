@@ -67,6 +67,10 @@ list($data,$pagestr) = Page::paging($pageConfig);
                   $d = config('webarr.trainingid');
                   Output::select2($d, '培训方式', 'trainingid');
               ?>
+              <?php
+              $d = config('webarr.trainingid');
+              Output::select2($d, '行业', 'trainingid');
+              ?>
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>

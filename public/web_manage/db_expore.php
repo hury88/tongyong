@@ -1,5 +1,5 @@
 <?php
-require './core/run.php';
+require '../core/run.php';
 //获取表的名称
 function list_tables($database)
 {
