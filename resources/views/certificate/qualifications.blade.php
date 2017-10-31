@@ -5,8 +5,6 @@
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhengshu.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhengshu.css"/>
     <link rel="stylesheet" href="/css/styles.css" type="text/css" />
-    <script type="text/javascript" src="/js/jquery.tools.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
 @stop
 @section('bodyNextLabel')
 <body>
@@ -115,4 +113,7 @@
                 </div>
 @stop
 
-
+@section('scripts')
+    @parent<script type="text/javascript" src="/js/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="/js/main_zhiyezhenshu.js"></script>
+@stop

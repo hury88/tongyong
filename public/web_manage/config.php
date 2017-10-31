@@ -64,7 +64,7 @@ $opt = new Output;
 							->flur()
 							 ->word('多个用“|”隔开;姓名与qq用“：”隔开！例：“尹艳阳：2355794817|彭华：2355612692”')->input("悬浮在线咨询", 'webqq')
 //							 ->word('Enter your Skype Name')->input('skype', 'link1')
-							// ->word('外链')->input('付款后', 'link1')
+							 ->word('外链')->input('关注微博', 'link1')
 							 ->word('外链')->input('咨询链接', 'link2')
 							/*->input('Facebook','link1')
 							->input('Twitter', 'link2')

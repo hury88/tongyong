@@ -217,6 +217,7 @@ return [
 
         'isstate'   => ['未审核', '已审核', 'isstate'],
         'isgood'    => ['未推荐', '已推荐', 'isgood'],
+        'certified'    => ['未认证', '已认证', 'certified'],
         'istop'     => ['未置顶', '置顶', 'istop'],
         'isdownload'   => ['本地文件', '外链下载', 'istop'],
         'isindex'   => ['未首页','在首页', 'istop'],

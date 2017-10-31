@@ -43,7 +43,7 @@
                                     <ul>
                                            @foreach($zhuanyegood as $val)
                                         <li>
-                                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'],$val['id'])}}">
+                                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}">
                                                 <img src="{{img($val['img1'])}}"/>
                                                 <p>{{$val['title']}}</p>
                                             </a>
@@ -125,127 +125,41 @@
                     <div class="zswenti">
                         <div class="kyfdTit">
                             <p class="p1">
-                                院校一览表
-                                <a href="" class="span2">更多<img src="img/zsnex2.png"/></a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'])}}" style="color: #444444;">{{$sanlist[3]['catname']}}</a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[3]['path'])}}" class="span2">更多<img src="/img/zsnex2.png"/></a>
                             </p>
                             <p>为您精心挑选出更多的考研高校</p>
                         </div>
                         <div id="content">
 
                             <ul id="expmenu-freebie">
-
                                 <li>
-
-                                    <!-- Start Freebie -->
-
                                     <ul class="expmenu">
-
+                                    @foreach($wentigood as $key=>$val)
                                         <li>
 
                                             <div class="header">
 
-                                                <span class="label" style="background-image: url(img/pc.png);height: 25px;">注册资金过大或者过小有什么坏处，一般多少比较合适？</span>
+                                                <span class="label" style="background-image: url(/img/pc.png);height: 25px;">{{$val['title']}}</span>
 
-                                                <span class="arrow up"></span>
+                                                <span class="arrow @if($key==0) up @else down @endif"></span>
 
                                             </div>
 
-                                            <ul class="menu">
+                                            <ul class="menu" style="display: @if($key==0) block @else none @endif" >
 
-                                                <li>科学基金国际合作自成立之初就致力于开拓资助渠道，截止到目前，已与37国家(地区)的76个基金组织或学术机构签署了组织间协议(或谅解备忘录)。旨在共同资助中外方科学家开展国际(地区)合作与交流项目。</li>
+                                                <li>{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}<a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'], $sanlist[3]['path'],$val['id'])}}" style="color: #d71418;">详情>></a></li>
 
                                             </ul>
 
                                         </li>
-
-                                        <li>
-
-                                            <div class="header">
-
-                                                <span class="label" style="background-image: url(img/pc.png);height: 25px;">注册资金过大或者过小有什么坏处，一般多少比较合适？</span>
-
-                                                <span class="arrow down"></span>
-
-                                            </div>
-
-                                            <ul class="menu" style="display:none">
-
-                                                <li>科学基金国际合作自成立之初就致力于开拓资助渠道，截止到目前，已与37国家(地区)的76个基金组织或学术机构签署了组织间协议(或谅解备忘录)。旨在共同资助中外方科学家开展国际(地区)合作与交流项目。</li>
-
-                                            </ul>
-
-                                        </li>
-
-                                        <li>
-
-                                            <div class="header">
-
-                                                <span class="label" style="background-image: url(img/pc.png);height: 25px;">注册资金过大或者过小有什么坏处，一般多少比较合适？</span>
-
-                                                <span class="arrow down"></span>
-
-                                            </div>
-
-                                            <ul class="menu" style="display:none">
-
-                                                <li>科学基金国际合作自成立之初就致力于开拓资助渠道，截止到目前，已与37国家(地区)的76个基金组织或学术机构签署了组织间协议(或谅解备忘录)。旨在共同资助中外方科学家开展国际(地区)合作与交流项目。</li>
-
-                                            </ul>
-
-                                        </li>
-                                        <li>
-
-                                            <div class="header">
-
-                                                <span class="label" style="background-image: url(img/pc.png);height: 25px;">注册资金过大或者过小有什么坏处，一般多少比较合适？</span>
-
-                                                <span class="arrow down"></span>
-
-                                            </div>
-
-                                            <ul class="menu" style="display:none">
-
-                                                <li>科学基金国际合作自成立之初就致力于开拓资助渠道，截止到目前，已与37国家(地区)的76个基金组织或学术机构签署了组织间协议(或谅解备忘录)。旨在共同资助中外方科学家开展国际(地区)合作与交流项目。</li>
-
-                                            </ul>
-
-                                        </li>
-
-                                        <li>
-
-                                            <div class="header">
-
-                                                <span class="label" style="background-image: url(img/pc.png);height: 25px;">注册资金过大或者过小有什么坏处，一般多少比较合适？</span>
-
-                                                <span class="arrow down"></span>
-
-                                            </div>
-
-                                            <ul class="menu" style="display:none">
-
-                                                <li>科学基金国际合作自成立之初就致力于开拓资助渠道，截止到目前，已与37国家(地区)的76个基金组织或学术机构签署了组织间协议(或谅解备忘录)。旨在共同资助中外方科学家开展国际(地区)合作与交流项目。</li>
-
-                                            </ul>
-
-                                        </li>
-
-
+                                    @endforeach
                                     </ul>
-
-                                    <!-- End Freebie -->
-
                                 </li>
-
                             </ul>
-
                         </div>
-
-
-
                     </div>
-
             </div>
-
 @stop
 
 @section('scripts')

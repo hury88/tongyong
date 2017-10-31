@@ -2,8 +2,8 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'training';
+$showname = 'training';
 
 //条件
 $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
@@ -11,13 +11,13 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 ###########################筛选开始
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
-$cid =   I('get.cid',0,'intval');
+$user_id =   I('get.user_id',0,'intval');
 $certificate_lid =   I('get.certificate_lid',0,'intval');
 $infotypeid =   I('get.infotypeid',0,'intval');
 $trainingid =   I('get.trainingid',0,'intval');
-if(!empty($cid)){
-    $map['cid'] =$cid;
-    $cname=v_id($cid,"name","cmember");
+if(!empty($user_id)){
+    $map['user_id'] =$user_id;
+    $cname=v_id($user_id,"member_name","users");
 }else{
     $cname='管理员';
 }
@@ -55,7 +55,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
             <!-- <b>显示</b><input style="width:50px;" name="psize" type="text" class="dfinput" value="<?=$psize?>"/>条 -->
             <!-- <b>编号</b><input name="id" type="text" class="dfinput" value="<?=$id?>"/> -->
         <?php if ($pid<5): ?>
-            <input type="hidden" name="cid" id="cid"  value="0">
+            <input type="hidden" name="user_id" id="user_id"  value="0">
              选择企业： <input type="text" id="cname" class="dfinput" value="<?=$cname?>">
             <div class="qyxf" style="display: none">
                 <ul>
@@ -63,16 +63,10 @@ list($data,$pagestr) = Page::paging($pageConfig);
                 </ul>
             </div>
         <?php endif ?>
-              <?php if ($tty==54) {
-                  $d = config('webarr.certificate');
-                  Output::select2($d, '选择证书类型', 'certificate_lid');
-              }elseif($ty==64){
-                  $d = config('webarr.infotypeid');
-                  Output::select2($d, '院校信息类型', 'infotypeid');
-              }elseif($pid==2){
+              <?php
                   $d = config('webarr.trainingid');
                   Output::select2($d, '培训方式', 'trainingid');
-              } ?>
+              ?>
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>
@@ -81,9 +75,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
 
                     $(".qyxf ul").on("click","li",function(){
 
-                        var cid=$(this).data("id");
+                        var user_id=$(this).data("id");
                         var cname=$(this).html();
-                        $("#cid").val(cid)
+                        $("#user_id").val(user_id)
                         $("#cname").val(cname)
                         $(".qyxf").hide()
                     })
@@ -115,10 +109,8 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <a href="?<?=queryString()?>" class="zhixin_a2 fl"></a><!-- 刷新  -->
         <a href="<?=getUrl(queryString(true),$showname.'_pro')?>" target="righthtml" class="zhixin_a3 fl"></a><!-- 添加  -->
         <input id="del" type="button" class="zhixin_a4 fl"/><!-- 删除  -->
-        <?php if (false && 5 == $showtype): // || 3 == $pid ?>
-        <a style="background:none;border:1px solid;line-height:28px;text-align:center" href="content.php?<?=queryString()?>" class="fl">编辑详情</a>
-    <?php endif ?>
-</div>
+
+      </div>
 </div>
 <div class="neirong clr">
     <table cellpadding="0" cellspacing="0" class="table clr">
@@ -126,61 +118,24 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <td onclick="selectAll(document.getElementById('sall'))" style="font-size:8px;cursor:pointer" width="24px">全选</td>
         <td width="24px">编号</td> <td width="200px">操作</td>
 
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/    if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
         <td> 图 </td>
         <td> 标题 <span class="fr"></td>
-        <!-- <td> 浏览次数 </td> -->
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
-        <td> 标题 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==9):/*＜＞＜＞培训方式＜＞＜＞*/?>
-        <td> 图 </td>
-        <td> 名称 </td>
-       <td> 培训方式 </td>
+        <td> 培训方式 </td>
         <td> 报名人数 </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
-        <td> 名称 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==11):/*＜＞＜＞图文列表＜＞＜＞*/?>
-        <!-- <td width="24px"> 配图 </td> -->
-        <td> 配图 </td>
-        <td> 信息 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==12):/*＜＞＜＞路线＜＞＜＞*/?>
-    <td> 配图 </td>
-    <td> 标题 </td>
-    <td> 详情页图片 </td>
-    <td> 目的地 </td>
-    <td> 报名人数 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==13):/*＜＞＜＞需报名新闻＜＞＜＞*/?>
-    <!-- <td width="24px"> 配图 </td> -->
-        <?php if($tty<>60){?>
-            <td> 配图 </td>
-        <?php } ?>
-
-    <td> 标题 </td>
-    <td> 报名人数 </td>
-   <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
-       <td> 问题 </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==16):/*＜＞＜＞职业证书＜＞＜＞*/?>
-        <td> 证书名称 </td>
-        <td> 配图 </td>
-        <td> 所属分类 </td>
-        <td> 报名人数 </td>
-
-   <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
-           <td width="10%">发布者</td>
-    <td width="10%">发布时间</td>
-</tr>
+        <td width="10%">发布者</td>
+        <td width="10%">发布时间</td>
+       </tr>
 <?php
     foreach ($data as $key => $bd) : extract($bd);
 
-                            #生成修改地址
     $query = queryString(true);
     $query['id'] = $id;
     $editUrl = getUrl($query, $showname.'_pro');
                             #时间
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
-if($cid){
-    $publisher=v_id($cid,"name","cmember");
+if($user_id){
+    $publisher=v_id($user_id,"member_name","users");
 }else{
     $publisher="平台管理员";
 }
@@ -253,3 +208,4 @@ if($cid){
 <?php endforeach?>
 <?php include('js/foot'); ?>
 <!-- <td><?=$img1?><a class="lookPic" href="javascript:;" data-id="<?=$id?>">添加更多图片(<?=M('pic')->where("ti=$id")->count()?>个)</a></td> -->
+

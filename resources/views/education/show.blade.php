@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title') @parent @stop
+@section('title') {{$id_arr->title}}@parent @stop
 @section('css')
 
     <script src="/js/jquery-1.11.0.min.js"></script>

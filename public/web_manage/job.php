@@ -177,8 +177,8 @@ list($data,$pagestr) = Page::paging($pageConfig);
                             #时间
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
-if($cid){
-    $publisher=v_id($cid,"name","cmember");
+if($user_id){
+    $publisher=v_id($user_id,"name","cmember");
 }else{
     $publisher="平台管理员";
 }
