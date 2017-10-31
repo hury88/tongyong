@@ -42,15 +42,12 @@
                         </div>
                         <div class="zslbxqCon">
                            {!! htmlspecialchars_decode($id_arr->content) !!}
-                            <p class="fenxiang" style="line-height: 30px;">
-                                分享到：
-                                <a href="javascript:void(0);" class="qqfx" style="height: 25px;display: inline-block">
-                                    <img src="/img/qq1.png" style="margin-top: 5px;"/>
-                                </a>
-                                <a href="javascript:void(0);" class="wxfx" style="height: 25px;display: inline-block">
-                                    <img src="/img/weixin.png"  style="margin-top: 5px;"/>
-                                </a>
-                            </p>
+                            <div class="bdsharebuttonbox fenxiang" style="line-height: 30px;width: 130px;margin: 0 auto">
+                                <a href="#" class="bds_more" data-cmd="more" style="display: none"></a>
+                                <a style="background: none">分享到：</a>
+                                <a href="javascript:void(0);"class="bds_sqq qqfx" data-cmd="sqq" title="分享到QQ好友"  style="height: 25px;display: inline-block"></a>
+                                <a href="javascript:void(0);"class="bds_weixin wxfx" data-cmd="weixin" title="分享到微信"  style="height: 25px;display: inline-block"></a></div>
+
                             <div class="xyb">
                                 @if($id_arr->previd>0)
                                     <a href="{{$id_arr->prevlink}}" style="float: left;font-weight: bold;color: #666666;">【上一篇】{{$id_arr->prev}}</a>
