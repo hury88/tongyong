@@ -16,7 +16,7 @@
                     <div class="Two-columns">
                         <dl>
                             @foreach($b_m_info['next'] as $index => $category_path_2)
-                            <dt{{$_second == $index ? ' class="erji-selected"' : ''}}><a href="{{route($b_route) .'/'. $index }}">{{$category_path_2['title']}}</a></dt>
+                            <dt {!! $_next == $index ? ' class="erji-selected"' : '' !!}><a href="{{route($b_route) .'/'. $index }}">{{$category_path_2['title']}}</a></dt>
                             @endforeach
                         </dl>
                     </div>

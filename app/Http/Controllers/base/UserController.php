@@ -42,7 +42,7 @@ class UserController extends Controller
             }
         }
         view()->share('_first', $first);
-        view()->share('_second', $next);
+        view()->share('_next', $next);
         view()->share('_title', $title);
 //            dd($user->role);
 

@@ -35,27 +35,28 @@ class BusinessController extends base\UserController
     /**
      * 招聘
      */
-    public function job()
+    public function job($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.job', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 简历管理
      */
-    public function resume()
+    public function resume($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.resume', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 职业培训管理
      */
-    public function training($action = '')
+    public function training($action = '', $id= '')
     {
-        return $this->relatedToNewsCats($action, $id);
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
@@ -70,65 +71,67 @@ class BusinessController extends base\UserController
     /**
      * 国际教育管理
      */
-    public function education()
+    public function education($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.certificate', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 实名认证
      */
-    public function certification()
+    public function certification($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.certification', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 订单管理
      */
-    public function order()
+    public function order($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.order', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 用户管理
      */
-    public function users()
+    public function users($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.users', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 安全设置
      */
-    public function safe()
+    public function safe($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.safe', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
-    private function relatedToNewsCats($action, $id, $compact = [])
+    private function relatedToNewsCats($table, $action, $id, $compact = [])
     {
-        $user = \Auth::user()->id;
+        $haystack = ['user' => \Auth::user()->relationsToArray()];
         switch ($action) {
             case 'create':
             case 'update':
-                // $id = Db()
-
+                $row = \Auth::user()->{'hasMany'.ucfirst($table)}->find($id);
+                $view = 'cu';
+                $haystack['row'] = $row;
                 break;
             case 'delete':
+                return $this->delete($table, $id);
                 break;
-
             default://列表
-                $user = \Auth::user()->relationsToArray();
                 $view = 'list';
+                // $list = \Auth::user()->{'hasMany'.ucfirst($table)}->toArray();
                 break;
         }
-        return view('business.related-news_cats-list', array_merge(['user' => $user], $compact));
+        ;
+        return view('business.related-news_cats-'.$view, array_merge($haystack, $compact));
     }
 }

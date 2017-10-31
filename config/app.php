@@ -281,8 +281,7 @@ return [
          * Vendors Aliases
          */
         'Socialize'   => Laravel\Socialite\Facades\Socialite::class,
-        'Form'        => Collective\Html\FormFacade::class,
-        'Html'        => Collective\Html\HtmlFacade::class,
+//        'Form'        => Collective\Html\FormFacade::class,
         'Image'       => Intervention\Image\Facades\Image::class,
         'Debugbar'    => Barryvdh\Debugbar\Facade::class,
         'Recaptcha'   => Greggilbert\Recaptcha\Facades\Recaptcha::class,
@@ -295,6 +294,7 @@ return [
          * App Alieses
          */
 
+        'Form'      => App\Helpers\FormHelper::class,
         'YZM'      => App\Helpers\YZMHelper::class,
         'Send'      => App\Helpers\Send::class,
         'Menu'      => App\Helpers\Menu::class,

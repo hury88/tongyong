@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('boot_config', $config);
         view()->share('boot_bread', $boot_bread);
         view()->share('boot_title', $boot_title);
+        view()->share('cache', []);
 
         //自定义验证码规则
         /*Validator::extend('phone', function($attribute, $value, $parameters){
