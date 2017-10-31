@@ -76,22 +76,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
-    public function addresses()
+    /*public function addresses()
     {
         return $this->hasMany('App\Address');
-    }
+    }*/
 
-    public function certificate()
+    public function hasManyCertificate()
     {
         return $this->hasMany('App\Certificate');
     }
 
-    public function Product()
+    /*public function Product()
     {
         return $this->hasMany('App\Product');
-    }
+    }*/
 
-    public function getHasPhoneAttribute()
+    /*public function getHasPhoneAttribute()
     {
         return !is_null($this->mobile_phone) || !is_null($this->work_phone)
             || ($this->profile() && $this->profile()->has_phone);
@@ -102,7 +102,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (!empty($value)) {
             $this->attributes['password'] = $value;
         }
-    }
+    }*/
 
     //Role Manage
     public function hasRole($role)
@@ -138,7 +138,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     //Cart Manage
 
-    public function getCartCount()
+    /*public function getCartCount()
     {
         $basicCart = Order::ofType('cart')->where('user_id', $this->id)->first();
         if (!($basicCart)) {
@@ -188,7 +188,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return false;
         }
     }
-
+*/
     /**
      * Send the password reset notification.
      *

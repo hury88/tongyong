@@ -9,7 +9,7 @@
 <body>
 <div class="main impowerBox">
     <div class="loginPanel normalPanel">
-        <div class="title">微信登录</div>
+        <div class="title">微信关注</div>
         <div class="waiting panelContent">
             <div class="wrp_code"><img class="qrcode lightBorder" src="{{img($boot_config['img1'])}}" /></div>
             <div class="info">

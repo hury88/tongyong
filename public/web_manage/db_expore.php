@@ -1,5 +1,5 @@
 <?php
-require '../core/run.php';
+require './core/run.php';
 //获取表的名称
 function list_tables($database)
 {
@@ -56,7 +56,7 @@ $database=Config::get('database.database');//数据库名
 
 //设置日期为备份文件名
 date_default_timezone_set('PRC');
-$t_name = date("Ymd_His");
+$t_name = date("Ymd_Hi");
 
 /*$options=array(
     'hostname' => $dbhost,//ip地址
@@ -65,7 +65,7 @@ $t_name = date("Ymd_His");
     'username' => $dbuser,
     'password' => $dbpw
 );*/
-$filename = ROOT_PATH . Config::get('pic.upload').'../dbbackup/'.$database.$t_name.'.sql';
+$filename = ROOT_PATH .'..'. Config::get('pic.upload').'../dbbackup/'.$database.$t_name.'.sql';
 $tables = list_tables($database);
 $fp = fopen($filename, 'w');
 foreach ($tables as $table) {
@@ -74,7 +74,7 @@ foreach ($tables as $table) {
 fclose($fp);
 //下载sql文件
 header("Content-type:application/octet-stream");
-header("Content-Disposition:attachment;filename=" . Request::instance()->domain());
+header("Content-Disposition:attachment;filename=" . $database . '_' . $t_name . '.sql');
 readfile($filename);
 //删除服务器上的sql文件
 // unlink($filename);
