@@ -103,7 +103,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
     $img2 =  '<img src="'.src($img2).'" width="80" />';
 if($cid){
-    $publisher=v_id($cid,"name","cmember");
+    $publisher=v_id($user_id,"name","cmember");
 }else{
     $publisher="平台管理员";
 }

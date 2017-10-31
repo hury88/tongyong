@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title') @parent @stop
+@section('title') {{$id_arr->title}}@parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/guojijiaoyu.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common_guojijiaoyu.css"/>

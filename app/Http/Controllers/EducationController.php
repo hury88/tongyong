@@ -96,8 +96,8 @@ class EducationController extends Controller
         $viewrow = $id;
         $education = new Education();
         $id_arr = $education->v_id_arr($id);
-        if ($id_arr->cid) {
-            $id_arr->qyname = v_id($id_arr->cid, 'name', 'cmember');
+        if ($id_arr->user_id) {
+            $id_arr->qyname = v_id($id_arr->user_id, 'name', 'cmember');
         } else {
             $id_arr->qyname = '平台管理员';
         }
@@ -127,8 +127,8 @@ class EducationController extends Controller
         $viewrow = $id;
         $education = new Education();
         $id_arr = $education->v_id_arr($id);
-        if ($id_arr->cid) {
-            $id_arr->qyname = v_id($id_arr->cid, 'name', 'cmember');
+        if ($id_arr->user_id) {
+            $id_arr->qyname = v_id($id_arr->user_id, 'name', 'cmember');
         } else {
             $id_arr->qyname = '平台管理员';
         }
@@ -243,8 +243,8 @@ class EducationController extends Controller
         $viewrow = $id;
         $education = new Education();
         $id_arr = $education->v_id_arr($id);
-        if ($id_arr->cid) {
-            $id_arr->qyname = v_id($id_arr->cid, 'name', 'cmember');
+        if ($id_arr->user_id) {
+            $id_arr->qyname = v_id($id_arr->user_id, 'name', 'cmember');
         } else {
             $id_arr->qyname = '平台管理员';
         }

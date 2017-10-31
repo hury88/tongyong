@@ -28,8 +28,8 @@ class NewsController extends Controller
         $viewrow =  $id;
         $news = new News();
         $id_arr=$news->v_id_arr($id);
-        if($id_arr->cid){
-            $id_arr->qyname=v_id($id_arr->cid,"name","cmember");
+        if($id_arr->user_id){
+            $id_arr->qyname=v_id($id_arr->user_id,"name","cmember");
         }else{
             $id_arr->qyname="平台管理员";
         }

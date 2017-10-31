@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title') @parent @stop
+@section('title') {{$id_arr->title}}@parent @stop
+
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhengshu.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhengshu.css"/>
@@ -22,7 +23,11 @@
 
                         <a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}></a>
                         <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}} ></a>
+                        @if($id_arr->certificate_lid>0)
                         <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'],$GLOBALS['tty_path'])}}?genre={{$id_arr->certificate_lid}}">{{config("config.webarr.certificate")[$id_arr->certificate_lid]}} ></a>
+                        @else
+                            <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'],$GLOBALS['tty_path'])}}">{{$GLOBALS['tty_data']->catname}} ></a>
+                        @endif
                         <a href="javascript:void(0);">{{$id_arr->title}}</a>
                     </div>
                 </div>
