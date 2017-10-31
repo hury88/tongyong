@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title')- 企业会员 @parent @stop
+@section('title'){{implode(' - ', $_title)}} - 企业会员 @parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_qiyehuiyuan.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>

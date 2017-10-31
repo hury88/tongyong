@@ -1,6 +1,6 @@
 @extends('business.layouts.master')
 
-@section('title') 首页 @parent @stop
+@section('title') @parent @stop
 
 @section('main')
 <div class="personal-member-index clearfix">

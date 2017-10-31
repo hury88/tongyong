@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Session;
 
 class BusinessController extends base\UserController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * 会员首页
      * @return
@@ -30,7 +35,7 @@ class BusinessController extends base\UserController
     /**
      * 招聘
      */
-    public function job ()
+    public function job()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.job', compact('user'));
@@ -39,7 +44,7 @@ class BusinessController extends base\UserController
     /**
      * 简历管理
      */
-    public function resume ()
+    public function resume()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.resume', compact('user'));
@@ -48,25 +53,24 @@ class BusinessController extends base\UserController
     /**
      * 职业培训管理
      */
-    public function training ()
+    public function training($action = '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.training', compact('user'));
+        return $this->relatedToNewsCats($action, $id);
     }
 
     /**
      * 证书管理
      */
-    public function certificate ()
+    public function certificate($action = '', $id= '')
     {
-        $user = \Auth::user()->relationsToArray();
-        return view('business.certificate', compact('user'));
+        $table = __FUNCTION__;
+        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
      * 国际教育管理
      */
-    public function education ()
+    public function education()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.certificate', compact('user'));
@@ -75,7 +79,7 @@ class BusinessController extends base\UserController
     /**
      * 实名认证
      */
-    public function certification ()
+    public function certification()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.certification', compact('user'));
@@ -84,7 +88,7 @@ class BusinessController extends base\UserController
     /**
      * 订单管理
      */
-    public function order ()
+    public function order()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.order', compact('user'));
@@ -93,7 +97,7 @@ class BusinessController extends base\UserController
     /**
      * 用户管理
      */
-    public function users ()
+    public function users()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.users', compact('user'));
@@ -102,12 +106,29 @@ class BusinessController extends base\UserController
     /**
      * 安全设置
      */
-    public function safe ()
+    public function safe()
     {
         $user = \Auth::user()->relationsToArray();
         return view('business.safe', compact('user'));
     }
-    /**
-     *
-     */
+
+    private function relatedToNewsCats($action, $id, $compact = [])
+    {
+        $user = \Auth::user()->id;
+        switch ($action) {
+            case 'create':
+            case 'update':
+                // $id = Db()
+
+                break;
+            case 'delete':
+                break;
+
+            default://列表
+                $user = \Auth::user()->relationsToArray();
+                $view = 'list';
+                break;
+        }
+        return view('business.related-news_cats-list', array_merge(['user' => $user], $compact));
+    }
 }

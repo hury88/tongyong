@@ -29,26 +29,37 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $user = \Auth::user();
+        $first = isset($GLOBALS['uri'][1]) ? $GLOBALS['uri'][1] : 'profile';
 
-        if ($user) {
+        $next = isset($GLOBALS['uri'][2]) ? $GLOBALS['uri'][2] : '';
+        if ($menu_first = trans("business.menu.$first")) {
+            $title = [$menu_first['title']];
+            if (isset($menu_first['next'])) {
+                if (!$next) {
+                    $next = key($menu_first['next']);
+                }
+                array_unshift($title, $menu_first['next'][$next]['title']);
+            }
+        }
+        view()->share('_first', $first);
+        view()->share('_second', $next);
+        view()->share('_title', $title);
 //            dd($user->role);
 
-            /*// Validacion de campos unique
-            $this->form_rules['email'] .= $user->id;
-            $this->form_rules['nickname'] .= $user->id;
+        /*// Validacion de campos unique
+        $this->form_rules['email'] .= $user->id;
+        $this->form_rules['nickname'] .= $user->id;
 
-            // Validaciones segun tipo de user
-            if ($user->hasRole(['admin', 'person'])) {
-                $form_rules['first_name'] = 'required|min:3|max:20|string';
-                $form_rules['last_name'] = 'required|min:3|max:20|string';
-            } else {
-                $form_rules['business_name'] = 'required|min:5|max:30|string';
-            }*/
-        }
+        // Validaciones segun tipo de user
+        if ($user->hasRole(['admin', 'person'])) {
+            $form_rules['first_name'] = 'required|min:3|max:20|string';
+            $form_rules['last_name'] = 'required|min:3|max:20|string';
+        } else {
+            $form_rules['business_name'] = 'required|min:5|max:30|string';
+        }*/
     }
 
-     /**
+    /**
      * Sube imagen de perfil y background de usuario.
      *
      * @param Request $request [description]

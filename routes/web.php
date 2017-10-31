@@ -18,10 +18,14 @@ Auth::routes();
 // 首页
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('help', [ 'uses' => 'NewsController@helplist']);
+Route::get('weixin', function(){
+    return view('weixin');
+});
 
 Route::group(['prefix' => 'home'], function () {
     Route::get('/', 'HomeController@index');
 });
+
 
 //个人中心
 require __DIR__.'/web/users.php';

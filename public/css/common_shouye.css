@@ -3,51 +3,51 @@
 @font-face {
 	font-family: "dolode";
 	src: url("../font/1.otf");
-	
+
 }
 @font-face {
 	font-family: "dolode2";
 	src: url("../font/2.TTF");
-	
+
 }
 
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,form, 
-input,textarea,p,th,td { 
-	margin:0; 
-	padding:0; 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,form,
+input,textarea,p,th,td {
+	margin:0;
+	padding:0;
 	font-family: "微软雅黑";
 	font-size: 14px;
-} 
-table { 
+}
+table {
 	border-collapse:collapse;
 	border-spacing:0;
-} 
-img { 
-	border:0 none; 
+}
+img {
+	border:0 none;
 	display:inline-block;
-} 
-em,i,u,b,strong,th{ 
-	font-style:normal; 
-	font-weight:normal; 
+}
+em,i,u,b,strong,th{
+	font-style:normal;
+	font-weight:normal;
 }
 input,textarea{
 	outline:none;
-} 
-ol,ul { 
+}
+ol,ul {
 	list-style:none;
-} 
-th { 
+}
+th {
 	text-align:left;
-} 
-h1,h2,h3,h4,h5,h6 { 
-	font-size:100%; 
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
 	font-weight:normal;
-} 
+}
 a{
 	text-decoration:none;
 }
 
-  
+
 .clearfix:after{
 		height:0;
 		content:" ";
@@ -80,12 +80,12 @@ a:hover{
 	width: 100%;
 	min-width: 1240px;
 	position: relative;
-	height: 1077px;
+	height: 1070px;
 	z-index: 200001;
 	overflow: hidden;
 	background:rgba(72,181,109,.3);
 
-  
+
 }
 
 
@@ -265,7 +265,7 @@ a:hover{
 	-moz-transition: all 1s;
 	-webkit-transition: all 1s;
 	-o-transition: all 1s;
-	
+
 }
 .container .content ul li:nth-of-type(1) p{
 	background: url(../img/1-1.png) no-repeat center center;
@@ -424,7 +424,7 @@ a:hover{
     padding: 1px 1px;
     border-radius: 5px;
     z-index: 2200000;
-    
+
  }
 
 .key_call,.key_act,.key_link,.key_kf,.key_wx,.key_fx,.key_top{
@@ -435,8 +435,8 @@ a:hover{
     border-bottom: 1px solid #e0e0df;
     text-align: center;
     padding: 4px 0;
- 
- 
+
+
 }
 .key_call p,.key_act p,.key_kf p,.key_link p,.key_wx p,.key_fx p,.key_top p{
        color: #5b5c5c;
@@ -492,7 +492,7 @@ a:hover{
 	height: 26px;
 	display: inline-block;
 	border-radius: 50%;
-	
+
 
 }
 .key_fx div a:nth-child(1){
