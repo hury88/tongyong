@@ -11,10 +11,10 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 ###########################筛选开始
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
-$cid =   I('get.cid',0,'intval');
-if(!empty($cid)){
-    $map['cid'] =$cid;
-    $cname=v_id($cid,"name","cmember");
+$user_id =   I('get.user_id',0,'intval');
+if(!empty($user_id)){
+    $map['user_id'] =$user_id;
+    $cname=v_id($user_id,"member_name","users");
 }else{
     $cname='管理员';
 }
@@ -49,7 +49,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
             <!-- <b>显示</b><input style="width:50px;" name="psize" type="text" class="dfinput" value="<?=$psize?>"/>条 -->
             <!-- <b>编号</b><input name="id" type="text" class="dfinput" value="<?=$id?>"/> -->
 
-            <input type="hidden" name="cid" id="cid"  value="0">
+            <input type="hidden" name="user_id" id="user_id"  value="0">
              选择企业： <input type="text" id="cname" class="dfinput" value="<?=$cname?>">
             <div class="qyxf" style="display: none">
                 <ul>
@@ -59,6 +59,39 @@ list($data,$pagestr) = Page::paging($pageConfig);
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>
+            <script type="text/javascript">
+                $(function(){
+
+                    $(".qyxf ul").on("click","li",function(){
+
+                        var user_id=$(this).data("id");
+                        var cname=$(this).html();
+                        $("#user_id").val(user_id)
+                        $("#cname").val(cname)
+                        $(".qyxf").hide()
+                    })
+                })
+
+                $("#cname").click(function(){
+                    $("#cname").val('')
+                    var key=$(this).val()
+                    $.get("include/json.php?action=xzqy&key="+key, function (data) {
+                        //  alert(data)
+                        $(".qyxf ul").html(data)
+                    })
+                    $(".qyxf").show()
+                })
+                $("#cname").keyup(function(){
+
+                    var key=$(this).val()
+
+                    $.get("include/json.php?action=xzqy&key="+key, function (data) {
+                        //  alert(data)
+                        $(".qyxf ul").html(data)
+                    })
+                    $(".qyxf").show()
+                })
+            </script>
     <div class="zhengwen clr">
       <div class="zhixin clr">
         <ul class="toolbar">
@@ -102,8 +135,8 @@ list($data,$pagestr) = Page::paging($pageConfig);
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
     $img2 =  '<img src="'.src($img2).'" width="80" />';
-if($cid){
-    $publisher=v_id($user_id,"name","cmember");
+if($user_id){
+    $publisher=v_id($user_id,"member_name","users");
 }else{
     $publisher="平台管理员";
 }

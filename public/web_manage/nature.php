@@ -94,7 +94,7 @@ if($pid>0){
 						<td width="20%">类别名称</th>
 						<td width="20%">所属等级类别</th>
 						<td width="20%">类别下级管理</th>
-						<td width="10%">数据量</th>
+						<td width="10%">下级数据量</th>
 						<td width="20%">管理操作</th>
                         </tr>
 <?php
@@ -103,7 +103,7 @@ if($pid>0){
 	$data =M('nature')->where($map)->order('disorder desc,id asc')->select();
 
     foreach ($data as $key=>$v){
-        $count = HR('nature')->where(array('pid'=>$pid,'typeid'=>$typeid))->count();
+        $count = HR('nature')->where(array('pid'=>$v['id'],'typeid'=>$typeid))->count();
  ?>
              <tr>
              	 <td><?=$key+1?></td>
@@ -113,10 +113,11 @@ if($pid>0){
                  <td><a href="<?=getUrl(array("pid"=>$v['id'],"typeid"=>$typeid),$showname)?>" class="thick">类别下级管理</a></td>
                  <td><?=$count?></td>
                  <td>
-                 	<a data-class="btn-warm" class="json <?=$v['isstate']==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$id?>"><?=$webarr['isstate'][$v['isstate']]?></a>
+                 	<a data-class="btn-warm" class="json <?=$v['isstate']==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$v['id']?>"><?=Config::get('webarr.isstate')[$v['isstate']] ?></a>
                  	 <a href="<?=getUrl($v['id'],$showname.'_pro')?>" class="thick">编辑</a>
                  	<a href="javascript:;" data-id="<?=$v['id']?>" data-opt="del" class="thick del">删除</a>
                  </td>
              </tr>
 <?php } $pagestr=''?>
 <?php include('js/foot'); ?>
+

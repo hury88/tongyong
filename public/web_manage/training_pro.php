@@ -2,8 +2,8 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'training';
+$showname = 'training';
 $istop = I('get.istop',0,'intval');
 if (!empty($id) ) { //显示页面 点击修改  只传了id
 	$row = M($table)->find($id);
@@ -50,31 +50,6 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 
 /*$opt->verify('')->input('页面标题','seotitle')->input('页面关键字','keywords')->textarea('页面描述','description');*/
 
-	switch ($showtype) {
-		case 1://＜＞＜＞新闻动态＜＞＜＞
-
-			// (!isset($title) || ! $title ) && $title = $system_sitename . '官方公告';
-		    $opt
-				->img('配图','img1')
-				// ->ifs($istop==1)->img('配图','img2','387*253')->endifs()
-				->input('标题','title')
-//				->cache()->input('发布者','name')->input('点击量','hits')->flur()
-//				->textarea('介绍','description')
-				// ->cache()->input('点赞数','dotlike')->input('分享数','share')->flur()
-				// ->textarea('简介','introduce')
-				->editor('信息内容')
-			;
-			break;
-		case 5://＜＞＜＞单条＜＞＜＞
-
-			$opt
-				->input('标题','title')
-				->editor('信息内容')
-				// ->ifs($ty==7)->textarea('内容', 'content')->endifs()
-				// ->ifs($ty==28)->input('QQ','ftitle')->endifs()
-			;
-			break;
-		case 9://＜＞＜＞产品＜＞＜＞
 				// $d = M('news')->where('pid=1 and ty=23')->order(config('other.order'))->getField('id,title');Output::select($d,'小游戏','istop');
 			//复选框
 			// $d = M('news')->where(m_gWhere(14,19))->getField('id,title');
@@ -92,78 +67,14 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 				->input('标题', 'title')
 				->input('摘要', 'ftitle')
 				->choose('培训方式','trainingid')->radioSet(Config::get('webarr.trainingid'))->flur()
+				->choose('培训方式','trainingid')->radioSet(Config::get('webarr.trainingid'))->flur()
 				->input('购买链接', 'source')
 				->display('inline')->input('价格', 'price')
 				->textarea('介绍', 'description')
 				->editor('Specifications')
 				->editor('Accessories','content2')
 				->editor('Advantages','content3')
-				// ->time('项目名','sendtime')
-				// ->input('售价','price')->input('电话','name')->flur()
 			;
-
-			break;
-		case 10://＜＞＜＞产品分类＜＞＜＞
-			$opt
-				->cache()->input('名称','title')->flur();
-			break;
-		case 11://＜＞＜＞图文列表＜＞＜＞
-			$opt
-				->img('配图', 'img1')
-				->input('信息标题', 'title')
-
-				 ->textarea('介绍', 'description')
-				->editor('信息内容', 'content')
-
-				// ->word('一行一个:之间用换行隔开即可')->textarea('介绍', 'content')
-				// ->cache()->ifs($ty==11)->input('名称','title')->input('职务','ftitle')->endifs()->flur()
-				// ->editor('信息内容')
-			;
-			break;
-		case 12://＜＞＜＞路线＜＞＜＞
-			$opt
-				->img('配图','img1')
-				// ->ifs($istop==1)->img('配图','img2','387*253')->endifs()
-				->input('标题','title')
-				->input('推荐人群', 'ftitle')
-				->input('目的地','destination')
-				->input('席位情况','introduce')
-				->cache()->time('游学开始时间', 'starttime')->time('游学结束时间', 'endtime')->flur()
-				->cache()->time('报名开始时间', 'bstarttime')->time('报名结束时间', 'bendtime')->flur()
-				// ->cache()->input('点赞数','dotlike')->input('分享数','share')->flur()
-				// ->textarea('简介','introduce')
-				->editor('路线详情')
-				->editor('详情介绍','content2')
-			;
-			break;
-		case 13://＜＞＜＞报名新闻＜＞＜＞
-			if($tty<>60){
-				$opt->img('配图','img1');
-			}
-			if($ty==64){
-				$opt->choose('所属分类','infotypeid')->radioSet(Config::get('webarr.infotypeid'))->flur();
-
-			}
-			$opt
-				->input('标题','title')
-//
-				->editor('信息内容')
-			;
-			break;
-		case 15://＜＞＜＞问答＜＞＜＞
-			$opt
-				->input('标题','title')
-				->editor('答案')
-			;
-			break;
-		case 16://＜＞＜＞职业证书＜＞＜＞
-			$opt
-				->input('证书名称','title')
-				->choose('所属分类','certificate_lid')->radioSet(Config::get('webarr.certificate'))->flur()
-				->editor('详情')
-			;
-			break;
-	}
 
 
 include('js/foot');

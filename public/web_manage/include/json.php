@@ -7,11 +7,12 @@ $action=I('get.action','','trim,htmlspecialchars');
 //后台选择企业
 if($action=='xzqy'){
 	$name=I('get.key','','trim,htmlspecialchars');
-	$map['name'] = array('like',"%$name%");
-	$data = M('cmember')->field("id,name")->where($map)->select();
+	$map['member_name'] = array('like',"%$name%");
+	$map['role'] = 2;
+	$data = M('users')->field("id,member_name")->where($map)->select();
 	$str='<li data-id="0">平台管理员</li>';
 	foreach ($data as $row) {
-		$str.="<li data-id=\"{$row['id']}\">{$row['name']}</li>";
+		$str.="<li data-id=\"{$row['id']}\">{$row['member_name']}</li>";
 	}
 	echo $str;
 }else{
