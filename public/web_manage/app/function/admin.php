@@ -46,6 +46,16 @@ function get_arr($typeid,$pid=0)
     }
     return $d;
 }
+function get_first($typeid,$pid=0)
+{
+    if(!empty($typeid)) $map['typeid'] = $typeid;
+    if(!empty($pid)) {$map['pid'] = $pid;}else{
+        $map['pid']=0;
+    }
+    $data = M('nature')->field('id')->where($map)->order('disorder desc,id asc')->find();
+
+    return $data['id'];
+}
 function get_edselect($d,$lm,$n,$select){
     $str='';
     foreach ($d as $k => $v){

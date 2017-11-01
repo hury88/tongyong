@@ -2,8 +2,8 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'job';
+$showname = 'job';
 
 //条件
 $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
@@ -15,9 +15,9 @@ $cid =   I('get.cid',0,'intval');
 $certificate_lid =   I('get.certificate_lid',0,'intval');
 $infotypeid =   I('get.infotypeid',0,'intval');
 $trainingid =   I('get.trainingid',0,'intval');
-if(!empty($cid)){
-    $map['cid'] =$cid;
-    $cname=v_id($cid,"name","cmember");
+if(!empty($user_id)){
+    $map['user_id'] =$user_id;
+    $cname=v_id($user_id,"member_name","users");
 }else{
     $cname='管理员';
 }
@@ -61,16 +61,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
                 </ul>
             </div>
         <?php endif ?>
-              <?php if ($tty==54) {
-                  $d = config('webarr.certificate');
-                  Output::select2($d, '选择证书类型', 'certificate_lid');
-              }elseif($ty==64){
-                  $d = config('webarr.infotypeid');
-                  Output::select2($d, '院校信息类型', 'infotypeid');
-              }elseif($pid==2){
-                  $d = config('webarr.trainingid');
-                  Output::select2($d, '培训方式', 'trainingid');
-              } ?>
+
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>

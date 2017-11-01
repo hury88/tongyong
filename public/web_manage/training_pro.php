@@ -47,7 +47,7 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
                         $qualificationid2 = v_id($qualificationid,"pid","nature");
                         $qualificationid1 = v_id($qualificationid2,"pid","nature");
                         }else{
-                        $qualificationid1=get_first(76,0);
+                        $qualificationid1=get_first(76);
                         $qualificationid2=get_first(76,$qualificationid1);
                         }
 
@@ -93,21 +93,18 @@ if($ty==28){
 			(!isset($name) || ! $name ) && $name = '';
 			$opt
 
-				//复选框
-				// ->choose('标签','relative')->checkboxSet($d)->flur()
-				// ->img('列表图','img1',$ty)
-				->img('列表图','img1')
-				// ->ifs($ty<>14)->img('二维码','img1')->endifs()
-				// ->ifs($ty==14)->img('二维码','img2','165*165')->endifs()
-				// ->cache()->input('标题','title')->input('副标题','ftitle')->verify('')->input('浏览次数','hits')->flur()
-				->input('标题', 'title')
-				->input('讲师姓名', 'ftitle')
 				->choose('培训方式','trainingid')->radioSet(Config::get('webarr.trainingid'))->flur()
-				->input('购买链接', 'source')
-				->display('inline')->input('价格', 'price')
-				->textarea('课程介绍', 'description')
+				->img('列表图','img1','250*150')
+				 ->img('详情页图片','img2',"550X375")
+				->input('课程名称', 'title')
+				->input('讲师姓名', 'name')->input('课时','period')->flur()
+				->input('价格', 'price')
+				->input('开播时间', 'introduce')
+//                ->time('时间选择框', 'on')
 				->editor('课程介绍')
-				->editor('讲师介绍','content2')
+				->editor('课程大纲','content2')
+				->editor('讲师介绍','content3')
+				->editor('学习资料','content4')
 			;
 
 echo '</div>';

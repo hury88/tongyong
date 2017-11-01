@@ -202,7 +202,7 @@ if($user_id){
         <td><?=$title?></td>
 
         <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
-        <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
+        <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=".$id." and typeid=".$ty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0 and typeid=".$ty)->count(); ?>未审核)</a></td>
 
      <td><?=$publisher?></td>
      <td><?=$time?></td>
@@ -210,6 +210,7 @@ if($user_id){
 <?php endforeach?>
 <?php include('js/foot'); ?>
 <!-- <td><?=$img1?><a class="lookPic" href="javascript:;" data-id="<?=$id?>">添加更多图片(<?=M('pic')->where("ti=$id")->count()?>个)</a></td> -->
+
 
 
 
