@@ -69,10 +69,13 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
     });
     // 证书管理
     Route::group(['prefix' => 'certificate'], function(){
-        foreach (trans('business.menu.certificate.next') as $index => $tran) {
+//        Route::get('', 'BusinessController@dispatch');
+        Route::get('/{action}/{id}', 'BusinessController@dispatch');
+        /*foreach (trans('business.menu.certificate.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
-        }
+
+        }*/
     });
     // 国际教育
     Route::group(['prefix' => 'education'], function(){

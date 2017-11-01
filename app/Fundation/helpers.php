@@ -76,6 +76,7 @@ function v_pic($pid){
 
 	// 将path => pid/ty/tty
 	function path2ptt($path) {
+        $path = trim($path, '/');
 		$GLOBALS['pid'] = $GLOBALS['ty'] = $GLOBALS['tty'] =
 		$GLOBALS['pid_path'] = $GLOBALS['ty_path'] = $GLOBALS['tty_path'] =
 		$GLOBALS['pid_data'] = $GLOBALS['ty_data'] = $GLOBALS['tty_data'] = null;

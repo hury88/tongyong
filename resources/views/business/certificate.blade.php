@@ -24,8 +24,8 @@ $td = [];
     <td>{{$enroll_num}}人</td>
     <td>{{date('Y-m-d', $sendtime)}}</td>
     <td>
-        <a class="resume-remove color-trblue" href="javascript:;">修改</a>
-        <a class="resume-delete color-trblue" href="javascript:;">删除</a>
+        <a class="resume-remove color-trblue" href="{{$table.'/update/'.$id}}">修改</a>
+        <a class="resume-delete color-trblue" href="{{$table}}/update/{{$id}}">删除</a>
     </td>
 </tr>
 @endforeach

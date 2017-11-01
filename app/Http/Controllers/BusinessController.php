@@ -118,20 +118,25 @@ class BusinessController extends base\UserController
     {
         #将一级栏目的路劲名作为表名
         $table = $GLOBALS['uri'][1];
-        path2ptt($table);
+        path2ptt(substr(Request()->path(), 8));
         $compact = ['user' => \Auth::user()->relationsToArray(), 'table' => $table];
         switch ($action) {
             case 'create':
             case 'update':
-                $row = \Auth::user()->{'hasMany'.ucfirst($table)}->find($id);
-                $view = 'cu';
-                $haystack['row'] = $row;
+                $hasMany = \Auth::user()->{'hasMany'.ucfirst($table)};
+                $row = $hasMany->find($id);
+                if ($row) {
+                    $row->toArray();
+                } else {
+                    $row = $hasMany->fillable;
+                }
+                return view("business.cu", $compact);
+            $compact['row'] = $row;
                 break;
             case 'delete':
                 return $this->delete($table, $id);
                 break;
             default://列表
-                $view = 'list';
                 $_GET['certificate_lid'] = isset($_GET['certificate_lid']) ? (int) $_GET['certificate_lid'] : 0;
                 $_GET['title'] = isset($_GET['title']) ? $_GET['title'] : '';
                 $compact['pagenewslist'] = \Auth::user()->hasManyCertificate()->where('isstate',1)->where(function($query){
@@ -139,10 +144,10 @@ class BusinessController extends base\UserController
                     empty($_GET['title']) or $query->where('title', 'like', '%'.$_GET['title'].'%');
                 })->paginate(15)->toArray(10);
                 $compact['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid='.intval($_GET['certificate_lid']) : '';
+                return view("business.$table", $compact);
                 break;
         }
         ;
-        return view("business.$table", $compact);
     }
 
     private function relatedToNewsCats($table, $action, $id, $compact = [])

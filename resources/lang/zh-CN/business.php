@@ -25,11 +25,11 @@ return [
                 ],
                 // 'profile' => ['title' => '院校信息发布', 'icon' => 'icon-school', 'uri' => '/', 'pid' => ],
                 'certificate' => ['title' => '证书管理', 'icon' => 'icon-cerify', 'uri' => '/', 'pid' => 3,
-                    'next' => [
+                    /*'next' => [
                         'qualifications' => ['title' => '职业资格信息', 'ty' => 9],
                         'upgraded' => ['title' => '专升本信息', 'ty' => 10],
                         'graduate' => ['title' => '考研信息', 'ty' => 11],
-                    ]
+                    ]*/
                 ],
                 'education' => ['title' => '国际教育管理', 'icon' => 'icon-nation', 'uri' => '/', 'pid' => 4,
                     'next' => [

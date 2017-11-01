@@ -310,11 +310,14 @@ HTML;
 		if($this->in_if === false) $temp = '';
 
 		}else{
+			// %word%
 			$tpl = <<<HTML
-     	%word% <label title="%name%" class="layui-form-label">%lablename%<b>*</b></label>
-				<div class="layui-input-%display%">
-					<input name="%name%" lay-verify="%verify%" value="%value%" autocomplete="off" placeholder="请输入%lablename%" class="layui-input" type="text">
-				</div>
+			<div class="job-posted-dv">
+			    <span class="job-posted-property"><b>*</b>%lablename%</span>
+			    <div class="job-posted-values">
+			        <input class="job-name %display%" type="text" name="%name%" value="%value%" autocomplete="off" placeholder="请填写%lablename%"/>
+			    </div>
+			</div>
 HTML;
 			$temp = str_replace(array_keys($replaceMap), array_values($replaceMap), $tpl);
 

@@ -17,8 +17,61 @@
 @stop
 
 @section('scripts')
-<link rel="stylesheet" href="/plugins/ui/layui/css/layui.css"  media="all">
-    <script src="/plugins/ui/layui/layui.js" language="javascript"></script>
+@if(defined('IN_PRO'))
+    <script>
+                //提交表单
+                function submitForm(){
+                    //读取信息
+                    var hiddenForm = new FormData($('#dataForm')[0]);
+                        /*that.parents('.submit').find('input,textarea,select').each(function(i,obj){
+                            hiddenForm.append(obj.name,obj.value)
+                        })*/
+
+
+                    $('.datasubmi').attr('disabled',true)
+                    $.ajax({
+                        url  : "include/action.php",
+                        type : "post",
+                        dataType : 'json',
+                        data : hiddenForm,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success : function(json){
+                            // console.log(json)
+                            var stu = json.status
+                            var theIndex=layer.alert(json.msg, {
+                              icon: stu
+                              ,skin: 'layui-layer-molv'
+                              ,anim: 4 //动画类型
+                            },function(){
+                                layer.close(theIndex);
+                            });
+                            if(stu==1 || stu==6){
+                                    // history.go(-1);
+                                setTimeout(function(){
+                                    window.location.href="<?=getUrl(queryString(true, true),$showname)?>";
+                                    // var index = parent.layer.getFrameIndex(window.name);
+                                    // parent.layer.close(index);
+                                    // window.location.reload();
+                                    // history.reload();
+                                },1500)
+                            }else{
+                                $('.datasubmit').removeAttr('disabled')
+                            }
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            $('.datasubmit').removeAttr('disabled');
+                          layer.alert('网络不畅,稍后再试!', {
+                            icon: 3,
+                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                          })
+                        }
+                    })
+                    return false;
+                }
+    </script>
+@else
     <script>
         function checked(obj){
             $(obj).prop("checked", true);
@@ -138,65 +191,6 @@
 
             });
         });
-        /*var selectedClass = "kw-selected";
-        var checkboxsClassName = ".xuanze";
-        var checkboxs = $(checkboxsClassName),
-            quanxuanBtn = $('.quanxuan')
-        ;
-        quanxuanBtn.click(function(){
-            if ($(this).hasClass(selectedClass)) {
-                quanxuan(0);
-                unchecked();
-            } else {
-                quanxuan(1);
-                check();
-            }
-        })
-        // 子按钮绑定切换状态
-        checkboxs.click(function(){
-            var index = $(this).index(checkboxsClassName);
-            toggle($(this), index);
-        })
-        // 切换子按钮状态
-        function toggle(obj,index){
-            if (obj.attr("checked")) {
-                unchecked(index);
-                quanxuan(0);
-            } else {
-                check(index);
-                if (checkboxs.length == $("."+selectedClass).length) {
-                    quanxuan(1);
-                } else {
-                    quanxuan(0);
-                }
-            }
-        }
-        // 切换为选中
-        function check(index){
-            if (typeof index == 'undefined') {
-                checkboxs.addClass(selectedClass);
-            } else {
-                checkboxs.eq(index).addClass(selectedClass);
-            }
-        }
-        // 切换为未选中
-        function unchecked(index){
-            if (typeof index == 'undefined') {
-                checkboxs.removeClass(selectedClass);
-            } else {
-                checkboxs.eq(index).removeClass(selectedClass);
-            }
-        }
-        // 全选切换为选中
-        function quanxuan(status){
-            if (status==1) {// _check
-                // quanxuanBtn.addClass(selectedClass);
-                quanxuanBtn.attr('checked', true);
-            } else {// _unchecked
-                quanxuanBtn.attr('checked', false);
-                // quanxuanBtn.removeClass(selectedClass);
-            }
-        }
-*/
     </script>
+@endif
     @stop

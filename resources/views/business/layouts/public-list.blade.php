@@ -20,7 +20,7 @@
                         <th>操作</th>
                     </tr>
                     <tbody>
-                    @yield('tobody')
+                    @yield('tbody')
                     </tbody>
                 </table>
                 <div class="manager-lasttr clearfix">
