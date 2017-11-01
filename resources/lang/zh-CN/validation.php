@@ -124,6 +124,9 @@ return [
         'org'   => '企业名称',
         'contact'   => '联系人',
         'nickname'   => '用户名（昵称）',
+
+        'origin' => '旧密码',
+        'new' => '新密码',
     ],
 
     'recaptcha' => '验证码不正确。',

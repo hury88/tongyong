@@ -38,7 +38,15 @@ class UserController extends Controller
                 if (!$next) {
                     $next = key($menu_first['next']);
                 }
+                $ty = $menu_first['next'][$next]['ty'];
                 array_unshift($title, $menu_first['next'][$next]['title']);
+            }
+            if ($next && isset($ty)) {
+                $db_tty = v_path( null, $ty);
+                $GLOBALS['tty'] = $db_tty->id;
+                $GLOBALS['tty_data'] = $db_tty;
+                $GLOBALS['tty_path'] = $db_tty->path;
+                array_unshift($title, $db_tty->catname);
             }
         }
         view()->share('_first', $first);

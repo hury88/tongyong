@@ -16,12 +16,43 @@
 @stop
 
 @section('scripts')
+    <script>
+        $('img').click(function(){
+            notie.alert(4, '<img src="'+this.src+'" alt=""/>', 3);
+        })
+    </script>
 @if(defined('AT_CU'))
     <script>
         $('.save').click(function(){
             model(this);
         })
+        //图片上传预览    IE是用了滤镜。
+        function previewImage(file,id)
+        {
+            var img = document.getElementById(id);
+            if (file.files && file.files[0])
+            {
+                var exts ="jpg,jpeg,gif,png,bmp,JPG,JPEG,GIF,PNG,BMP";
+                if (exts.indexOf(lastname(file.value)) < 0) {
+                    dialog(3,["请上传JPG、BMP、PNG、GIF格式", "上传格式不正确"],{cancel:"取消"});
+                    return;
+                };
+
+                var reader = new FileReader();
+                reader.onload = function(evt){
+                    src = evt.target.result
+                    img.src = src;
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+        }
+        function lastname(filename) {
+            var index = filename.lastIndexOf(".");
+            var ext = filename.substr(index+1);
+            return ext;
+        }
     </script>
+@elseif(defined('AT_NO'))
 @else
     <script>
         function checked(obj){

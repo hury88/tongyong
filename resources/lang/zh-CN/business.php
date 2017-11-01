@@ -23,19 +23,18 @@ return [
                         'online' => ['title' => '在线学习', 'ty' => 66],
                     ]
                 ],
-                // 'profile' => ['title' => '院校信息发布', 'icon' => 'icon-school', 'uri' => '/', 'pid' => ],
                 'certificate' => ['title' => '证书管理', 'icon' => 'icon-cerify', 'uri' => '/', 'pid' => 3,
-                    /*'next' => [
+                    'next' => [
                         'qualifications' => ['title' => '职业资格信息', 'ty' => 9],
                         'upgraded' => ['title' => '专升本信息', 'ty' => 10],
                         'graduate' => ['title' => '考研信息', 'ty' => 11],
-                    ]*/
+                    ]
                 ],
                 'education' => ['title' => '国际教育管理', 'icon' => 'icon-nation', 'uri' => '/', 'pid' => 4,
                     'next' => [
-                        'camp' => ['title' => '国际夏令营', 'ty' => 14],
-                        'tour' => ['title' => '国际游学', 'ty' => 13],
                         'study' => ['title' => '国际留学', 'ty' => 12],
+                        'tour' => ['title' => '国际游学', 'ty' => 13],
+                        'camp' => ['title' => '国际夏令营', 'ty' => 14],
                         'joint' => ['title' => '国际联合办学', 'ty' => 15],
                     ]
                 ],

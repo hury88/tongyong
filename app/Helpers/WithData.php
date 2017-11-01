@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 /**
  *public function submit()     统一提交
  *#以下方法名对应表名称
@@ -51,21 +52,21 @@ class WithData
     public function certificate()
     {
         $certificate_lid = $this->I('certificate_lid', 0, 'intval');
-        if (empty($certificate_lid)) {
+
+        $fields = array(
+            'pid'               =>      (int)$GLOBALS['pid'],
+            'ty'                =>      (int)$GLOBALS['ty'] ? : 11,
+            'tty'               =>      (int)$GLOBALS['tty'] ? : 54,
+            'certificate_lid'   =>      $this->I('certificate_lid', 0, 'intval'),
+            'title'             =>      $this->I('title'),
+            'content'           =>      $this->I('content'),
+            'sendtime'          =>      time(),
+
+        );
+        if ($fields['tty']==54 && empty($certificate_lid)) {
         	$this->error = [203, '请选择一个证书类型'];
         	return false;
         }
-
-        $fields = array(
-            'pid'				=>		(int)$GLOBALS['pid'],
-            'ty'				=>		(int)$GLOBALS['ty'] ? : 11,
-            'tty'				=>		(int)$GLOBALS['tty'] ? : 54,
-            'certificate_lid'	=>		$this->I('certificate_lid', 0, 'intval'),
-            'title'				=>		$this->I('title'),
-            'content'			=>		$this->I('content'),
-            'sendtime'      	=>		time(),
-
-        );
 
         $this->logInsert = "添加证书: ".$fields['title'];
         $this->logUpdate = '更新证书: '.$fields['title'];
@@ -74,61 +75,39 @@ class WithData
 
     public function education()
     {
-        $istop = I('post.istop',0,'intval');
+        // $file = \Input::file('img1');
 
-        $relative = isset($_POST['relative']) && is_array($_POST['relative'])?implode(',',$_POST['relative']):'';
         $fields = array(
-            'pid'                =>    		I('pid', 0, 'intval'),
-            'ty'                 =>    		I('ty' , 0, 'intval'),
-            'tty'                =>    		I('tty', 0, 'intval'),
-            'title'              =>    		I('post.title','','trim,htmlspecialchars'),
-            'ftitle'             =>    		I('post.ftitle','','trim,htmlspecialchars'),
-            'content'            =>    		I('post.content',''),
-            'content2'           =>    		I('post.content2',''),
-            'content3'           =>    		I('post.content3',''),
-            'content4'           =>    		I('post.content4',''),
-            'content5'           =>    		I('post.content5',''),
-            'name'                =>    		I('post.name','','trim'),
-            'source'              =>    		I('post.source','','trim,htmlspecialchars'),
-            'destination'        =>    		I('post.destination','','trim,htmlspecialchars'),
-            'from'        =>    		I('post.from','','trim,htmlspecialchars'),
-            'relative'            =>    		$relative,
-            'introduce'           =>    		I('post.introduce','','trim,htmlspecialchars'),
-            'price'                =>    		I('post.price','','trim,htmlspecialchars'),
-            'linkurl'              =>    		I('post.linkurl','','trim,htmlspecialchars'),
-            'link1'                =>    		I('post.link1','','trim,htmlspecialchars'),
-            'link2'                =>    		I('post.link2','','trim,htmlspecialchars'),
-                        #资讯
-            'begin'      	      =>    		I('post.begin','','trim,htmlspecialchars'),
-                        //SEO
-            'seotitle'		      =>    		I('post.seotitle','','trim'),
-            'keywords'		      =>    		I('post.keywords','','trim'),
-            'description'		  =>    		I('post.description','','trim'),
+            'pid'               =>      (int)$GLOBALS['pid'],
+            'ty'                =>      (int)$GLOBALS['ty'] ? : 11,
+            'tty'               =>      (int)$GLOBALS['tty'] ? : 54,
+            'title'             =>      $this->I('title'),
+            'ftitle'            =>      $this->I('ftitle'),
+            'from'              =>      $this->I('from'),
+            'destination'       =>      $this->I('destination'),
+            'introduce'         =>      $this->I('introduce'),
+            'content'           =>      $this->I('content'),
+            'content2'          =>      $this->I('content2'),
+            'sendtime'          =>      time(),
 
-            'disorder'      	=>		I('post.disorder',0,'intval'),
-            'hits'      		=>		I('post.hits',1,'intval'),
-            'istop'      	 	=>		I('post.istop',0,'intval'),
-            'isgood'      	 	=>		I('post.isgood',0,'intval'),
-            'sendtime'      	=>		I('post.sendtime',0,'strtotime'),
-            'starttime'      	=>		I('post.starttime',0,'strtotime'),
-            'endtime'      	=>		I('post.endtime',0,'strtotime'),
-            'bstarttime'      =>		I('post.bstarttime',0,'strtotime'),
-            'bendtime'      	=>		I('post.bendtime',0,'strtotime'),
+            'starttime'         =>      $this->I('starttime', time(), 'strtotime'),
+            'endtime'           =>      $this->I('endtime', time(), 'strtotime'),
+            'bstarttime'        =>      $this->I('bstarttime', time(), 'strtotime'),
+            'bendtime'          =>      $this->I('bendtime', time(), 'strtotime'),
 
         );
-        /*if ($fields['ty'] == 9 && empty($fields['istop'])) {
-            ajaxReturn(-1,'请选择案例分类');
-        }*/
-        uppro('img1',$fields,'ajax');
-        uppro('img2',$fields,'ajax');
-        uppro('img3',$fields,'ajax');
-        uppro('img4',$fields,'ajax');
-        uppro('img5',$fields,'ajax');
-        uppro('img6',$fields,'ajax');
-        uppro('file',$fields,'file');
-        // uppro('img5',$fields,'water',$water_path);
-        $this->logInsert = "添加信息: ".$fields['title'];
-        $this->logUpdate = '更新信息: '.$fields['title'];
+
+
+
+        // uppro('img1',$fields,'ajax');
+        // uppro('img2',$fields,'ajax');
+        // uppro('img3',$fields,'ajax');
+        // uppro('img4',$fields,'ajax');
+        // uppro('img5',$fields,'ajax');
+        // uppro('img6',$fields,'ajax');
+        // uppro('file',$fields,'file');
+        $this->logInsert = '添加教育信息('.$fields['pid'].','.$fields['ty'].','.$fields['tty'].'): '.$fields['title'];
+        $this->logUpdate = '更新教育信息('.$fields['pid'].','.$fields['ty'].','.$fields['tty'].'): '.$fields['title'];
         return $fields;
     }
 

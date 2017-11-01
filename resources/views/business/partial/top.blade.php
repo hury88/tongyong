@@ -9,7 +9,7 @@
             @else
             <li class="personal-infor3 no-authentication"><img src="/img/renzhe.png">未认证</li>
             @endif
-            <li class="personal-infor4"><a href="javascript:;"><img src="/img/next-icon.png"></a></li>
+            <li class="personal-infor4"> <form onsubmit="return confirm('确定退出');" action="{{ route('logout')}}" method="post"><a href="javascript:;"><input type="image" src="/img/next-icon.png"></a>{!! csrf_field() !!}</form> </li>
         </ul>
     </div>
 </div>

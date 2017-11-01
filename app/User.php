@@ -76,20 +76,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
-    /*public function addresses()
-    {
-        return $this->hasMany('App\Address');
-    }*/
-
     public function hasManyCertificate()
     {
         return $this->hasMany('App\Certificate');
     }
 
-    /*public function Product()
+    public function hasManyEducation()
     {
-        return $this->hasMany('App\Product');
-    }*/
+        return $this->hasMany('App\Education');
+    }
 
     /*public function getHasPhoneAttribute()
     {

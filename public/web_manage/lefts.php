@@ -84,7 +84,7 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                 }
 
                 ?>
-                <li class="pro_type2" style="padding-left:20px;"><a href="<?php echo $linkurl2?>" target="righthtml"><?php echo $bd3['catname']?></a></li>
+                <li title="<?php echo $bd3['catname'],'-',$bd2['pid'],':',$bd2['id'],':',$bd3['id'] ?>" class="pro_type2" style="padding-left:20px;"><a href="<?php echo $linkurl2?>" target="righthtml"><?php echo $bd3['catname']?></a></li>
                 <?php }//三级循环结束?>
                 <?php }//二级循环结束?>
 

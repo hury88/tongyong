@@ -7,7 +7,7 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
 
     //    删除操作
     Route::post('delete/{table}', ['as' => 'b_delte', 'uses' => 'BusinessController@delete']);
-    Route::post('safe', ['as' => 'b_safe ', 'uses' => 'BusinessController@dispatch']);
+    Route::post('safe', ['as' => 'b_safe ', 'uses' => 'BusinessController@safe']);
     //    更新添加操作
     Route::post('{table}/cu/{id}', 'BusinessController@with');
     Route::post('{table}/cu', 'BusinessController@with');
@@ -17,41 +17,7 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         Route::get($index, ['as' => trans('business.route_prefiex').$index, 'uses' => "BusinessController@dispatch"]);
     }
 
-    /*// 招聘路由组
-    Route::group(['prefix' => 'job'], function(){
-        foreach (trans('business.menu.job.next') as $index => $tran) {
-            Route::get($index, 'BusinessController@job');
-            Route::get($index.'/{action}/{id}', 'BusinessController@job');
-        }
-    });
-    // 简历路由组
-    Route::group(['prefix' => 'resume'], function(){
-        foreach (trans('business.menu.resume.next') as $index => $tran) {
-            Route::get($index, 'BusinessController@resume');
-            Route::get($index.'/{action}/{id}', 'BusinessController@resume');
-        }
-    });
-    // 职业培训管理
-    Route::group(['prefix' => 'training'], function(){
-        foreach (trans('business.menu.training.next') as $index => $tran) {
-            Route::get($index, 'BusinessController@training');
-            Route::get($index.'/{action}/{id}', 'BusinessController@training');
-        }
-    });
-    // 证书管理
-    Route::group(['prefix' => 'certificate'], function(){
-        foreach (trans('business.menu.certificate.next') as $index => $tran) {
-            Route::get($index, 'BusinessController@certificate');
-            Route::get($index.'/{action}/{id}', 'BusinessController@certificate');
-        }
-    });
-    // 国际教育
-    Route::group(['prefix' => 'education'], function(){
-        foreach (trans('business.menu.education.next') as $index => $tran) {
-            Route::get($index, 'BusinessController@education');
-            Route::get($index.'/{action}/{id}', 'BusinessController@education');
-        }
-    });*/
+
 
     // 招聘路由组
     Route::group(['prefix' => 'job'], function(){
@@ -78,22 +44,47 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         }
     });
     // 证书管理
-    Route::group(['prefix' => 'certificate'], function(){
+    /*Route::group(['prefix' => 'certificate'], function(){
 //        Route::get('', 'BusinessController@dispatch');
         Route::get('/{action}/{id}', 'BusinessController@dispatch');
         Route::get('/{action}', 'BusinessController@dispatch');
-        /*foreach (trans('business.menu.certificate.next') as $index => $tran) {
+        foreach (trans('business.menu.certificate.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
 
-        }*/
+        }
+    });*/
+    $newsCats = new \App\NewsCats();
+    // 证书管理
+    Route::group(['prefix' => 'certificate'], function() use($newsCats){
+        foreach (trans('business.menu.certificate.next') as $index => $tran) {
+            $then = $newsCats->getNavigation(['path'], $tran['ty'])->toArray();
+                Route::get($index, 'BusinessController@dispatch');
+            foreach ($then as $row) {
+                Route::get($index.'/'.$row['path'], 'BusinessController@dispatch');
+                Route::get($index.'/'.$row['path'].'/{action}/{id}', 'BusinessController@dispatch');
+                Route::get($index.'/'.$row['path'].'/{action}', 'BusinessController@dispatch');
+                Route::post($index.'/'.$row['path'].'/cu/{id}', 'BusinessController@with');
+                Route::post($index.'/'.$row['path'].'/cu', 'BusinessController@with');
+                // Route::get($index.'/{action}', 'BusinessController@dispatch');
+            }
+        }
     });
+
+
     // 国际教育
-    Route::group(['prefix' => 'education'], function(){
+    Route::group(['prefix' => 'education'], function() use($newsCats){
         foreach (trans('business.menu.education.next') as $index => $tran) {
-            Route::get($index, 'BusinessController@dispatch');
-            Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
-            Route::get($index.'/{action}', 'BusinessController@dispatch');
+            $then = $newsCats->getNavigation(['path'], $tran['ty'])->toArray();
+                Route::get($index, 'BusinessController@dispatch');
+            foreach ($then as $row) {
+                Route::get($index.'/'.$row['path'], 'BusinessController@dispatch');
+                Route::get($index.'/'.$row['path'].'/{action}/{id}', 'BusinessController@dispatch');
+                Route::get($index.'/'.$row['path'].'/{action}', 'BusinessController@dispatch');
+                Route::post($index.'/'.$row['path'].'/cu/{id}', 'BusinessController@with');
+                Route::post($index.'/'.$row['path'].'/cu', 'BusinessController@with');
+                // Route::get($index.'/{action}', 'BusinessController@dispatch');
+            }
         }
     });
 

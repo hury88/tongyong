@@ -343,20 +343,15 @@ HTML;
 	// 生成图片
 	public function img($lablename, $imgname, $tys='')
 	{
-		global $$imgname;
-
 		if(!$lablename || !$imgname) exit('图片字段名为空');
 
 		if (empty($tys)) {
-			global $tty;
-			$imgsize = v_news_cats($tty, 'imgsize');
+			$imgsize = v_news_cats($this->tty, 'imgsize');
 
 			if (! $imgsize) {
-				global $ty;
-				$imgsize = v_news_cats($ty, 'imgsize');
+				$imgsize = v_news_cats($this->ty, 'imgsize');
                 if (! $imgsize) {
-                    global $pid;
-                    $imgsize = v_news_cats($pid, 'imgsize');
+                    $imgsize = v_news_cats($this->pid, 'imgsize');
 
                 }
 			}
@@ -367,15 +362,39 @@ HTML;
 		//替换映射
 		$replaceMap = [
 			'%name%'      => $imgname,
-			'%value%'     => $$imgname,
-			'%src%'       => src($$imgname),
+			'%value%'     => $this->$imgname,
+			'%src%'       => img($this->$imgname, '/img/default-img.png'),
 			'%lablename%' => $lablename,
 			'%imgsize%'   => $imgsize,
-			'%picsize%'   => getConfig('picsize'),
+			'%picsize%'   => '不小于100px，JPG、PNG、GIF格式，小于300k。',
 		];
 			// <a href="%src%" target="_blank">查看图片</a>
 		$tpl = <<<HTML
-		<label title="%name%" class="layui-form-label">%lablename%<b>*</b></label>
+		<div class="post-message-div clearfix">
+            <div class="post-message-left fl">
+                <span><b>*</b>%lablename%</span>
+            </div>
+			<div class="post-message-right fr">
+			    <div class="default-img-box">
+			        <img id="%name%" src="%src%" />
+				    <input type="hidden" name="%name%" value="%value%">
+				    <input type="hidden" name="imgsize_%name%" value="%imgsize%">
+			    </div>
+			    <div class="company-logo-upload">
+			        <div class="user-headimg-upload clearfix">
+			            <div class="user-file-cover">
+			                <p>选择文件</p>
+			                <input onchange="previewImage(this,'%name%')" name="%name%" type="file"/>
+			            </div>
+			            <p class="user-file-notice">选择上传后将直接替换。</p>
+			        </div>
+			        <p class="headimg-upload-limit">%picsize%</p>
+			    </div>
+			</div>
+		</div>
+
+HTML;
+		/*<label title="%name%" class="layui-form-label">%lablename%<b>*</b></label>
 		<div class="site-demo-upload fl">
 		<img src="%src%" height="40" />
 			<input type="hidden" name="%name%" value="%value%">
@@ -387,8 +406,7 @@ HTML;
 				</div>
 			</div>
 			<b style="position: absolute; bottom: -18px;width:220px">图片大小: %picsize% K内,%imgsize%px</b>
-		</div>
-HTML;
+		</div>*/
 		$echoString = str_replace(array_keys($replaceMap), array_values($replaceMap), $tpl);
 
 		# 使用ifs函数 如果条件不成立 输出空
