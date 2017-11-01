@@ -258,3 +258,18 @@ T
 	    unset($state,$title,$message,$redirect);
 	    return response()->json($arr);
 	}
+function get_arr($typeid,$pid=0)
+{
+    $map=$d = array();
+    if(!empty($typeid)) $map['typeid'] = $typeid;
+    if(!empty($pid)) {$map['pid'] = $pid;}else{
+        $map['pid']=0;
+    }
+    $data = DB::table('nature')->select('id','catname')->where("pid",0)->where("typeid",75)->orderBy('disorder','desc')->orderBy('id','asc')->get();
+
+    foreach ($data as $v) {
+        $d[$v->id]=$v->catname;
+    }
+    return $d;
+
+}

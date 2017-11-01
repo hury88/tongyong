@@ -161,7 +161,7 @@ class FormHelper{
 	}
 
 	//编辑器调用
-	public function editor($lablename='信息内容',$name='content',$width = '99%', $height = '350',$b=''){ if($this->in_if === false) return $this;global $$name;$val  = htmlspecialchars_decode($$name);?>
+	public function editor($lablename='信息内容',$name='content',$width = '80%', $height = '350',$b=''){ if($this->in_if === false) return $this;global $$name;$val  = htmlspecialchars_decode($$name);?>
 		<div class="layui-form-item layui-form-text"><?php echo $b?>
 		   <label title="<?php echo $name?>" class="layui-form-label"><?php echo $lablename?><b>*</b></label>
 		   <?php echo $this->word ?>
@@ -497,7 +497,19 @@ HTML;
 		unset($checked,$val,$title,$disabled);
 		return $this;
 	}
-	//+-----------------------------------------------------------------
+
+
+    public static function select2s($typeid,$pid=0,$lm,$n){  $$n = isset($_GET[$n]) ? $_GET[$n] : '';  ?>
+        <select title="<?php echo $lm?>" name="<?php echo $n?>">
+            <option value="0"><?php echo $lm?></option>
+            <?php
+            $d=get_arr($typeid,$pid);
+            foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+                <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+            <?php endforeach ?>
+        </select>
+        <?php UNSET($d,$lm,$n,$v,$t)?>
+    <?php }
 
 }
 

@@ -21,7 +21,9 @@ Route::get('help', [ 'uses' => 'NewsController@helplist']);
 Route::get('weixin', function(){
     return view('weixin');
 });
-
+Route::get('editor', function(){
+    return view('partial/editor');
+});
 Route::group(['prefix' => 'home'], function () {
     Route::get('/', 'HomeController@index');
 });

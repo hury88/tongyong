@@ -33,7 +33,19 @@ function uppro($name,&$arr,$style='img',$water_path=''){
        return  $arr[$name]=$imgnewname;
     }
 }
-
+function get_arr($typeid,$pid=0)
+{
+    $map=$d = array();
+    if(!empty($typeid)) $map['typeid'] = $typeid;
+    if(!empty($pid)) {$map['pid'] = $pid;}else{
+        $map['pid']=0;
+    }
+    $data = M('nature')->field('id,catname')->where($map)->order('disorder desc,id asc')->select();
+    foreach ($data as $v) {
+        $d[$v['id']] = $v['catname'];
+    }
+    return $d;
+}
 //图片上传
 function uploadimgAjax($obj,$path,$name){
     global $system_pictype,$system_picsize;

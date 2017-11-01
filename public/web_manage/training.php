@@ -12,8 +12,11 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
 $user_id =   I('get.user_id',0,'intval');
-$certificate_lid =   I('get.certificate_lid',0,'intval');
-$infotypeid =   I('get.infotypeid',0,'intval');
+
+$industryid =   I('get.industryid',0,'intval');
+$neixunid =   I('get.neixunid',0,'intval');
+$publicid =   I('get.publicid',0,'intval');
+$qualificationid =   I('get.qualificationid',0,'intval');
 $trainingid =   I('get.trainingid',0,'intval');
 if(!empty($user_id)){
     $map['user_id'] =$user_id;
@@ -21,8 +24,11 @@ if(!empty($user_id)){
 }else{
     $cname='管理员';
 }
-if(!empty($certificate_lid)) $map['certificate_lid'] = $certificate_lid;
-if(!empty($infotypeid)) $map['infotypeid'] = $infotypeid;
+if(!empty($trainingid)) $map['trainingid'] = $trainingid;
+if(!empty($industryid)) $map['industryid'] = $industryid;
+if(!empty($neixunid)) $map['neixunid'] = $neixunid;
+if(!empty($publicid)) $map['publicid'] = $publicid;
+if(!empty($qualificationid)) $map['qualificationid'] = $qualificationid;
 
 if(!empty($tty)) $map['tty'] = $tty;
 ###########################筛选开始
@@ -63,13 +69,20 @@ list($data,$pagestr) = Page::paging($pageConfig);
                 </ul>
             </div>
         <?php endif ?>
-              <?php
+              <?php if($ty==28){
+                  $d=get_arr(75);
+                  Output::select2($d, '行业', 'industryid');
+              }elseif($ty==65){
+                  $d=get_arr(73);
+                  Output::select2($d, '内训分类', 'neixunid');
+                  $d=get_arr(74);
+                  Output::select2($d, '公开课分类', 'publicid');
+              }
+                  $d=get_arr(76);
+                  Output::select2($d, '职业资格', 'qualificationid');
+
                   $d = config('webarr.trainingid');
                   Output::select2($d, '培训方式', 'trainingid');
-              ?>
-              <?php
-              $d = config('webarr.trainingid');
-              Output::select2($d, '行业', 'trainingid');
               ?>
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
@@ -212,4 +225,7 @@ if($user_id){
 <?php endforeach?>
 <?php include('js/foot'); ?>
 <!-- <td><?=$img1?><a class="lookPic" href="javascript:;" data-id="<?=$id?>">添加更多图片(<?=M('pic')->where("ti=$id")->count()?>个)</a></td> -->
+
+
+
 
