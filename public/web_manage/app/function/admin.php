@@ -46,6 +46,22 @@ function get_arr($typeid,$pid=0)
     }
     return $d;
 }
+function get_edselect($d,$lm,$n,$select){
+    $str='';
+    foreach ($d as $k => $v){
+        if($k==$select){
+            $sl='selected';
+        }else{
+        $sl='';
+        }
+        $str.="<option {$sl} value='{$k}'>{$v}</option>";
+    }
+    $cs= "<div class='layui-form-item'>
+            <label title=\"{$n}\" class='layui-form-label' style='width: 85px;'>{$lm}<b>*</b></label>
+            <div class='layui-input-block'><select name=\"{$n}\" id=\"{$n}\" style='width:80%;height:35px;font-size:15px;'>{$str}</select> </div>
+          </div>";
+    return $cs;
+}
 //图片上传
 function uploadimgAjax($obj,$path,$name){
     global $system_pictype,$system_picsize;

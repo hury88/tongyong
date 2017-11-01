@@ -16,10 +16,26 @@ $user_id =   I('get.user_id',0,'intval');
 $industryid =   I('get.industryid',0,'intval');
 $neixunid =   I('get.neixunid',0,'intval');
 $publicid =   I('get.publicid',0,'intval');
-$qualificationid1 =   I('get.qualificationid',0,'intval');
-$qualificationid2 =   I('get.qualificationid',0,'intval');
+$qualificationid1 =   I('get.qualificationid1',0,'intval');
+$qualificationid2 =   I('get.qualificationid2',0,'intval');
 $qualificationid =   I('get.qualificationid',0,'intval');
 $trainingid =   I('get.trainingid',0,'intval');
+
+
+if($qualificationid){
+    $qualificationid=$qualificationid;
+}else{
+    if($qualificationid1){
+        if($qualificationid2){
+            $qualificationid2=$qualificationid2;
+        }else{
+            $qualificationid2=get_first(76,$qualificationid1);
+        }
+        $qualificationid=get_first(76,$qualificationid2);
+    }else{
+        $qualificationid=0;
+    }
+}
 if(!empty($user_id)){
     $map['user_id'] =$user_id;
     $cname=v_id($user_id,"member_name","users");
@@ -84,9 +100,10 @@ list($data,$pagestr) = Page::paging($pageConfig);
                   Output::select2($d, '职业资格类', 'qualificationid1');
                   if($qualificationid1){
                       $d=get_arr(76,$qualificationid1);
-                      Output::select2($d, '职业资格类', 'qualificationid1');
-                      $d=get_arr(76);
-                      Output::select2($d, '职业资格类', 'qualificationid1');
+                      Output::select2s($d, '职业资格种类', 'qualificationid2');
+
+                      $d=get_arr(76,$qualificationid2);
+                      Output::select2s($d, '职业资格', 'qualificationid');
                   }
                   $d = config('webarr.trainingid');
                   Output::select2($d, '培训方式', 'trainingid');
@@ -180,51 +197,12 @@ if($user_id){
             <!-- <a href="<?=$editUrl?>" class="thick edits">编辑</a>| -->
             <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
         </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
+
         <td><?=$img1?></td>
         <td><?=$title?></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
-            <td><?=$title?><!-- <span class="fr"><a href="link.php?showtype=6&istop=<?php echo $id ?>">下属列表</a></span> --></td>
-            <td><a href="pic.php?ti=<?=$id?>">图集(<?php echo M('pic')->where("ti=$id and isstate=1")->count()?>条)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==9):/*＜＞＜＞产品＜＞＜＞*/?>
-        <td><?=$img1?></td>
-        <td><?=$title?>)</a></td>
+
         <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
         <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-        <?php if ($ty==11): ?><td><?=isset($d1[$istop]) ? $d1[$istop] : '','&emsp;',isset($d2[$istop2]) ? $d2[$istop2] : '' ?></td><?php endif ?>
-        <!-- <td><?=$hits?></td> -->
-        <!-- <a href="pic.php?ti=<?=$id?>&cid=5">户型介绍(<?//=M('pic')->where("ti=$id and cid=5 and isstate=1")->count()?>条)</a> -->
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
-        <td><?=$title?><span class="fr" style="display:none"><?php echo M('news')->where("istop=$id")->count(); ?></span></td>
-<!-- <td><span data-content="<?=$introduce?>" class="lookinfo layui-btn layui-btn-primary layer-demolist">查看简介</span></td> -->
-<?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==11):/*＜＞＜＞图文列表＜＞＜＞*/?>
-        <td><?=$img1?></td>
-        <td><?=$title,'&emsp;',$ftitle,'&emsp;',$name?><a href="pic.php?ti=<?php echo $id?>">图集(<?php echo M('pic')->where("ti=$id")->count(); ?>)</a>&emsp;&emsp;<a href="link.php?showtype=5&istop=<?php echo $id ?>">历程(<?php echo M('news')->where("istop=$id")->count(); ?>)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==12):/*＜＞＜＞路线＜＞＜＞*/?>
-            <td><?=$img1?></td>
-            <td><?=$title?></td>
-            <td><a href="pic.php?ti=<?php echo $id?>">图集(<?php echo M('pic')->where("ti=$id")->count(); ?>)</a></td>
-            <td><?=$destination?></td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==13):/*＜＞＜＞报名新闻＜＞＜＞*/?>
-        <?php if($tty<>60){?>
-                <td><?=$img1?></td>
-            <?php } if($ty==64){?>
-                <td> <?=Config::get('webarr.infotypeid')[$infotypeid]?> </td>
-            <?php }?>
-
-            <td><?=$title?></td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
-            <!-- <td width="24px"> 配图 </td> -->
-            <td> <?=$title?> </td>
-            <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==16):/*＜＞＜＞职业证书＜＞＜＞*/?>
-            <td> <?=$title?> </td>
-            <td><?=$img1?></td>
-            <td> <?=Config::get('webarr.certificate')[$certificate_lid]?> </td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-
-<?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
 
      <td><?=$publisher?></td>
      <td><?=$time?></td>

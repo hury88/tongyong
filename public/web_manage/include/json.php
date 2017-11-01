@@ -15,8 +15,27 @@ if($action=='xzqy'){
 		$str.="<li data-id=\"{$row['id']}\">{$row['member_name']}</li>";
 	}
 	echo $str;
-}else{
-	echo "";
+	exit();
+}elseif($action=='hqfl1'){
+    $qualificationid1=I('get.qualificationid1','0','intval');
+    $d3=get_arr(76,$qualificationid1);
+    $str='';
+    foreach  ($d3 as $k => $v){
+    $sl=$k==$qualificationid1?'selected':'';
+    $str.="<option {$sl} value=\"{$k}\">{$v}</option>";
+    }
+	echo $str;
+    exit();
+}elseif($action=='hqfl2'){
+    $qualificationid2=I('get.qualificationid2','0','intval');
+    $d5=get_arr(76,$qualificationid2);
+    $str='';
+    foreach  ($d5 as $k => $v){
+        $sl=$k==$qualificationid2?'selected':'';
+        $str.="<option {$sl} value=\"{$k}\">{$v}</option>";
+    }
+    echo $str;
+    exit();
 }
 
 //function deletePics($ids){//删除关联图片

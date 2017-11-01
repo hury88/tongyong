@@ -223,7 +223,32 @@ class Output{
 		 </div>
 		 <?php UNSET($d,$lm,$n,$v,$t)?>
 	<?php }
-
+    public static function edselect($d,$lm,$n){ global $$n; ?>
+        <div class="layui-form-item">
+            <label title="<?php echo $n?>" class="layui-form-label"><?php echo $lm?><b>*</b></label>
+            <div class="layui-input-block">
+                <select name="<?php echo $n?>" style="width:80%;height:35px;font-size:15px;"  id="<?php echo $n?>">
+                    <?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+        <?php UNSET($d,$lm,$n,$v,$t)?>
+    <?php }
+    public static function edselect2($d,$lm,$n){ global $$n; ?>
+        <div class="layui-form-item" id="<?php echo $n?>">
+            <label title="<?php echo $n?>" class="layui-form-label"><?php echo $lm?><b>*</b></label>
+            <div class="layui-input-block">
+                <select name="<?php echo $n?>" style="width:80%;height:35px;font-size:15px;">
+                    <?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+        <?php UNSET($d,$lm,$n,$v,$t)?>
+    <?php }
 	public static function select2($d,$lm,$n){ global $$n; ?>
 			  <label title="<?php echo $n?>"><?php echo $lm?><b>*</b></label>
 			    <select name="<?php echo $n?>" style="height:34px">
@@ -234,7 +259,15 @@ class Output{
 			    </select>
 		 <?php UNSET($d,$lm,$n,$v,$t)?>
 	<?php }
-
+    public static function select2s($d,$lm,$n){ global $$n; ?>
+        <label title="<?php echo $n?>"><?php echo $lm?><b>*</b></label>
+        <select name="<?php echo $n?>" style="height:34px">
+            <?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+                <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+            <?php endforeach ?>
+        </select>
+        <?php UNSET($d,$lm,$n,$v,$t)?>
+    <?php }
 
 
 	//生成隐藏域
