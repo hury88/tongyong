@@ -16,6 +16,8 @@ $user_id =   I('get.user_id',0,'intval');
 $industryid =   I('get.industryid',0,'intval');
 $neixunid =   I('get.neixunid',0,'intval');
 $publicid =   I('get.publicid',0,'intval');
+$qualificationid1 =   I('get.qualificationid',0,'intval');
+$qualificationid2 =   I('get.qualificationid',0,'intval');
 $qualificationid =   I('get.qualificationid',0,'intval');
 $trainingid =   I('get.trainingid',0,'intval');
 if(!empty($user_id)){
@@ -79,8 +81,13 @@ list($data,$pagestr) = Page::paging($pageConfig);
                   Output::select2($d, '公开课分类', 'publicid');
               }
                   $d=get_arr(76);
-                  Output::select2($d, '职业资格', 'qualificationid');
-
+                  Output::select2($d, '职业资格类', 'qualificationid1');
+                  if($qualificationid1){
+                      $d=get_arr(76,$qualificationid1);
+                      Output::select2($d, '职业资格类', 'qualificationid1');
+                      $d=get_arr(76);
+                      Output::select2($d, '职业资格类', 'qualificationid1');
+                  }
                   $d = config('webarr.trainingid');
                   Output::select2($d, '培训方式', 'trainingid');
               ?>

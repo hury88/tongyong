@@ -25,4 +25,5 @@
 <?php
 $opt = new App\Helpers\FormHelper;
 $opt->editor('详情内容','content');
+
 ?>
