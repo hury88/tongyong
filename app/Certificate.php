@@ -4,10 +4,12 @@ namespace app;
 
 use Exception;
 use App\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use function foo\func;
 
 class Certificate extends Model
 {
+    use SoftDeletes;
     /**
      * The database table used by the model.
      *
@@ -34,6 +36,7 @@ class Certificate extends Model
      */
     // $fillable属性和$guarded
     protected $fillable = ['title', 'certificate_lid', 'content'];
+
 
     public function v_list($where=[],$field=['*'],$num=null)
     {
