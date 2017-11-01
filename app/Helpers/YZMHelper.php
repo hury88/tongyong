@@ -5,7 +5,7 @@ class YZMHelper
 {
 	const NUMBER = 1;
 	const MIX = 2;
-	private $debug = false;
+	private $debug = true;
     private static $var = 'yzm';
 	private static $var_expire = 'yzm_expire';
 

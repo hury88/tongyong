@@ -44,7 +44,7 @@ if (IS_POST) { //增加
 		// ECHO '执行插入';
 		//检查用户名的唯一性
 		if(M($table)->where("`username`='{$fields['username']}'")->getField('id')){
-			JsError("对不起该用户名 ".$fields['username']." 已有人使用，请重新输入！");
+			Redirect::JsError("对不起该用户名 ".$fields['username']." 已有人使用，请重新输入！");
 			exit();
 		}
 		$fields['sendtime']	=	$PHP_TIME;
@@ -52,19 +52,19 @@ if (IS_POST) { //增加
 		if( M($table)->insert($fields) ) {
 
 			AddLog("添加{$showname}_pro管理员信息",$_SESSION['Admin_UserName']);
-			JsSucce("添加数据成功,操作成功！",$redirect);
+			Redirect::JsSuccess("添加数据成功,操作成功！",$redirect);
 		}else{
 			// _sql();exit;
-			JsError("添加数据失败,请至少选择一个有效分类！");
+			Redirect::JsError("添加数据失败,请至少选择一个有效分类！");
 		}
 	}else{
 		// ECHO '执行更新';
 		$fields['id'] = $id;
 		if( M($table)->update($fields) ) {
 			AddLog("编辑{$showname}_pro管理员信息",$_SESSION['Admin_UserName']);
-			JsSucce("更新数据成功,操作成功！",$redirect);
+			Redirect::JsSuccess("更新数据成功,操作成功！",$redirect);
 		}else{
-			JsError("更新数据失败,操作失败！");
+			Redirect::JsError("更新数据失败,操作失败！");
 		}
 	}
 }
@@ -115,10 +115,10 @@ if (IS_POST) { //增加
 							<?php printInputHtml('管理帐号','username') ?>
 							<li class="fade"><label>登陆密码<b>*</b></label><input name="password" type="password" class="shurukuang" value=""/>  (不修改则为空)</li>
 							<li class="fade"><label>确认密码<b>*</b></label><input name="password1" type="password" class="shurukuang" value=""/></li>
-							<li class="fade"><label>管理员类型<b>*</b></label><input name="typeid" type="radio" onClick="show(0)" value="2" <? if(isset($bigmymenu)&&$bigmymenu=="super") echo 'checked'?>> 超级管理员 <input type="radio" name="typeid" value="1" onClick="show(2)" <? if(isset($bigmymenu)&&$bigmymenu<>"super") echo 'checked'?>> 普通管理员</li>
+							<li class="fade"><label>管理员类型<b>*</b></label><input name="typeid" type="radio" onClick="show(0)" value="2" <?php if(isset($bigmymenu)&&$bigmymenu=="super") echo 'checked'?>> 超级管理员 <input type="radio" name="typeid" value="1" onClick="show(2)" <?php if(isset($bigmymenu)&&$bigmymenu<>"super") echo 'checked'?>> 普通管理员</li>
 							<li id="dlqy" style="display:none"><label>管理员权限<b>*</b></label>
 								<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolorlight="#A1BC7A" bordercolordark="#FFFFFF">
-									<?
+									<?php
 									// $sql="SELECT id,catname FROM `{$tablepre}news_cats` WHERE isstate=1 AND pid=0  ORDER BY disorder ASC,id ASC";
 									$data1ji = M('news_cats')->field('id,catname')->where('isstate=1 AND pid=0')->order('disorder ASC,id ASC')->select();
 									foreach ($data1ji as $key1ji => $row) {
@@ -128,7 +128,7 @@ if (IS_POST) { //增加
 											<td width=2% height="25" align="center"></td>
 											<td width=98% height="25">
 												<b><?=$row['id']?>:<?=$row['catname']?></b><br>
-												<?
+												<?php
 												$data2ji = M('news_cats')->field('id,catname')->where("isstate=1 AND pid=$pid")->order('disorder ASC,id ASC')->select();
 												$smallmymenu = isset($smallmymenu)?$smallmymenu:'';
 												foreach ($data2ji as $key2 => $row2) {
@@ -142,13 +142,11 @@ if (IS_POST) { //增加
 													?>
 													<?=$bj?><input name="smallmymenu[]" type="checkbox" id="smallmymenu[]" value="<?=$row2['id']?>"  <?=$ck?>>
 													<?=$row2['catname']?>&nbsp;&nbsp;
-													<? }//二级结束 ?><br>
+													<?php }//二级结束 ?><br>
 												</td>
 											</tr>
 
-											<?
-										}//循环一级结束
-										?>
+											<?php }//循环一级结束 ?>
 										<tr>
 											<td></td>
 											<td>

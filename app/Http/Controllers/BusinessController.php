@@ -17,9 +17,10 @@ use Illuminate\Support\Facades\Session;
 
 class BusinessController extends base\UserController
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
-        parent::__construct();
+        if ($request->method() == 'GET')
+            parent::__construct();
     }
 
     /**
@@ -113,6 +114,37 @@ class BusinessController extends base\UserController
         return $this->relatedToNewsCats($table, $action, $id);
     }
 
+    public function dispatch($action = '', $id = '')
+    {
+        #将一级栏目的路劲名作为表名
+        $table = $GLOBALS['uri'][1];
+        path2ptt($table);
+        $compact = ['user' => \Auth::user()->relationsToArray(), 'table' => $table];
+        switch ($action) {
+            case 'create':
+            case 'update':
+                $row = \Auth::user()->{'hasMany'.ucfirst($table)}->find($id);
+                $view = 'cu';
+                $haystack['row'] = $row;
+                break;
+            case 'delete':
+                return $this->delete($table, $id);
+                break;
+            default://列表
+                $view = 'list';
+                $_GET['certificate_lid'] = isset($_GET['certificate_lid']) ? (int) $_GET['certificate_lid'] : 0;
+                $_GET['title'] = isset($_GET['title']) ? $_GET['title'] : '';
+                $compact['pagenewslist'] = \Auth::user()->hasManyCertificate()->where('isstate',1)->where(function($query){
+                    empty($_GET['certificate_lid']) or $query->where('certificate_lid', intval($_GET['certificate_lid']));
+                    empty($_GET['title']) or $query->where('title', 'like', '%'.$_GET['title'].'%');
+                })->paginate(15)->toArray(10);
+                $compact['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid='.intval($_GET['certificate_lid']) : '';
+                break;
+        }
+        ;
+        return view("business.$table", $compact);
+    }
+
     private function relatedToNewsCats($table, $action, $id, $compact = [])
     {
         $haystack = ['user' => \Auth::user()->relationsToArray()];
@@ -127,11 +159,23 @@ class BusinessController extends base\UserController
                 return $this->delete($table, $id);
                 break;
             default://列表
+                $haystack['table'] = $table;
                 $view = 'list';
-                // $list = \Auth::user()->{'hasMany'.ucfirst($table)}->toArray();
+                $_GET['certificate_lid'] = isset($_GET['certificate_lid']) ? (int) $_GET['certificate_lid'] : 0;
+                $_GET['title'] = isset($_GET['title']) ? $_GET['title'] : '';
+                $haystack['pagenewslist'] = \Auth::user()->hasManyCertificate()->where('isstate',1)->where(function($query){
+                    empty($_GET['certificate_lid']) or $query->where('certificate_lid', intval($_GET['certificate_lid']));
+                    empty($_GET['title']) or $query->where('title', 'like', '%'.$_GET['title'].'%');
+                })->paginate(15)->toArray(10);
+                $haystack['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid='.intval($_GET['certificate_lid']) : '';
                 break;
         }
         ;
         return view('business.related-news_cats-'.$view, array_merge($haystack, $compact));
+    }
+
+    public function delete(Request $request)
+    {
+        dd($request->all());
     }
 }

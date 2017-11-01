@@ -9,26 +9,7 @@
 @stop
 @section('content')
     <div class="login-box">
-       <div class="login-header">
-           <div class="login-header-l fl">
-              <a class="login-logo" href="javascript:void(0)">
-                  <img src="img/login-logo.png" alt=""/>
-                  中国职业培训网
-              </a>
-              <a class="login-address" href="javascript:void(0)">合肥</a>
-           </div>
-           <div class="login-header-r fr">
-               <ul class="login-nav-ul">
-                   <li class="login-nav-li">
-                       <a href="javascript:void(0)">首页</a>
-                   </li>
-                   <li class="login-nav-li">
-                       <a href="javascript:void(0)">使用帮助</a>
-                   </li>
-               </ul>
-           </div>
-           <div class="clearfix"></div>
-       </div>
+      @include('auth.partial.auth_head')
        <div class="login-content">
            <div class="login-content-l fl">
                <h2>高端职业</h2>
@@ -39,7 +20,7 @@
               <form class="form" method="post" action="{{route('login')}}">
                  <div class="form-title">
                      <ul class="form-title-ul">
-                         <li class="form-title-li {{request()->has('person') ? 'active' : ''}}">
+                         <li class="form-title-li {{request()->has('org') ? '' : 'active'}}">
                              <a href="/login?person=true">学生登录</a>
                          </li>
                          <li class="form-title-li {{request()->has('org') ? 'active' : ''}}">

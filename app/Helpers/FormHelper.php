@@ -36,6 +36,7 @@
    Output::groupSelect($d,$groupCate,'选择分类','istop','ty');
 *  +----------------------------------------------------------------------
 */
+namespace App\Helpers;
 class FormHelper{
 	private $display = 'block';//长度 inline短一些
 	private $verify  = '';//必填项  number:数字 email:邮箱 phone:手机号 date:日期 url:链接 http://www....
@@ -224,10 +225,9 @@ class FormHelper{
 		 <?php UNSET($d,$lm,$n,$v,$t)?>
 	<?php }
 
-	public static function select2($d,$lm,$n){ global $$n; ?>
-			  <label title="<?php echo $n?>"><?php echo $lm?><b>*</b></label>
-			    <select name="<?php echo $n?>" style="height:34px">
-			    		<option value="0">请选择</option>
+	public static function select2($d,$lm,$n){  $$n = isset($_GET[$n]) ? $_GET[$n] : '';  ?>
+			    <select title="<?php echo $lm?>" name="<?php echo $n?>">
+			    		<option value="0"><?php echo $lm?></option>
 			    	<?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
 			    		<option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
 			    	<?php endforeach ?>

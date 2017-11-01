@@ -12,26 +12,7 @@
     @section('navigation')
     @stop
     <div class="register-box">
-        <div class="login-header">
-            <div class="login-header-l fl">
-                <a class="login-logo" href="javascript:void(0)">
-                    <img src="/img/login-logo.png" alt=""/>
-                    中国职业培训网
-                </a>
-                <a class="login-address" href="javascript:void(0)">合肥</a>
-            </div>
-            <div class="login-header-r fr">
-                <ul class="login-nav-ul">
-                    <li class="login-nav-li">
-                        <a href="/">首页</a>
-                    </li>
-                    <li class="login-nav-li">
-                        <a href="{{u('help')}}">使用帮助</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+        @include('auth.partial.auth_head')
     </div>
     <div class="pager_wrap register-wrap">
         <div class="login-register-box register-content">
@@ -102,7 +83,7 @@
                     </div>
                 </div>
                 <div class="register-right fr">
-                    <a class="register-other-link" href="javascript:;">已有账号，去登录？ >></a>
+                    <a class="register-other-link" href="{{route('login')}}">已有账号，去登录？ >></a>
                     <div class="third-login">
                         <h3>使用第三方登录</h3>
                         <div class="third-login-type">

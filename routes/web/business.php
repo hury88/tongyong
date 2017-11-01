@@ -3,13 +3,14 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
     Route::get('dashboard', 'BusinessController@dashBoard');
 
     Route::get('/', ['as' => 'business', 'uses' => 'BusinessController@profile']);
+    Route::post('delete/{table}', ['as' => 'b_delte', 'uses' => 'BusinessController@delete']);
 
     // 左侧栏目
     foreach (array_keys(trans('business.menu')) as $index) {
-        Route::get($index, ['as' => trans('business.route_prefiex').$index, 'uses' => "BusinessController@$index"]);
+        Route::get($index, ['as' => trans('business.route_prefiex').$index, 'uses' => "BusinessController@dispatch"]);
     }
 
-    // 招聘路由组
+    /*// 招聘路由组
     Route::group(['prefix' => 'job'], function(){
         foreach (trans('business.menu.job.next') as $index => $tran) {
             Route::get($index, 'BusinessController@job');
@@ -42,6 +43,42 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         foreach (trans('business.menu.education.next') as $index => $tran) {
             Route::get($index, 'BusinessController@education');
             Route::get($index.'/{action}/{id}', 'BusinessController@education');
+        }
+    });*/
+
+    // 招聘路由组
+    Route::group(['prefix' => 'job'], function(){
+        foreach (trans('business.menu.job.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@dispatch');
+            Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+        }
+    });
+    // 简历路由组
+    Route::group(['prefix' => 'resume'], function(){
+        foreach (trans('business.menu.resume.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@dispatch');
+            Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+        }
+    });
+    // 职业培训管理
+    Route::group(['prefix' => 'training'], function(){
+        foreach (trans('business.menu.training.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@dispatch');
+            Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+        }
+    });
+    // 证书管理
+    Route::group(['prefix' => 'certificate'], function(){
+        foreach (trans('business.menu.certificate.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@dispatch');
+            Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+        }
+    });
+    // 国际教育
+    Route::group(['prefix' => 'education'], function(){
+        foreach (trans('business.menu.education.next') as $index => $tran) {
+            Route::get($index, 'BusinessController@dispatch');
+            Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
         }
     });
 

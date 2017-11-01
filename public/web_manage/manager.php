@@ -9,21 +9,21 @@ $showname= 'manager';
 
 if ($action=="confirm"){
 	if (empty($id)){
-		JsError("参数提交错误");
+		Redirect::JsError("参数提交错误");
 	}
 	$sql="update `{$tablepre}manager` SET isstate=NOT(isstate) WHERE id=".$id;
 	$db->sql_query($sql);
 
 	AddLog("审核管理员帐号",$_SESSION['Admin_UserName']);
 
-	JsSucce("操作成功！","manager.php");
+	Redirect::JsSuccess("操作成功！","manager.php");
 	exit();
 }elseif ($action=="del"){
 	$checkid = isset($_POST['checkid']) ? $_POST['checkid'] : array();
 	if(M($table)->delete($checkid)){
-		JsSucce("删除操作成功！","manager.php");
+		Redirect::JsSuccess("删除操作成功！","manager.php");
 	}else{
-		JsSucce("删除操作失败","manager.php");
+		Redirect::JsSuccess("删除操作失败","manager.php");
 	}
 	AddLog("删除管理员帐号",$_SESSION['Admin_UserName']);
 	exit();
@@ -103,7 +103,7 @@ $PageCount=$db->sql_numrows($result);*/
 									<a data-class="btn-warm" class="json <?php echo $isstate==1?'':'btn-warm' ?>" data-url="s=1&a=isstate&t=<?php echo $table?>&id=<?php echo $id?>"><?php echo Config::get('webarr.isstate')[$isstate] ?></a>
 								</td>
 								<td><?php echo $time?></td>
-								<td><a href="<?php echo $showname?>_pro.php?id=<?php echo $bd['id']?>" class="tablelink">修改</a></td>
+								<td><a href="<?php echo $showname?>_pro.php?id=<?php echo $id?>" class="tablelink">修改</a></td>
 							</tr>
 						<?php endforeach; $pagestr=''?>
 <?php include('js/foot'); ?>
