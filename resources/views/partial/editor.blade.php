@@ -5,9 +5,9 @@
     KindEditor.ready(function(K) {
         var editor1 = K.create('.editor_id', {
             filterMode: false,//是否开启过滤模式
-            cssPath : 'plugins/myeditor/plugins/code/prettify.css',
-            uploadJson : 'plugins/myeditor/php/upload_json.php',
-            fileManagerJson : 'plugins/myeditor/php/file_manager_json.php',
+            cssPath : '/plugins/myeditor/plugins/code/prettify.css',
+            uploadJson : '/plugins/myeditor/php/upload_json.php',
+            fileManagerJson : '/plugins/myeditor/php/file_manager_json.php',
             allowFileManager : true,
             afterBlur : function() {
                 this.sync();
@@ -22,8 +22,3 @@
         prettyPrint();
     });
 </script>
-<?php
-$opt = new App\Helpers\FormHelper;
-$opt->editor('详情内容','content');
-
-?>

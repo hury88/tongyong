@@ -1,5 +1,4 @@
 @extends('business.layouts.master')
-
 @section('title') @parent @stop
 @section('css') @parent @stop
 
@@ -17,10 +16,61 @@
 @stop
 
 @section('scripts')
-@if(defined('IN_PRO'))
+@if(defined('AT_CU'))
     <script>
+        $('.save').click(function(){
+            model(this);
+        })
+        //提交表单
+        function formSubmit(that, actionUrl){
+            //读取信息
+            var hiddenForm = new FormData();
+            var form = $(that).parents('.form');
+            if (!actionUrl) actionUrl = form.attr("action");
+            form.find('input,textarea,select').each(function(i){
+                if (this.type=="file") {
+                    hiddenForm.append(this.name, this.files[0])
+                } else if(this.type == 'radio'){
+                    hiddenForm.append(this.name, this.checked);
+                } else {
+                    hiddenForm.append(this.name, this.value);
+                }
+            })
+            $(that).attr('disabled',true);//按钮锁定
+            $.ajax({
+             url  : actionUrl,
+             type : "post",
+             dataType : 'json',
+             data : hiddenForm,
+             cache: false,
+             processData: false,
+             contentType: false,
+             contentType: false,
+             // headers: { 'X-CSRF-TOKEN' : "{{csrf_token()}}" },
+             success : function(response){
+                var state = response.state,
+                    title = response.title,
+                    message = response.message,
+                    status = response.status,
+                    redirect = response.redirect;
+
+                handing(status,state,title,message,redirect,function(){
+                    if (is_yzm(status, state)) {
+                        settime(that, 60);
+                    } else {
+                        $(that).removeAttr('disabled');//解除锁定
+                    }
+                });
+             },
+             error : function(){
+                $(that).removeAttr('disabled');
+                dialog(3,["提交出错 : 请刷新页面重试!", "系统错误"],{cancel:"取消",confirm:["刷新", "?"]});
+             }
+            })
+            return false;
+        }
                 //提交表单
-                function submitForm(){
+                function submitForm(btn){
                     //读取信息
                     var hiddenForm = new FormData($('#dataForm')[0]);
                         /*that.parents('.submit').find('input,textarea,select').each(function(i,obj){
@@ -28,15 +78,16 @@
                         })*/
 
 
-                    $('.datasubmi').attr('disabled',true)
+                    btn.attr('disabled',true)
                     $.ajax({
-                        url  : "include/action.php",
+                        url  : "{{u('business', $table, 'cu', $form->id)}}",
                         type : "post",
                         dataType : 'json',
                         data : hiddenForm,
                         cache: false,
                         processData: false,
                         contentType: false,
+                        headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                         success : function(json){
                             // console.log(json)
                             var stu = json.status
@@ -50,7 +101,7 @@
                             if(stu==1 || stu==6){
                                     // history.go(-1);
                                 setTimeout(function(){
-                                    window.location.href="<?=getUrl(queryString(true, true),$showname)?>";
+                                    window.location.href="";
                                     // var index = parent.layer.getFrameIndex(window.name);
                                     // parent.layer.close(index);
                                     // window.location.reload();
@@ -61,7 +112,7 @@
                             }
                         },
                         error:function(XMLHttpRequest, textStatus, errorThrown){
-                            $('.datasubmit').removeAttr('disabled');
+                            btn.removeAttr('disabled');
                           layer.alert('网络不畅,稍后再试!', {
                             icon: 3,
                             skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅

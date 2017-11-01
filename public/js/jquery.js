@@ -36,7 +36,6 @@ function model(that, actionUrl){
 
 		handing(status,state,title,message,redirect,function(){
 			if (is_yzm(status, state)) {
-				console.log("tt");
 				settime(that, 60);
 			} else {
 		     	$(that).removeAttr('disabled');//解除锁定

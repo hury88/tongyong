@@ -3,7 +3,13 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
     Route::get('dashboard', 'BusinessController@dashBoard');
 
     Route::get('/', ['as' => 'business', 'uses' => 'BusinessController@profile']);
+
+
+    //    删除操作
     Route::post('delete/{table}', ['as' => 'b_delte', 'uses' => 'BusinessController@delete']);
+    //    更新添加操作
+    Route::post('{table}/cu/{id}', 'BusinessController@with');
+    Route::post('{table}/cu', 'BusinessController@with');
 
     // 左侧栏目
     foreach (array_keys(trans('business.menu')) as $index) {
@@ -51,6 +57,7 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         foreach (trans('business.menu.job.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+            Route::get($index.'/{action}', 'BusinessController@dispatch');
         }
     });
     // 简历路由组
@@ -58,6 +65,7 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         foreach (trans('business.menu.resume.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+            Route::get($index.'/{action}', 'BusinessController@dispatch');
         }
     });
     // 职业培训管理
@@ -65,12 +73,14 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         foreach (trans('business.menu.training.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+            Route::get($index.'/{action}', 'BusinessController@dispatch');
         }
     });
     // 证书管理
     Route::group(['prefix' => 'certificate'], function(){
 //        Route::get('', 'BusinessController@dispatch');
         Route::get('/{action}/{id}', 'BusinessController@dispatch');
+        Route::get('/{action}', 'BusinessController@dispatch');
         /*foreach (trans('business.menu.certificate.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
@@ -82,18 +92,18 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
         foreach (trans('business.menu.education.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
+            Route::get($index.'/{action}', 'BusinessController@dispatch');
         }
     });
 
 
+    /* Route::post('profile/save', 'UserController@saveProfile');
 
-   /* Route::post('profile/save', 'UserController@saveProfile');
+     Route::post('profile/disable', 'UserController@disableProfile');
 
-    Route::post('profile/disable', 'UserController@disableProfile');
+     Route::post('profile/enable', 'UserController@activeProfile');
 
-    Route::post('profile/enable', 'UserController@activeProfile');
-
-    Route::post('upload', 'UserController@upload');*/
+     Route::post('upload', 'UserController@upload');*/
 
     //Address
    /* Route::get('address/', 'AddressesController@index'); //list

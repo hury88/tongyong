@@ -327,6 +327,7 @@
 .certificate-but{
     width: 111px;
     height: 34px;
+    line-height: 34px;
     background: #2c68b2 url(../img/arror.png) no-repeat 85px center;
     border-radius:15px;
     float: left;

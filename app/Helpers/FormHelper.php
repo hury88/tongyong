@@ -52,6 +52,16 @@ class FormHelper{
 
 	const CHECKED = 1;// 选中状态
 
+	public function __construct($row)
+	{
+		$this->row = $row;
+	}
+
+	public function __get($index)
+	{
+		return isset($this->row[$index]) ? $this->row[$index] : '';
+	}
+
 	public function echoString($string)
 	{
 		if($this->in_if === false) $string = '';
@@ -161,14 +171,13 @@ class FormHelper{
 	}
 
 	//编辑器调用
-	public function editor($lablename='信息内容',$name='content',$width = '80%', $height = '350',$b=''){ if($this->in_if === false) return $this;global $$name;$val  = htmlspecialchars_decode($$name);?>
-		<div class="layui-form-item layui-form-text"><?php echo $b?>
-		   <label title="<?php echo $name?>" class="layui-form-label"><?php echo $lablename?><b>*</b></label>
-		   <?php echo $this->word ?>
-		   <div class="layui-input-block">
-		     <?php echo self::initEditor($name,$width,$height)?>
-		   </div>
-		 </div>
+	public function editor($lablename='信息内容',$name='content',$width = '47%', $height = '350',$b=''){ if($this->in_if === false) return $this;global $$name;$val  = htmlspecialchars_decode($$name);?>
+		<div class="job-posted-dv">
+		    <span class="job-posted-property"><?php echo $lablename?></span>
+		    <div class="job-posted-values">
+		       <?php echo $this->initEditor($name,$width,$height)?>
+		    </div>
+		</div>
 	<?php return $this;}
 
 	//生成select $d:d $lm=lablename $n:name $v:value $t:text
@@ -210,19 +219,19 @@ class FormHelper{
 	<?php }
 
 
-	public static function select($d,$lm,$n){ global $$n; ?>
+	public function select($d,$lm,$n){ ?>
         <div class="job-posted-dv">
-            <span title="<?php echo $n?>" class="job-posted-property"><b>*</b><?php echo $lm?></span>
+            <span title="<?php echo $lm?>" class="job-posted-property"><b>*</b><?php echo $lm?></span>
             <div class="job-posted-values">
-                <select>
+                <select name="<?php echo $n?>">
                     <option value="0">请选择</option>
-                    <?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+                    <?php foreach ($d as $k => $v): $sl=$k==$this->$n?'selected':'' ?>
                         <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
                     <?php endforeach ?>
                 </select>
             </div>
         </div>
-		 <?php UNSET($d,$lm,$n,$v,$t)?>
+		 <?php UNSET($d,$lm,$n,$v,$t);return $this;?>
 	<?php }
 
 	public static function select2($d,$lm,$n){  $$n = isset($_GET[$n]) ? $_GET[$n] : '';  ?>
@@ -240,8 +249,7 @@ class FormHelper{
 	//生成隐藏域
 	public function hide($n,$v=''){
 		if (empty($v)) {
-			global $$n;
-			$v = isset($$n) ? $$n : '';
+			$v = $this->$n;
 		}
 		echo '<input name="'.$n.'" value="'.$v.'" type="hidden">';
 		return $this;
@@ -253,13 +261,12 @@ class FormHelper{
 	{
 		$this->in = 'time';
 
-		global $$inputname;
 		//替换映射
 		$replaceMap = [
 			'%word%'      => $this->word,
 			'%display%'   => 'inline',
 			'%name%'      => $inputname,
-			'%value%'     => isset($$inputname) ? date("Y-m-d H:i:s", $$inputname) : date("Y-m-d H:i:s"),
+			'%value%'     => isset($this->$inputname) ? date("Y-m-d H:i:s", $this->$inputname) : date("Y-m-d H:i:s"),
 			'%lablename%' => $lablename,
 		];
 
@@ -286,14 +293,13 @@ HTML;
 
 	//生成input或者textarea
 	private function input_text($lablename,$inputname,$type=0){
-		global $$inputname;
 		//替换映射
 		$replaceMap = [
 			'%word%'      => $this->word,
 			'%verify%'    => $this->verify,
 			'%display%'   => $this->display,
 			'%name%'      => $inputname,
-			'%value%'     => $$inputname,
+			'%value%'     => $this->$inputname,
 			'%lablename%' => $lablename,
 		];
 
@@ -441,9 +447,8 @@ HTML;
 		return $editor;
 	}
 	//编辑器调用
-	private static function initEditor($name='content',$width = '667', $height = '350'){
-		global $$name;
-		$val  = htmlspecialchars_decode($$name);
+	private function initEditor($name='content',$width = '667', $height = '350'){
+		$val  = htmlspecialchars_decode($this->$name);
 		$editor="<textarea class=\"editor_id\" name=\"{$name}\" style=\"width:{$width};height:{$height}px;\">{$val}</textarea>";
 		return $editor;
 	}

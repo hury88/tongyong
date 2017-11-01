@@ -109,7 +109,11 @@ function v_pic($pid){
 					$GLOBALS['ty'] = $db_ty->id;
 					$GLOBALS['ty_path'] = $uri[1];
 					$GLOBALS['ty_data'] = $db_ty;
-				}
+				} /*elseif ( $db_ty = v_path(null, $db_pid->id) ) {
+					$GLOBALS['ty'] = $db_ty->id;
+					$GLOBALS['ty_path'] = $db_ty->path;
+					$GLOBALS['ty_data'] = $db_ty;
+				}*/
 			}
 		} elseif($level == 3) {
 			if ( $db_pid = v_path($uri[0]) ) {
@@ -166,7 +170,7 @@ function v_pic($pid){
     {
         $args = func_get_args();
         $args =  $args ? implode('/', $args) : '';
-        return "/$args";
+        return '/'.trim($args, '/');
     }
 
 	function bread()
@@ -236,28 +240,42 @@ T
 		UNSET($url,$catname,$breadTemp,$bread);*/
 	}
 
-	function handleResponseJson($state,$message,$redirect=false){
-	    $arr = [
-	    	'state' => $state,
-	    	'message' => $message,
-	    	'status' => 'handle',
-	    ];
-	    $redirect && $arr['redirect'] = $redirect;
-	    unset($state,$title,$message,$redirect);
-	    return response()->json($arr);
-	}
+/**
+ * @param $state h_s = 200,h_i = 201;h_w = 203,h_e = 412;h_c = 2011; //验证码
+ * @param $message
+ * @param bool $redirect
+ * @return \Illuminate\Http\JsonResponse
+ */
+function handleResponseJson($state,$message,$redirect=false){
+    $arr = [
+        'state' => $state,
+        'message' => $message,
+        'status' => 'handle',
+    ];
+    $redirect && $arr['redirect'] = $redirect;
+    unset($state,$title,$message,$redirect);
+    return response()->json($arr);
+}
 
-	function noticeResponseJson($state,$title,$message,$redirect=false){
-	    $arr = [
-	    	'state' => $state,
-	    	'title' => $title,
-	    	'message' => $message,
-	    	'status' => 'notice',
-	    ];
-	    $redirect && $arr['redirect'] = $redirect;
-	    unset($state,$title,$message,$redirect);
-	    return response()->json($arr);
-	}
+/**
+ * @param $state n_s = 200,n_i = 201;n_w = 303,n_e = 412;
+ * @param $title
+ * @param $message
+ * @param bool $redirect
+ * @return \Illuminate\Http\JsonResponse
+ */
+function noticeResponseJson($state,$title,$message,$redirect=false){
+    $arr = [
+        'state' => $state,
+        'title' => $title,
+        'message' => $message,
+        'status' => 'notice',
+    ];
+    $redirect && $arr['redirect'] = $redirect;
+    unset($state,$title,$message,$redirect);
+    return response()->json($arr);
+}
+
 function get_arr($typeid,$pid=0)
 {
     $map=$d = array();

@@ -21,13 +21,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Request $request)
     {
         $config = Config::find(1)->toArray();
-        path2ptt($request->path());
-        list($boot_bread, $boot_title) = bread();
-        array_push($boot_title, $config['sitename']);
         view()->share('boot_config', $config);
-        view()->share('boot_bread', $boot_bread);
-        view()->share('boot_title', $boot_title);
-        view()->share('cache', []);
+        path2ptt($request->path());
+        if ($request->method() == 'GET') {
+            list($boot_bread, $boot_title) = bread();
+            array_push($boot_title, $config['sitename']);
+            view()->share('boot_bread', $boot_bread);
+            view()->share('boot_title', $boot_title);
+        }
 
         //自定义验证码规则
         /*Validator::extend('phone', function($attribute, $value, $parameters){
