@@ -121,6 +121,7 @@ class BusinessController extends base\UserController
         #将一级栏目的路劲名作为表名
         $table = $GLOBALS['uri'][1];
         path2ptt(substr(Request()->path(), 8));
+        //dd($GLOBALS);
         $compact = ['user' => \Auth::user()->relationsToArray(), 'table' => $table];
         switch ($action) {
             case 'create':
