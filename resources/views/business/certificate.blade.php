@@ -17,7 +17,7 @@ $td = [];
 @foreach($pagenewslist['data'] as $key => $list)<?php extract($list) ?>
 <tr>
     <td class="manager-firstth">
-        <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
+        <label><input id="delid{{$id}}" class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
     <td>{{$title}}</td>
     <td>{{$d[$certificate_lid]}}</td>
@@ -25,7 +25,7 @@ $td = [];
     <td>{{date('Y-m-d', $sendtime)}}</td>
     <td>
         <a class="resume-remove color-trblue" href="{{$table}}/update/{{$id}}">修改</a>
-        <a class="resume-delete color-trblue" href="{{$table}}/delete/{{$id}}">删除</a>
+        <a data-id="{{$id}}" class="resume-delete color-trblue" href="javascript:;">删除</a>
     </td>
 </tr>
 @endforeach

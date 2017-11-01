@@ -143,9 +143,13 @@ class BusinessController extends base\UserController
         };
     }
 
-    public function delete($table, $id)
+    public function delete($table, Request $request)
     {
-        dd([$table, $id]);
+        if (in_array($table, $this->fillTable)) {
+            #出入表名
+            $DeleteData = new \App\Helpers\DeleteData($table, $request->get('ids'), \Auth::user()->id);
+        }
+        return handleResponseJson(200, '');
     }
 
     /**
