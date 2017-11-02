@@ -6,9 +6,11 @@ Route::group(['prefix'=>'training'],function(){
     Route::get('skill', [ 'uses' => 'TrainingController@newslist']);
     Route::get('enterprise', [ 'uses' => 'TrainingController@newslist']);
     Route::get('online', [ 'uses' => 'TrainingController@newslist']);
-    Route::get('skill/{id}', [ 'as'=>'company','uses' => 'TrainingController@show']);
-    Route::get('enterprise/{id}', [ 'as'=>'education','uses' => 'TrainingController@show']);
+    Route::get('business', [ 'uses' => 'TrainingController@userlist']);
+    Route::get('skill/{id}', ['uses' => 'TrainingController@show']);
+    Route::get('enterprise/{id}', ['uses' => 'TrainingController@show']);
     Route::get('online/{id}', [ 'uses' => 'TrainingController@show']);
+    Route::get('business/{id}', [ 'uses' => 'TrainingController@view']);
 });
 
 
