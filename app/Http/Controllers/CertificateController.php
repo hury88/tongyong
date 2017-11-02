@@ -249,7 +249,13 @@ class CertificateController extends Controller
         $pagenewslist = $Certificate->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content'], 9, 9);
         return view('education/newslist', compact('list', 'pagenewslist', 'ckey'));
     }
-
+    public function majorlist()
+    {
+        $Certificate = new Certificate();
+        $ckey = '';
+        $pagenewslist = $Certificate->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'img1'], 9, 9);
+        return view('certificate/majorlist', compact('list', 'pagenewslist', 'ckey'));
+    }
     //常见问题列表
     public function problemlist()
     {

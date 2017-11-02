@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title') @parent @stop
+
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyepeixun.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyepeixun.css"/>
@@ -26,28 +27,28 @@
                     <div class="zhiyepx1">
                         <ul>
                             <li class="liat1">
-                                <a href="">
-                                    <img src="img/jineng1.png"/>技能培训
+                                <a href="{{u($GLOBALS['pid_path'],$sanlist[0]['path'])}}">
+                                    <img src="/img/jineng1.png"/>{{$sanlist[0]['catname']}}
                                 </a>
                             </li>
                             <li class="liat2">
-                                <a href="">
-                                    <img src="img/jineng2.png"/>企业培训
+                                <a href="{{u($GLOBALS['pid_path'],$sanlist[1]['path'])}}">
+                                    <img src="/img/jineng2.png"/>{{$sanlist[1]['catname']}}
                                 </a>
                             </li>
                             <li class="liat3">
-                                <a href="">
-                                    <img src="img/jineng3.png"/>培训机构
+                                <a href="{{u('raining','business')}}">
+                                    <img src="/img/jineng3.png"/>培训机构
                                 </a>
                             </li>
                             <li class="liat4">
-                                <a href="">
-                                    <img src="/img/jineng4.png"/>在线学习
+                                <a href="{{u($GLOBALS['pid_path'],$sanlist[2]['path'])}}">
+                                    <img src="/img/jineng4.png"/>{{$sanlist[2]['catname']}}
                                 </a>
                             </li>
                             <li class="liat">
-                                <a href="">
-                                    <img src="img/jineng5.png" style="width:15%;" />在线咨询
+                                <a href="{{$boot_config['link2']}}" target="_blank">
+                                    <img src="/img/jineng5.png" style="width:15%;" />在线咨询
                                 </a>
                             </li>
                         </ul>
@@ -55,168 +56,189 @@
                     <div class="zhiyepx2">
                         <div class="zhiyepx2Tit">
                             <div class="zhiyepx2Titl">
-                                <img src="img/jingping1.png"/>
+                                <img src="/img/jingping1.png"/>
                             </div>
                             <div class="zhiyepx2Titr">
                                 <p class="jingp1">精品直播</p>
                                 <p class="jingp2">
                                     <span>High - quality direct seeding</span>
                                     <span class="jingp2_2">
-            					<a href="" class="jingp2_2on">最新直播 </a>
-            					<a href="">特价推荐</a>
+            					<a href="javascript:void(0);" class="jingp2_2on">最新直播 </a>
+            					<a href="javascript:void(0);">特价推荐</a>
             				</span>
                                 </p>
                             </div>
                         </div>
                         <div class="zhiyepx2Con">
+                            <?php
+                            function get_url($ty,$id){
+                                if($ty==28){
+                                return u('training','skill',$id);
+                                }elseif($ty==65){
+                                    return u('training','enterprise',$id);
+                                }elseif($ty==66){
+                                    return u('training','online',$id);
+                                }
+                            }?>
                             <ul>
+                                @foreach($zuixingood as $key=>$val)
+                                    @if($key==2||$key==5)
+                                        <li class="list2">
+                                            <div class="zhiyepx2Contop">
+                                                <a href="{{get_url($val['ty'],$val['id'])}}"><img src="{{img($val['img1'])}}" style="width: 324px;height: 221px"/></a>
+                                                <div class="zhibosj">
+                                                    {{$val['introduce']}}
+                                                </div>
+                                                <div class="layerpx" style="display: none;">
+                                                    <a href="{{get_url($val['ty'],$val['id'])}}">我要报名</a>
+                                                    <p>{{$val['title']}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="zhiyepx2Conbom">
+                                                <p class="p1"><a href="{{get_url($val['ty'],$val['id'])}}">职业技能培训直播课程</a></p>
+                                                <p class="p2">
+                                                    <span class="sp1">￥{{$val['price']}} </span>
+                                                    <span class="sp2">{{$val['period']}}</span>
+                                                </p>
+                                                <p class="p3">
+                                                    <span class="sp1">{{$val['name']}}（主讲人）</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <div class="" style="clear: both;">
+
+                                        </div>
+                                    @else
                                 <li>
                                     <div class="zhiyepx2Contop">
-                                        <a href=""><img src="img/jingp1.jpg"/></a>
+                                        <a href="{{get_url($val['ty'],$val['id'])}}"><img src="{{img($val['img1'])}}" style="width: 324px;height: 221px"/></a>
                                         <div class="zhibosj">
-                                            直播时间：08月23日 07:00
+                                            {{$val['introduce']}}
                                         </div>
                                         <div class="layerpx" style="display: none;">
-                                            <a href="">我要报名</a>
-                                            <p>联想集团有限公司</p>
+                                            <a href="{{get_url($val['ty'],$val['id'])}}">我要报名</a>
+                                            <p>{{$val['title']}}</p>
                                         </div>
                                     </div>
                                     <div class="zhiyepx2Conbom">
-                                        <p class="p1"><a href="">职业技能培训直播课程</a></p>
+                                        <p class="p1"><a href="{{get_url($val['ty'],$val['id'])}}">职业技能培训直播课程</a></p>
                                         <p class="p2">
-                                            <span class="sp1">￥29.90 </span>
-                                            <span class="sp2">20课时</span>
+                                            <span class="sp1">￥{{$val['price']}} </span>
+                                            <span class="sp2">{{$val['period']}}</span>
                                         </p>
                                         <p class="p3">
-                                            <span class="sp1">罗莎（主讲人）</span>
-                                            <span class="sp2"><i>45456</i>人已报名</span>
+                                            <span class="sp1">{{$val['name']}}（主讲人）</span>
+                                            <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
                                         </p>
                                     </div>
-
                                 </li>
-                                <li>
-                                    <div class="zhiyepx2Contop">
-                                        <a href=""><img src="img/jingp2.jpg"/></a>
-                                        <div class="zhibosj">
-                                            直播时间：08月23日 07:00
-                                        </div>
-                                        <div class="layerpx" style="display: none;">
-                                            <a href="">我要报名</a>
-                                            <p>联想集团有限公司</p>
-                                        </div>
-                                    </div>
-                                    <div class="zhiyepx2Conbom">
-                                        <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                        <p class="p2">
-                                            <span class="sp1">￥29.90 </span>
-                                            <span class="sp2">20课时</span>
-                                        </p>
-                                        <p class="p3">
-                                            <span class="sp1">罗莎（主讲人）</span>
-                                            <span class="sp2"><i>45456</i>人已报名</span>
-                                        </p>
-                                    </div>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="zhiyepx2Con" style="display: none">
+                            <ul>
+                                @foreach($tuijiangood as $key=>$val)
+                                    @if($key==2||$key==5)
+                                        <li class="list2">
+                                            <div class="zhiyepx2Contop">
+                                                <a href="{{get_url($val['ty'],$val['id'])}}"><img src="{{img($val['img1'])}}" style="width: 324px;height: 221px"/></a>
+                                                <div class="zhibosj">
+                                                    {{$val['introduce']}}
+                                                </div>
+                                                <div class="layerpx" style="display: none;">
+                                                    <a href="{{get_url($val['ty'],$val['id'])}}">我要报名</a>
+                                                    <p>{{$val['title']}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="zhiyepx2Conbom">
+                                                <p class="p1"><a href="{{get_url($val['ty'],$val['id'])}}">职业技能培训直播课程</a></p>
+                                                <p class="p2">
+                                                    <span class="sp1">￥{{$val['price']}} </span>
+                                                    <span class="sp2">{{$val['period']}}</span>
+                                                </p>
+                                                <p class="p3">
+                                                    <span class="sp1">{{$val['name']}}（主讲人）</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <div class="" style="clear: both;">
 
+                                        </div>
+                                    @else
+                                        <li>
+                                            <div class="zhiyepx2Contop">
+                                                <a href="{{get_url($val['ty'],$val['id'])}}"><img src="{{img($val['img1'])}}" style="width: 324px;height: 221px"/></a>
+                                                <div class="zhibosj">
+                                                    {{$val['introduce']}}
+                                                </div>
+                                                <div class="layerpx" style="display: none;">
+                                                    <a href="{{get_url($val['ty'],$val['id'])}}">我要报名</a>
+                                                    <p>{{$val['title']}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="zhiyepx2Conbom">
+                                                <p class="p1"><a href="{{get_url($val['ty'],$val['id'])}}">职业技能培训直播课程</a></p>
+                                                <p class="p2">
+                                                    <span class="sp1">￥{{$val['price']}} </span>
+                                                    <span class="sp2">{{$val['period']}}</span>
+                                                </p>
+                                                <p class="p3">
+                                                    <span class="sp1">{{$val['name']}}（主讲人）</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="zhiyepx3" style="margin-top: 50px;">
+                    <div class="zhiyepx3All">
+                        <div class="zhiyepx2Tit" style="border: none;padding-top: 40px;margin-bottom: 25px;">
+                            <div class="zhiyepx2Titl">
+                                <img src="/img/list1.png"/>
+                            </div>
+                            <div class="zhiyepx2Titr" style="width: 85%;">
+                                <p class="jingp1">{{$sanlist[0]['catname']}}</p>
+                                <p class="jingp2">
+                                    <span>Skills training</span>
+                                </p>
+                            </div>
+                            <div class="zhiyepx2Titc" style="width: 9%;float: left;">
+                                <a href="{{u("training","skill")}}" style="color: #666666;margin-top: 20px;">更多<img src="/img/qydown1.png"></a>
+                            </div>
+                        </div>
+                        <div class="qypeixinCon">
+                            <ul>
+                                @foreach($jinenggood as $val)
+                                <li style="border-bottom: 2px solid #e94a4c;">
+                                    <a href="{{u("training","skill",$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
+                                    <div class="qypeixinCon1">
+                                        <p class="pu1">
+                                            <a href="{{u("training","skill",$val['id'])}}" style="color: #e94a4c;">{{$val['title']}}</a>
+                                        </p>
+                                        <p class="pu2">
+                                            <span>￥{{$val['price']}} </span>
+                                            <i><em>{{$val['enroll_num']}}</em>人已报名</i>
+                                        </p>
+                                        <p class="pu3">
+                                            <a href="{{u("training","skill",$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 75, '...') !!}</a>
+                                        </p>
+                                        <p class="pu4">
+                                            <a href="{{u("training","skill",$val['id'])}}" style="border-color:#e94a4c">我要报名</a>
+                                        </p>
+                                    </div>
                                 </li>
-                                <li class="list2">
-                                    <div class="zhiyepx2Contop">
-                                        <a href=""><img src="img/jingp3.jpg"/></a>
-                                        <div class="zhibosj">
-                                            直播时间：08月23日 07:00
-                                        </div>
-                                        <div class="layerpx" style="display: none;">
-                                            <a href="">我要报名</a>
-                                            <p>联想集团有限公司</p>
-                                        </div>
-                                    </div>
-                                    <div class="zhiyepx2Conbom">
-                                        <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                        <p class="p2">
-                                            <span class="sp1">￥29.90 </span>
-                                            <span class="sp2">20课时</span>
-                                        </p>
-                                        <p class="p3">
-                                            <span class="sp1">罗莎（主讲人）</span>
-                                            <span class="sp2"><i>45456</i>人已报名</span>
-                                        </p>
-                                    </div>
+                                @endforeach
 
-                                </li>
-                                <div class="" style="clear: both;">
-
-                                </div>
-                                <li>
-                                    <div class="zhiyepx2Contop">
-                                        <a href=""><img src="img/jingp4.jpg"/></a>
-                                        <div class="zhibosj">
-                                            直播时间：08月23日 07:00
-                                        </div>
-                                        <div class="layerpx" style="display: none;">
-                                            <a href="">我要报名</a>
-                                            <p>联想集团有限公司</p>
-                                        </div>
-                                    </div>
-                                    <div class="zhiyepx2Conbom">
-                                        <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                        <p class="p2">
-                                            <span class="sp1">￥29.90 </span>
-                                            <span class="sp2">20课时</span>
-                                        </p>
-                                        <p class="p3">
-                                            <span class="sp1">罗莎（主讲人）</span>
-                                            <span class="sp2"><i>45456</i>人已报名</span>
-                                        </p>
-                                    </div>
-
-                                </li>
-                                <li>
-                                    <div class="zhiyepx2Contop">
-                                        <a href=""><img src="img/jingp5.jpg"/></a>
-                                        <div class="zhibosj">
-                                            直播时间：08月23日 07:00
-                                        </div>
-                                        <div class="layerpx" style="display: none;">
-                                            <a href="">我要报名</a>
-                                            <p>联想集团有限公司</p>
-                                        </div>
-                                    </div>
-                                    <div class="zhiyepx2Conbom">
-                                        <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                        <p class="p2">
-                                            <span class="sp1">￥29.90 </span>
-                                            <span class="sp2">20课时</span>
-                                        </p>
-                                        <p class="p3">
-                                            <span class="sp1">罗莎（主讲人）</span>
-                                            <span class="sp2"><i>45456</i>人已报名</span>
-                                        </p>
-                                    </div>
-
-                                </li>
-                                <li class="list2">
-                                    <div class="zhiyepx2Contop">
-                                        <a href=""><img src="img/jingp6.jpg"/></a>
-                                        <div class="zhibosj">
-                                            直播时间：08月23日 07:00
-                                        </div>
-                                        <div class="layerpx" style="display: none;">
-                                            <a href="">我要报名</a>
-                                            <p>联想集团有限公司</p>
-                                        </div>
-                                    </div>
-                                    <div class="zhiyepx2Conbom">
-                                        <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                        <p class="p2">
-                                            <span class="sp1">￥29.90 </span>
-                                            <span class="sp2">20课时</span>
-                                        </p>
-                                        <p class="p3">
-                                            <span class="sp1">罗莎（主讲人）</span>
-                                            <span class="sp2"><i>45456</i>人已报名</span>
-                                        </p>
-                                    </div>
-
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -225,92 +247,40 @@
                     <div class="zhiyepx3All">
                         <div class="zhiyepx2Tit" style="border: none;padding-top: 40px;margin-bottom: 25px;">
                             <div class="zhiyepx2Titl">
-                                <img src="img/list1.png"/>
+                                <img src="/img/list1.png"/>
                             </div>
                             <div class="zhiyepx2Titr" style="width: 85%;">
-                                <p class="jingp1">技能培训</p>
+                                <p class="jingp1">{{$sanlist[1]['catname']}}</p>
                                 <p class="jingp2">
-                                    <span>Skills training</span>
+                                    <span>Enterprise training</span>
                                 </p>
                             </div>
                             <div class="zhiyepx2Titc" style="width: 9%;float: left;">
-                                <a href="" style="color: #666666;margin-top: 20px;">更多<img src="img/qydown1.png"></a>
+                                <a href="{{u("training","skill")}}" style="color: #666666;margin-top: 20px;">更多<img src="/img/qydown1.png"></a>
                             </div>
                         </div>
                         <div class="qypeixinCon">
                             <ul>
-                                <li style="border-bottom: 2px solid #e94a4c;">
-                                    <a href=""><img src="img/qypx1.jpg"/></a>
-                                    <div class="qypeixinCon1">
-                                        <p class="pu1">
-                                            <a href="" style="color: #e94a4c;">工具钳工 技师高级技师...</a>
-                                        </p>
-                                        <p class="pu2">
-                                            <span>￥29.90 </span>
-                                            <i><em>45456</em>人已报名</i>
-                                        </p>
-                                        <p class="pu3">
-                                            <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                        </p>
-                                        <p class="pu4">
-                                            <a href="" style="border-color:#e94a4c;color: #e94a4c;">我要报名</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li style="border-bottom: 2px solid #39beea;">
-                                    <a href=""><img src="img/qypx2.jpg"/></a>
-                                    <div class="qypeixinCon1">
-                                        <p class="pu1">
-                                            <a href="" style="color: #39beea;">工具钳工 技师高级技师...</a>
-                                        </p>
-                                        <p class="pu2">
-                                            <span>￥29.90 </span>
-                                            <i><em>45456</em>人已报名</i>
-                                        </p>
-                                        <p class="pu3">
-                                            <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                        </p>
-                                        <p class="pu4">
-                                            <a href="" style="border-color:#39beea;color: #39beea;">我要报名</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li style="border-bottom: 2px solid #96bb1e;">
-                                    <a href=""><img src="img/qypx3.jpg"/></a>
-                                    <div class="qypeixinCon1">
-                                        <p class="pu1">
-                                            <a href="" style="color: #96bb1e;">工具钳工 技师高级技师...</a>
-                                        </p>
-                                        <p class="pu2">
-                                            <span>￥29.90 </span>
-                                            <i><em>45456</em>人已报名</i>
-                                        </p>
-                                        <p class="pu3">
-                                            <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                        </p>
-                                        <p class="pu4">
-                                            <a href="" style="border-color:#96bb1e;color: #96bb1e;">我要报名</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li style="border-bottom: 2px solid #60ba76;">
-                                    <a href=""><img src="img/qypx4.jpg"/></a>
-                                    <div class="qypeixinCon1">
-                                        <p class="pu1">
-                                            <a href="" style="color: #60ba76;">工具钳工 技师高级技师...</a>
-                                        </p>
-                                        <p class="pu2">
-                                            <span>￥29.90 </span>
-                                            <i><em>45456</em>人已报名</i>
-                                        </p>
-                                        <p class="pu3">
-                                            <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                        </p>
-                                        <p class="pu4">
-                                            <a href="" style="border-color:#60ba76;color: #60ba76;">我要报名</a>
-                                        </p>
-                                    </div>
-                                </li>
+                                @foreach($qiyegood as $val)
+                                    <li style="border-bottom: 2px solid #e94a4c;">
+                                        <a href="{{u("training","enterprise",$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
+                                        <div class="qypeixinCon1">
+                                            <p class="pu1">
+                                                <a href="{{u("training","enterprise",$val['id'])}}" style="color: #e94a4c;">{{$val['title']}}</a>
+                                            </p>
+                                            <p class="pu2">
+                                                <span>￥{{$val['price']}} </span>
+                                                <i><em>{{$val['enroll_num']}}</em>人已报名</i>
+                                            </p>
+                                            <p class="pu3">
+                                                <a href="{{u("training","enterprise",$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 75, '...') !!}</a>
+                                            </p>
+                                            <p class="pu4">
+                                                <a href="{{u("training","enterprise",$val['id'])}}" style="border-color:#e94a4c">我要报名</a>
+                                            </p>
+                                        </div>
+                                    </li>
+                                @endforeach
 
                             </ul>
                         </div>
@@ -497,19 +467,7 @@
                     </div>
                 </div>
 
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
 @stop
 
 @section('scripts')
@@ -530,6 +488,15 @@
                 })
                 $('.zhiyepx2Contop').mouseout(function(){
                     $(this).children('.layerpx').hide();
+                })
+                $(function () {
+                   $(".jingp2_2 a").click(function () {
+                     var index=$(this).index()
+                       $(".jingp2_2 a").removeClass("jingp2_2on")
+                       $(this).addClass("jingp2_2on")
+                       $(".zhiyepx2 .zhiyepx2Con").hide()
+                       $(".zhiyepx2 .zhiyepx2Con").eq(index).show()
+                   })
                 })
             </script>
 @stop

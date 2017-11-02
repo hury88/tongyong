@@ -13,9 +13,9 @@ $gourl=getUrl(queryString(true),$showname);
 $map = array();
 
 ###########################筛选开始
-$action_type_id =   I('get.action_type_id',0,'intval');/*if(!empty($type))*/$map['action_type_id'] = $action_type_id;
+$action_type_id =   I('get.action_type_id',16,'intval');/*if(!empty($type))*/$map['action_type_id'] = $action_type_id;
 ###########################筛选开始
-$map['uid'] = 0;
+$map['user_id'] = 0;
 ########################分页配置开始
 $psize   =   I('get.psize',30,'intval');
 $pageConfig = array(
@@ -53,21 +53,23 @@ list($data,$pagestr) = Page::paging($pageConfig);
 							<td width="5%">选择</td>
 							<td width="5%">编号</td>
                              <td>发送人</td>
-                             <td>信息标题</td>
+                             <td>信息</td>
                              <td>状态</td>
 							<td width="13%">发布时间</td>
 						</tr>
 						<?php foreach ($data as $key => $value): extract($value);
+						$v=M("businesses")->where("user_id=".$sender_id)->find();
+//						var_dump($v)
 						?>
 						    <tr>
 	                            <td><input id="delid<?=$id?>" name="del[]" value="<?=$id?>" type="checkbox"><i class="layui-i">&nbsp;</i></td>
 	                            <td><?=$key+1?></td>
-									<td> <a href="infoshow.php?id=<?=$id?>" target="righthtml">阅读：<?=$title?></a></td>
-                                <td>信息标题</td>
+	                            <td><?=$v['business_name']?></td>
+									<td> <a href="infoshow.php?id=<?=$id?>" target="righthtml">信息详情</a></td>
 	                            <td>
-                            	    <a data-class="btn-warm" class="json <?=$status?'':'btn-warm' ?>" data-url="status&id=<?=$id?>"><?=$webarr['status'][$status] ?></a>
+                            	    <a data-id="<?=$id?>"><?=$webarr['status'][$status] ?></a>
 	                            </td>
-	                            <td><?=date('Y-m-d H:i:s',$created_at)?></td>
+	                            <td><?=$created_at?></td>
 	                        </tr>
 						<?php endforeach ?>
 					<?php include('js/foot'); ?>

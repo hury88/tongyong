@@ -89,6 +89,8 @@ if($ty==28){
     $d2=get_arr(74);
     $opt ->edselect($d1, '内训分类', 'neixunid');
     $opt ->edselect($d2, '公开课分类', 'publicid');
+}elseif($ty==66){
+    $opt->choose('分类','onlineid')->radioSet(Config::get('webarr.onlineid'))->flur();
 }
 			(!isset($name) || ! $name ) && $name = '';
 			$opt
