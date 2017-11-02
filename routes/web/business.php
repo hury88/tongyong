@@ -6,6 +6,8 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
     Route::get('json/qualificationid2/{id}', 'JsonController@qualificationid1');
 
     Route::get('/', ['as' => 'business', 'uses' => 'BusinessController@profile']);
+    // 系统消息
+    Route::get('/notices', ['as' => 'b_notices', 'uses' => 'NoticesController@index']);
 
 
     //    删除操作

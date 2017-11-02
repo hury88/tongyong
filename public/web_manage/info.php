@@ -48,7 +48,7 @@ list($data, $pagestr) = Page::paging($pageConfig);
                       <input id="del" type="button" class="zhixin_a4 fl"/><!-- 删除  -->
                       <form>
                         <?php //Output::select2(['未处理', '已处理'], '处理', 'chuli') ?>
-                        <input type="submit" value="搜索">
+                        <!-- <input type="submit" value="搜索"> -->
                       </form>
                   </div>
                 <div class="neirong clr">

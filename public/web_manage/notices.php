@@ -20,6 +20,7 @@ if(IS_POST && $_POST['send']=='notices'){
     if(updateBusiness($user_id, ['certified_status' => 2])) {
       creatNotices($user_id, 3, $source_id, $sendVal);
       _update('notices', $source_id, ['status' => 3]);
+      _update('users', $user_id, ['certified' => 1]);
       exit("通过认证");
     }
   } elseif($status == 2) {// 驳回

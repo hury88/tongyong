@@ -27,8 +27,8 @@ Route::get('editor', function(){
 Route::group(['prefix' => 'home'], function () {
     Route::get('/', 'HomeController@index');
 });
-
-
+// 图片处理
+Route::get('img/{file?}', 'FileController@img')->where('file', '(.*)');
 //个人中心
 require __DIR__.'/web/users.php';
 //会员中心

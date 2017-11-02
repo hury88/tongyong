@@ -9,6 +9,7 @@ return [
     ],
     //templates to the actions types
     'templates' => [
+        'certification:request'       => '已创建新订单 #[source_id]',
         'order:open'       => '已创建新订单 #[source_id]',
         'order:pending'    => '订单 #[source_id]等待处理中',
         'order:comment'    => '订单 #[source_id]有一条新评论',

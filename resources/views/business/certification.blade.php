@@ -218,7 +218,7 @@
                     <span class="authentication-form-left fl"><b>*</b>上传凭证</span>
                     <div class="authentication-form-right fr">
                         <div class="authented-img">
-                            <img src="/img/zhizhao.jpg"/>
+                            <img src="{{img($user['img'])}}"/>
                         </div>
                     </div>
                 </div>
