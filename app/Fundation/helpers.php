@@ -281,20 +281,39 @@ function noticeResponseJson($state,$title,$message,$redirect=false){
 
 function get_arr($typeid,$pid=0)
 {
-    $map=$d = array();
-    if(!empty($typeid)) $map['typeid'] = $typeid;
-    if(!empty($pid)) {$map['pid'] = $pid;}else{
-        $map['pid']=0;
-    }
-    $data = DB::table('nature')->select('id','catname')->where("pid",0)->where("typeid",75)->orderBy('disorder','desc')->orderBy('id','asc')->get();
+    $data = DB::table('nature')->select('id','catname')->where("pid",$pid)->where("typeid",$typeid)->orderBy('disorder','desc')->orderBy('id','asc')->get();
 
     foreach ($data as $v) {
         $d[$v->id]=$v->catname;
     }
+
     return $d;
 
 }
 
+function get_first($typeid,$pid=0)
+{
+
+    $data = DB::table('nature')->select("id")->where("pid",$pid)->where("typeid",$typeid)->orderBy('disorder','desc')->orderBy('id','asc')->first();
+
+    return $data->id;
+}
+function get_edselect($d,$lm,$n,$select){
+    $str='';
+    foreach ($d as $k => $v){
+        if($k==$select){
+            $sl='selected';
+        }else{
+            $sl='';
+        }
+        $str.="<option {$sl} value='{$k}'>{$v}</option>";
+    }
+    $cs= "<div class='layui-form-item'>
+            <label title=\"{$n}\" class='layui-form-label' style='width: 85px;'>{$lm}<b>*</b></label>
+            <div class='layui-input-block'><select name=\"{$n}\" id=\"{$n}\" style='width:80%;height:35px;font-size:15px;'>{$str}</select> </div>
+          </div>";
+    return $cs;
+}
 function upload()
 {
      $file = Input::file('Filedata');

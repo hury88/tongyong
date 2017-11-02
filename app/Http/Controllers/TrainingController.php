@@ -29,27 +29,53 @@ class TrainingController extends Training
     //培训首页
     public function index()
     {
+
 //二级列表信息
-
         $sanlist = $this->sanlist();
-
+//培训首页最新直播
+        $zuixingood = $this->xinlist( ['id', 'title', 'ty','img1','price','introduce',  'period', 'name', 'enroll_num'], 6);
+//培训首页推荐直播
+        $tuijiangood = $this->tuijianlist( ['id', 'title','ty', 'img1','price','introduce', 'period', 'name', 'enroll_num'], 6);
 //培训首页技能培训
-        $jinenggood = $this->goodlist([2,28], ['id', 'title', 'img1', 'content'], 4);
+        $jinenggood = $this->goodlist([2,28], ['id', 'title', 'img1','price', 'content'], 4);
 //培训首页企业培训
-        $qiyegood = $this->goodlist([2,65], ['id', 'title', 'img2', 'content'], 3);
+        $qiyegood = $this->goodlist([2,65], ['id', 'title', 'img1', 'price','content'], 4);
 
 //培训首页在线学习
-        $zaixiangood = $this->goodlist([2,66], ['id', 'title', 'content'], 9);
-//培训首页培训机构
-        $peixungood = $this->usergoodlist();
+        $zaixiangood[0] = $this->omlinelist(1, ['id', 'title', 'price','img1','content'], 3);
+        $zaixiangood[1] = $this->omlinelist(2, ['id', 'title', 'price','img1','content'], 3);
+        $zaixiangood[2] = $this->omlinelist(3, ['id', 'title', 'price','img1','content'], 3);
+        $zaixiangood[3] = $this->omlinelist(4, ['id', 'title', 'price','img1','content'], 3);
 
-        return view('training/index', compact('sanlist', 'jinenggood', 'qiyegood', 'zaixiangood', 'peixungood'));
+//培训首页培训机构
+        return view('training/index', compact('sanlist', 'zuixingood', 'tuijiangood', 'jinenggood', 'qiyegood', 'zaixiangood'));
     }
     //推荐列表
     public function goodlist($where = [], $field = ['*'], $num = 4)
     {
         $Training = new Training();
         $goodlist = $Training->v_list($where, $field, $num);
+        return $goodlist;
+    }
+    //推荐在线学习
+    public function omlinelist($onlineid, $field = ['*'], $num = 4)
+    {
+        $Training = new Training();
+        $goodlist = $Training->v_onlinelist($onlineid, $field, $num);
+        return $goodlist;
+    }
+    //推荐直播
+    public function tuijianlist( $field = ['*'], $num = 4)
+    {
+        $Training = new Training();
+        $goodlist = $Training->v_tuijianlist( $field, $num);
+        return $goodlist;
+    }
+    //最新直播
+    public function xinlist( $field = ['*'], $num = 4)
+    {
+        $Training = new Training();
+        $goodlist = $Training->v_xinglist($field, $num);
         return $goodlist;
     }
     public function usergoodlist($where = [], $field = ['*'], $num = 4)

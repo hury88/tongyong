@@ -16,6 +16,7 @@ $user_id =   I('get.user_id',0,'intval');
 $industryid =   I('get.industryid',0,'intval');
 $neixunid =   I('get.neixunid',0,'intval');
 $publicid =   I('get.publicid',0,'intval');
+$onlineid =   I('get.onlineid',0,'intval');
 $qualificationid1 =   I('get.qualificationid1',0,'intval');
 $qualificationid2 =   I('get.qualificationid2',0,'intval');
 $qualificationid =   I('get.qualificationid',0,'intval');
@@ -46,6 +47,7 @@ if(!empty($trainingid)) $map['trainingid'] = $trainingid;
 if(!empty($industryid)) $map['industryid'] = $industryid;
 if(!empty($neixunid)) $map['neixunid'] = $neixunid;
 if(!empty($publicid)) $map['publicid'] = $publicid;
+if(!empty($onlineid)) $map['onlineid'] = $onlineid;
 if(!empty($qualificationid)) $map['qualificationid'] = $qualificationid;
 
 if(!empty($tty)) $map['tty'] = $tty;
@@ -95,6 +97,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
                   Output::select2($d, '内训分类', 'neixunid');
                   $d=get_arr(74);
                   Output::select2($d, '公开课分类', 'publicid');
+              }elseif($ty==66){
+                  $d = config('webarr.onlineid');
+                  Output::select2($d, '在线学习分类', 'onlineid');
               }
                   $d=get_arr(76);
                   Output::select2($d, '职业资格类', 'qualificationid1');

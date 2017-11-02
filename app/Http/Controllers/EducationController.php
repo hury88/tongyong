@@ -53,7 +53,7 @@ class EducationController extends Controller
 //国际游学首页国际游学
         $youxuegood = $this->goodlist([4, 13, 24], ['id', 'title', 'img1', 'content'], 5);
 //国际游学首页游学路线
-        $luxiangood = $this->goodlist([4, 13, 25], ['id', 'title', 'img1'], 8);
+        $luxiangood = $this->goodlist([4, 13, 25], ['id', 'title', 'img1','enroll_num'], 8);
 //国际游学首页游学解答
         $zixungood = $this->goodlist([4, 13, 26], ['id', 'title', 'img1', 'content'], 4);
 //国际游学首页游学保障
@@ -68,7 +68,7 @@ class EducationController extends Controller
 //夏令营首页首页火爆线路
         $huobaogood = $this->goodlist([4, 14, 29], ['id', 'title', 'img1', 'content'], 3);
 //夏令营首页首页特色线路
-        $tesegood = $this->goodlist([4, 14, 30], ['id', 'title', 'img1'], 8);
+        $tesegood = $this->goodlist([4, 14, 30], ['id', 'title', 'img1','enroll_num'], 8);
 //夏令营首页首页精彩瞬间
         $jincaigood = $this->goodlist([4, 14, 31], ['id', 'title', 'img1', 'content'], 12);
 //夏令营首页首页实时动态
@@ -234,7 +234,7 @@ class EducationController extends Controller
     {
         $education = new Education();
         $ckey = '';
-        $pagenewslist = $education->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content'], 16, 9);
+        $pagenewslist = $education->v_pages([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'sendtime', 'img1', 'content','enroll_num'], 16, 9);
         return view('education/tourlist', compact('list', 'pagenewslist', 'ckey'));
     }
     //学院介绍详情

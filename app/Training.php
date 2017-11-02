@@ -37,8 +37,44 @@ class Training extends Model
 
     public function v_list($where=[],$field=['*'],$num=null)
     {
-        return $this->parseWhere($where)
+    return $this->parseWhere($where)
+        ->where('isstate','=' ,'1')
+        ->latest('isgood')
+        ->latest('disorder')
+        ->latest('id')
+        ->take($num)
+        ->get($field);
+    }
+    //在线学习
+    public function v_onlinelist($onlineid,$field=['*'],$num=null)
+    {
+        return $this
             ->where('isstate','=' ,'1')
+            ->where('ty','=' ,'66')
+            ->where('onlineid','=',$onlineid)
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->take($num)
+            ->get($field);
+    }
+    //最新直播
+    public function v_xinglist($field=['*'],$num=null)
+    {
+        return $this ->where('isstate','=' ,'1')
+            ->where('pid','=' ,'2')
+            ->where('trainingid','=' ,'1')
+            ->latest('id')
+            ->take($num)
+            ->get($field);
+    }
+    //推荐直播
+    public function v_tuijianlist($field=['*'],$num=null)
+    {
+        return $this
+            ->where('isstate','=' ,'1')
+            ->where('pid','=' ,'2')
+            ->where('trainingid','=' ,'1')
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')
