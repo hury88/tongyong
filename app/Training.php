@@ -4,9 +4,11 @@ namespace app;
 
 use Exception;
 use App\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Training extends Model
 {
+    use SoftDeletes;
     /**
      * The database table used by the model.
      *

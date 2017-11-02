@@ -127,6 +127,11 @@ return [
 
         'origin' => '旧密码',
         'new' => '新密码',
+
+        'registerid' => '注册号',
+        'legal' => '法定代表人',
+        'uploadimg' => '营业执照',
+
     ],
 
     'recaptcha' => '验证码不正确。',

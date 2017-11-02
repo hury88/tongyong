@@ -86,6 +86,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Education');
     }
 
+    public function hasManyTraining()
+    {
+        return $this->hasMany('App\Training');
+    }
+
     /*public function getHasPhoneAttribute()
     {
         return !is_null($this->mobile_phone) || !is_null($this->work_phone)
@@ -196,9 +201,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    /**
+     * 格式转换 如: 011 => [0,1,1]
+     * @return array|false|string[]
+     */
     public function getRoleAttribute()
     {
-        // 011 => [0,1,1]
         return preg_split('//', $this->attributes['role'], -1, PREG_SPLIT_NO_EMPTY);
     }
 

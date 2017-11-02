@@ -266,15 +266,17 @@ class FormHelper{
 			'%word%'      => $this->word,
 			'%display%'   => 'inline',
 			'%name%'      => $inputname,
-			'%value%'     => isset($this->$inputname) ? date("Y-m-d H:i:s", $this->$inputname) : date("Y-m-d H:i:s"),
+			'%value%'     => isset($this->$inputname) ? date("Y-m-d", $this->$inputname) : '',
 			'%lablename%' => $lablename,
 		];
 
 			$tpl = <<<HTML
-     	%word% <label title="%name%" class="layui-form-label">%lablename%<b>*</b></label>
-				<div class="layui-input-%display%">
-					<input name="%name%"  value="%value%" autocomplete="off" placeholder="点击文本框选择日期" class="layui-input" type="text" value="" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD hh:mm:ss'})">
-				</div>
+<div class="job-posted-dv">
+    <span class="job-posted-property"><b>*</b>%lablename%</span>
+    <div class="job-posted-values">
+        <input size="10" value="%value%" maxlength="10" onclick="new Calendar().show(this);" readonly="readonly" class="job-name %display%" type="text" name="%name%" value="%value%" autocomplete="off" placeholder="请填写%lablename%"/>
+    </div>
+</div>
 HTML;
 			$temp = str_replace(array_keys($replaceMap), array_values($replaceMap), $tpl);
 

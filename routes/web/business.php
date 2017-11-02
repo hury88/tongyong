@@ -8,6 +8,8 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
     //    删除操作
     Route::post('delete/{table}', ['as' => 'b_delte', 'uses' => 'BusinessController@delete']);
     Route::post('safe', ['as' => 'b_safe ', 'uses' => 'BusinessController@safe']);
+    Route::post('certification', ['as' => 'b_certification ', 'uses' => 'BusinessController@certification']);
+
     //    更新添加操作
     Route::post('{table}/cu/{id}', 'BusinessController@with');
     Route::post('{table}/cu', 'BusinessController@with');

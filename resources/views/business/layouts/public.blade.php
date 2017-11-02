@@ -22,6 +22,8 @@
         })
     </script>
 @if(defined('AT_CU'))
+<script type="text/javascript" src="/PLUGINS/alert.min.js"></script>
+
     <script>
         $('.save').click(function(){
             model(this);
@@ -55,6 +57,9 @@
 @elseif(defined('AT_NO'))
 @else
     <script>
+        $('#jsSoForm select').change(function(){
+            $('#jsSoForm').submit();
+        })
         function checked(obj){
             $(obj).prop("checked", true);
         }

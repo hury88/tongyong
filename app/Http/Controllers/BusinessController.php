@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Validator;
+use App\Notice;
 
 class BusinessController extends base\UserController
 {
@@ -24,7 +25,7 @@ class BusinessController extends base\UserController
             parent::__construct();
     }
 
-    private $fillTable = ['certificate', 'education'];
+    private $fillTable = ['certificate', 'education', 'training'];
 
     private $paginate = 15;
     private $toArray = 10;
@@ -61,7 +62,38 @@ class BusinessController extends base\UserController
      */
     public function training(&$compact)
     {
-        $table = __FUNCTION__;
+        $_GET['certificate_lid'] = isset($_GET['certificate_lid']) ? (int)$_GET['certificate_lid'] : 0;
+        $_GET['title'] = isset($_GET['title']) ? $_GET['title'] : '';
+        $_GET['industryid'] = isset($_GET['industryid']) ? intval($_GET['industryid']) : 0;
+        $_GET['neixunid'] = isset($_GET['neixunid']) ? intval($_GET['neixunid']) : 0;
+        $_GET['publicid'] = isset($_GET['publicid']) ? intval($_GET['publicid']) : 0;
+        $_GET['qualificationid1'] = isset($_GET['qualificationid1']) ? intval($_GET['qualificationid1']) : 0;
+        $_GET['qualificationid2'] = isset($_GET['qualificationid2']) ? intval($_GET['qualificationid2']) : 0;
+        $_GET['qualificationid'] = isset($_GET['qualificationid']) ? intval($_GET['qualificationid']) : 0;
+        $_GET['trainingid'] = isset($_GET['trainingid']) ? intval($_GET['trainingid']) : 0;
+
+        if(empty($_GET['qualificationid'])){
+            if($_GET['qualificationid1']){
+                if(empty($_GET['qualificationid2'])){
+                    $_GET['qualificationid2'] = get_first(76, $_GET['qualificationid1']);
+                }
+                $_GET['qualificationid'] = get_first(76, $_GET['qualificationid2']);
+            }else{
+                $_GET['qualificationid'] = 0;
+            }
+        }
+        $compact['pagenewslist'] = \Auth::user()->hasManyTraining()->where('ty', $GLOBALS['ty'])->where('isstate', 1)->where(function ($query) {
+            $_GET['trainingid'] and $query->where('trainingid', $_GET['trainingid']);
+            $_GET['industryid'] and $query->where('industryid', $_GET['industryid']);
+            $_GET['neixunid'] and $query->where('neixunid', $_GET['neixunid']);
+            $_GET['publicid'] and $query->where('publicid', $_GET['publicid']);
+            $_GET['qualificationid'] and $query->where('qualificationid', $_GET['qualificationid']);
+            $_GET['title'] and $query->where('title', 'like', '%' . $_GET['title'] . '%');
+        })->paginate($this->paginate)->toArray($this->toArray);
+        $compact['ckey'] = '';
+        foreach ($_GET as $key => $value) {
+            if($key<>'page' && $value) $compact['ckey'] .= "&$key=$value";
+        }
         return $compact;
     }
 
@@ -96,10 +128,46 @@ class BusinessController extends base\UserController
     /**
      * 实名认证
      */
-    public function certification(&$compact)
+    public function certification(Request $request)
     {
-        $table = __FUNCTION__;
-        return $compact;
+        $request = request();
+        $rules = [
+//            'org' => 'required|between:2,20',
+            'registerid' => 'required|numeric',
+            'legal' => 'required|between:2,6',
+            'business_time' => 'required_with:business_time|date_format:Y-m-d',
+            'islonger' => 'required_with:islonger',
+//            'uploadimg' => 'image',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
+
+        $user = \Auth::user();
+        $user_id = $user->id;
+        $business = $user->profile;
+        $business->business_time = $request->get('islonger') ? null : $request->get('business_time');
+        $business->legal = $request->get('legal');
+        $business->registerid = $request->get('registerid');
+        if ($business->save()) {
+            #发送认证请求
+            $flag = Notice::create([
+                'user_id'        => 0,
+                'sender_id'      => $user_id,
+                'action_type_id' => 16,
+                'source_id'      => $user_id,
+                'status'         => 1,
+            ]);
+            if ($flag) {
+                return handleResponseJson(200, '申请认证成功!', '?');
+            }
+        }
+        return handleResponseJson(412, '申请认证失败!');
+
+
     }
 
     /**
@@ -126,11 +194,10 @@ class BusinessController extends base\UserController
     public function safe(Request $request)
     {
 
-        $data = $request->all(); //接收所有的数据
         $rules = [
-            'origin'=>'required|between:6,20',
-            'new'=>'required|between:6,20',
-            'password2'=>'required|between:6,20|same:new',
+            'origin' => 'required|between:6,20',
+            'new' => 'required|between:6,20',
+            'password2' => 'required|between:6,20|same:new',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -140,8 +207,8 @@ class BusinessController extends base\UserController
         $user_id = $user->id;
         $hashedPassword = $user->password;
 
-        $validator->after(function($validator) use($hashedPassword, $origin) {
-            if(!\Hash::check($origin, $hashedPassword)){
+        $validator->after(function ($validator) use ($hashedPassword, $origin) {
+            if (!\Hash::check($origin, $hashedPassword)) {
                 $validator->errors()->add('origin', '旧密码错误');
             }
         });
@@ -151,9 +218,9 @@ class BusinessController extends base\UserController
             return noticeResponseJson(412, '执行失败', $errors);
         }
         $user->password = bcrypt($request->new);
-        if($user->save()){
+        if ($user->save()) {
             return handleResponseJson(200, '密码修改成功!', '?');
-        }else{
+        } else {
             return handleResponseJson(412, '密码修改失败,请稍后再试', '?');
         }
     }
@@ -174,12 +241,13 @@ class BusinessController extends base\UserController
                 return view("business.cu", $compact);
                 break;
             default://列表
-                if ($table <> 'safe') {
+                if (in_array($table, $this->fillTable)) {
                     if (is_null($GLOBALS['tty'])) {
-                        $db_tty = v_path(null, $GLOBALS['ty']);
-                        $GLOBALS['tty'] = $db_tty->id;
-                        $GLOBALS['tty_data'] = $db_tty;
-                        $GLOBALS['tty_path'] = $db_tty->path;
+                        if ($db_tty = v_path(null, $GLOBALS['ty'])) {
+                            $GLOBALS['tty'] = $db_tty->id;
+                            $GLOBALS['tty_data'] = $db_tty;
+                            $GLOBALS['tty_path'] = $db_tty->path;
+                        }
                     }
                     $compact = $this->$table($compact);
                 }
@@ -200,10 +268,10 @@ class BusinessController extends base\UserController
     /**
      * 添加或修改
      */
-    public function with($table ='', $id = '', Request $request)
+    public function with($table = '', $id = '', Request $request)
     {
         path2ptt(substr(Request()->path(), 8));
-        if(is_numeric($table)) {
+        if (is_numeric($table)) {
             $id = $table;
             $table = $GLOBALS['pid_path'];
         }
