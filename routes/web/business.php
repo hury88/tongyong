@@ -2,6 +2,9 @@
 Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth', 'roles']], function () {
     Route::get('dashboard', 'BusinessController@dashBoard');
 
+    Route::get('json/qualificationid1/{id}', 'JsonController@qualificationid1');
+    Route::get('json/qualificationid2/{id}', 'JsonController@qualificationid1');
+
     Route::get('/', ['as' => 'business', 'uses' => 'BusinessController@profile']);
 
 

@@ -4,6 +4,7 @@
 $th = ['图', '标题', '培训方式', '报名人数'];
 $trainingid_s = config('config.webarr.trainingid');
 $ty = $GLOBALS['ty'];
+$url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path']);
  ?>
 
 @section('inbox')
@@ -27,13 +28,13 @@ $ty = $GLOBALS['ty'];
                     $d = get_arr(76,$_GET['qualificationid1']);
                     Form::select2s($d, '职业资格种类', 'qualificationid2');
 
-                    $d = get_arr(76,$qualificationid2);
+                    $d = get_arr(76,$_GET['qualificationid2']);
                     Form::select2s($d, '职业资格', 'qualificationid');
                 }
                 Form::select2($trainingid_s, '培训方式', 'trainingid');
         ?>
         <input class="order-manager-sub" type="submit" value="搜索结果">
-        <a class="certificate-but" href="{{$table}}/create">发布信息</a>
+        <a class="certificate-but" href="{{$url}}/create">发布信息</a>
     </div>
 </form>
 @stop

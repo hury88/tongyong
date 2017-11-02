@@ -224,7 +224,6 @@ class FormHelper{
             <span title="<?php echo $lm?>" class="job-posted-property"><b>*</b><?php echo $lm?></span>
             <div class="job-posted-values">
                 <select name="<?php echo $n?>">
-                    <option value="0">请选择</option>
                     <?php foreach ($d as $k => $v): $sl=$k==$this->$n?'selected':'' ?>
                         <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
                     <?php endforeach ?>
@@ -244,7 +243,14 @@ class FormHelper{
 		 <?php UNSET($d,$lm,$n,$v,$t)?>
 	<?php }
 
-
+    public static function select2s($d,$lm,$n){  $$n = isset($_GET[$n]) ? $_GET[$n] : '';  ?>
+        <select title="<?php echo $lm?>" name="<?php echo $n?>">
+            <?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+                <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+            <?php endforeach ?>
+        </select>
+        <?php UNSET($d,$lm,$n,$v,$t)?>
+    <?php }
 
 	//生成隐藏域
 	public function hide($n,$v=''){
@@ -463,7 +469,7 @@ HTML;
 	private static function initEditor2($name='content',$width = '667', $height = '350'){
 		global $$name;
 		$val  = htmlspecialchars_decode($$name);
-		$editor="<textarea id=\"{$name}\" name=\"{$name}\" style=\"width:{$width};height:{$height}px;\">{$val}</textarea><script type=\"text/javascript\"> var ue = UE.getEditor('{$name}'); </script>";
+		$editor="<textarea id=\"{$name}\" name=\"{$name}\" style=\"width:{$width}px;height:{$height}px;\">{$val}</textarea><script type=\"text/javascript\"> var ue = UE.getEditor('{$name}'); </script>";
 		return $editor;
 	}
 	//编辑器调用
@@ -524,17 +530,7 @@ HTML;
 	}
 
 
-    public static function select2s($typeid,$pid=0,$lm,$n){  $$n = isset($_GET[$n]) ? $_GET[$n] : '';  ?>
-        <select title="<?php echo $lm?>" name="<?php echo $n?>">
-            <option value="0"><?php echo $lm?></option>
-            <?php
-            $d=get_arr($typeid,$pid);
-            foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
-                <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
-            <?php endforeach ?>
-        </select>
-        <?php UNSET($d,$lm,$n,$v,$t)?>
-    <?php }
+
 
 }
 

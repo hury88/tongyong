@@ -293,13 +293,13 @@
                                 <img src="img/list2.png"/>
                             </div>
                             <div class="zhiyepx2Titr" style="width: 85%;">
-                                <p class="jingp1">在线学习</p>
+                                <p class="jingp1">培训机构</p>
                                 <p class="jingp2">
-                                    <span>On - line learning</span>
+                                    <span>Training institution</span>
                                 </p>
                             </div>
                             <div class="zhiyepx2Titc" style="width: 9%;float: left;">
-                                <a href="" style="color: #666666;margin-top: 20px;">更多<img src="img/qydown1.png"></a>
+                                <a href="{{u('training','business')}}" style="color: #666666;margin-top: 20px;">更多<img src="/img/qydown1.png"></a>
                             </div>
                         </div>
                         <div class="zhiyepx4Con">
@@ -360,7 +360,7 @@
                     <div class="zhiyepx3All">
                         <div class="zhiyepx2Tit" style="border: none;padding-top: 40px;margin-bottom: 25px;">
                             <div class="zhiyepx2Titl">
-                                <img src="img/list9.png"/>
+                                <img src="/img/list9.png"/>
                             </div>
                             <div class="zhiyepx2Titr" style="width: 85%;">
                                 <p class="jingp1">在线学习</p>

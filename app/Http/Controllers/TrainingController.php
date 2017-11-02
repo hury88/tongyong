@@ -96,7 +96,7 @@ class TrainingController extends Training
         $Training= new Training();
         $id_arr=$Training->v_id_arr($id);
         if($id_arr->user_id){
-            $id_arr->qyname=v_id($id_arr->user_id,"name","cmember");
+            $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'user');
         }else{
             $id_arr->qyname="平台管理员";
         }

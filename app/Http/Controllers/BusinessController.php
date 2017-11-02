@@ -81,6 +81,7 @@ class BusinessController extends base\UserController
             }else{
                 $_GET['qualificationid'] = 0;
             }
+
         }
         $compact['pagenewslist'] = \Auth::user()->hasManyTraining()->where('ty', $GLOBALS['ty'])->where('isstate', 1)->where(function ($query) {
             $_GET['trainingid'] and $query->where('trainingid', $_GET['trainingid']);
