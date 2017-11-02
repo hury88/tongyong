@@ -22,7 +22,7 @@
         })
     </script>
 @if(defined('AT_CU'))
-<script type="text/javascript" src="/PLUGINS/alert.min.js"></script>
+<script type="text/javascript" src="/plugins/calendar.js"></script>
 
     <script>
         $('.save').click(function(){

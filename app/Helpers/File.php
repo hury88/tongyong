@@ -18,7 +18,7 @@ class File
      *
      * @var string
      */
-    private static $default_path = 'files';
+    private static $default_path = 'uploadfile/upload';
 
     /**
      * $sections
@@ -30,6 +30,7 @@ class File
     [
         'default'          => ['path' => '', 'type' => 'all', 'valid' => '/[\.\/](.+)$/i'],
         'img'              => ['path' => 'img', 'type' => 'img', 'code' => true, 'valid' => '/[\.\/](jpe?g|png)$/i', 'maxwidth' => 2048],
+        'upload_img'       => ['path' => '', 'type' => 'img', 'code' => true, 'valid' => '/[\.\/](jpe?g|png|gif|bmp)$/i', 'maxwidth' => 1200],
         'category_img'     => ['path' => 'img/categories/image', 'type' => 'img', 'valid' => '/[\.\/](jpe?g|png)$/i', 'maxwidth' => 600, 'square' => true],
         'profile_img'      => ['path' => 'img/profile', 'type' => 'img', 'code' => true, 'valid' => '/[\.\/](jpe?g|png)$/i', 'maxwidth' => 600, 'square' => true],
         'product_img'      => ['path' => 'img/products/image', 'type' => 'img', 'code' => true, 'valid' => '/[\.\/](jpe?g|gif|png)$/i', 'maxwidth' => 600, 'square' => true],
@@ -128,7 +129,7 @@ class File
             $options = (object) $this->options;
 
             //setting file path
-            $path = [storage_path(), self::$default_path, $options->path];
+            $path = [public_path(), self::$default_path, $options->path];
             if (@$options->code && \Auth::check()) {
                 $path[] = \Auth::id();
             }
@@ -173,7 +174,7 @@ class File
         $path = explode('/', $file);
 
         if (\Auth::id() == $path[4]) {
-            $file = storage_path().'/'.self::$default_path.$file;
+            $file = public_path().'/'.self::$default_path.$file;
             unlink($file);
 
             return file_exists($file) ? 0 : 1;

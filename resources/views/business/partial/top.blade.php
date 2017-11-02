@@ -2,7 +2,7 @@
     <h1 class="fl">欢迎登录{{$boot_config['sitename']}}企业用户中心！<span>您上次登录的时间：{{$user['updated_at']}}</span></h1>
     <div class="safety-header-personal fr">
         <ul>
-            <li class="personal-infor1"><i>2</i></li>
+            <li class="personal-infor1"><a href="{{route('b_notices')}}"><i>2</i></a></li>
             <li class="personal-infor2"><img src="/img/qiye-img.jpg">欢迎回来，{{$user['member_name']}}</li>
             @if($user['certified'])
             <li class="personal-infor3"><img src="/img/renzhe.png">已认证</li>

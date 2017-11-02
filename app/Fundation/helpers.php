@@ -3,9 +3,13 @@
 use App\News;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use App\Http\FileController;
+use App\Helpers\File;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+
+
 
 if (!function_exists('v_show')) {
 	//{{vv(3, 7, '<div title="@$title@" class="swiper-slide"> <img src="__IMG__" /> </div>')}}
@@ -314,116 +318,14 @@ function get_edselect($d,$lm,$n,$select){
           </div>";
     return $cs;
 }
-function upload()
-{
-     $file = Input::file('Filedata');
-     if($file->isValid()){
-         $extension = $file->getClientOriginalExtension();
-         $newName = date('YmdHis').mt_rand(100,999).".".$extension;
-         $path = $file->move(base_path()."/uploads",$newName);
-         $filepath = 'uploads/'.$newName;
-         return $filepath;
-         //检验上传的文件是否有效
-         $clientName = $file->getClientOriginalName();//获取文件名称
-         $tmpName = $file->getFileName();  //缓存在tmp文件中的文件名 例如 php9732.tmp 这种类型的
-         $realPath = $file->getRealPath();  //这个表示的是缓存在tmp文件夹下的文件绝对路径。
-         $entension = $file->getClientOriginalExtension(); //上传文件的后缀
-         $mimeType = $file->getMimeType(); //得到的结果是imgage/jpeg
-         $path = $file->move('storage/uploads');
-         //如果这样写的话,默认会放在我们 public/storage/uploads/php9372.tmp
-         //如果我们希望将放置在app的uploads目录下 并且需要改名的话
-         $path = $file->move(app_path().'/uploads'.$newName);
-         //这里app_path()就是app文件夹所在的路径。$newName 可以是通过某种算法获得的文件名称
-         //比如 $newName = md5(date('YmdHis').$clientName).".".$extension;
-     }
-}
 
-/**
- * [uppro 上传文件及图片]
- * @return [type] [description]
- */
-/*function uppro($iptname,$path,$originname='',$savename='',$active=Image::IMAGE_THUMB_SCALE)
+
+function upload(Request $request, $file)
 {
-	$file = Input::file($iptname);
-	if($file->isValid()){
-	    $extension = $file->getClientOriginalExtension();
-	    $newName = date('YmdHis').mt_rand(100,999).".".$extension;
-	    $path = $file->move(base_path()."/uploads",$newName);
-	    $filepath = 'uploads/'.$newName;
-	    return $filepath;
-	    //检验上传的文件是否有效
-	    $clientName = $file->getClientOriginalName();//获取文件名称
-	    $tmpName = $file->getFileName();  //缓存在tmp文件中的文件名 例如 php9732.tmp 这种类型的
-	    $realPath = $file->getRealPath();  //这个表示的是缓存在tmp文件夹下的文件绝对路径。
-	    $entension = $file->getClientOriginalExtension(); //上传文件的后缀
-	    $mimeType = $file->getMimeType(); //得到的结果是imgage/jpeg
-	    $path = $file->move('storage/uploads');
-	    //如果这样写的话,默认会放在我们 public/storage/uploads/php9372.tmp
-	    //如果我们希望将放置在app的uploads目录下 并且需要改名的话
-	    $path = $file->move(app_path().'/uploads'.$newName);
-	    //这里app_path()就是app文件夹所在的路径。$newName 可以是通过某种算法获得的文件名称
-	    //比如 $newName = md5(date('YmdHis').$clientName).".".$extension;
+	$v = \Validator::make($request->all(), ['file' => 'image']);
+	if ($v->fails()) {
+		return false;
 	}
 
-    $realpath = trim(ROOT_PATH, DS) . $path;
-
-    // $delimg=isset($_POST[$name]) ? $_POST[$name] : '';
-    if(!isset($_FILES[$iptname]))return 0;
-    $img_name = $_FILES[$iptname]['name'];
-    $ext = pathinfo($img_name, PATHINFO_EXTENSION);
-    $savename or $savename = date("YmdHis").mt_rand(10,99);
-    $savename = "$savename.$ext";
-    if($img_name){
-        if ($originname && file_exists($realpath.$originname)) @unlink($realpath.$originname);
-        uploadimg($iptname,$realpath,$savename,$active);
-        return $savename;
-    }
-    return false;
+	return File::section('upload_img')->upload($request->file($file));
 }
-*/
-
-//图片上传
-/*function uploadimg($obj,$path,$name,$active){
-    global $system_pictype,$system_picsize;
-    $picaExt = explode('|',$system_pictype);                          //图片文件
-    $uppic=$_FILES[$obj]['name'];                                   //文件名称
-    $thumbs_type=strtolower(substr($uppic,strrpos($uppic,".")+1));  //上传类型
-    $thumbs_file=$_FILES[$obj]['tmp_name'];                         //临时文件
-    $thumbs_size=$_FILES[$obj]['size'];                             //文件大小
-    $imageinfo = getimagesize($thumbs_file);
-
-
-    $upfile=$path.$name;
-    if(in_array($thumbs_type,$picaExt)&&$thumbs_size>intval($system_picsize)*1024){
-        returnJson(-100,"图片上传大小超过上限:".ceil($system_picsize/1024)."M！");
-    }
-
-    if($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg' && $imageinfo['mime'] != 'image/png' && $imageinfo['mime'] != 'image/bmp') {
-        returnJson(-100,"非法图像文件！");
-    }
-
-    if(!in_array($thumbs_type,$picaExt)){
-        returnJson(-100,"上传图片格式不对，请上传".$system_pictype."格式的图片！");
-    }
-    if (!is_writable($path)){
-        //修改文件夹权限
-        $oldumask = umask(0);
-        mkdir($path,0777);
-        umask($oldumask);
-        returnJson(-100,"请确保文件夹的存在或文件夹有写入权限");
-    }
-
-    $imgsize = config('pic.imgsize');
-    if($imgsize && strpos($imgsize, '*')) {
-        list($w, $h) = explode('*', $imgsize, 2);
-        $image = new Image();
-        $result = $image->open($thumbs_file)->thumb($w, $h, $active)->save($upfile);
-    } else {
-        $result = copy($thumbs_file,$upfile);
-    }
-
-    if(!$result){
-        returnJson(-100,"上传失败!");
-    }
-}*/
-

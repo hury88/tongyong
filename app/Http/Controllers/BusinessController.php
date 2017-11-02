@@ -146,19 +146,26 @@ class BusinessController extends base\UserController
         if ($validator->fails()) {
             return noticeResponseJson(412, '执行失败', $errors);
         }
+        $img = upload($request, 'uploadimg');
+        if (!$img) {
+            return noticeResponseJson(412, '执行失败', '上传失败!');
+        }
 
         $user = \Auth::user();
         $user_id = $user->id;
         $business = $user->profile;
+        $business->img = $img;
+        $business->certified_status = 2;
         $business->business_time = $request->get('islonger') ? null : $request->get('business_time');
         $business->legal = $request->get('legal');
         $business->registerid = $request->get('registerid');
+
         if ($business->save()) {
             #发送认证请求
             $flag = Notice::create([
                 'user_id'        => 0,
                 'sender_id'      => $user_id,
-                'action_type_id' => 16,
+                'action_type_id' => 1,
                 'source_id'      => $user_id,
                 'status'         => 1,
             ]);
