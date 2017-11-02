@@ -39,7 +39,20 @@ class Business extends Model
     {
         return $this->belongsTo('App\User');
     }
-
+    public function v_pages($business_name,$field=['*'],$num=15,$linknum=5){
+        return $this
+            ->where('has2','=' ,'1')
+            ->where(function($query) use($business_name){
+                if($business_name) {
+                    $query->where('business_name','like' ,'%'.$business_name.'%');
+                }
+            })
+            ->latest('disorder')
+            ->latest('user_id')
+            ->select($field)
+            ->paginate($num)
+            ->toArray($linknum);
+    }
     public function getAgeAttribute()
     {
         return \Carbon\Carbon::parse($this->creation_date)->age;
@@ -52,6 +65,6 @@ class Business extends Model
 
     public function getFullNameAttribute()
     {
-        return "$this->business_name";
+        return $this->business_name;
     }
 }

@@ -99,7 +99,7 @@ class WithData
 
 
 
-        // uppro('img1',$fields,'ajax');
+         uppro('img1',$fields,'ajax');
         // uppro('img2',$fields,'ajax');
         // uppro('img3',$fields,'ajax');
         // uppro('img4',$fields,'ajax');

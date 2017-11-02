@@ -153,13 +153,13 @@ class BusinessController extends base\UserController
         $business->business_time = $request->get('islonger') ? null : $request->get('business_time');
         $business->legal = $request->get('legal');
         $business->registerid = $request->get('registerid');
-        $business->certified_status = 1;
+        $business->registerid = $request->get('registerid');
         if ($business->save()) {
             #发送认证请求
             $flag = Notice::create([
                 'user_id'        => 0,
                 'sender_id'      => $user_id,
-                'action_type_id' => 1,
+                'action_type_id' => 16,
                 'source_id'      => $user_id,
                 'status'         => 1,
             ]);

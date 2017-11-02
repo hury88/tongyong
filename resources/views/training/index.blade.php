@@ -37,7 +37,7 @@
                                 </a>
                             </li>
                             <li class="liat3">
-                                <a href="{{u('raining','business')}}">
+                                <a href="{{u('training','business')}}">
                                     <img src="/img/jineng3.png"/>培训机构
                                 </a>
                             </li>

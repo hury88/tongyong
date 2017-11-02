@@ -42,7 +42,7 @@ class TrainingController extends Training
 //培训首页企业培训
         $qiyegood = $this->goodlist([2,65], ['id', 'title', 'img1', 'price','content'], 4);
 //培训首页培训机构
-        $jigougood = $this->usergoodlist( ['user_id', 'business_name', 'img'], 10);
+        $jigougood = $this->usergoodlist( ['user_id', 'business_name', 'logo'], 10);
 //培训首页在线学习
         $zaixiangood[0] = $this->omlinelist(1, ['id','img1', 'title','introduce', 'price','img1', 'enroll_num','content'], 3);
         $zaixiangood[1] = $this->omlinelist(2, ['id','img1', 'title','introduce', 'price','img1', 'enroll_num','content'], 3);
@@ -100,7 +100,7 @@ class TrainingController extends Training
         $Training= new Training();
         $id_arr=$Training->v_id_arr($id);
         if($id_arr->user_id){
-            $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'user');
+            $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'users');
         }else{
             $id_arr->qyname="平台管理员";
         }
@@ -168,26 +168,30 @@ class TrainingController extends Training
     {
         $Training = new Training();
 
-        // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
-//        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"],9);
-//
-//        $list['newslist']=$newslist;
         $ckey='';
-        $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],["id","title","sendtime","img1","content"],9,9);
-        return view('training/list', compact("pagenewslist","ckey"));
+        $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],['id','title','sendtime','img1','content'],9,9);
+        return view('training/list', compact('pagenewslist','ckey'));
     }
     //培训机构列表加分页
     public function userlist()
     {
         $Training = new Business();
+        if(isset($_GET['business_name'])){
+            $key=$_GET['business_name'];
+            $ckey='&business_name='.$_GET['business_name'];
+        }else{
+            $ckey='';
+            $key='';
+        }
 
         // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
-//        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"],9);
+//        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],['id','title','sendtime','img1','content'],9);
 //
 //        $list['newslist']=$newslist;
-        $ckey='';
-        $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],["id","title","sendtime","img1","content"],9,9);
-        return view('training/list', compact("pagenewslist","ckey"));
+
+        $pagenewslist=$Training->v_pages($key,['user_id','business_name','logo','business_introduction'],16,9);
+        //dd($pagenewslist);
+        return view('training/userlist', compact('pagenewslist','ckey','key'));
     }
     public function seachlist()
     {
@@ -200,9 +204,9 @@ class TrainingController extends Training
         }
         $Training = new Training();
 
-        $pagenewslist=$Training->v_seachpages($key,[$GLOBALS['pid']],["id",'ty',"title","sendtime","cid","content"],9,9);
+        $pagenewslist=$Training->v_seachpages($key,[$GLOBALS['pid']],['id','ty','title','sendtime','cid','content'],9,9);
 
-        return view('training/seach', compact("pagenewslist","key","ckey"));
+        return view('training/seach', compact('pagenewslist','key','ckey'));
     }
 
 }
