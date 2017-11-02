@@ -1,6 +1,29 @@
 <?php
 //这里放后台的函数
 
+function creatNotices($user_id, $action_type_id, $source_id, $content = '')
+{
+    return M('notices')->insert([
+        'user_id'        => $user_id,
+        'sender_id'      => 0,
+        'action_type_id' => $action_type_id,
+        'source_id'      => $user_id,
+        'status'         => 1,
+        'content'        => $content,
+    ]);
+}
+
+function _update($table, $id, $arr, $pk = 'id')
+{
+    $arr['updated_at'] = date('Y-m-d H:i:s');
+    return M($table)->where("$pk=$id")->update($arr);
+}
+
+function updateBusiness($user_id, $update)
+{
+    return M('businesses')->where("user_id=$user_id")->update($update);
+}
+
 /**
  * [uppro 上传文件及图片]
  * @return [type] [description]

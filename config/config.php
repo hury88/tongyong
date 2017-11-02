@@ -235,6 +235,14 @@ return [
         // array('/','\\','>','<','#','*','|','?',':','"')
     ],
 
+    'notices' => [
+        'certification.request' => '企业会员实名认证',
+        'certification.refuse' => '企业会员实名认证失败',
+        'certification.ok' => '企业会员实名认证成功',
+        'x' => '提款',
+        'xx' => '退款',
+    ],
+
     'other'                  => [
         // 'nocontent'  => '<p style="text-align:center;width:100%;padding:20px 0;">内容更新中</p>',
         'nocontent'  => '<p style="text-align:center;width:90%;padding:38px 0;">内容更新中</p>',
