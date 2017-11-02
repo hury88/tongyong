@@ -256,7 +256,7 @@
                                 </p>
                             </div>
                             <div class="zhiyepx2Titc" style="width: 9%;float: left;">
-                                <a href="{{u("training","skill")}}" style="color: #666666;margin-top: 20px;">更多<img src="/img/qydown1.png"></a>
+                                <a href="{{u("training","enterprise")}}" style="color: #666666;margin-top: 20px;">更多<img src="/img/qydown1.png"></a>
                             </div>
                         </div>
                         <div class="qypeixinCon">
@@ -293,6 +293,7 @@
                                 <img src="img/list2.png"/>
                             </div>
                             <div class="zhiyepx2Titr" style="width: 85%;">
+
                                 <p class="jingp1">培训机构</p>
                                 <p class="jingp2">
                                     <span>Training institution</span>
@@ -304,54 +305,12 @@
                         </div>
                         <div class="zhiyepx4Con">
                             <ul>
+                                @foreach($jigougood as $val)
                                 <li>
-                                    <a href=""><img src="img/list3.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
+                                    <a href="{{u('training','business',$val['user_id'])}}"><img src="{{img($val['img'])}}"/></a>
+                                    <p><a href="{{u('training','business',$val['user_id'])}}">{{$val['business_name']}}</a></p>
                                 </li>
-                                <li>
-                                    <a href=""><img src="img/list4.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list4.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list6.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list7.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list8.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list3.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list4.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list5.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list6.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list7.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
-                                <li>
-                                    <a href=""><img src="img/list8.png"/></a>
-                                    <p><a href="">联想集团有限公司</a></p>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -363,101 +322,130 @@
                                 <img src="/img/list9.png"/>
                             </div>
                             <div class="zhiyepx2Titr" style="width: 85%;">
-                                <p class="jingp1">在线学习</p>
+                                <p class="jingp1">{{$sanlist[2]['catname']}}</p>
                                 <p class="jingp2">
                                     <span>On - line learning</span>
                                 </p>
                             </div>
                             <div class="zhiyepx2Titc" style="width: 9%;float: left;">
-                                <a href="" style="color: #666666;margin-top: 20px;">更多<img src="img/qydown1.png"></a>
+                                <a href="{{u("training","online")}}" style="color: #666666;margin-top: 20px;">更多<img src="/img/qydown1.png"></a>
                             </div>
                         </div>
                         <div class="zhiyepx5Con">
                             <div id="notice-tit" class="notice-tit">
                                 <ul>
                                     <li class="select">
-                                        <a href="javascript:;">人力资源培训</a>
+                                        <a href="javascript:void(0);">{{config("config.webarr.onlineid.1")}}</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;">战略管理培训</a>
+                                        <a href="javascript:void(0);">{{config("config.webarr.onlineid.2")}}</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;">采购培训</a>
+                                        <a href="javascript:void(0);">{{config("config.webarr.onlineid.3")}}</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;">其他培训</a>
+                                        <a href="javascript:void(0);">{{config("config.webarr.onlineid.4")}}</a>
                                     </li>
                                 </ul>
                             </div>
                             <div id="notice-con" class="notice-con">
-                                <!--  对应的菜单栏目  -->
+
                                 <div class="mod" style="display:block">
                                     <ul>
+                                        @foreach($zaixiangood[0] as $val)
                                         <li>
                                             <div class="modTop">
-                                                <img src="img/qiye1.png"/>
+                                                <a href="{{u("training","online",$val['id'])}}"> <img src="{{img($val['img1'])}}"/></a>
                                                 <div class="minute">
-                                                    <img src="img/xlsys3.png"/>共110节 -- 20小时8分钟
+                                                   <img src="/img/xlsys3.png"/>{{$val['introduce']}}
                                                 </div>
                                             </div>
                                             <div class="modBom">
-                                                <p class="p1"><a href="">职业技能培训直播课程</a></p>
+                                                <p class="p1"><a href="{{u("training","online",$val['id'])}}">{{$val['title']}}</a></p>
                                                 <p class="p2">
-                                                    <span class="sp1">￥29.90</span>
-                                                    <span class="sp2"><i>45456</i>人已报名</span>
+                                                    <span class="sp1">￥{{$val['price']}}</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
                                                 </p>
                                                 <p class="p3">
-                                                    <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有的高度。网规出题思路紧跟技术发展脉搏...</a>
+                                                    <a href="{{u("training","online",$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}</a>
                                                 </p>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="modTop">
-                                                <img src="img/qiye2.png"/>
-                                                <div class="minute">
-                                                    <img src="img/xlsys3.png"/>共110节 -- 20小时8分钟
-                                                </div>
-                                            </div>
-                                            <div class="modBom">
-                                                <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                                <p class="p2">
-                                                    <span class="sp1">￥29.90</span>
-                                                    <span class="sp2"><i>45456</i>人已报名</span>
-                                                </p>
-                                                <p class="p3">
-                                                    <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有的高度。网规出题思路紧跟技术发展脉搏...</a>
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="modTop">
-                                                <img src="img/qiye3.png"/>
-                                                <div class="minute">
-                                                    <img src="img/xlsys3.png"/>共110节 -- 20小时8分钟
-                                                </div>
-                                            </div>
-                                            <div class="modBom">
-                                                <p class="p1"><a href="">职业技能培训直播课程</a></p>
-                                                <p class="p2">
-                                                    <span class="sp1">￥29.90</span>
-                                                    <span class="sp2"><i>45456</i>人已报名</span>
-                                                </p>
-                                                <p class="p3">
-                                                    <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有的高度。网规出题思路紧跟技术发展脉搏...</a>
-                                                </p>
-                                            </div>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
 
                                 <div class="mod" style="display:none">
-                                    111
+                                    <ul>
+                                    @foreach($zaixiangood[1] as $val)
+                                        <li>
+                                            <div class="modTop">
+                                                <a href="{{u("training","online",$val['id'])}}"> <img src="{{img($val['img1'])}}"/></a>
+                                                <div class="minute">
+                                                    <img src="/img/xlsys3.png"/>{{$val['introduce']}}
+                                                </div>
+                                            </div>
+                                            <div class="modBom">
+                                                <p class="p1"><a href="{{u("training","online",$val['id'])}}">{{$val['title']}}</a></p>
+                                                <p class="p2">
+                                                    <span class="sp1">￥{{$val['price']}}</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                                </p>
+                                                <p class="p3">
+                                                    <a href="{{u("training","online",$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                    </ul>
                                 </div>
                                 <div class="mod" style="display:none">
-                                    222
+                                    <ul>
+                                    @foreach($zaixiangood[2] as $val)
+                                        <li>
+                                            <div class="modTop">
+                                                <a href="{{u("training","online",$val['id'])}}"> <img src="{{img($val['img1'])}}"/></a>
+                                                <div class="minute">
+                                                    <img src="/img/xlsys3.png"/>{{$val['introduce']}}
+                                                </div>
+                                            </div>
+                                            <div class="modBom">
+                                                <p class="p1"><a href="{{u("training","online",$val['id'])}}">{{$val['title']}}</a></p>
+                                                <p class="p2">
+                                                    <span class="sp1">￥{{$val['price']}}</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                                </p>
+                                                <p class="p3">
+                                                    <a href="{{u("training","online",$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                    </ul>
                                 </div>
                                 <div class="mod" style="display:none">
-                                    333
+                                    <ul>
+                                    @foreach($zaixiangood[3] as $val)
+                                        <li>
+                                            <div class="modTop">
+                                                <a href="{{u("training","online",$val['id'])}}"> <img src="{{img($val['img1'])}}"/></a>
+                                                <div class="minute">
+                                                    <img src="/img/xlsys3.png"/>{{$val['introduce']}}
+                                                </div>
+                                            </div>
+                                            <div class="modBom">
+                                                <p class="p1"><a href="{{u("training","online",$val['id'])}}">{{$val['title']}}</a></p>
+                                                <p class="p2">
+                                                    <span class="sp1">￥{{$val['price']}}</span>
+                                                    <span class="sp2"><i>{{$val['enroll_num']}}</i>人已报名</span>
+                                                </p>
+                                                <p class="p3">
+                                                    <a href="{{u("training","online",$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 100, '...') !!}</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         </div>

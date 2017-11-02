@@ -54,7 +54,7 @@ class NoticesController extends Controller
 
         // extract($data);
 
-        return View('business.notices', compact('pagenewslist'));
+        return View('business.notices', compact('pagenewslist', '_title'));
     }
 
     public function push($force = false)
