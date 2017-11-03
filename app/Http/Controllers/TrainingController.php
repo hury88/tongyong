@@ -196,17 +196,19 @@ class TrainingController extends Training
             $industryid=(int)$_GET['industryid'];
             $ckey.='&industryid='.$industryid;
         }else{
-            $qualificationid=0;
+            $industryid=0;
         }
         if(isset($_GET['trainingid'])){
             $trainingid=(int)$_GET['trainingid'];
-            $ckey.='&qualificationid='.$trainingid;
+            $ckey.='&trainingid='.$trainingid;
         }else{
             $trainingid=0;
         }
-        $industryids=get_arr();
+        $industryids=get_arr(75);
+        $neixunids=get_arr(73);
+        $publicids=get_arr(74);
         $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],['id','title','sendtime','img1','content'],9,9);
-        return view('training/list', compact('pagenewslist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids'));
+        return view('training/list', compact('pagenewslist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids'));
     }
     //培训机构列表加分页
     public function userlist()

@@ -14,6 +14,7 @@
     </form>
 </div>
 </div>
+<script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript">
     $(".web-pager form .pager-form-inp").keyup(function () {
         var ss=parseInt($(this).val())

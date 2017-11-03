@@ -29,24 +29,15 @@
                                     内训分类
                                 </div>
                                 <div class="qypeixinTit2Right neixunid">
-                                    <div style="width: 780px; float: left">
-                                        <a href="" class="qypeixinTiton">全部  </a>
-                                        <a href="javascript:;">管理技能内训课程  </a>
-                                        <a href="javascript:;">职业素养内训课程  </a>
-                                        <a href="javascript:;">人力资源内训课程  </a>
-                                        <a href="javascript:;">生产管理内训课程 </a>
-                                        <a href="javascript:;">销售管理内训课程 </a>
-                                        <a href="javascript:;">市场营销内训课程 </a>
-                                        <a href="javascript:;"> 战略管理内训课程  </a>
-                                        <a href="javascript:;">客户服务内训课程  </a>
-                                        <a href="javascript:;"> 财务管理内训课程</a>
-                                        <a href="javascript:;">采购物流内训课程</a>
-                                        <a href="javascript:;">国学智慧内训课程</a>
-                                        <a href="javascript:;">项目管理内训课程 </a>
-                                        <a href="javascript:;">政府·农林牧渔</a>
+                                    <div style="width: 820px; float: left" class="touda">
+                                        <a data-id='0' href="javascript:void(0);" @if($neixunid==0) class="qypeixinTiton" @endif>全部  </a>
+                                        @foreach($neixunids as $key=>$val)
+                                            <a href="javascript:void(0);" data-id='{{$key}}' @if($key==$neixunid) class="qypeixinTiton"  @endif>{{$val}}</a>
+                                        @endforeach
                                     </div>
-                                    <div class="bb1" style="float: right;width: 220px;">
-                                        <span href="javascript:void(0);" class="aa1">收起<img src="/img/sqzwtop1.png"></span>
+                                    <div class="bb1" style="float: right;width: 70px;">
+                                        <span href="javascript:void(0);" class="aa1" >收起<img src="/img/sqzwtop1.png"></span>
+                                        <span href="javascript:void(0);" class="aa2"style="display: none">展开<img src="/img/qydown.png"></span>
                                     </div>
 
                                 </div>
@@ -56,27 +47,15 @@
                                    公开课分类
                                 </div>
                                 <div class="qypeixinTit2Right publicid">
-                                    <div style="width: 780px; float: left">
-                                        <a href="" class="qypeixinTiton">全部  </a>
-                                        <a href="javascript:;">管理技能内训课程  </a>
-                                        <a href="javascript:;">职业素养内训课程  </a>
-                                        <a href="javascript:;">人力资源内训课程  </a>
-                                        <a href="javascript:;">生产管理内训课程 </a>
-                                        <a href="javascript:;">销售管理内训课程 </a>
-
-                                        <a href="javascript:;">市场营销内训课程 </a>
-                                        <a href="javascript:;"> 战略管理内训课程  </a>
-                                        <a href="javascript:;">客户服务内训课程  </a>
-                                        <a href="javascript:;"> 财务管理内训课程</a>
-                                        <a href="javascript:;">采购物流内训课程</a>
-                                        <a href="javascript:;">国学智慧内训课程</a>
-
-                                        <a href="javascript:;">项目管理内训课程 </a>
-                                        <a href="javascript:;">政府·农林牧渔</a>
+                                    <div style="width: 820px; float: left" class="touda">
+                                        <a data-id='0' href="javascript:void(0);" @if($publicid==0) class="qypeixinTiton" @endif>全部  </a>
+                                        @foreach($publicids as $key=>$val)
+                                            <a href="javascript:void(0);" data-id='{{$key}}' @if($key==$publicid) class="qypeixinTiton"  @endif>{{$val}}</a>
+                                        @endforeach
                                     </div>
-
-                                    <div class="bb1">
-                                        <span href="javascript:;" class="aa1">收起<img src="img/sqzwtop1.png"></span>
+                                    <div class="bb1" style="float: right;width: 70px;">
+                                        <span href="javascript:void(0);" class="aa1" >收起<img src="/img/sqzwtop1.png"></span>
+                                        <span href="javascript:void(0);" class="aa2"style="display: none">展开<img src="/img/qydown.png"></span>
                                     </div>
                                 </div>
                             </div>
@@ -86,23 +65,15 @@
                                     行业
                                 </div>
                                 <div class="qypeixinTit2Right industryid">
-                                    <div style="width: 820px; float: left">
-                                        <a href="javascript:void(0);" class="qypeixinTiton">全部  </a>
-                                        <a href="javascript:void(0);">互联网·游戏·软件  </a>
-                                        <a href="javascript:void(0);">电子·通信·硬件  </a>
-                                        <a href="javascript:void(0);">房地产·建筑·物业  </a>
-                                        <a href="javascript:void(0);">金融 消费品 </a>
-                                        <a href="javascript:void(0);">汽车·机械·制造  </a>
-                                        <a href="javascript:void(0);">制药·医疗  </a>
-
-                                        <a href="javascript:void(0);">能源·化工·环保</a>
-                                        <a href="javascript:void(0);">服务·外包·中介 </a>
-                                        <a href="javascript:void(0);"> 广告·传媒·教育·文化  </a>
-                                        <a href="javascript:void(0);">交通·贸易·物流   </a>
-                                        <a href="javascript:void(0);"> 政府·农林牧渔</a>
+                                    <div style="width: 820px; float: left" class="touda">
+                                        <a data-id='0' href="javascript:void(0);" @if($industryid==0) class="qypeixinTiton" @endif>全部  </a>
+                                        @foreach($industryids as $key=>$val)
+                                        <a href="javascript:void(0);" data-id='{{$key}}' @if($key==$industryid) class="qypeixinTiton"  @endif>{{$val}}</a>
+                                        @endforeach
                                     </div>
-                                    <div class="bb1" style="float: right;width: 65px;">
-                                        <span href="javascript:void(0);" class="aa1">收起<img src="/img/sqzwtop1.png"></span>
+                                    <div class="bb1" style="float: right;width: 70px;">
+                                        <span href="javascript:void(0);" class="aa1" >收起<img src="/img/sqzwtop1.png"></span>
+                                        <span href="javascript:void(0);" class="aa2"style="display: none">展开<img src="/img/qydown.png"></span>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +84,7 @@
                                 </div>
                                 <div class="qypeixinTit2Right trainingid">
                                     <div class="">
-                                        <a data-id="0" href="javascript:void(0);" @if(!$trainingid) class="qypeixinTiton" @endif>全部</a>
+                                        <a data-id="0" href="javascript:void(0);" @if($trainingid==0) class="qypeixinTiton" @endif>全部</a>
                                         @foreach(config("config.webarr.trainingid") as $key=>$val)
                                         <a data-id="{{$key}}" href="javascript:void(0);" @if($trainingid==$key) class="qypeixinTiton" @endif>{{$val}}</a>
                                         @endforeach
@@ -125,16 +96,18 @@
                             <form action="" method="get">
                                   <span class="span1">
                                     <input type="text" name="" id="qualificationid" value="@if($qualificationid) {{v_id($qualificationid,'catname','nature')}} @endif" placeholder="职业资格名称"/>
-                                    <input type="hidden" name="qualificationid" id="qualificationid" value="{{$qualificationid}}" placeholder="职业资格名称"/>
+                                    <input type="hidden" name="qualificationid" id="qualificationid" value="{{$qualificationid}}"/>
                                     <a href="javascript:void(0)">+</a>
                                   </span>
 
                                 <input type="text" name="title" id="title" value="{{$title}}" placeholder="清输入关键词" class="inp"/>
-
+                                @if($GLOBALS['ty']==65)
                                 <input type="hidden" name="neixunid" id="neixunid" value="{{$neixunid}}"/>
                                 <input type="hidden" name="publicid" id="publicid" value="{{$publicid}}"/>
-                                <input type="hidden" name="trainingid" id="trainingid" value="{{$trainingid}}"/>
+                                @elseif($GLOBALS['ty']==28)
                                 <input type="hidden" name="industryid" id="industryid" value="{{$industryid}}"/>
+                                @endif
+                                <input type="hidden" name="trainingid" id="trainingid" value="{{$trainingid}}"/>
                                 <span class="span3">
                                 <img src="/img/fdj1.jpg"/>
                                 <input type="submit"  value="搜索" />
@@ -443,15 +416,245 @@
 
                 </div>
             </div>
+
+
+
 @stop {{-- end content --}}
 
 
 @section('footer')
   @parent
+
+
+            <div class="jobselect-cover"></div>
+            <div class="jobselect-mask">
+                <h2>选择职业规格<span>最多只能选择五个 ！</span><a href="javascript:;" class="job-close"></a></h2>
+                <div class="job-result clearfix">
+                    <p class="job-notice fl">您的选择结果：</p>
+                    <ul class="fl">
+                    </ul>
+                </div>
+                <div class="job-lists-box">
+                    <div class="job-menu fl">
+                        <ul>
+                            <li class="job-select-icon">准入类</li>
+                            <li>水平 评价类</li>
+                        </ul>
+                    </div>
+                    <div class="job-lists-content fl" style="display:block">
+                        <div class="job-lists-dv">
+                            <p class="job-big-type"><i class="big-type-icon"></i>消防设施操作员</p>
+                            <ul class="job-small-type">
+                                <li>消防设施操作A</li>
+                                <li>消防设施操作B</li>
+                                <li>消防设施操作C</li>
+                                <li>消防设施操作D</li>
+                                <li>消防设施操作E</li>
+                                <li>消防设施操作F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">焊工</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">家畜繁殖员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于健身和娱乐场所服务人员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">家畜繁殖员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于航空运输服务人员会籍顾问</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于道路运输服务人员 </p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于轨道交通运输服务人员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于消防和应急救援人员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="job-lists-content fl" style="display:none">
+                        <div class="job-lists-dv">
+                            <p class="job-big-type"><i class="big-type-icon"></i>消防设施操作员</p>
+                            <ul class="job-small-type">
+                                <li>消防设施操作A</li>
+                                <li>消防设施操作B</li>
+                                <li>消防设施操作C</li>
+                                <li>消防设施操作D</li>
+                                <li>消防设施操作E</li>
+                                <li>消防设施操作F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">焊工</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">家畜繁殖员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于健身和娱乐场所服务人员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">家畜繁殖员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于航空运输服务人员会籍顾问</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于道路运输服务人员 </p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于轨道交通运输服务人员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                        <div class="job-lists-dv">
+                            <p class="job-big-type">关于消防和应急救援人员</p>
+                            <ul class="job-small-type">
+                                <li>焊工A</li>
+                                <li>焊工B</li>
+                                <li>焊工C</li>
+                                <li>焊工D</li>
+                                <li>焊工E</li>
+                                <li>焊工F</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="job-operate">
+                    <a class="operate-comfirm" href="javascript:;">确定</a>
+                    <a class="operate-reset" href="javascript:;">取消</a>
+                </div>
+            </div>
 @stop
 
 @section('scripts')
   @parent
+            <script type="text/javascript" src="/js/2.js"></script>
             <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
             <script type="text/javascript">
                 $('.industryid div a').click(function(){
@@ -461,5 +664,35 @@
                     $('#industryid').val(ss)
                 })
 
+                $('.neixunid div a').click(function(){
+                    $('.neixunid div a').removeClass("qypeixinTiton")
+                    $(this).addClass("qypeixinTiton")
+                    ss=$(this).data('id')
+                    $('#neixunid').val(ss)
+                })
+
+                $('.publicid div a').click(function(){
+                    $('.publicid div a').removeClass("qypeixinTiton")
+                    $(this).addClass("qypeixinTiton")
+                    ss=$(this).data('id')
+                    $('#publicid').val(ss)
+                })
+                $('.trainingid div a').click(function(){
+                    $('.trainingid div a').removeClass("qypeixinTiton")
+                    $(this).addClass("qypeixinTiton")
+                    ss=$(this).data('id')
+                    $('#trainingid').val(ss)
+                })
+
+                $(".bb1 .aa2").click(function () {
+                    $(this).hide()
+                    $(this).siblings(".aa1").show()
+                    $(this).parent().parent().children(".touda").removeClass("sqdown")
+                })
+                $(".bb1 .aa1").click(function () {
+                    $(this).hide()
+                    $(this).siblings(".aa2").show()
+                    $(this).parent().parent().children(".touda").addClass("sqdown")
+                })
             </script>
 @stop
