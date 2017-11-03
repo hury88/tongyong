@@ -74,6 +74,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return $this->hasOne('App\Business');
 
+    } public function business()
+    {
+        return $this->hasOne('App\Business');
+
     }
 
     public function hasManyCertificate()

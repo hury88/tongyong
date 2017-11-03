@@ -121,7 +121,9 @@ class CertificateController extends Controller
 
         $Certificate = new Certificate();
         $id_arr = $Certificate->v_id_arr($id);
-
+        if(!$id_arr){
+            about(404);
+        }
 
         if ($id_arr->user_id) {
             $id_arr->qyname = v_id($id_arr->user_id,'member_name', 'users');
@@ -157,6 +159,9 @@ class CertificateController extends Controller
         $viewrow = $id;
         $Certificate = new Certificate();
         $id_arr = $Certificate->v_id_arr($id);
+        if(!$id_arr){
+            about(404);
+        }
         if ($id_arr->user_id) {
             $id_arr->qyname = v_id($id_arr->user_id,'member_name', 'users');
         } else {
@@ -316,6 +321,9 @@ class CertificateController extends Controller
         $viewrow = $id;
         $Certificate = new Certificate();
         $id_arr = $Certificate->v_id_arr($id);
+        if(!$id_arr){
+            about(404);
+        }
         if ($id_arr->user_id) {
             $id_arr->qyname = v_id($id_arr->user_id,'member_name', 'users');
         } else {

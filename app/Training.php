@@ -85,7 +85,7 @@ class Training extends Model
     }
     public function v_id_arr($id)
     {
-        return $this->find($id);
+        return $this->findOrFail($id);
     }
     public function v_pages($where=[],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,$field=['*'],$num=15,$linknum=5){
         return $this->parseWhere($where)

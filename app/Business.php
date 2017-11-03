@@ -39,6 +39,7 @@ class Business extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     public function v_pages($business_name,$field=['*'],$num=15,$linknum=5){
         return $this
             ->where('has2','=' ,'1')

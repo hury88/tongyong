@@ -99,27 +99,30 @@ class TrainingController extends Training
         $viewrow =  $id;
         $Training= new Training();
         $id_arr=$Training->v_id_arr($id);
+        if(!$id_arr){
+            about(404);
+        }
         if($id_arr->user_id){
             $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'users');
         }else{
             $id_arr->qyname="平台管理员";
         }
-        $arr=$this->newsorder($id);
-        $id_arr->previd=$arr['previd'];
-        $id_arr->nextid=$arr['nextid'];
-        if($id_arr->previd>0){
-            $id_arr->prevlink=route($GLOBALS['ty_path'],$id_arr->previd);
-            $id_arr->prev=v_id($id_arr->previd,"title");
-
-        }else{
-            $id_arr->prevlink='javascript:void(0)';
-        }
-        if($id_arr->nextid>0){
-            $id_arr->nextlink=route($GLOBALS['ty_path'],$id_arr->nextid);
-            $id_arr->next=v_id($id_arr->nextid,"title");
-        }else{
-            $id_arr->nextlink='javascript:void(0);';
-        }
+     //   $arr=$this->newsorder($id);
+//        $id_arr->previd=$arr['previd'];
+//        $id_arr->nextid=$arr['nextid'];
+//        if($id_arr->previd>0){
+//            $id_arr->prevlink=u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$id_arr->previd);
+//            $id_arr->prev=v_id($id_arr->previd,"title");
+//
+//        }else{
+//            $id_arr->prevlink='javascript:void(0)';
+//        }
+//        if($id_arr->nextid>0){
+//            $id_arr->nextlink=u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$id_arr->nextid);
+//            $id_arr->next=v_id($id_arr->nextid,"title");
+//        }else{
+//            $id_arr->nextlink='javascript:void(0);';
+//        }
         return view('training/view', compact('id_arr'));
 
     }
@@ -236,6 +239,40 @@ class TrainingController extends Training
         $pagenewslist=$Training->v_pages($key,['user_id','business_name','logo','business_introduction'],16,9);
         //dd($pagenewslist);
         return view('training/userlist', compact('pagenewslist','ckey','key'));
+    }
+    public function view($id)
+    {
+        $id_arr = User::find($id);
+        abort(404);
+        if($id_arr){
+            $id_arr = $id_arr->business;
+        } else {
+            abort(404);
+        }
+//        return view('errors.404');
+        if($id_arr->user_id){
+            $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'users');
+        }else{
+            $id_arr->qyname="平台管理员";
+        }
+//        $arr=$this->newsorder($id);
+//        $id_arr->previd=$arr['previd'];
+//        $id_arr->nextid=$arr['nextid'];
+//        if($id_arr->previd>0){
+//            $id_arr->prevlink=route($GLOBALS['ty_path'],$id_arr->previd);
+//            $id_arr->prev=v_id($id_arr->previd,"title");
+//
+//        }else{
+//            $id_arr->prevlink='javascript:void(0)';
+//        }
+//        if($id_arr->nextid>0){
+//            $id_arr->nextlink=route($GLOBALS['ty_path'],$id_arr->nextid);
+//            $id_arr->next=v_id($id_arr->nextid,"title");
+//        }else{
+//            $id_arr->nextlink='javascript:void(0);';
+//        }
+        return view('news/view', compact('id_arr'));
+
     }
     public function seachlist()
     {
