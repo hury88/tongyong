@@ -106,32 +106,14 @@
     </div>
     <div class="member-index-right fr">
        <div class="mem-message">
-           <h4>系统消息<a href="javascript:;">更多 > </a></h4>
+           <h4>系统消息<a href="{{route('b_notices')}}">更多 > </a></h4>
            <ul class="mem-message-ul">
+            @foreach($notices as $row)
                <li class="mem-message-li">
-                   <a href="javascript:;">新人大礼包等你抢<i></i></a>
-                   <p>2017-07-18 11:11</p>
+                   <a href="javascript:;">{{$row['title']}}{!! $row['status'] == 1 ? '<i></i>' : '' !!}</a>
+                   <p>{{$row['created_at']}}</p>
                </li>
-               <li class="mem-message-li">
-                   <a href="javascript:;">新人大礼包等你抢<i></i></a>
-                   <p>2017-07-18 11:11</p>
-               </li>
-               <li class="mem-message-li">
-                   <a href="javascript:;">新人大礼包等你抢</a>
-                   <p>2017-07-18 11:11</p>
-               </li>
-               <li class="mem-message-li">
-                   <a href="javascript:;">新人大礼包等你抢</a>
-                   <p>2017-07-18 11:11</p>
-               </li>
-               <li class="mem-message-li">
-                   <a href="javascript:;">新人大礼包等你抢</a>
-                   <p>2017-07-18 11:11</p>
-               </li>
-               <li class="mem-message-li">
-                   <a href="javascript:;">新人大礼包等你抢</a>
-                   <p>2017-07-18 11:11</p>
-               </li>
+           @endforeach
            </ul>
        </div>
         <div class="mem-message">

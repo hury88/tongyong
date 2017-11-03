@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
  *public function education()		  []
  *public function certificate()		  []
  *public function nature()		  []
+ *public function tranning()		  []
  */
 class WithData
 {
@@ -121,8 +122,8 @@ class WithData
     public function nature()
     {
         $fields=array(
-            'pid' 		  => 		I('post.pid',0,'intval'),
-            'typeid' 		  => 		I('post.typeid',0,'intval'),
+            'pid' 		  => 		(int)$GLOBALS['pid'],
+            'typeid' 		  => 	I('post.typeid',0,'intval'),
             'catname'     => 		I('post.catname','','trim'),
             'catname2'    => 		I('post.catname2','','trim'),
             'linkurl'     =>	 	I('post.linkurl','','trim'),
@@ -137,6 +138,45 @@ class WithData
         $this->logInsert = '添加类别分类'.$fields['catname'];
         $this->logUpdate = '编辑类别分类'.$fields['catname'];
 
+        return $fields;
+    }
+
+    public function training()
+    {
+        $fields = array(
+            'pid'				=>		(int)$GLOBALS['pid'],
+            'ty'				=>		(int)$GLOBALS['ty'],
+            'tty'				=>		0,
+            'industryid'		=>		$this->I('industryid', 0, 'intval'),
+            'neixunid'			=>		$this->I('neixunid', 0, 'intval'),
+            'trainingid'		=>		$this->I('trainingid', 0, 'intval'),
+            'qualificationid'	=>		$this->I('qualificationid', 0, 'intval'),
+            'publicid'			=>		$this->I('publicid', 0, 'intval'),
+            'title'				=>		$this->I('title','','htmlspecialchars'),
+            'name'				=>		$this->I('name','','htmlspecialchars'),
+            'ftitle'			=>		$this->I('ftitle','','htmlspecialchars'),
+            'content'			=>		$this->I('content',''),
+            'content2'       	=>		$this->I('content2',''),
+            'content3'       	=>		$this->I('content3',''),
+            'content4'       	=>		$this->I('content4',''),
+            'introduce'			=>		$this->I('introduce','','htmlspecialchars'),
+            'price'				=>		$this->I('price','','htmlspecialchars'),
+            'period'			=>		$this->I('period','','htmlspecialchars'),
+            'sendtime'      	=>		time(),
+        );
+        /*if ($fields['ty'] == 9 && empty($fields['istop'])) {
+            ajaxReturn(-1,'请选择案例分类');
+        }*/
+        uppro('img1',$fields);
+        uppro('img2',$fields);
+        uppro('img3',$fields);
+        uppro('img4',$fields);
+        uppro('img5',$fields);
+        uppro('img6',$fields);
+        // uppro('file',$fields);
+        // uppro('img5',$fields,'water',$water_path);
+        $this->logInsert = '添加培训信息('.$fields['pid'].','.$fields['ty'].','.'): '.$fields['title'];
+        $this->logUpdate = '更新培训信息('.$fields['pid'].','.$fields['ty'].','.'): '.$fields['title'];
         return $fields;
     }
 	public function pic()

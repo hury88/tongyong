@@ -37,7 +37,8 @@ class BusinessController extends base\UserController
     public function profile()
     {
         $user = \Auth::user()->relationsToArray();
-        return view('business.profile', compact('user'));
+        $notices = Notice::auth()->desc()->take(6)->get(['title','created_at']);
+        return view('business.profile', compact('user', 'notices'));
     }
 
     /**

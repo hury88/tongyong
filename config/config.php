@@ -236,7 +236,7 @@ return [
     ],
 
     'notices' => [
-        'certification_request' => '企业会员实名认证',
+        'certification_request' => '企业会员实名认证申请',
         'certification_refuse' => '企业会员实名认证失败',
         'certification_ok' => '企业会员实名认证成功',
         'x' => '提款',

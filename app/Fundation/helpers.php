@@ -175,7 +175,7 @@ function v_pic($pid){
      */
     function u()
     {
-        $args = func_get_args();
+        $args = array_filter(func_get_args());
         $args =  $args ? implode('/', $args) : '';
         return '/'.trim($args, '/');
     }

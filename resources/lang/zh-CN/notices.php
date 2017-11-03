@@ -3,7 +3,7 @@
 return [
     //id of actions that can get notices
     //'actions' => [1,2,3,8,9,11,13],
-    //links to the source type of actions
+    //links to the sourcece type of actions
     'links' => [
         'order' => route('orders.show_order', ['source_id']),
     ],

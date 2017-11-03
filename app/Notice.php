@@ -10,6 +10,7 @@ namespace app;
 
 use App\Eloquent\Collection;
 use App\Eloquent\Model;
+use App\ActionType;
 
 class Notice extends Model
 {
@@ -47,14 +48,16 @@ class Notice extends Model
      * @attribute users : array with 2 users, notice to both users, sender and receiver
      * @attribute user_ids : send a notice from sender to all that user receivers
      */
-    /*public static function create(array $attr = [])
+    public static function create(array $attr = [])
     {
-        if (!isset($attr['status'])) {
-            $attr['status'] = 1;
+        $ac = ActionType::find($attr['action_type_id']);
+        if (!isset($attr['title'])) {
+            $attr['title'] = ActionType::find($attr['action_type_id'])->notice_title;
         }
-        dd($attr);
-        return ($attr['user_id'] == $attr['sender_id']) ? null : parent::create($attr);
-    }*/
+        $attr['created_at'] = date('Y-m-d H:is');
+        return self::insert($attr);
+        // parent::create($attr);
+    }
 
     /**
      * create many notices.

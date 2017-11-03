@@ -379,10 +379,10 @@ HTML;
 			// <a href="%src%" target="_blank">查看图片</a>
 		$tpl = <<<HTML
 		<div class="post-message-div clearfix">
-            <div class="post-message-left fl">
+            <div style="width:11.45%" class="post-message-left fl">
                 <span><b>*</b>%lablename%</span>
             </div>
-			<div class="post-message-right fr">
+			<div style="width:87.7%" class="post-message-right fr">
 			    <div class="default-img-box">
 			        <img id="%name%" src="%src%" />
 				    <input type="hidden" name="%name%" value="%value%">
