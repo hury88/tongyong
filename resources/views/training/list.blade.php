@@ -97,7 +97,7 @@
                                   <span class="span1">
                                     <input type="text" name="" id="qualificationid" value="@if($qualificationid) {{v_id($qualificationid,'catname','nature')}} @endif" placeholder="职业资格名称"/>
                                     <input type="hidden" name="qualificationid" id="qualificationid" value="{{$qualificationid}}"/>
-                                    <a href="javascript:void(0)">+</a>
+                                    <a id="profession-chose" href="javascript:void(0)">+</a>
                                   </span>
 
                                 <input type="text" name="title" id="title" value="{{$title}}" placeholder="清输入关键词" class="inp"/>
