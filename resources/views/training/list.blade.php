@@ -95,7 +95,7 @@
                         <div class="qypeixinTit3">
                             <form action="" method="get">
                                   <span class="span1">
-                                    <input type="text" name="" id="qualificationid" value="@if($qualificationid) {{v_id($qualificationid,'catname','nature')}} @endif" placeholder="职业资格名称"/>
+                                    <input type="text" id="qualificationidname" value="@if($qualificationidarr&&$qualificationidarr[0]>0) @foreach($qualificationidarr as $vc) @if($loop->index==0) {{v_id($vc,'catname','nature')}} @else ,{{v_id($vc,'catname','nature')}} @endif @endforeach @endif" placeholder="职业资格名称"/>
                                     <input type="hidden" name="qualificationid" id="qualificationid" value="{{$qualificationid}}"/>
                                     <a id="profession-chose" href="javascript:void(0)">+</a>
                                   </span>
@@ -118,297 +118,27 @@
                     </div>
                     <div class="qypeixinCon">
                         <ul>
+                            @foreach($pagenewslist['data'] as $val)
                             <li>
-                                <a href=""><img src="img/qypx1.jpg"/></a>
+                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                 <div class="qypeixinCon1">
                                     <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">{{$val['title']}}</a>
                                     </p>
                                     <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
+                                        <span>￥{{$val['price']}}</span>
+                                        <i><em>{{$val['enroll_num']}}</em>人已报名</i>
                                     </p>
                                     <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}</a>
                                     </p>
                                     <p class="pu4">
-                                        <a href="">我要报名</a>
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">我要报名</a>
                                     </p>
                                 </div>
                             </li>
-                            <li>
-                                <a href=""><img src="img/qypx2.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx3.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx4.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <div class="" style="clear: both;">
+                            @endforeach
 
-                            </div>
-                            <li>
-                                <a href=""><img src="img/qypx5.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx6.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx7.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx8.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx5.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx6.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx7.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx8.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx5.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx6.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx7.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <a href=""><img src="img/qypx8.jpg"/></a>
-                                <div class="qypeixinCon1">
-                                    <p class="pu1">
-                                        <a href="">工具钳工 技师高级技师...</a>
-                                    </p>
-                                    <p class="pu2">
-                                        <span>￥29.90 </span>
-                                        <i><em>45456</em>人已报名</i>
-                                    </p>
-                                    <p class="pu3">
-                                        <a href="">网络规划设计师，作为网络专业最高级别的考试，考察深度、难度达到了前所未有...</a>
-                                    </p>
-                                    <p class="pu4">
-                                        <a href="">我要报名</a>
-                                    </p>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                     @include('partial.paginator')
@@ -432,217 +162,32 @@
                 <div class="job-result clearfix">
                     <p class="job-notice fl">您的选择结果：</p>
                     <ul class="fl">
+                        @if($qualificationidarr) @foreach($qualificationidarr as $vc) <li>{{v_id($vc,'catname','nature')}}<i class="job-selected-icon" data-id="{{$vc}}"></i></li> @endforeach @endif
                     </ul>
                 </div>
                 <div class="job-lists-box">
                     <div class="job-menu fl">
                         <ul>
-                            <li class="job-select-icon">准入类</li>
-                            <li>水平 评价类</li>
+
+                            @foreach($qiyezige[0] as $key=>$val)
+                            <li class=" @if($loop->index==0) job-select-icon @endif " >{{$val}}</li>
+                            @endforeach
                         </ul>
                     </div>
-                    <div class="job-lists-content fl" style="display:block">
+                    @foreach($qiyezige[0] as $key=>$val)
+                    <div class="job-lists-content fl" @if($loop->index==0) style="display:block" @else style="display:none" @endif>
+                        @foreach($qiyezige[$key] as $k=>$v)
                         <div class="job-lists-dv">
-                            <p class="job-big-type"><i class="big-type-icon"></i>消防设施操作员</p>
+                            <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
                             <ul class="job-small-type">
-                                <li>消防设施操作A</li>
-                                <li>消防设施操作B</li>
-                                <li>消防设施操作C</li>
-                                <li>消防设施操作D</li>
-                                <li>消防设施操作E</li>
-                                <li>消防设施操作F</li>
+                                @foreach($qiyezige[$k] as $k1=>$v1)
+                                <li class="c{{$k1}} @if(in_array($k1,$qualificationidarr)) select-item @endif" data-id="{{$k1}}">{{$v1}}</li>
+                                @endforeach
                             </ul>
                         </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">焊工</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">家畜繁殖员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于健身和娱乐场所服务人员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">家畜繁殖员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于航空运输服务人员会籍顾问</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于道路运输服务人员 </p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于轨道交通运输服务人员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于消防和应急救援人员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="job-lists-content fl" style="display:none">
-                        <div class="job-lists-dv">
-                            <p class="job-big-type"><i class="big-type-icon"></i>消防设施操作员</p>
-                            <ul class="job-small-type">
-                                <li>消防设施操作A</li>
-                                <li>消防设施操作B</li>
-                                <li>消防设施操作C</li>
-                                <li>消防设施操作D</li>
-                                <li>消防设施操作E</li>
-                                <li>消防设施操作F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">焊工</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">家畜繁殖员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于健身和娱乐场所服务人员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">家畜繁殖员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于航空运输服务人员会籍顾问</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于道路运输服务人员 </p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于轨道交通运输服务人员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                        <div class="job-lists-dv">
-                            <p class="job-big-type">关于消防和应急救援人员</p>
-                            <ul class="job-small-type">
-                                <li>焊工A</li>
-                                <li>焊工B</li>
-                                <li>焊工C</li>
-                                <li>焊工D</li>
-                                <li>焊工E</li>
-                                <li>焊工F</li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforeach
                     <div class="clearfix"></div>
                 </div>
                 <div class="job-operate">

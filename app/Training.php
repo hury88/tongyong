@@ -87,9 +87,29 @@ class Training extends Model
     {
         return $this->find($id);
     }
-    public function v_pages($where=[],$field=['*'],$num=15,$linknum=5){
+    public function v_pages($where=[],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,$field=['*'],$num=15,$linknum=5){
         return $this->parseWhere($where)
             ->where("isstate","=" ,"1")
+            ->where(function($query) use($title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid){
+                if($title) {
+                    $query->where('title','like' ,'%'.$title.'%');
+                }
+                if($neixunid) {
+                    $query->where('neixunid','=' ,$neixunid);
+                }
+                if($publicid) {
+                    $query->where('publicid','=' ,$publicid);
+                }
+                if($industryid) {
+                    $query->where('industryid','=' ,$industryid);
+                }
+                if($trainingid) {
+                    $query->where('trainingid','=' ,$trainingid);
+                }
+                if($qualificationidarr&&$qualificationidarr[0]>0){
+                    $query->where('qualificationid','in' ,$qualificationidarr);
+                }
+            })
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')

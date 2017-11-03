@@ -307,3 +307,12 @@ handle 模块handleResponseJson
   h_c = 2011; //验证码
 
 
+foreach 自带变量
+$loop->index： 当前循环迭代的索引（从0开始）
+$loop->iteration： 当前的循环迭代（从1开始）
+$loop->remaining： 剩下的迭代数量
+$loop->count： 循环中的数据总数
+$loop->first： 是否这是循环中的第一条数据，返回Boolean值
+$loop->last： 是否这是循环中的最后一条数据，返回Boolean值
+$loop->depth： 当前循环的嵌套级别
+$loop->parent： 当在嵌套循环中，父的循环变量

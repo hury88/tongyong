@@ -37,7 +37,7 @@
                     @foreach($pagenewslist['data'] as $val)
                         <li>
                             <a href="{{route(v_id($val['ty'],"path","news_cats"),$val['id'])}}" class="a1">{!!  htmlspecialchars_decode(str_replace($key,'<i>'.$key.'</i>',$val['title'])) !!}</a>
-                            <span>发布时间：{{date("Y-m-d",$val['sendtime'])}}   来源：@if($val['cid']) {{v_id($id_arr->cid,"name","cmember")}} @else 平台管理员 @endif </span>
+                            <span>发布时间：{{date("Y-m-d",$val['sendtime'])}}   来源：@if($val['user_id']) {{v_id($val['user_id'],'member_name', 'users')}} @else 平台管理员 @endif </span>
                             <a href="{{route(v_id($val['ty'],"path","news_cats"),$val['id'])}}" class="a2"> {!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}</a>
                         </li>
                     @endforeach

@@ -70,23 +70,31 @@
   });
 
   $(".job-small-type li").click(function(){
-     var txt = $(this).text();
-    var linum = $(".job-result ul").children().length;
-    if(linum<5){
-      $(this).addClass("select-item");
-      $(".job-result ul").append("<li>"+txt+"<i class='job-selected-icon'></li>");
-    }else{
-      $(".jobselect-mask h2 span").show();
-    }
-    $(".job-result .job-selected-icon").click(function(){
-        $(this).parent().remove();
-       var nowlinum = $(".job-result ul").children().length;
-      if(nowlinum<5){
-        $(".jobselect-mask h2 span").hide();
-      }
-    });
-  });
+      if($(this).hasClass("select-item")){
 
+      }else{
+          var txt = $(this).text();
+          var linum = $(".job-result ul").children().length;
+          if(linum<5){
+              $(this).addClass("select-item");
+              var ss=$(this).data('id');
+              $(".job-result ul").append("<li>"+txt+"<i class='job-selected-icon' data-id='"+ss+"'></li>");
+          }else{
+              $(".jobselect-mask h2 span").show();
+          }
+
+          $(".job-result .job-selected-icon").click(function(){
+              $(this).parent().remove();
+              var cc=$(this).data('id');
+              $(".c"+cc).removeClass('select-item')
+              var nowlinum = $(".job-result ul").children().length;
+              if(nowlinum<5){
+                  $(".jobselect-mask h2 span").hide();
+              }
+          });
+      }
+
+  });
   $(".job-operate .operate-reset").click(function(){
     $(".job-result ul").empty();
     if($(".jobselect-mask h2 span").is(":hidden")){
@@ -94,4 +102,21 @@
     }else{
       $(".jobselect-mask h2 span").hide();
     }
+  })
+  $('.operate-comfirm').click(function(){
+      var ids='';
+      var idsname='';
+      $('.job-small-type .select-item').each(function () {
+          var cd=$(this).data('id');
+          var cdname=$(this).text()
+          ids+=','+cd
+          idsname+=','+cdname
+      })
+      ids=ids.substr(1)
+      idsname=idsname.substr(1)
+
+      $("#qualificationid").val(ids)
+      $("#qualificationidname").val(idsname)
+      $(".jobselect-cover").fadeOut("fast");
+      $(".jobselect-mask").fadeOut("fast");
   })

@@ -8,6 +8,19 @@
                 <a  href="{{$pagenewslist['next_page_url'].$ckey}}" class="scrip-a"><img src="/img/zhizhen.jpg"></a>
             @endif
     <form>
+        <?php
+        $ckeys=explode("&",$ckey);
+        foreach($ckeys as $v){
+            if(strstr($v, '=')){
+                $vs=explode("=",$v);
+
+                if($vs[1]!==0){
+
+              ?>
+            <input name="{{$vs[0]}}" value="{{$vs[1]}}" type="hidden">
+           <?php }}}?>
+
+
         <span class="script-span">跳转到：</span>
         <input class="pager-form-inp" name="page" style="text-align: center" type="text"/>
         <input class="pager-form-sub" type="submit" value="GO">

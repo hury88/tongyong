@@ -168,47 +168,53 @@ class TrainingController extends Training
     {
         $Training = new Training();
         $ckey='';
-        if(isset($_GET['title'])){
+        if(isset($_GET['title'])&&$_GET['title']!=0){
+
             $title=$_GET['title'];
             $ckey.='&title='.$title;
         }else{
             $title='';
         }
-        if(isset($_GET['neixunid'])){
+        if(isset($_GET['neixunid'])&&$_GET['neixunid']!=0){
             $neixunid=(int)$_GET['neixunid'];
             $ckey.='&neixunid='.$neixunid;
         }else{
             $neixunid=0;
         }
-        if(isset($_GET['publicid'])){
-            $publicid=$_GET['publicid'];
+        if(isset($_GET['publicid'])&&$_GET['publicid']!=0){
+            $publicid=(int)$_GET['publicid'];
             $ckey.='&publicid='.$publicid;
         }else{
             $publicid=0;
         }
-        if(isset($_GET['qualificationid'])){
-            $qualificationid=(int)$_GET['qualificationid'];
+        if(isset($_GET['qualificationid'])&&$_GET['qualificationid']!=0){
+            $qualificationid=$_GET['qualificationid'];
+            $qualificationidarr=explode(',',$qualificationid);
             $ckey.='&qualificationid='.$qualificationid;
         }else{
+            $qualificationidarr=array();
             $qualificationid=0;
         }
-        if(isset($_GET['industryid'])){
+        if(isset($_GET['industryid'])&&$_GET['industryid']!=0){
             $industryid=(int)$_GET['industryid'];
             $ckey.='&industryid='.$industryid;
         }else{
             $industryid=0;
         }
-        if(isset($_GET['trainingid'])){
+        if(isset($_GET['trainingid'])&&$_GET['trainingid']!=0){
             $trainingid=(int)$_GET['trainingid'];
             $ckey.='&trainingid='.$trainingid;
         }else{
             $trainingid=0;
         }
-        $industryids=get_arr(75);
-        $neixunids=get_arr(73);
-        $publicids=get_arr(74);
-        $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],['id','title','sendtime','img1','content'],9,9);
-        return view('training/list', compact('pagenewslist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids'));
+
+        $sousuoarr=get_ssarr();
+        $industryids=$sousuoarr[75][0];
+        $neixunids=$sousuoarr[73][0];
+        $publicids=$sousuoarr[74][0];
+        $qiyezige=$sousuoarr[76];
+        $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,['id','title','price','enroll_num','img1','content'],16,9);
+        return view('training/list', compact('pagenewslist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids','qiyezige','qualificationidarr'));
     }
     //培训机构列表加分页
     public function userlist()
