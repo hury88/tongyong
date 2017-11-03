@@ -23,6 +23,7 @@ function th_map($tty) {
 $th = th_map($GLOBALS['tty']);
 
 $url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path'], $GLOBALS['tty_path']);
+$out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path'], $GLOBALS['tty_path']);
 
 ?>
 @section('form')
@@ -45,9 +46,9 @@ $url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path'], $GLOBALS['tty_pa
     <td class="manager-firstth">
         <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
-    <td>{{$title}}</td>
+    <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     @if($tty==54)
-        <td> <?=Config::get('webarr.certificate')[$certificate_lid]?> </td>
+        <td> <?=config('config.webarr.certificate')[$certificate_lid]?> </td>
     @endif
     @if (in_array($tty,array(56,61)))
         <td><img src="{{img($img1)}}" width="80"></td>

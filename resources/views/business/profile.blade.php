@@ -1,9 +1,8 @@
 @extends('business.layouts.master')
 
 @section('title') @parent @stop
-
 @section('main')
-<div class="personal-member-index clearfix">
+<div class="pe  rsonal-member-index clearfix">
     <div class="member-index-left fl">
         <div class="member-index-header clearfix">
             <img class="mem-hearimg" src="/img/member-headerimg.png"/>
@@ -41,18 +40,33 @@
             <div class="index-recruit-left fr">
                 <h3>职业培训管理<a href="javascript:;">查看更多 > </a></h3>
                 <ul class="index-recruit-ul">
+                    @if(true || $user['has2'])
                     <li class="index-recruit-li">
                         <p>技能培训</p>
-                        <a href="javascript:;">编辑上传技能培训信息</a>
+                        <a href="{{route('b_training')}}">编辑上传技能培训信息</a>
                     </li>
                     <li class="index-recruit-li">
                         <p>企业培训</p>
-                        <a href="javascript:;">编辑上传企业培训信息</a>
+                        <a href="{{route('b_training')}}/enterprise">编辑上传企业培训信息</a>
                     </li>
                     <li class="index-recruit-li">
                         <p>在线学习</p>
+                        <a href="{{route('b_training')}}/online">编辑上传在线学习资料</a>
+                    </li>
+                    @else
+                    <li class="index-recruit-li index-recruit-on">
+                        <p>技能培训</p>
+                        <a href="javascript:;">编辑上传技能培训信息</a>
+                    </li>
+                    <li class="index-recruit-li index-recruit-on">
+                        <p>企业培训</p>
+                        <a href="javascript:;">编辑上传企业培训信息</a>
+                    </li>
+                    <li class="index-recruit-li index-recruit-on">
+                        <p>在线学习</p>
                         <a href="javascript:;">编辑上传在线学习资料</a>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>

@@ -34,10 +34,6 @@
                                 <div class="register-form-div">
                                     <input name="telphone" type="text" placeholder="请输入手机号"/>
                                 </div>
-                                <div class="register-form-dv">
-                                    <input name="yzm" class="form-code-inp" type="text" placeholder="请输入手机验证码"/>
-                                    <input id="mobile" class="form-code-get" type="button" value="获取验证码"/>
-                                </div>
                                 <div class="register-form-psw">
                                     <input name="password" type="password" placeholder="请输入您的密码"/>
                                     <!-- <a href="javascript:;"></a> -->
@@ -47,6 +43,10 @@
                                     <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
                                 @yield('protocal')
+                                <div class="register-form-dv">
+                                    <input name="yzm" class="form-code-inp" type="text" placeholder="请输入手机验证码"/>
+                                    <input id="mobile" class="form-code-get" type="button" value="获取验证码"/>
+                                </div>
                                 <div class="register-form-inp">
                                     <input class="submit" type="submit" value="注册"/>
                                 </div>
@@ -60,10 +60,6 @@
                                 <div class="register-form-div">
                                     <input name="email" type="text" placeholder="请输入邮箱"/>
                                 </div>
-                                <div class="register-form-dv">
-                                    <input name="yzm" class="form-code-inp" type="text" placeholder="请输入邮箱验证码"/>
-                                    <input id="mail" class="form-code-get" type="button" value="获取验证码"/>
-                                </div>
                                 <div class="register-form-psw">
                                     <input name="password" type="password" placeholder="请输入您的密码"/>
                                     <!-- <a href="javascript:;"></a> -->
@@ -73,6 +69,10 @@
                                     <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
                                 @yield('protocal')
+                                <div class="register-form-dv">
+                                    <input name="yzm" class="form-code-inp" type="text" placeholder="请输入邮箱验证码"/>
+                                    <input id="mail" class="form-code-get" type="button" value="获取验证码"/>
+                                </div>
                                 <div class="register-form-inp">
                                     <input class="submit" type="submit" value="注册"/>
                                 </div>

@@ -170,7 +170,7 @@
         <div class="authentication-notice">
             <div class="authentication-guide">
                 @if($certified_status == 1)
-                    <img src="/img/close-icon.png"/>
+                    <!-- <img src="/img/close-icon.png"/> -->
                     <div class="guide-div">
                         <p class="guide-title">
                             认证审核中

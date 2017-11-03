@@ -5,6 +5,7 @@ $th = ['图', '标题', '培训方式', '报名人数'];
 $trainingid_s = config('config.webarr.trainingid');
 $ty = $GLOBALS['ty'];
 $url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path']);
+$out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
  ?>
 
 @section('inbox')
@@ -46,7 +47,7 @@ $url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path']);
         <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
     <td><img src="{{img($img1)}}" width="80"></td>
-    <td>{{$title}}</td>
+    <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     <td>{{$trainingid_s[$trainingid]}}</td>
     <td>{{$enroll_num}}</td>
     <td>{{date('Y-m-d', $sendtime)}}</td>
