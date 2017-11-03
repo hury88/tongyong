@@ -219,7 +219,7 @@ function src($img,$path='upload',$nopic='nopic'){
     global $system_siteurl;
     $upload =  Config::get("pic.$path");
     $imgPath = ROOT_PATH .'../'. $upload .$img;
-    if(empty($img) || !file_exists($imgPath)){
+    if(empty($img)){ //  || !file_exists($imgPath)
         $img = Config::get("pic.$nopic");
     } else {
         $img = $upload . $img;

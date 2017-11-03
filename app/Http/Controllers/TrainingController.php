@@ -167,10 +167,46 @@ class TrainingController extends Training
     public function newslist()
     {
         $Training = new Training();
-
         $ckey='';
+        if(isset($_GET['title'])){
+            $title=$_GET['title'];
+            $ckey.='&title='.$title;
+        }else{
+            $title='';
+        }
+        if(isset($_GET['neixunid'])){
+            $neixunid=(int)$_GET['neixunid'];
+            $ckey.='&neixunid='.$neixunid;
+        }else{
+            $neixunid=0;
+        }
+        if(isset($_GET['publicid'])){
+            $publicid=$_GET['publicid'];
+            $ckey.='&publicid='.$publicid;
+        }else{
+            $publicid=0;
+        }
+        if(isset($_GET['qualificationid'])){
+            $qualificationid=(int)$_GET['qualificationid'];
+            $ckey.='&qualificationid='.$qualificationid;
+        }else{
+            $qualificationid=0;
+        }
+        if(isset($_GET['industryid'])){
+            $industryid=(int)$_GET['industryid'];
+            $ckey.='&industryid='.$industryid;
+        }else{
+            $qualificationid=0;
+        }
+        if(isset($_GET['trainingid'])){
+            $trainingid=(int)$_GET['trainingid'];
+            $ckey.='&qualificationid='.$trainingid;
+        }else{
+            $trainingid=0;
+        }
+        $industryids=get_arr();
         $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],['id','title','sendtime','img1','content'],9,9);
-        return view('training/list', compact('pagenewslist','ckey'));
+        return view('training/list', compact('pagenewslist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids'));
     }
     //培训机构列表加分页
     public function userlist()

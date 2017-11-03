@@ -23,56 +23,122 @@
                             <span>您已选择：</span><img src="/img/dingwei.png"/><a href="">合肥</a><img src="/img/qydown.png">
                         </div>
                         <div class="qypeixinTit2All">
+                            @if($GLOBALS['ty']==65)
+                            <div class="qypeixinTit2">
+                                <div class="qypeixinTit2Left">
+                                    内训分类
+                                </div>
+                                <div class="qypeixinTit2Right neixunid">
+                                    <div style="width: 780px; float: left">
+                                        <a href="" class="qypeixinTiton">全部  </a>
+                                        <a href="javascript:;">管理技能内训课程  </a>
+                                        <a href="javascript:;">职业素养内训课程  </a>
+                                        <a href="javascript:;">人力资源内训课程  </a>
+                                        <a href="javascript:;">生产管理内训课程 </a>
+                                        <a href="javascript:;">销售管理内训课程 </a>
+                                        <a href="javascript:;">市场营销内训课程 </a>
+                                        <a href="javascript:;"> 战略管理内训课程  </a>
+                                        <a href="javascript:;">客户服务内训课程  </a>
+                                        <a href="javascript:;"> 财务管理内训课程</a>
+                                        <a href="javascript:;">采购物流内训课程</a>
+                                        <a href="javascript:;">国学智慧内训课程</a>
+                                        <a href="javascript:;">项目管理内训课程 </a>
+                                        <a href="javascript:;">政府·农林牧渔</a>
+                                    </div>
+                                    <div class="bb1" style="float: right;width: 220px;">
+                                        <span href="javascript:void(0);" class="aa1">收起<img src="/img/sqzwtop1.png"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="qypeixinTit2">
+                                <div class="qypeixinTit2Left">
+                                   公开课分类
+                                </div>
+                                <div class="qypeixinTit2Right publicid">
+                                    <div style="width: 780px; float: left">
+                                        <a href="" class="qypeixinTiton">全部  </a>
+                                        <a href="javascript:;">管理技能内训课程  </a>
+                                        <a href="javascript:;">职业素养内训课程  </a>
+                                        <a href="javascript:;">人力资源内训课程  </a>
+                                        <a href="javascript:;">生产管理内训课程 </a>
+                                        <a href="javascript:;">销售管理内训课程 </a>
+
+                                        <a href="javascript:;">市场营销内训课程 </a>
+                                        <a href="javascript:;"> 战略管理内训课程  </a>
+                                        <a href="javascript:;">客户服务内训课程  </a>
+                                        <a href="javascript:;"> 财务管理内训课程</a>
+                                        <a href="javascript:;">采购物流内训课程</a>
+                                        <a href="javascript:;">国学智慧内训课程</a>
+
+                                        <a href="javascript:;">项目管理内训课程 </a>
+                                        <a href="javascript:;">政府·农林牧渔</a>
+                                    </div>
+
+                                    <div class="bb1">
+                                        <span href="javascript:;" class="aa1">收起<img src="img/sqzwtop1.png"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            @elseif($GLOBALS['ty']==28)
                             <div class="qypeixinTit2">
                                 <div class="qypeixinTit2Left">
                                     行业
                                 </div>
-                                <div class="qypeixinTit2Right">
-                                    <div class="">
-                                        <a href="" class="qypeixinTiton">全部  </a>
-                                        <a href="javascript:;">互联网·游戏·软件  </a>
-                                        <a href="javascript:;">电子·通信·硬件  </a>
-                                        <a href="javascript:;">房地产·建筑·物业  </a>
-                                        <a href="javascript:;">金融 消费品 </a>
-                                        <a href="javascript:;">汽车·机械·制造  </a>
-                                        <a href="javascript:;">制药·医疗  </a>
+                                <div class="qypeixinTit2Right industryid">
+                                    <div style="width: 820px; float: left">
+                                        <a href="javascript:void(0);" class="qypeixinTiton">全部  </a>
+                                        <a href="javascript:void(0);">互联网·游戏·软件  </a>
+                                        <a href="javascript:void(0);">电子·通信·硬件  </a>
+                                        <a href="javascript:void(0);">房地产·建筑·物业  </a>
+                                        <a href="javascript:void(0);">金融 消费品 </a>
+                                        <a href="javascript:void(0);">汽车·机械·制造  </a>
+                                        <a href="javascript:void(0);">制药·医疗  </a>
 
-                                        <span href="javascript:;" class="aa1">收起<img src="img/sqzwtop1.png"></span>
+                                        <a href="javascript:void(0);">能源·化工·环保</a>
+                                        <a href="javascript:void(0);">服务·外包·中介 </a>
+                                        <a href="javascript:void(0);"> 广告·传媒·教育·文化  </a>
+                                        <a href="javascript:void(0);">交通·贸易·物流   </a>
+                                        <a href="javascript:void(0);"> 政府·农林牧渔</a>
                                     </div>
-                                    <div class="bb1">
-                                        <a href="javascript:;">能源·化工·环保</a>
-                                        <a href="javascript:;">服务·外包·中介 </a>
-                                        <a href="javascript:;"> 广告·传媒·教育·文化  </a>
-                                        <a href="javascript:;">交通·贸易·物流   </a>
-                                        <a href="javascript:;"> 政府·农林牧渔</a>
+                                    <div class="bb1" style="float: right;width: 65px;">
+                                        <span href="javascript:void(0);" class="aa1">收起<img src="/img/sqzwtop1.png"></span>
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="qypeixinTit2">
                                 <div class="qypeixinTit2Left" style="height: 37px;">
                                     类  别
                                 </div>
-                                <div class="qypeixinTit2Right">
+                                <div class="qypeixinTit2Right trainingid">
                                     <div class="">
-                                        <a href="" class="qypeixinTiton">直播培训    </a>
-                                        <a href="javascript:;">视频培训  </a>
-                                        <a href="javascript:;">教材培训  </a>
+                                        <a data-id="0" href="javascript:void(0);" @if(!$trainingid) class="qypeixinTiton" @endif>全部</a>
+                                        @foreach(config("config.webarr.trainingid") as $key=>$val)
+                                        <a data-id="{{$key}}" href="javascript:void(0);" @if($trainingid==$key) class="qypeixinTiton" @endif>{{$val}}</a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="qypeixinTit3">
-                            <form action="" method="post">
-            		  <span class="span1">
-            			<input type="" name="" id="" value="" placeholder="职业资格名称"/>
-            			<a href="">+</a>
-            		  </span>
-                                <input type="text" name="" id="" value="" placeholder="清输入关键词" class="inp"/>
+                            <form action="" method="get">
+                                  <span class="span1">
+                                    <input type="text" name="" id="qualificationid" value="@if($qualificationid) {{v_id($qualificationid,'catname','nature')}} @endif" placeholder="职业资格名称"/>
+                                    <input type="hidden" name="qualificationid" id="qualificationid" value="{{$qualificationid}}" placeholder="职业资格名称"/>
+                                    <a href="javascript:void(0)">+</a>
+                                  </span>
 
+                                <input type="text" name="title" id="title" value="{{$title}}" placeholder="清输入关键词" class="inp"/>
+
+                                <input type="hidden" name="neixunid" id="neixunid" value="{{$neixunid}}"/>
+                                <input type="hidden" name="publicid" id="publicid" value="{{$publicid}}"/>
+                                <input type="hidden" name="trainingid" id="trainingid" value="{{$trainingid}}"/>
+                                <input type="hidden" name="industryid" id="industryid" value="{{$industryid}}"/>
                                 <span class="span3">
-                      	<img src="img/fdj1.jpg"/>
-                      	<input type="search" name="" id="" value="搜索" />
-                      </span>
+                                <img src="/img/fdj1.jpg"/>
+                                <input type="submit"  value="搜索" />
+                              </span>
 
                             </form>
                         </div>
@@ -388,13 +454,12 @@
   @parent
             <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
             <script type="text/javascript">
+                $('.industryid div a').click(function(){
+                    $('.industryid div a').removeClass("qypeixinTiton")
+                    $(this).addClass("qypeixinTiton")
+                    ss=$(this).data('id')
+                    $('#industryid').val(ss)
+                })
 
-                $('.qypeixinTit2Right div a').click(function(){
-                    $(this).css('background','#445263');
-                    $(this).css('color','#fff');
-                })
-                $('.aa1').click(function(){
-                    $('.bb1').slideToggle();
-                })
             </script>
 @stop
