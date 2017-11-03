@@ -66,7 +66,7 @@ list($data, $pagestr) = Page::paging($pageConfig);
                    <tr>
                     <td><input id="delid<?=$id?>" name="del[]" value="<?=$id?>" type="checkbox"><i class="layui-i">&nbsp;</i></td>
                     <td><?=$key+1?></td>
-                    <td><?=$notices["$source_type.$action"]?> <b style="color:red">未处理</b>(<?php echo $MNotices->where(['action_type_id' => $id, 'status' => 1])->count() ?>)
+                    <td><?=$notices[$source_type.'_'.$action]?> <b style="color:red">未处理</b>(<?php echo $MNotices->where(['action_type_id' => $id, 'status' => 1])->count() ?>)
                       <a href="notices.php?action_type_id=<?=$id?>">去处理</a>&emsp;<b style="color:red">已处理</b>(<?php echo $MNotices->where(['action_type_id' => $id, 'status' => 3])->count() ?>)
                     </td>
                   </tr>

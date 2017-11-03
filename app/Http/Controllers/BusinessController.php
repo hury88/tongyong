@@ -164,7 +164,7 @@ class BusinessController extends base\UserController
             $flag = Notice::create([
                 'user_id'        => 0,
                 'sender_id'      => $user_id,
-                'action_type_id' => 16,
+                'action_type_id' => 1,
                 'source_id'      => $user_id,
                 'status'         => 1,
             ]);

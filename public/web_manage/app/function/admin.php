@@ -10,6 +10,7 @@ function creatNotices($user_id, $action_type_id, $source_id, $content = '')
         'source_id'      => $user_id,
         'status'         => 1,
         'content'        => $content,
+        'created_at'     => date('Y-m-d H:i:s'),
     ]);
 }
 
