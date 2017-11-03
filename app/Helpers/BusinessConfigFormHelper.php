@@ -37,7 +37,7 @@
 *  +----------------------------------------------------------------------
 */
 namespace App\Helpers;
-class FormHelper{
+class BusinessConfigFormHelper{
 	private $display = 'block';//长度 inline短一些
 	private $verify  = '';//必填项  number:数字 email:邮箱 phone:手机号 date:日期 url:链接 http://www....
 	private $word  = '';	//红色提示语
@@ -326,10 +326,10 @@ HTML;
 		}else{
 			// %word%
 			$tpl = <<<HTML
-			<div class="job-posted-dv">
-			    <span class="job-posted-property"><b>*</b>%lablename%</span>
-			    <div class="job-posted-values">
-			        <input class="job-name %display%" type="text" name="%name%" value="%value%" autocomplete="off" placeholder="请填写%lablename%"/>
+			<div class="useredit-form-dv clearfix">
+			    <span class="authentication-form-left fl"><b>*</b>%lablename%</span>
+			    <div class="authentication-form-right fr">
+			        <input class="user-form-inp %display%" type="text" name="%name%" value="%value%" autocomplete="off" placeholder="请填写%lablename%"/>
 			        %word%
 			    </div>
 			</div>

@@ -38,7 +38,8 @@ class UserController extends Controller
                 if (!$next) {
                     $next = key($menu_first['next']);
                 }
-                $ty = $menu_first['next'][$next]['ty'];
+                isset($menu_first['next'][$next]['ty'])
+                && $ty = $menu_first['next'][$next]['ty'];
                 array_unshift($title, $menu_first['next'][$next]['title']);
             }
             if ($next && isset($ty)) {

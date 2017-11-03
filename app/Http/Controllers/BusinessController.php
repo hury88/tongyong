@@ -192,6 +192,50 @@ class BusinessController extends base\UserController
      */
     public function config(&$compact)
     {
+        $request = request();
+        $rules = [
+//            'org' => 'required|between:2,20',
+            'registerid' => 'required|numeric',
+            'legal' => 'required|between:2,6',
+            'business_time' => 'required_with:business_time|date_format:Y-m-d',
+            'islonger' => 'required_with:islonger',
+//            'uploadimg' => 'image',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
+        $img = upload($request, 'uploadimg');
+        if (!$img) {
+            return noticeResponseJson(412, '执行失败', '上传失败!');
+        }
+
+        $user = \Auth::user();
+        $user_id = $user->id;
+        $business = $user->profile;
+        $business->img = $img;
+        $business->certified_status = 1;
+        $business->business_time = $request->get('islonger') ? null : $request->get('business_time');
+        $business->legal = $request->get('legal');
+        $business->registerid = $request->get('registerid');
+        if ($business->save()) {
+            #发送认证请求
+            $flag = Notice::create([
+                'user_id'        => 0,
+                'sender_id'      => $user_id,
+                'action_type_id' => 1,
+                'source_id'      => $user_id,
+                'status'         => 1,
+            ]);
+            if ($flag) {
+                return handleResponseJson(200, '申请认证成功!', '?');
+            }
+        }
+        return handleResponseJson(412, '申请认证失败!');
+
+
     }
 
     /**
@@ -261,7 +305,10 @@ class BusinessController extends base\UserController
                     }
                     $compact = $this->$table($compact);
                 }
-                return view("business.$table", $compact);
+                if (view()->exists("business.$table")) {
+                    return view("business.$table", $compact);
+                }
+                return view("errors.b_404", $compact);
                 break;
         };
     }

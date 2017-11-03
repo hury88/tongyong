@@ -22,6 +22,11 @@
                                 <a href="{{u($yiji->path, $erji->path)}}" @if($GLOBALS['ty']==$erji->id) class="action" @endif> {{$erji->catname}}</a>
                             </li>
                             @endforeach
+                            @if($yiji->id==2)
+                            <li>
+                                <a href="{{u($yiji->path, 'business')}}">培训机构</a>
+                            </li>
+                            @endif
 
                         </ul>
                         <span></span>

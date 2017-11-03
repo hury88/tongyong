@@ -155,7 +155,7 @@
         <div class="post-message-div clearfix">
             <div class="post-message-right fr">
                 <input class="post-message-inp save" type="submit" value="发布"/>
-                <a href="javascript:window.history.back();"  class="post-message-sub">返回</a>
+                <a href="javascript:window.history.back();"  class="post-message-sub">取消</a>
             </div>
         </div>
         <div class="black77"></div>
