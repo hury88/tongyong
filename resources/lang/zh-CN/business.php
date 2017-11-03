@@ -3,7 +3,7 @@ return [
         'route_prefiex' => 'b_',
         'menu' => [
                 'profile' => ['title' => '会员首页', 'icon' => 'icon-index', 'uri' => '/'],
-                'job' => ['title' => '招聘', 'icon' => 'icon-recurit', 'uri' => '/', 'pid' => 1,
+                /*'job' => ['title' => '招聘', 'icon' => 'icon-recurit', 'uri' => '/', 'pid' => 1,
                     'next' => [
                         'high_level' => ['title' => '高端招聘', 'ty' => 6],
                         'enterprise' => ['title' => '企业招聘', 'ty' => 7],
@@ -15,7 +15,7 @@ return [
                         'receive' => ['title' => '简历收件箱'],
                         'downloaded' => ['title' => '已下载简历'],
                     ]
-                ],
+                ],*/
                 'training' => ['title' => '职业培训管理', 'icon' => 'icon-cultivate', 'uri' => '/', 'pid' => 2,
                     'next' => [
                         'skill' => ['title' => '技能培训', 'ty' => 28],
@@ -39,8 +39,8 @@ return [
                     ]
                 ],
                 'certification' => ['title' => '实名认证', 'icon' => 'icon-certification', 'uri' => '/'],
-                'order' => ['title' => '订单管理', 'icon' => 'icon-order', 'uri' => '/'],
-                'users' => ['title' => '用户管理', 'icon' => 'icon-user', 'uri' => '/'],
+                // 'order' => ['title' => '订单管理', 'icon' => 'icon-order', 'uri' => '/'],
+                'config' => ['title' => '用户管理', 'icon' => 'icon-user', 'uri' => '/'],
                 'safe' => ['title' => '安全设置', 'icon' => 'icon-safety', 'uri' => '/'],
         ],
 ];

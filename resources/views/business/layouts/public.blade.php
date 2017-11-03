@@ -16,6 +16,7 @@
 @stop
 
 @section('scripts')
+    @parent
     <script>
         $('img').click(function(){
             notie.alert(4, '<img src="'+this.src+'" alt=""/>', 3);

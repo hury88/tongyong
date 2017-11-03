@@ -143,25 +143,26 @@ function v_pic($pid){
 
 	function img($img,$nopic=false, $width = 0, $height = 0)
 	{
-            $upload ='/uploadfile/upload/';
-            $imgPath = $upload .$img;
-            if ($img) {
-                $path= $imgPath;
-            } else {
-            	if ($nopic) {
-	                $path= $nopic;
-            	} else {
-	                $path= '/uploadfile/nopic.jpg';
-            	}
-            }
-            return $path;
-            // if(Request::instance()->isMobile()){
-//		static $file;
-//		if (is_null($file)) {
-//			$file = new FileController;
-//		}
-//		$file->img;
-	    // return $filepath . "?imageView2/1/w/{$width}/h/{$height}";
+        $upload ='/uploadfile/upload/';
+        $imgPath = $upload .$img;
+        if ($img) {
+            $path= $imgPath;
+        } else {
+        	if ($nopic) {
+                $path= $nopic;
+        	} else {
+                $path= '/uploadfile/nopic.jpg';
+        	}
+        }
+        return $path;
+	}
+
+	function reimg($img,$width = 0, $height = 0)
+	{
+		$p = '/img/'.$img;
+		$width && $p .= "&w=$width";
+		$height && $p .= "&h=$height";
+        return $p;
 	}
 
 

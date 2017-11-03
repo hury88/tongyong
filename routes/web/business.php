@@ -31,21 +31,21 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
 
 
     // 招聘路由组
-    Route::group(['prefix' => 'job'], function(){
+   /* Route::group(['prefix' => 'job'], function(){
         foreach (trans('business.menu.job.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
             Route::get($index.'/{action}', 'BusinessController@dispatch');
         }
-    });
+    });*/
     // 简历路由组
-    Route::group(['prefix' => 'resume'], function(){
+    /*Route::group(['prefix' => 'resume'], function(){
         foreach (trans('business.menu.resume.next') as $index => $tran) {
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
             Route::get($index.'/{action}', 'BusinessController@dispatch');
         }
-    });
+    });*/
     // 职业培训管理
     Route::group(['prefix' => 'training'], function(){
         foreach (trans('business.menu.training.next') as $index => $tran) {

@@ -190,10 +190,8 @@ class BusinessController extends base\UserController
     /**
      * 用户管理
      */
-    public function users(&$compact)
+    public function config(&$compact)
     {
-        $table = __FUNCTION__;
-        return $this->relatedToNewsCats($table, $action, $id);
     }
 
     /**
@@ -212,10 +210,14 @@ class BusinessController extends base\UserController
 
         $user = \Auth::user();
         $origin = $request->origin;
+        $new = $request->new;
         $user_id = $user->id;
         $hashedPassword = $user->password;
 
-        $validator->after(function ($validator) use ($hashedPassword, $origin) {
+        $validator->after(function ($validator) use ($hashedPassword, $origin, $new) {
+            if ($origin == $new) {
+                $validator->errors()->add('new', '旧密码与新密码相同');
+            }
             if (!\Hash::check($origin, $hashedPassword)) {
                 $validator->errors()->add('origin', '旧密码错误');
             }

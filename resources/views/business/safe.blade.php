@@ -8,21 +8,21 @@
                 <label><b>*</b>旧密码</label>
                 <div class="safety-pwd-dv">
                     <input name="origin" type="password"/>
-                    <a href="javascript:;"></a>
+                    <!-- <a href="javascript:;"></a> -->
                 </div>
             </div>
             <div class="safety-form-div">
                 <label><b>*</b>新密码</label>
                 <div class="safety-pwd-dv">
                     <input name="new" type="password"/>
-                    <a href="javascript:;"></a>
+                    <!-- <a href="javascript:;"></a> -->
                 </div>
             </div>
             <div class="safety-form-div">
                 <label><b>*</b>确认密码</label>
                 <div class="safety-pwd-dv">
                     <input name="password2" type="password"/>
-                    <a href="javascript:;"></a>
+                    <!-- <a href="javascript:;"></a> -->
                 </div>
             </div>
             <div class="safety-form-div safety-form-sub">

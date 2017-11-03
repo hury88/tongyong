@@ -22,7 +22,7 @@ class FileController extends Controller
 
         //if you need security add it here
         //can validate here alternative default pictures
-        $this->showImg("img/$file", ['w' => $request->get('w'), 'h' => $request->get('h')]);
+        $this->showImg("$file", ['w' => $request->get('w'), 'h' => $request->get('h')]);
     }
 
     //validation functions
@@ -55,12 +55,12 @@ class FileController extends Controller
 
     private function showImg($file, $resize = [])
     {
-        $path = storage_path().'/files';
+        $path = public_path().'/uploadfile/upload';
 
         $pathFile = $this->imgExist($path, $file, $resize);
 
         if (!$pathFile) {
-            $pathFile = $path.'/img/no-image.jpg';
+            $pathFile = public_path().'/uploadfile/nopic.jpg';
         }
 
         $imginfo = getimagesize($pathFile);
