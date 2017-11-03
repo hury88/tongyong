@@ -264,6 +264,8 @@ function handleResponseJson($state,$message,$redirect=false){
     return response()->json($arr);
 }
 
+
+
 /**
  * @param $state n_s = 200,n_i = 201;n_w = 303,n_e = 412;
  * @param $title
@@ -322,10 +324,17 @@ function get_edselect($d,$lm,$n,$select){
 
 function upload(Request $request, $file)
 {
-	$v = \Validator::make($request->all(), ['file' => 'image']);
+	$v = \Validator::make($request->all(), [$file => 'image']);
 	if ($v->fails()) {
 		return false;
 	}
-
 	return File::section('upload_img')->upload($request->file($file));
+}
+
+function uppro($file, &$fields) {
+     if ($filename = upload(Request(), $file)) {
+         $fields[$file] = $filename;
+     } else {
+         return false;
+     }
 }

@@ -282,6 +282,7 @@ class BusinessController extends base\UserController
             $id = $table;
             $table = $GLOBALS['pid_path'];
         }
+        if(empty($table))$table = $GLOBALS['pid_path'];
         if (in_array($table, $this->fillTable)) {
             #出入表名
             $WithData = new \App\Helpers\WithData($table, $id, $request->all());

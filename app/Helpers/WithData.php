@@ -68,6 +68,13 @@ class WithData
         	return false;
         }
 
+        uppro('img1',$fields);
+        uppro('img2',$fields);
+        uppro('img3',$fields);
+        uppro('img4',$fields);
+        uppro('img5',$fields);
+        uppro('img6',$fields);
+
         $this->logInsert = "添加证书: ".$fields['title'];
         $this->logUpdate = '更新证书: '.$fields['title'];
         return $fields;
@@ -99,13 +106,13 @@ class WithData
 
 
 
-         uppro('img1',$fields,'ajax');
-        // uppro('img2',$fields,'ajax');
-        // uppro('img3',$fields,'ajax');
-        // uppro('img4',$fields,'ajax');
-        // uppro('img5',$fields,'ajax');
-        // uppro('img6',$fields,'ajax');
-        // uppro('file',$fields,'file');
+         uppro('img1',$fields);
+         uppro('img2',$fields);
+         uppro('img3',$fields);
+         uppro('img4',$fields);
+         uppro('img5',$fields);
+         uppro('img6',$fields);
+//         uppro('file',$fields,'file');
         $this->logInsert = '添加教育信息('.$fields['pid'].','.$fields['ty'].','.$fields['tty'].'): '.$fields['title'];
         $this->logUpdate = '更新教育信息('.$fields['pid'].','.$fields['ty'].','.$fields['tty'].'): '.$fields['title'];
         return $fields;
@@ -125,9 +132,8 @@ class WithData
             'isstate'      =>	 	1,
         );
 
-        uppro('img1',$fields,'ajax');
-        uppro('img2',$fields,'ajax');
-
+        uppro('img1',$fields);
+        uppro('img2',$fields);
         $this->logInsert = '添加类别分类'.$fields['catname'];
         $this->logUpdate = '编辑类别分类'.$fields['catname'];
 
