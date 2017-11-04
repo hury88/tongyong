@@ -218,8 +218,9 @@
                         </div>
                         <div class="qypeixinCon">
                             <ul>
-                                @foreach($jinenggood as $val)
-                                <li style="border-bottom: 2px solid #e94a4c;">
+                                <?php $colorarr=[0=>"#e94a4c",1=>'#39beea',2=>'#96bb1e',3=>'#60ba76'];?>
+                                @foreach($jinenggood as $key=>$val)
+                                <li style="border-bottom: 2px solid {{$colorarr[$key]}};">
                                     <a href="{{u("training","skill",$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                     <div class="qypeixinCon1">
                                         <p class="pu1">
@@ -247,7 +248,7 @@
                     <div class="zhiyepx3All">
                         <div class="zhiyepx2Tit" style="border: none;padding-top: 40px;margin-bottom: 25px;">
                             <div class="zhiyepx2Titl">
-                                <img src="/img/list1.png"/>
+                                <img src="/img/enterprise-icon.png"/>
                             </div>
                             <div class="zhiyepx2Titr" style="width: 85%;">
                                 <p class="jingp1">{{$sanlist[1]['catname']}}</p>
@@ -261,8 +262,8 @@
                         </div>
                         <div class="qypeixinCon">
                             <ul>
-                                @foreach($qiyegood as $val)
-                                    <li style="border-bottom: 2px solid #e94a4c;">
+                                @foreach($qiyegood as $key=>$val)
+                                    <li style="border-bottom: 2px solid {{$colorarr[$key]}};">
                                         <a href="{{u("training","enterprise",$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                         <div class="qypeixinCon1">
                                             <p class="pu1">

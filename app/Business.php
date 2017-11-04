@@ -43,6 +43,7 @@ class Business extends Model
     public function v_pages($business_name,$field=['*'],$num=15,$linknum=5){
         return $this
             ->where('has2','=' ,'1')
+            ->where('certified_status','=' ,'2')
             ->where(function($query) use($business_name){
                 if($business_name) {
                     $query->where('business_name','like' ,'%'.$business_name.'%');

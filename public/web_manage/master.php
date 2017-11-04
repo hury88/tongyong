@@ -11,17 +11,10 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 ###########################筛选开始
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
-$cid =   I('get.cid',0,'intval');
-$certificate_lid =   I('get.certificate_lid',0,'intval');
 $infotypeid =   I('get.infotypeid',0,'intval');
-$trainingid =   I('get.trainingid',0,'intval');
-if(!empty($cid)){
-    $map['cid'] =$cid;
-    $cname=v_id($cid,"name","cmember");
-}else{
-    $cname='管理员';
-}
-if(!empty($certificate_lid)) $map['certificate_lid'] = $certificate_lid;
+$academyid =   I('get.academyid',0,'intval');
+
+if(!empty($academyid)) $map['academyid'] = $academyid;
 if(!empty($infotypeid)) $map['infotypeid'] = $infotypeid;
 
 if(!empty($tty)) $map['tty'] = $tty;
@@ -54,59 +47,17 @@ list($data,$pagestr) = Page::paging($pageConfig);
             <input type="hidden" name="tty" value="<?=$tty?>" />
             <!-- <b>显示</b><input style="width:50px;" name="psize" type="text" class="dfinput" value="<?=$psize?>"/>条 -->
             <!-- <b>编号</b><input name="id" type="text" class="dfinput" value="<?=$id?>"/> -->
-        <?php if ($pid<5): ?>
-            <input type="hidden" name="cid" id="cid"  value="0">
-             选择企业： <input type="text" id="cname" class="dfinput" value="<?=$cname?>">
-            <div class="qyxf" style="display: none">
-                <ul>
-                    <li data-id="0">平台管理员</li>
-                </ul>
-            </div>
-        <?php endif ?>
-              <?php if ($tty==54) {
-                  $d = config('webarr.certificate');
-                  Output::select2($d, '选择证书类型', 'certificate_lid');
-              }elseif($ty==64){
+
+              <?php
+              if($ty==64){
+                  $ds =get_arr(78);
+                  Output::select2($ds, '所属院校', 'academyid');
                   $d = config('webarr.infotypeid');
                   Output::select2($d, '院校信息类型', 'infotypeid');
-              }elseif($pid==2){
-                  $d = config('webarr.trainingid');
-                  Output::select2($d, '培训方式', 'trainingid');
-              } ?>
+              }?>
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>
-            <script type="text/javascript">
-                $(function(){
-
-                    $(".qyxf ul").on("click","li",function(){
-
-                        var cid=$(this).data("id");
-                        var cname=$(this).html();
-                        $("#cid").val(cid)
-                        $("#cname").val(cname)
-                        $(".qyxf").hide()
-                    })
-                })
-
-                $("#cname").click(function(){
-                    $("#cname").val('')
-                    var key=$(this).val()
-                    $.get("include/json.php?action=xzqy&key="+key, function (data) {
-                      //  alert(data)
-                        $(".qyxf ul").html(data)
-                    })
-                    $(".qyxf").show()
-                })
-                $("#cname").keyup(function(){
-                    var key=$(this).val()
-                    $.get("include/json.php?action=xzqy&key="+key, function (data) {
-                      //  alert(data)
-                        $(".qyxf ul").html(data)
-                    })
-                    $(".qyxf").show()
-                })
-            </script>
     <div class="zhengwen clr">
       <div class="zhixin clr">
         <ul class="toolbar">
@@ -127,8 +78,12 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <td width="24px">编号</td> <td width="200px">操作</td>
 
     <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/    if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
-        <td> 图 </td>
-        <td> 标题 <span class="fr"></td>
+        <td> 配图 </td>
+        <td> 标题</td>
+        <?php if($ty==64){?>
+            <td> 所属院校</td>
+            <td> 院校信息类型</td>
+        <?php }?>
         <!-- <td> 浏览次数 </td> -->
     <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
         <td> 标题 </td>
@@ -138,11 +93,15 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <!-- <td width="24px"> 配图 </td> -->
         <td> 配图 </td>
         <td> 信息 </td>
+    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==13):/*＜＞＜＞报名信息＜＞＜＞*/?>
+        <!-- <td width="24px"> 配图 </td> -->
+        <td> 配图 </td>
+        <td> 信息 </td>
    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
        <td> 问题 </td>
 
    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
-           <td width="10%">发布者</td>
+
     <td width="10%">发布时间</td>
 </tr>
 <?php
@@ -155,11 +114,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
                             #时间
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
-if($cid){
-    $publisher=v_id($cid,"name","cmember");
-}else{
-    $publisher="平台管理员";
-}
+    $yuanxiaoname=v_id($academyid,'catname','nature');
 
     // $title = '<a href="' . U('blog/view', ['id'=>$id]) . '" target="_blank">'.$title.'</a>';
 ?>
@@ -180,6 +135,10 @@ if($cid){
         <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
         <td><?=$img1?></td>
         <td><?=$title?></td>
+            <?php if($ty==64){?>
+                <td><?=$yuanxiaoname?></td>
+                <td><?=Config::get('webarr.infotypeid')[$infotypeid]?></td>
+            <?php }?>
         <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
             <td><?=$title?></td>
         <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
@@ -189,8 +148,6 @@ if($cid){
             <!-- <td width="24px"> 配图 </td> -->
             <td> <?=$title?> </td>
 <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
-
-     <td><?=$publisher?></td>
      <td><?=$time?></td>
  </tr>
 <?php endforeach?>

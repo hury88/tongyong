@@ -56,7 +56,7 @@ if(!empty($tty)) $map['tty'] = $tty;
 $psize   =   I('get.psize',30,'intval');
 $pageConfig = array(
     /*条件*/'where' => $map,
-    /*排序*/'order' => 'isgood desc,disorder desc,sendtime desc',
+    /*排序*/'order' => 'isgood desc,disorder desc,id desc',
     /*条数*/'psize' => $psize,
     /*表  */'table' => $table,
     );
@@ -214,6 +214,7 @@ if($user_id){
 <?php endforeach?>
 <?php include('js/foot'); ?>
 <!-- <td><?=$img1?><a class="lookPic" href="javascript:;" data-id="<?=$id?>">添加更多图片(<?=M('pic')->where("ti=$id")->count()?>个)</a></td> -->
+
 
 
 

@@ -52,16 +52,14 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 
 	switch ($showtype) {
 		case 1://＜＞＜＞新闻动态＜＞＜＞
-
-			// (!isset($title) || ! $title ) && $title = $system_sitename . '官方公告';
+            if($ty==64){
+                $d1=get_arr(78);
+                $opt ->edselect($d1, '所属院校', 'academyid');
+                $opt ->choose('信息类型','infotypeid')->radioSet(Config::get('webarr.infotypeid'))->flur();
+            }
 		    $opt
 				->img('配图','img1')
-				// ->ifs($istop==1)->img('配图','img2','387*253')->endifs()
 				->input('标题','title')
-//				->cache()->input('发布者','name')->input('点击量','hits')->flur()
-//				->textarea('介绍','description')
-				// ->cache()->input('点赞数','dotlike')->input('分享数','share')->flur()
-				// ->textarea('简介','introduce')
 				->editor('信息内容')
 			;
 			break;
@@ -92,7 +90,17 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 				// ->editor('信息内容')
 			;
 			break;
+        case 13://＜＞＜＞报名信息＜＞＜＞
 
+            $opt
+                ->img('配图', 'img1')
+                ->input('信息标题', 'title')
+
+                ->textarea('介绍', 'description')
+                ->editor('信息内容', 'content')
+
+            ;
+            break;
 		case 15://＜＞＜＞问答＜＞＜＞
 			$opt
 				->input('标题','title')

@@ -83,7 +83,7 @@ class WithData
 			'pid'				=>		I('pid', 0, 'intval'),
 			'ty'				=>		I('ty' , 0, 'intval'),
 			'tty'				=>		I('tty', 0, 'intval'),
-			'certificate_lid'				=>		I('certificate_lid', 0, 'intval'),
+			'academyid'				=>		I('academyid', 0, 'intval'),
 			'infotypeid'				=>		I('infotypeid', 0, 'intval'),
 			'title'				=>		I('post.title','','trim,htmlspecialchars'),
 			'ftitle'			=>		I('post.ftitle','','trim,htmlspecialchars'),

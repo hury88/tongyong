@@ -125,7 +125,7 @@ class TrainingController extends Training
 //        }
         $userinfo= Business::where('user_id','=',$id_arr->user_id)->select("logo","business_name",'business_introduction')->get();
         $qiyegood = $this->goodlist([2], ['id','ty','img1', 'title','introduce', 'price','img1', 'enroll_num','content'], 4);
-        return view('training/view', compact('id_arr','userinfo','qiyegood'));
+        return view('training/show', compact('id_arr','userinfo','qiyegood'));
     }
     //文章排序
     protected function newsorder($id)
@@ -245,10 +245,11 @@ class TrainingController extends Training
     }
     public function view($id)
     {
-        $id_arr = User::find($id);
-        abort(404);
+        $id_arr = User::where("certified",1)->find($id);
+
         if($id_arr){
             $id_arr = $id_arr->business;
+
         } else {
             abort(404);
         }
@@ -258,40 +259,12 @@ class TrainingController extends Training
         }else{
             $id_arr->qyname="平台管理员";
         }
-//        $arr=$this->newsorder($id);
-//        $id_arr->previd=$arr['previd'];
-//        $id_arr->nextid=$arr['nextid'];
-//        if($id_arr->previd>0){
-//            $id_arr->prevlink=route($GLOBALS['ty_path'],$id_arr->previd);
-//            $id_arr->prev=v_id($id_arr->previd,"title");
-//
-//        }else{
-//            $id_arr->prevlink='javascript:void(0)';
-//        }
-//        if($id_arr->nextid>0){
-//            $id_arr->nextlink=route($GLOBALS['ty_path'],$id_arr->nextid);
-//            $id_arr->next=v_id($id_arr->nextid,"title");
-//        }else{
-//            $id_arr->nextlink='javascript:void(0);';
-//        }
-        return view('news/view', compact('id_arr'));
+        //机构职业证书
+
+        return view('training/view', compact('id_arr'));
 
     }
-    public function seachlist()
-    {
-        if(isset($_GET['key'])){
-            $key=str_limit($_GET['key'],20);
-            $ckey='&key='.$key;
-        }else{
-            $key='';
-            $ckey='';
-        }
-        $Training = new Training();
 
-        $pagenewslist=$Training->v_seachpages($key,[$GLOBALS['pid']],['id','ty','title','sendtime','cid','content'],9,9);
-
-        return view('training/seach', compact('pagenewslist','key','ckey'));
-    }
 }
 function get_ssarr()
 {
