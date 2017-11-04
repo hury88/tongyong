@@ -4,7 +4,7 @@
 @section('headMeta')
 	<meta charset="utf-8">
 @show
-<title>@section('title') {{ implode(' - ', $boot_title) }}@show</title>
+<title>@section('title') @if(isset($boot_title) && is_array($boot_title)){{ implode(' - ', $boot_title) }}@endif @show</title>
 	<meta name="keywords" content="{{ $boot_config['keywords'] }}">
 	<meta name="description" content="{{ $boot_config['description'] }}">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>

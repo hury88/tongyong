@@ -52,7 +52,7 @@ require __DIR__.'/web/training.php';
 // require __DIR__.'/web/wish_lists.php';
 
 //orders lists
-// require __DIR__.'/web/orders.php';
+require __DIR__.'/web/orders.php';
 
 //关于我们
 require __DIR__.'/web/about.php';

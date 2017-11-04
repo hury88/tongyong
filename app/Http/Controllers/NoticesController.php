@@ -51,7 +51,7 @@ class NoticesController extends Controller
         // $notices = $data['notices'] = $data['data'];
         // unset($data['data']);
         $action_types = $this->getActions($pagenewslist['data']);
-        $user = \Auth::user();
+        $user = \Auth::user()->relationsToArray();
         $_title = ['系统消息'];
         $_first = 'notices';
         $_next = '';

@@ -1,5 +1,7 @@
 <?php
 
+Route::post('enroll/{$tranning_id}', ['uses' => 'OrdersController@create', 'as' => 'orders.create']);
+/*
 Route::get('orders/report/{type}/{filter}', ['uses' => 'OrdersController@reports', 'as' => 'orders.report']);
 
 Route::get('user/orders/addTo/{destination}/{productId}', ['uses' => 'OrdersController@addToOrder', 'as' => 'orders.add_to_order']);
@@ -27,3 +29,5 @@ Route::get('mailTest', 'OrdersController@mailtest');
 Route::resource('virtualproductorders', 'VirtualProductOrdersController');
 
 Route::post('editKeyVirtualProductsOrders/{id}', ['uses' => 'VirtualProductOrdersController@editKey', 'as' => 'virtualProductOrdersController.editKey']);
+
+*/

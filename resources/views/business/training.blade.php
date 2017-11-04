@@ -1,4 +1,6 @@
 @extends('business.layouts.public-list')
+@section('inbox')
+@section('form')
 <?php
     // define('AT_NO', 1);
 $th = ['图', '标题', '培训方式', '报名人数'];
@@ -7,10 +9,6 @@ $ty = $GLOBALS['ty'];
 $url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path']);
 $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
  ?>
-
-@section('inbox')
-@include('partial.editor')
-@section('form')
 <form id="jsSoForm">
     <div class="order-search">
         <?php

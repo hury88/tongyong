@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title') {{$id_arr->title}}@parent @stop
+@section('title') {{$id_arr->title}} - @parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyepeixun.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyepeixun.css"/>
@@ -42,9 +42,10 @@
                             <span class="erweima"><img src="/img/xlsys.png"/>扫码关注我们了解更多培训信息</span>
                             <a href="javasript:void(0);" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
                         </div>
-                        <div class="dagang1Right1_2">
+                        <div class="dagang1Right1_2 form" action="{{route('orders.create', $id_arr->id)}}">
                             <a href="javasript:void(0);" class="aaa1">免费试看</a>
-                            <a href="javasript:void(0);" class="aaa2">我要报名</a>
+                                {{csrf_field()}}
+                                <a href="javascript:;" onclick="return model(this)" class="aaa2">我要报名</a>
                         </div>
                         <p class="dagang1Right1_4">
                             <span>报名人数{{$id_arr->enroll_num}}</span>
@@ -101,7 +102,7 @@
                         <p class="pp2">{{$userinfo[0]['business_name']}}</p>
                         <p class="pp3">{!! $userinfo[0]['business_introduction']!!}</p>
                     </div>
-                    @else
+                    @elseif(env('APP_DEBUG'))
                         <div class="dagang2ConRight1">
                             <p class="pp1">
                                 <img src="/img/dagang3.jpg"/>
@@ -178,6 +179,5 @@
     @stop
 
     @section('scripts')
-    @parent
-
+    @parent <script type="text/javascript" src="/js/alert.min.js"></script>
     @stop
