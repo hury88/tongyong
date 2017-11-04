@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 use App\News;
+use App\Training;
 use App\NewsCats;
 /*
  * Antvel - Company CMS Controller
@@ -149,9 +150,9 @@ class NewsController extends Controller
     }
     private function hot_train()
     {
-//        $news = new Training();
-//        $str = $news->v_list([2],["title","img1","price","id","address","pid"],10);
-//        $str[0]['img1']=img($str[0]['img1']);
+       $news = new Training();
+       $str = $news->v_xinglist(["id"],10);
+       $str[0]['img1']=img($str[0]['img1']);
         $str='';
         return $str;
     }

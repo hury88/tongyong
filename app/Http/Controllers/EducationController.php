@@ -134,7 +134,7 @@ class EducationController extends Controller
             about(404);
         }
         if ($id_arr->user_id) {
-            $id_arr->qyname = v_id($id_arr->user_id,'member_name', 'user');
+            $id_arr->qyname = v_id($id_arr->user_id,'member_name', 'users');
         } else {
             $id_arr->qyname = '平台管理员';
         }

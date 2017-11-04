@@ -21,7 +21,11 @@
             </div>
             <div class="dagang1">
                 <div class="dagang1Left">
+                    @if($id_arr->img2)
                     <img src="{{img($id_arr->img2)}}"/>
+                    @else
+                        <img src="/uploadfile/upload/2017110121384026.jpg"/>
+                    @endif
                 </div>
                 <div class="dagang1Right">
                     <h2>{{$id_arr->title}}</h2>
@@ -55,7 +59,7 @@
         <div class="dagang2">
             <div class="dagang2Tit">
                 <ul>
-                    <li>
+                    <li class="dagang2Tit-li-on">
                         <a href="javascript:void(0);">课程介绍</a>
                     </li>
                     <li>
@@ -89,93 +93,58 @@
 
                 </div>
                 <div class="dagang2ConRight">
+                    @if($id_arr->user_id>0)
                     <div class="dagang2ConRight1">
                         <p class="pp1">
-                            <img src="img/dagang3.jpg"/>
+                            <img src="{{img($userinfo[0]['logo'])}}"/>
                         </p>
-                        <p class="pp2">联想集团</p>
-                        <p class="pp3">联想集团成立于1984年，由于客源所投资20万人民币和11位科技人员创办，现已发展为一家信息多元化发展的大型企业，富有长新华科技有限公司...</p>
+                        <p class="pp2">{{$userinfo[0]['business_name']}}</p>
+                        <p class="pp3">{!! $userinfo[0]['business_introduction']!!}</p>
                     </div>
+                    @else
+                        <div class="dagang2ConRight1">
+                            <p class="pp1">
+                                <img src="/img/dagang3.jpg"/>
+                            </p>
+                            <p class="pp2">领航平台</p>
+                            <p class="pp3">领航平台，由于客源所投资20万人民币和11位科技人员创办，现已发展为一家信息多元化发展的大型企业，富有长新华科技有限公司...</p>
+                        </div>
+                    @endif
                     <div class="interst">
                         <div class="interstTit">
+                            <?php function get_turl($ty,$id){
+                                if($ty==28){
+                                    return u("training",'skill',$id);
+                                }elseif($ty==65){
+                                    return u("training",'enterprise',$id);
+                                }elseif($ty==66){
+                                    return u("training",'online',$id);
+                                }
+                            }
+                            ?>
                             <h3>你可能还感兴趣的课程</h3>
                             <ul>
+                                @foreach($qiyegood as $val)
                                 <li>
                                     <div class="interstImg">
-                                        <img src="/img/qypx1.jpg" width="100%"/>
+                                        <a href="{{get_turl($val['ty'],$val['id'])}}"><img src="{{img($val['img1'])}}" width="100%"/></a>
                                         <div class="interstImg1">
-                                            <a href=""><img src="/img/xlsys2.png"/></a>
+                                            <a href="{{get_turl($val['ty'],$val['id'])}}"><img src="/img/xlsys2.png"/></a>
                                         </div>
                                         <div class="interstTxt">
-                                            直播时间：08月23日&nbsp;07:00
+                                            {{$val['introduce']}}
                                         </div>
                                     </div>
-                                    <p class="jiangong"><a href="">工具建工技师高级技师...</a></p>
+                                    <p class="jiangong"><a href="{{get_turl($val['ty'],$val['id'])}}">工具建工技师高级技师...</a></p>
                                     <p class="jiangong1">
-                                        <span>￥29.90</span>
-                                        <a href="">
-                                            <i>45456</i>
+                                        <span>￥{{$val['price']}}</span>
+                                        <a href="{{get_turl($val['ty'],$val['id'])}}">
+                                            <i>{{$val['enroll_num']}}</i>
                                             人已报名
                                         </a>
                                     </p>
                                 </li>
-                                <li>
-                                    <div class="interstImg">
-                                        <img src="/img/qypx1.jpg" width="100%"/>
-                                        <div class="interstImg1">
-                                            <a href=""><img src="/img/xlsys2.png"/></a>
-                                        </div>
-                                        <div class="interstTxt">
-                                            直播时间：08月23日&nbsp;07:00
-                                        </div>
-                                    </div>
-                                    <p class="jiangong"><a href="">工具建工技师高级技师...</a></p>
-                                    <p class="jiangong1">
-                                        <span>￥29.90</span>
-                                        <a href="">
-                                            <i>45456</i>
-                                            人已报名
-                                        </a>
-                                    </p>
-                                </li>
-                                <li>
-                                    <div class="interstImg">
-                                        <img src="/img/qypx1.jpg" width="100%"/>
-                                        <div class="interstImg1">
-                                            <a href=""><img src="/img/xlsys2.png"/></a>
-                                        </div>
-                                        <div class="interstTxt">
-                                            直播时间：08月23日&nbsp;07:00
-                                        </div>
-                                    </div>
-                                    <p class="jiangong"><a href="">工具建工技师高级技师...</a></p>
-                                    <p class="jiangong1">
-                                        <span>￥29.90</span>
-                                        <a href="">
-                                            <i>45456</i>
-                                            人已报名
-                                        </a>
-                                    </p>
-                                </li>
-                                <li>
-                                    <div class="interstImg">
-                                        <img src="/img/qypx1.jpg" width="100%"/>
-                                        <div class="interstImg1">
-                                            <a href=""><img src="/img/xlsys2.png"/></a>
-                                        </div>
-                                        <div class="interstTxt">
-                                            直播时间：08月23日&nbsp;07:00
-                                        </div>
-                                    </div>
-                                    <p class="jiangong"><a href="">工具建工技师高级技师...</a></p>
-                                    <p class="jiangong1">
-                                        <span>￥29.90</span>
-                                        <a href="">
-                                            <i>45456</i>
-                                            人已报名
-                                        </a>
-                                    </p>
-                                </li>
+                                @endforeach
 
                             </ul>
                             <p class="hyh">
@@ -190,6 +159,14 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript">
+            $(".dagang2Tit li").click(function(){
+                var i = $(this).index();
+                $(this).addClass("dagang2Tit-li-on").siblings(".dagang2Tit li").removeClass("dagang2Tit-li-on");
+                $(".dagang2Con .dagang2ConLeft").eq(i).show().siblings(".dagang2Con .dagang2ConLeft").hide();
+            });
+        </script>
     </div>
     @stop {{-- end content --}}
 

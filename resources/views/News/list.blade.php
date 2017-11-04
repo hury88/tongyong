@@ -13,7 +13,7 @@
             <div class="yijianAll" style="margin-top: 67px;">
                 <div class="xwdt">
                     <p class="xwdtmbx">
-                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
+                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>><a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}</a> > <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
                     </p>
                     <div class="xwdtAll">
                         <div class="xwdtTit">
@@ -23,7 +23,6 @@
                                 @foreach($left as $row)
                                     <a {!! $GLOBALS['ty']==$row->id ? ' class="xwdton"' :'' !!} href="{{u('news', $row->path)}}">{{$row->catname}}</a>
                                 @endforeach
-
               	  	        </span>
                         </div>
                         <div class="xwdtCon">
@@ -108,6 +107,7 @@
                                                     <p class="ps2">Popular Training</p>
                                                 </div>
                                             </div>
+
                                             <div class="xwdtBom">
                                                 <div class="rmpx">
                                                     <img src="img/xwdt6.jpg" style="width: 100%;"/>

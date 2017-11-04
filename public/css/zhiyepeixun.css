@@ -1,4 +1,4 @@
-.qypeixinAll{
+﻿.qypeixinAll{
 	width: 100%;
 	background: #f5f5f4;
 	margin-top: 67px;
@@ -160,7 +160,9 @@
 	display: block;
 }
 .qypeixinCon ul li a img{
-	width: 100%;
+	/*width: 100%;*/
+	width:250px;
+	height:150px;
 }
 .qypeixinCon ul .list{
 	margin-right: 0;
@@ -228,7 +230,7 @@
 	width: 50%;
 	float: left;
 	background: #fff;
-	
+
 }
 .dagang1Right h2{
 	color: #fff;
@@ -302,7 +304,7 @@
 .dagang1Right1_4 a img{
 	vertical-align: middle;
 	margin-right: 10px;
-	
+
 }
 .dagang2{
 	background: #fff;
@@ -319,15 +321,18 @@
 .dagang2Tit ul li{
 	width: 20%;
 	float: left;
+	text-align: center;
+}
+.dagang2Tit .dagang2Tit-li-on a{
+	border-bottom: 2px solid #d81617;
 }
 .dagang2Tit ul li a{
-    display: block;
+    display: inline-block;
     font-size: 20px;
     color: #333333;
     text-align: center;
-    width: 67%;
     margin: 0 auto;
-    padding-bottom: 5px;  
+    padding-bottom: 5px;
 }
 .dagang2Tit ul li .dagangon{
 	border-bottom: 2px solid #d71418;
@@ -341,6 +346,7 @@
 .dagang2ConLeft{
 	width: 70%;
 	float: left;
+	overflow: hidden;
 	border-bottom: 1px solid #dddddd;
 }
 .dagang2ConRight{
@@ -499,7 +505,7 @@
     left: 0;
     width: 100%;
     bottom: 0;
-    
+
 }
 .zhiboLeft{
 	width: 30%;
@@ -576,7 +582,7 @@
 }
 .zhiyepx1 ul .liat1 a{
 	background: #e94a4c;
-	color: #fff;	
+	color: #fff;
 }
 .zhiyepx1 ul .liat2 a{
 	border: 1px solid #36bdea;
@@ -584,11 +590,11 @@
 }
 .zhiyepx1 ul .liat3 a{
 	background: #96bb1e;
-	color: #fff;	
+	color: #fff;
 }
 .zhiyepx1 ul .liat4 a{
 	background: #60ba76;
-	color: #fff;	
+	color: #fff;
 }
 .zhiyepx1 ul .liat a{
 	background: #e1a112;
@@ -653,7 +659,7 @@
 }
 .zhiyepx2Con ul li{
 	width: 31.3%;
-	float: left;  
+	float: left;
 	margin-right: 30px;
 	margin-bottom: 25px;
 }
@@ -700,7 +706,7 @@
 .zhiyepx2Conbom .p1 a{
 	color: #323333;
 	font-size: 16px;
-	
+
 }
 .zhiyepx2Conbom p{
 	padding-bottom: 15px;
@@ -944,7 +950,7 @@
 }
 .tiptop a {
      display: block;
-    background: url(../img/close.png) no-repeat;
+    background: url(../images/close.png) no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 33px;
@@ -970,7 +976,7 @@
     background: #fff;
     /* box-shadow: 1px 8px 10px 1px #9b9b9b; */
     border-radius: 1px;
-    behavior: url(js/pie.htc);
+    behavior: url(../images/pie.htc);
     display: none;
     z-index: 111111;
     border: 5px solid #2f2f3f;
@@ -1055,8 +1061,8 @@
 .small_list ul li.on .bun_bg{display:block;}
 .btn{display:block;width:20px;height:73px;background-color:#777;background-repeat:no-repeat;background-position:center center;cursor:pointer;}
 .btn:hover{background-color:#e7000e;}
-.left_btn{float:left;margin-right:10px;background-image:url(../img/left_btn.png);}
-.right_btn{float:right;background-image:url(../img/right_btn.png);}
+.left_btn{float:left;margin-right:10px;background-image:url(../images/left_btn.png);}
+.right_btn{float:right;background-image:url(../images/right_btn.png);}
 
 .jobselect-cover{
 	position:absolute;
@@ -1099,7 +1105,7 @@
 	float: right;
 	width: 21px;
 	height: 21px;
-	background: url(../img/job-selected.png) no-repeat center;
+	background: url(../images/job-selected.png) no-repeat center;
 	margin-top: 15px;
 }
 .job-result{
@@ -1132,7 +1138,7 @@
 	height: 11px;
 	margin-left: 6px;
 	display: inline-block;
-	background:url(../img/job-selected.png) no-repeat center center;
+	background:url(../images/job-selected.png) no-repeat center center;
 }
 .job-lists-box{
 	width: 100%;
@@ -1176,7 +1182,7 @@
 	border: 1px solid #f5b517;
 }
 .job-lists-content .job-lists-dv .job-big-type{
-	background: url(../img/job-pull-close.png) no-repeat 7px center;
+	background: url(../images/job-pull-close.png) no-repeat 7px center;
 	padding:0 7px 0 27px;
 	font-size: 12px;
 	color: #333;
@@ -1188,7 +1194,7 @@
 	cursor: default;
 }
 .job-lists-content .job-lists-dv.job-selected-box .job-big-type{
-	background:#f5b517 url(../img/job-select-dui.png) no-repeat 7px center;
+	background:#f5b517 url(../images/job-select-dui.png) no-repeat 7px center;
 	color: #fff;
 }
 .job-small-type{
@@ -1203,7 +1209,7 @@
 	border: 1px solid #f5b517;
 }
 .job-small-type li{
-	background: url(../img/job-select-dui.png) no-repeat left center;
+	background: url(../images/job-select-dui.png) no-repeat left center;
 	padding-left: 20px;
 	font-size: 12px;
 	color: #333;
@@ -1214,7 +1220,7 @@
 	cursor: pointer;
 }
 .job-small-type .select-item{
-	background: url(../img/job-son-dui.png) no-repeat left center;
+	background: url(../images/job-son-dui.png) no-repeat left center;
 }
 .job-operate{
 	height:61px;
