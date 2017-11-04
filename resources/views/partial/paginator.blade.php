@@ -1,5 +1,6 @@
 
 <div class="web-pager" data-pages="{{$pagenewslist['last_page']}}">
+    <?php if(isset($ckey)){$ckey=$ckey;}else {$ckey='';}?>
 
         @for($i=$pagenewslist['min_page'];$i<=$pagenewslist['max_page'];$i++)
             <a @if($pagenewslist['current_page']==$i) class=" pager-now" href="javascript:void(0);" @else href="?page={{$i.$ckey}}" @endif >{{$i}}</a>

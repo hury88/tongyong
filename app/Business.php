@@ -29,8 +29,7 @@ class Business extends Model
      * @var array
      */
     // protected $fillable = ['user_id', 'business_name', 'location', 'contact', 'creation_date'];
-//    protected $hidden = ['user_id',];
-
+    // protected $hidden = ['user_id',];
     /**
      * Get business user.
      *
@@ -57,7 +56,7 @@ class Business extends Model
     }
     public function getAgeAttribute()
     {
-        return \Carbon\Carbon::parse($this->creation_date)->age;
+    return \Carbon\Carbon::parse($this->creation_date)->age;
     }
 
     public function getHasPhoneAttribute()

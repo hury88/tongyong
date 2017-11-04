@@ -13,7 +13,7 @@
             <div class="yijianAll" style="margin-top: 67px;">
                 <div class="xwdt">
                     <p class="xwdtmbx">
-                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
+                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>><a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}</a> > <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
                     </p>
                     <div class="xwdtAll">
                         <div class="xwdtTit">
@@ -23,7 +23,6 @@
                                 @foreach($left as $row)
                                     <a {!! $GLOBALS['ty']==$row->id ? ' class="xwdton"' :'' !!} href="{{u('news', $row->path)}}">{{$row->catname}}</a>
                                 @endforeach
-
               	  	        </span>
                         </div>
                         <div class="xwdtCon">
@@ -108,25 +107,35 @@
                                                     <p class="ps2">Popular Training</p>
                                                 </div>
                                             </div>
+                                            <?php function get_turl($ty,$id){
+                                                if($ty==28){
+                                                    return u("training",'skill',$id);
+                                                }elseif($ty==65){
+                                                    return u("training",'enterprise',$id);
+                                                }elseif($ty==66){
+                                                    return u("training",'online',$id);
+                                                }
+                                            }
+                                            ?>
                                             <div class="xwdtBom">
                                                 <div class="rmpx">
-                                                    <img src="img/xwdt6.jpg" style="width: 100%;"/>
+                                                    <img src="{{img($list['hot_train'][0]['img1'])}}" style="width: 100%;"/>
                                                     <div class="rmpx0">
-                                                        <img src="img/xwdttime.png"/>
-                                                        <span>共110节 -- 20小时8分钟</span>>
+                                                        <img src="/img/xwdttime.png"/>
+                                                        <span>{{$list['hot_train'][0]['introduce']}}</span>>
                                                     </div>
                                                 </div>
                                                 <div class="rmpx1">
-                                                    <p class="pb1">职业技能培训直播课程</p>
+                                                    <p class="pb1">{{str_limit($list['hot_train'][0]['title'],25,"...")}}</p>
                                                     <p class="pb2">
-                                                        <span>￥29.90 </span>
-                                                        <i><b>45456</b>人已报名</i>
+                                                        <span>￥{{$list['hot_train'][0]['price']}} </span>
+                                                        <i><b>{{$list['hot_train'][0]['enroll_num']}}</b>人已报名</i>
                                                     </p>
-                                                    <p><a href="">【技能培训】本科统考英语、计算机...	</a></p>
-                                                    <p><a href="">【企业培训】本科统考英语、计算机...</a></p>
-                                                    <p><a href="">【在线学习】学历与学位的区别</a></p>
-                                                    <p><a href="">【企业培训】7月成考报名指南</a></p>
-                                                    <p><a href="">【技能培训】北京理工大学现代远等...</a></p>
+                                                    @foreach($list['hot_train'] as $key=>$val)
+                                                        @if($key>0)
+                                                    <p><a href="{{get_turl($val['ty'],$val['id'])}}">【{{v_id($val['ty'],'catname','news_cats')}}】{{str_limit($val->title,25,"...")}}</a></p>
+                                                        @endif
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </li>

@@ -176,8 +176,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
 
     $query = queryString(true);
     $query['id'] = $id;
-    $editUrl = getUrl($query, $showname.'_pro');
-                            #时间
+    $editUrl = getUrl($query, $showname.'_pro');#时间
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
 if($user_id){

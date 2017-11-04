@@ -297,17 +297,7 @@ function get_arr($typeid,$pid=0)
     return $d;
 
 }
-function get_ssarr()
-{
-    $data = DB::table('nature')->select('id','pid','typeid','catname')->orderBy('disorder','desc')->orderBy('id','asc')->get();
 
-    foreach ($data as $v) {
-        $d[$v->typeid][$v->pid][$v->id]=$v->catname;
-    }
-
-    return $d;
-
-}
 function get_first($typeid,$pid=0)
 {
 
@@ -347,8 +337,8 @@ function uppro($file, &$fields) {
          $fields[$file] = $filename;
      } else {
          return false;
-     }
-}
+     }}
+
 function ifUploadCheckIt(Request $request, $file, $origin, $mind) {
      if ($file = $request->file($file)) {
      	if ($file->isValid()) {

@@ -123,8 +123,9 @@ class TrainingController extends Training
 //        }else{
 //            $id_arr->nextlink='javascript:void(0);';
 //        }
-        return view('training/view', compact('id_arr'));
-
+        $userinfo= Business::where('user_id','=',$id_arr->user_id)->select("logo","business_name",'business_introduction')->get();
+        $qiyegood = $this->goodlist([2], ['id','ty','img1', 'title','introduce', 'price','img1', 'enroll_num','content'], 4);
+        return view('training/view', compact('id_arr','userinfo','qiyegood'));
     }
     //文章排序
     protected function newsorder($id)
@@ -169,6 +170,7 @@ class TrainingController extends Training
     }
     public function newslist()
     {
+        $sanlist = $this->sanlist();
         $Training = new Training();
         $ckey='';
         if(isset($_GET['title'])&&$_GET['title']!=0){
@@ -217,11 +219,12 @@ class TrainingController extends Training
         $publicids=$sousuoarr[74][0];
         $qiyezige=$sousuoarr[76];
         $pagenewslist=$Training->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,['id','title','price','enroll_num','img1','content'],16,9);
-        return view('training/list', compact('pagenewslist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids','qiyezige','qualificationidarr'));
+        return view('training/list', compact('pagenewslist','sanlist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids','qiyezige','qualificationidarr'));
     }
     //培训机构列表加分页
     public function userlist()
     {
+        $sanlist = $this->sanlist();
         $Training = new Business();
         if(isset($_GET['business_name'])){
             $key=$_GET['business_name'];
@@ -238,7 +241,7 @@ class TrainingController extends Training
 
         $pagenewslist=$Training->v_pages($key,['user_id','business_name','logo','business_introduction'],16,9);
         //dd($pagenewslist);
-        return view('training/userlist', compact('pagenewslist','ckey','key'));
+        return view('training/userlist', compact('pagenewslist','sanlist','ckey','key'));
     }
     public function view($id)
     {
@@ -289,9 +292,7 @@ class TrainingController extends Training
 
         return view('training/seach', compact('pagenewslist','key','ckey'));
     }
-
 }
-
 function get_ssarr()
 {
     $data = \Illuminate\Support\Facades\DB::table('nature')->select('id','pid','typeid','catname')->orderBy('disorder','desc')->orderBy('id','asc')->get();
@@ -301,5 +302,4 @@ function get_ssarr()
     }
 
     return $d;
-
 }

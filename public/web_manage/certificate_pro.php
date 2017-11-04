@@ -50,6 +50,7 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 
                         if ($tty==54){
                             $opt->input('证书名称','title')
+//                                ->img('配图', 'img1')
                                 ->choose('所属分类','certificate_lid')->radioSet(Config::get('webarr.certificate'))->flur()
                                 ->editor('详情');
                         }else{

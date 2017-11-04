@@ -13,11 +13,41 @@
             <div class="qypeixinAll">
                 <div class="qypeixin">
                     <p class="xwdtmbx">
-                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
+                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}</a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>
                     </p>
+                    <div class="zhiyepx1">
+                        <ul>
+                            <li class="liat1">
+                                <a href="{{u($GLOBALS['pid_path'],$sanlist[0]['path'])}}">
+                                    <img src="/img/jineng1.png"/>{{$sanlist[0]['catname']}}
+                                </a>
+                            </li>
+                            <li class="liat2">
+                                <a href="{{u($GLOBALS['pid_path'],$sanlist[1]['path'])}}">
+                                    <img src="/img/jineng2.png"/>{{$sanlist[1]['catname']}}
+                                </a>
+                            </li>
+                            <li class="liat3">
+                                <a href="{{u('training','business')}}">
+                                    <img src="/img/jineng3.png"/>培训机构
+                                </a>
+                            </li>
+                            <li class="liat4">
+                                <a href="{{u($GLOBALS['pid_path'],$sanlist[2]['path'])}}">
+                                    <img src="/img/jineng4.png"/>{{$sanlist[2]['catname']}}
+                                </a>
+                            </li>
+                            <li class="liat">
+                                <a href="{{$boot_config['link2']}}" target="_blank">
+                                    <img src="/img/jineng5.png" style="width:15%;" />在线咨询
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="" style="padding-bottom: 20px;">
                         <img src="/img/zplb1.jpg" width="100%"/>
                     </div>
+
                     <div class="qypeixinTit">
                         <div class="qypeixinTit1">
                             <span>您已选择：</span><img src="/img/dingwei.png"/><a href="">合肥</a><img src="/img/qydown.png">
@@ -130,7 +160,7 @@
                                         <i><em>{{$val['enroll_num']}}</em>人已报名</i>
                                     </p>
                                     <p class="pu3">
-                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}</a>
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 80, '...') !!}</a>
                                     </p>
                                     <p class="pu4">
                                         <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">我要报名</a>

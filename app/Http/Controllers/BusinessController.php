@@ -223,10 +223,6 @@ class BusinessController extends base\UserController
             $business->img  = $filename;
         }
 
-        if ($filename = ifUploadCheckIt($request, 'logo', $business->logo, 'b_logo')) {
-            $business->logo  = $filename;
-        }
-
         $business->contact = $request->get('contact');
         $business->weixin = $request->get('weixin');
         $business->qq = $request->get('qq');
