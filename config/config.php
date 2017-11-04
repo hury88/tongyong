@@ -249,6 +249,12 @@ return [
         'nature' => ['民营企业', '私人企业', '国营企业', ],
     ],
 
+    'order' => [
+        'orderBy' => [ 'created_at' => '按下单时间', 'status' => '按订单状态'],
+        'pay_style' => [1=>'支付宝支付', 2=>'微信支付'],
+        'status' => ['新订单'],
+    ],
+
     'other'                  => [
         // 'nocontent'  => '<p style="text-align:center;width:100%;padding:20px 0;">内容更新中</p>',
         'nocontent'  => '<p style="text-align:center;width:90%;padding:38px 0;">内容更新中</p>',

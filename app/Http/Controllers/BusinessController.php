@@ -25,7 +25,7 @@ class BusinessController extends base\UserController
             parent::__construct();
     }
 
-    private $fillTable = ['certificate', 'education', 'training'];
+    private $fillTable = ['certificate', 'education', 'training', 'order'];
 
     private $paginate = 15;
     private $toArray = 10;
@@ -149,7 +149,7 @@ class BusinessController extends base\UserController
         }
         $img = upload($request, 'uploadimg');
         if (!$img) {
-            return noticeResponseJson(412, '执行失败', '上传失败!');
+            return noticeResponseJson(412, '执行失败', '营业执照上传失败!');
         }
 
         $user = \Auth::user();
@@ -183,8 +183,17 @@ class BusinessController extends base\UserController
      */
     public function order(&$compact)
     {
-        $table = __FUNCTION__;
-        return $this->relatedToNewsCats($table, $action, $id);
+        $_GET['orderBy'] = isset($_GET['orderBy']) ? (int)$_GET['orderBy'] : 'created_at';
+        $_GET['trade_no'] = isset($_GET['trade_no']) && $_GET['trade_no'] ? (int)$_GET['trade_no'] : '';
+        $compact['pagenewslist'] = \Auth::user()->hasManyOrder()
+            ->where(function ($query) {
+                empty($_GET['trade_no']) or $query->where('trade_no', intval($_GET['trade_no']));
+        })->orderBy($_GET['orderBy'], 'desc')->paginate($this->paginate)->toArray($this->toArray);
+        $compact['ckey'] = '';
+        foreach ($_GET as $key => $value) {
+            if($key<>'page' && $value) $compact['ckey'] .= "&$key=$value";
+        }
+        return $compact;
     }
 
     /**
@@ -219,8 +228,11 @@ class BusinessController extends base\UserController
         $user = \Auth::user();
         $business = $user->profile;
 
-        if ($filename = ifUploadCheckIt($request, 'img', $business->img, 'b_img')) {
-            $business->img  = $filename;
+        if ($filename = ifUploadCheckIt($request, 'headimg', $business->headimg, 'b_img')) {
+            $business->headimg  = $filename;
+        }
+        if ($filename = ifUploadCheckIt($request, 'logo', $business->logo, 'b_logo')) {
+            $business->logo  = $filename;
         }
 
         $business->contact = $request->get('contact');

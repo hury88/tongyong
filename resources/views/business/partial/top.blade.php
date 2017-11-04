@@ -3,7 +3,7 @@
     <div class="safety-header-personal fr">
         <ul>
             <li class="personal-infor1"><a href="{{route('b_notices')}}"><i>{{App\Notice::auth()->where('status', 1)->count()}}</i></a></li>
-            <li class="personal-infor2"><img src="/img/qiye-img.jpg">欢迎回来，{{$user['member_name']}}</li>
+            <li class="personal-infor2"><img src="{{img($user['headimg'], '/img/member-headerimg.png')}}">欢迎回来，{{$user['member_name']}}</li>
             @if($user['certified'])
             <li class="personal-infor3"><img src="/img/renzhe.png">已认证</li>
             @else

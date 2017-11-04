@@ -1,4 +1,4 @@
-@extends('auth.layouts/register')
+  @extends('auth.layouts/register')
 @section('title') 企业@parent @stop
 @section('css')@parent    <link rel="stylesheet" type="text/css" href="/plugins/business-location/css/city-picker.css"/>@stop
 @section('bodyNextLabel')
@@ -7,7 +7,7 @@
     @stop
 @section('register_header')
     <h1 class="fl">我是<font style="color:red">企业</font>加入中国职业培训网</h1>
-    <a style="color:red" class="register-cate fr" href="{{u('register', 'org')}}"><img src="/img/student.png"/>我是企业</a>
+    <a style="color:red" class="register-cate fr" href="{{u('register', 'org')}}"><img src="/img/xs.png"/>我是企业</a>
     <a class="register-cate fr" href="{{u('register', 'person')}}"><img src="/img/student.png"/>我是学生</a>
     @stop {{-- end register_header --}}
 @section('form')
@@ -16,7 +16,7 @@
         <input name="org" type="text" placeholder="请输入企业名称"/>
     </div>
     <div class="register-form-div list1" style="position:relative">
-        <input name="location" class="form-control" readonly type="text" value="江苏省/常州市/溧阳市" data-toggle="city-picker">
+        <input name="location" class="form-control" readonly type="text" value="" data-toggle="city-picker">
     </div>
     <!-- <div class="register-form-div list1">
        <div class="dd">

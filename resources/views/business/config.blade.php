@@ -19,7 +19,7 @@
             // $form ->img('企业头像','logo',"250*150");
             $form
                 ->hide('_token', csrf_token())
-                ->img('企业头像', 'img', '250*150')
+                ->img('企业头像', 'headimg', '250*150')
                 ->input('企业姓名', 'business_name')
                 ->input('联系人', 'contact')
                 ->word('<a class="useredit-a" href="javascript:;">修改手机号</a>')->input2('手机号', 'telphone')

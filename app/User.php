@@ -74,7 +74,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return $this->hasOne('App\Business');
 
-    } public function business()
+    }
+
+    /**
+     * 不同会员关联订单表
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hasManyOrder()
+    {
+        if ($this->isPerson()) {
+            return $this->hasMany('App\Order', 'buyer_id');
+        }
+        return $this->hasMany('App\Order', 'seller_id');
+    }
+
+
+    public function business()
     {
         return $this->hasOne('App\Business');
 
