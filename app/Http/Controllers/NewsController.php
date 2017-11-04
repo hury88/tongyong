@@ -151,9 +151,9 @@ class NewsController extends Controller
     private function hot_train()
     {
        $news = new Training();
-       $str = $news->v_xinglist(["id"],10);
-       $str[0]['img1']=img($str[0]['img1']);
-        $str='';
+       $str = $news->v_xinglist(['id','ty','img1', 'title','introduce', 'price','img1', 'enroll_num','content'],5);
+       //$str[0]['img1']=img($str[0]['img1']);
+     //  dd($str);
         return $str;
     }
 }

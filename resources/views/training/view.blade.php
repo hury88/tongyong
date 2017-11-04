@@ -124,8 +124,10 @@
                             ?>
                             <h3>你可能还感兴趣的课程</h3>
                             <ul>
+
                                 @foreach($qiyegood as $val)
                                 <li>
+
                                     <div class="interstImg">
                                         <a href="{{get_turl($val['ty'],$val['id'])}}"><img src="{{img($val['img1'])}}" width="100%"/></a>
                                         <div class="interstImg1">

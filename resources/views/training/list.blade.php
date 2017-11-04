@@ -160,7 +160,7 @@
                                         <i><em>{{$val['enroll_num']}}</em>人已报名</i>
                                     </p>
                                     <p class="pu3">
-                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 240, '...') !!}</a>
+                                        <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 80, '...') !!}</a>
                                     </p>
                                     <p class="pu4">
                                         <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">我要报名</a>

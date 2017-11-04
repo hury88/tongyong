@@ -225,11 +225,6 @@ class BusinessController extends base\UserController
             $business->img  = $filename;
         }
 
-        if ($filename = ifUploadCheckIt($request, 'img'), $business->img) {
-            $business->img  = $filename;
-        }
-
-        dd($file = \Input::file('img'));
 
         if ( $file = \Input::file('img') ) {
             if ($img = upload($request, 'img')) {

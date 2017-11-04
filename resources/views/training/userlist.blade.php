@@ -50,7 +50,7 @@
 
                     <div class="qypeixinTit" style="    overflow: hidden;padding: 20px 30px;">
                         <div class="qypeixinTit1" style="width: 15%;float: left;padding-top: 10px;">
-                            <span>您已选择：</span><img src="img/dingwei.png"/><a href="">合肥</a><img src="/img/qydown.png">
+                            <span>您已选择：</span><img src="/img/dingwei.png"/><a href="">合肥</a><img src="/img/qydown.png">
                         </div>
 
                         <div class="qypeixinTit3" style="width: 37%;float: right;padding: 0;">
