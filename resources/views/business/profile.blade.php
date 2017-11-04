@@ -5,7 +5,7 @@
 <div class="pe  rsonal-member-index clearfix">
     <div class="member-index-left fl">
         <div class="member-index-header clearfix">
-            <img class="mem-hearimg" src="/img/member-headerimg.png"/>
+            <img class="mem-hearimg" src="{{img($user['headimg'], '/img/member-headerimg.png')}}"/>
             <div class="member-information">
                 <h2>{{$user['business_name']}}<a title="{{$user['business_name']}}" href=""><img class="mem-link" src="/img/link.png"/></a>
                     @if($user['certified'])
@@ -16,7 +16,7 @@
 
                 </h2>
                 <span>{{$user['location']}}</span>
-                <p>公司描述：{{$user['business_introduction']}}</p>
+                <p>公司描述：{!! str_limit(strip_tags($user['business_introduction']), 500) !!}</p>
             </div>
         </div>
         <div class="mem-index-recruit clearfix">

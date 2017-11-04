@@ -173,14 +173,14 @@ class File
     {
         $path = explode('/', $file);
 
-        if (\Auth::id() == $path[4]) {
+//        if (\Auth::id() == $path[4]) {
             $file = public_path().'/'.self::$default_path.$file;
-            unlink($file);
+            @unlink($file);
 
             return file_exists($file) ? 0 : 1;
-        }
+//        }
 
-        return 0;
+//        return 0;
     }
 
     /**

@@ -46,19 +46,19 @@
         <ul class="clearfix">
             <li>
                 <p></p>
-                <a href="###">职业招聘</a>
+                <a href="javascript:;">职业招聘</a>
             </li>
             <li>
                 <p></p>
-                <a href="###">职业培训</a>
+                <a href="javascript:;">职业培训</a>
             </li>
             <li>
                 <p></p>
-                <a href="###">职业证书</a>
+                <a href="/certicate">职业证书</a>
             </li>
             <li>
                 <p></p>
-                <a href="###">国际教育</a>
+                <a href="/education">国际教育</a>
             </li>
         </ul>
     </div>

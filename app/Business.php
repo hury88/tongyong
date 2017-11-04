@@ -28,8 +28,31 @@ class Business extends Model
      *
      * @var array
      */
-    // protected $fillable = ['user_id', 'business_name', 'location', 'contact', 'creation_date'];
-    // protected $hidden = ['user_id',];
+    protected $fillable = [
+        'user_id',
+        'business_name',
+        'business_introduction',
+        'business_time',
+        'registerid',
+        'legal',
+        'contact',
+        'img',
+        'headimg',
+        'creation_date',
+        'qq',
+        'weixin',
+        'location',
+        'has1',
+        'has2',
+        'certified_status',
+        'logo',
+        'jing',
+        'wei',
+        'siteurl',
+        'cate',
+        'nature',
+        'size',
+    ];
     /**
      * Get business user.
      *

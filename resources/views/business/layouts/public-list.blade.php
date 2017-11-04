@@ -17,7 +17,7 @@
                         <th>{{$title}}</th>
                         @endforeach
                         <th>时间</th>
-                        <th>操作</th>
+                        <th class="caozuo">操作</th>
                     </tr>
                     <tbody>
                     @yield('tbody')

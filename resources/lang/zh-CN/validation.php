@@ -138,7 +138,7 @@ return [
         'qq' => 'QQ',
         'jing' => '经度',
         'wei' => '纬度',
-        'siteurl' => '官网',
+        'siteurl' => '官方网址',
 
     ],
 
