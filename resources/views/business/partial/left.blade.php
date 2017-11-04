@@ -1,6 +1,6 @@
 <div class="member-safety-left fl">
     <div class="member-logo">
-        <a href="javascript:;"><img src="/img/vip-logo.png"/></a>
+        <a href="/"><img src="/img/vip-logo.png"/></a>
         <a href="javascript:;" class="icon-nav"></a>
     </div>
     <div class="left-nav-lists">

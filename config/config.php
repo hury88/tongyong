@@ -243,6 +243,12 @@ return [
         'xx' => '退款',
     ],
 
+    'business' => [
+        'size' => ['10-20人', '20-50人', '50-100人', '100-500人', '500人以上', ],
+        'cate' => ['IT行业', '销售行业', '服务行业', '实业', ],
+        'nature' => ['民营企业', '私人企业', '国营企业', ],
+    ],
+
     'other'                  => [
         // 'nocontent'  => '<p style="text-align:center;width:100%;padding:20px 0;">内容更新中</p>',
         'nocontent'  => '<p style="text-align:center;width:90%;padding:38px 0;">内容更新中</p>',

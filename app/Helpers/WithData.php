@@ -160,7 +160,7 @@ class WithData
             'content3'       	=>		$this->I('content3',''),
             'content4'       	=>		$this->I('content4',''),
             'introduce'			=>		$this->I('introduce','','htmlspecialchars'),
-            'price'				=>		$this->I('price', 0.00,'float'),
+            'price'				=>		$this->I('price', 0.00,'floatval'),
             'period'			=>		$this->I('period','','htmlspecialchars'),
             'sendtime'      	=>		time(),
         );

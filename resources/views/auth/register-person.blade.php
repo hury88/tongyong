@@ -7,8 +7,9 @@
 @stop
 
 @section('register_header')
-    <h1 class="fl">我是学生加入中国职业培训网</h1>
+    <h1 class="fl">我是<font style="color:red">学生</font>加入中国职业培训网</h1>
     <a class="register-cate fr" href="{{u('register', 'org')}}"><img src="/img/qiye.png"/>我是企业</a>
+    <a style="color:red" class="register-cate fr" href="{{u('register')}}"><img src="/img/qiye.png"/>我是学生</a>
     @stop {{-- end register_header --}}
 @section('form')
 <form class="form" action="{{url('register')}}">

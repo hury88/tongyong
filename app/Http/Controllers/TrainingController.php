@@ -297,8 +297,21 @@ function get_ssarr()
 {
     $data = \Illuminate\Support\Facades\DB::table('nature')->select('id','pid','typeid','catname')->orderBy('disorder','desc')->orderBy('id','asc')->get();
 
+<<<<<<< HEAD
     foreach ($data as $v) {
         $d[$v->typeid][$v->pid][$v->id]=$v->catname;
     }
     return $d;
+=======
+function get_ssarr()
+{
+    $data = \Illuminate\Support\Facades\DB::table('nature')->select('id','pid','typeid','catname')->orderBy('disorder','desc')->orderBy('id','asc')->get();
+
+    foreach ($data as $v) {
+        $d[$v->typeid][$v->pid][$v->id]=$v->catname;
+    }
+
+    return $d;
+
+>>>>>>> 5313cd6388dc2cc1cdd2ac84c826811e1204a777
 }
