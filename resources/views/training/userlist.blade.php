@@ -68,7 +68,7 @@
                         <ul>
                             @foreach($pagenewslist['data'] as $val)
                             <li>
-                                <a href="{{u('training','business',$val['user_id'])}}"><img src="img/qypx9.jpg"/></a>
+                                <a href="{{u('training','business',$val['user_id'])}}"><img src="{{img($val['logo'],'/img/qypx9.jpg')}}"/></a>
                                 <div class="qypeixinCon1">
                                     <p class="pu1">
                                         <a href="{{u('training','business',$val['user_id'])}}">{{$val['business_name']}}</a>
