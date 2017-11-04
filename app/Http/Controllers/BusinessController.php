@@ -208,7 +208,6 @@ class BusinessController extends base\UserController
             'nature' => 'required|numeric',
             'siteurl' => 'required|url',
             'business_introduction' => 'required',
-//            'uploadimg' => 'image',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -217,7 +216,6 @@ class BusinessController extends base\UserController
             return noticeResponseJson(412, '执行失败', $errors);
         }
 
-        dd($request->all());
         $user = \Auth::user();
         $business = $user->profile;
 
@@ -225,50 +223,27 @@ class BusinessController extends base\UserController
             $business->img  = $filename;
         }
 
-        if ($filename = ifUploadCheckIt($request, 'img'), $business->img) {
-            $business->img  = $filename;
+        if ($filename = ifUploadCheckIt($request, 'logo', $business->logo, 'b_logo')) {
+            $business->logo  = $filename;
         }
 
-        dd($file = \Input::file('img'));
+        $business->contact = $request->get('contact');
+        $business->weixin = $request->get('weixin');
+        $business->qq = $request->get('qq');
+        $business->location = $request->get('location');
+        $business->jing = $request->get('jing');
+        $business->wei = $request->get('wei');
+        $business->size = $request->get('size');
+        $business->cate = $request->get('cate');
+        $business->nature = $request->get('nature');
+        $business->siteurl = $request->get('siteurl');
+        $business->business_introduction = $request->get('business_introduction');
 
-        if ( $file = \Input::file('img') ) {
-            if ($img = upload($request, 'img')) {
-                            # code...
-                        }
-        }
-
-        $img = upload($request, 'img');
-        if (!$img) {
-            return noticeResponseJson(412, '执行失败', '企业头像上传失败!');
-        }
-        $logo = upload($request, 'logo');
-        if (!$logo) {
-            return noticeResponseJson(412, '执行失败', '企业LOGO上传失败!');
-        }
-
-        // users表更新
-        $user_id = $user->id;
-        $business = $user->profile;
-        $business->img = $img;
-        $business->img = $img;
-        $business->certified_status = 1;
-        $business->business_time = $request->get('islonger') ? null : $request->get('business_time');
-        $business->legal = $request->get('legal');
-        $business->registerid = $request->get('registerid');
+        // users->business表更新
         if ($business->save()) {
-            #发送认证请求
-            $flag = Notice::create([
-                'user_id'        => 0,
-                'sender_id'      => $user_id,
-                'action_type_id' => 1,
-                'source_id'      => $user_id,
-                'status'         => 1,
-            ]);
-            if ($flag) {
-                return handleResponseJson(200, '申请认证成功!', '?');
-            }
+           return handleResponseJson(200, '设置成功!', '?');
         }
-        return handleResponseJson(412, '申请认证失败!');
+        return handleResponseJson(412, '设置失败!');
 
 
     }
