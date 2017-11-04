@@ -826,6 +826,10 @@
     margin-right: 22px;
     border-radius: 50%;
 }
+.member-information{
+    width:auto;
+    padding:0 40px 0 133px;
+}
 .member-information h2{
     font-size: 24px;
     color: #333;
@@ -861,6 +865,9 @@
     font-size: 12px;
     color:#666;
     line-height: 22px;
+    height: 44px;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 .member-index-right{
     width: 16.67%;

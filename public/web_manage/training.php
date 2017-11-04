@@ -165,7 +165,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <td width="24px">编号</td> <td width="200px">操作</td>
 
         <td> 图 </td>
-        <td> 标题 <span class="fr"></td>
+        <td> 标题</td>
         <td> 培训方式 </td>
         <td> 报名人数 </td>
         <td width="10%">发布者</td>

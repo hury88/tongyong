@@ -112,7 +112,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
            <?php if ($tty==21){?>
                <td>logo 图 </td>
            <?php }?>
-        <td> 标题 <span class="fr"></td>
+        <td> 标题</td>
            <?php if (in_array($tty,array(24,25,29,30))){?>
            <td> 详情页图片 </td>
            <td> 目的地 </td>

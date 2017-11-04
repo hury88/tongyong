@@ -1,4 +1,4 @@
-﻿.qypeixinAll{
+.qypeixinAll{
 	width: 100%;
 	background: #f5f5f4;
 	margin-top: 67px;
@@ -149,20 +149,22 @@
 }
 .qypeixinCon ul{
 	overflow: hidden;
+	margin-right: -20px;
 }
 .qypeixinCon ul li{
-	    width: 23.1%;
+	width:260px;
     float: left;
     margin-right: 20px;
     margin-bottom: 20px;
 }
-.qypeixinCon ul li a{
+.qypeixinCon>ul>li>a{
 	display: block;
+	width:260px;
+	height:178px;
 }
 .qypeixinCon ul li a img{
-	/*width: 100%;*/
-	width:250px;
-	height:150px;
+	width:260px;
+	height:178px;
 }
 .qypeixinCon ul .list{
 	margin-right: 0;
@@ -173,7 +175,6 @@
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
 }
 .qypeixinCon1 .pu2 span{
 	color: #db1c16;
@@ -187,10 +188,17 @@
 }
 .qypeixinCon1 .pu3 a{
 	color: #666666;
+	height:44px;
+	font-size: 12px;
+	line-height: 22px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .qypeixinCon1 .pu3{
-	height: 67px;
-	overflow: hidden;
+	height:44px;
+}
+.qypeixinCon1 .pu4{
+	height:44px;
 }
 .qypeixinCon1 .pu4 a{
 	display: block;
@@ -208,12 +216,21 @@
 	background: #e94a4c;
 }
 .qypeixinCon1{
-	    padding: 15px;
-    border: 1px solid #ddd;
+	padding: 15px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
     margin-top: -3px;
 }
 .qypeixinCon1 p{
+	width: 100%;
 	padding-bottom: 10px;
+}
+.qypeixinCon1 .pu1{
+	height:25px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: keep-all;
 }
 .dagang1{
 	overflow: hidden;
@@ -344,15 +361,14 @@
 	overflow: hidden;
 }
 .dagang2ConLeft{
-	width: 70%;
+	width:760px;
 	float: left;
 	overflow: hidden;
 	border-bottom: 1px solid #dddddd;
 }
 .dagang2ConRight{
-	width: 25%;
-    float: left;
-    margin-left: 50px;
+	width:300px;
+    float: right;
 }
 .dagang2ConLeft .mianfei li{
 	border-top: 1px solid #dddddd;
@@ -379,9 +395,13 @@
 }
 .dagang2ConRight1 .pp1{
 	    border: 1px solid #e3e3e3;
-    padding: 10px;
-    width: 47%;
-    margin: 0 auto;
+	    width: 137px;
+	    height: 74px;
+       margin: 0 auto;
+}
+.dagang2ConRight1 .pp1 img{
+	width: 137px;
+	height: 74px;
 }
 .dagang2ConRight1 .pp2{
 	font-size: 20px;
@@ -390,11 +410,13 @@
 }
 .dagang2ConRight1{
 	border: 1px solid #e3e3e3;
-	padding: 20px;
+	padding:27px 20px 26px;
+	background: #fbfbfd;
+	width:258px;
 }
 .dagang2ConRight1 .pp3{
 	line-height: 1.5;
-	height: 105px;
+	height: 85px;
 	overflow: hidden;
 }
 .interst{
@@ -405,31 +427,51 @@
 	border-bottom: 1px solid #e3e3e3;
 }
 .interstTit h3{
-	padding: 15px;
-    border-bottom: 2px solid #d71418;
-    width: 66%;
+	height:59px;
+	line-height: 59px;
     font-size: 18px;
+	color: #323431;
+	padding-left: 19px;
+	background:#fbfbfd url(../img/career-bg_01.jpg) no-repeat left bottom;
+	border-bottom: 1px solid #e7e7e7;
 }
 .interstTit ul{
 	padding: 10px 15px;
 }
 .interstImg{
 	position: relative;
+	width: 268px;
+	height: 150px;
+}
+.interstImg>a>img{
+	width: 268px;
+	height: 150px;
 }
 .interstImg1{
 	position: absolute;
 	right: 0;
 	top: 0;
+	width:89px;
+	height:26px;
+}
+.interstImg1 img{
+	width:89px;
+	height:26px;
 }
 .interstTxt{
 	position: absolute;
     left: 0;
-    bottom: 3px;
+    bottom:0;
     color: #fff;
     background: rgba(0,0,0,.6);
-    padding: 5px 0;
+	height: 27px;
+	line-height: 27px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all;
     text-align: center;
     width: 100%;
+
 }
 .interstTit ul li .jiangong a{
 	color: #333;
@@ -627,10 +669,12 @@
 	float: right;
 }
 .zhiyepx2Titr .jingp2 .jingp2_2 a{
-	padding: 5px;
+	height: 32px;
+	line-height: 34px;
+	padding: 0 12px;
 	color: #323333;
 	border: 1px solid #ea5955;
-	border-radius: 5px;
+	border-radius:3px 3px 0 0;
 }
 .zhiyepx2Titr .jingp2 .jingp2_2 .jingp2_2on{
 	background: #ea5955;
@@ -639,28 +683,41 @@
 .zhiyepx2Con{
 	background: #fff;
 	border: 1px solid #dddddd;
-	padding: 30px;
+	padding: 30px 29px 5px;
 }
 .zhiyepx2Contop{
 	position: relative;
+	width: 100%;
+	height: 220px;
+	overflow: hidden;
+}
+.zhiyepx2Contop>a>img{
+	width:324px;
+	height: 220px;
 }
 .zhiyepx2Contop .zhibosj{
 	position: absolute;
     left: 0;
-    bottom: 4px;
+    bottom:0;
     background: rgba(0,0,0,.4);
     color: #fff;
-    width: 100%;
     text-align: center;
-    padding: 5px 0;
+	width: 100%;
+	height: 28px;
+	font-size: 14px;
+	line-height:28px;
+	text-overflow: ellipsis;
+	word-break: keep-all;
+	overflow: hidden;
 }
 .zhiyepx2Con ul{
 	overflow: hidden;
 }
 .zhiyepx2Con ul li{
-	width: 31.3%;
+	width:324px;
 	float: left;
-	margin-right: 30px;
+	padding:7px 6px 6px;
+	margin-right:16px;
 	margin-bottom: 25px;
 }
 .zhiyepx2Con ul .list2{
@@ -673,13 +730,20 @@
 .zhiyepx2Contop a img{
 	width: 100%;
 }
+.zhiyepx2Con ul li:hover .layerpx{
+	display:block !important;
+}
+.zhiyepx2Con ul li:hover{
+	background:url(../img/carreee.png) no-repeat center center;
+	background-size: contain;
+}
 .layerpx{
-	    position: absolute;
+	position: absolute;
     left: 0;
     top: 0;
     background: rgba(14,23,37,.8);
     width: 100%;
-    height: 147px;
+    height: 150px;
     padding-top: 70px;
 }
 .layerpx a,.layerpx p{
@@ -697,19 +761,19 @@
     margin-bottom: 15px;
 }
 .zhiyepx2Conbom{
-	    background: #fff;
-    border: 1px solid #dddddd;
-    box-shadow: 3px 3px 3px #dddddd;
-    padding: 15px;
-    margin-top: -4px;
+	background: #fff;
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    height:98px;
+	padding: 16px 20px 0 20px;
 }
 .zhiyepx2Conbom .p1 a{
 	color: #323333;
 	font-size: 16px;
-
 }
 .zhiyepx2Conbom p{
-	padding-bottom: 15px;
+	padding-bottom:12px;
 }
 .zhiyepx2Conbom .p2 .sp1{
 	color: #db1c16;
@@ -767,7 +831,7 @@
 	overflow: hidden;
 }
 .zhiyepx5Con .notice-tit{
-	width: 20%;
+	width:220px;
     float: left;
     margin-top: 40px;
 }
@@ -795,29 +859,40 @@
 	background: #f9cfcc;
 }
 .zhiyepx5Con .notice-con{
-	width: 80%;
+	width:820px;
 	float: left;
 }
 .modTop{
+	width:252px;
+	height: 172px;
 	position: relative;
+}
+.modTop>a>img{
+	width:252px;
+	height: 172px;
 }
 .modTop .minute{
 	position: absolute;
     left: 0;
-    bottom: 5px;
+    bottom:0;
     color: #fff;
+	height: 28px;
+	line-height:28px;
     text-align: center;
     background: rgba(0,0,0,.6);
-    padding: 5px;
-    width: 94%;
+    padding:0 5px;
+	display: block;
+	width: 242px;
 }
 .zhiyepx5Con .notice-con .mod ul{
 	overflow: hidden;
+	margin-right:-32px;
 }
 .zhiyepx5Con .notice-con .mod ul li{
-	    width: 29.7%;
+	width:252px;
     float: left;
-    margin-right: 30px;
+    margin-right:32px;
+	overflow: hidden;
 }
 .zhiyepx5Con .notice-con .mod ul .list{
 	margin-right: 0;
@@ -828,6 +903,11 @@
 }
 .modBom .p1{
 	padding-bottom: 15px;
+	height: 25px;
+	overflow: hidden;
+	width: 100%;
+	word-break: keep-all;
+	text-overflow: ellipsis;
 }
 .modBom .p1 a{
 	color: #323333;

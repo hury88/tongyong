@@ -11,18 +11,14 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 ###########################筛选开始
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
-$cid =   I('get.cid',0,'intval');
-$certificate_lid =   I('get.certificate_lid',0,'intval');
-$infotypeid =   I('get.infotypeid',0,'intval');
-$trainingid =   I('get.trainingid',0,'intval');
+
+$user_id =   I('get.user_id',0,'intval');
 if(!empty($user_id)){
     $map['user_id'] =$user_id;
     $cname=v_id($user_id,"member_name","users");
 }else{
     $cname='管理员';
 }
-if(!empty($certificate_lid)) $map['certificate_lid'] = $certificate_lid;
-if(!empty($infotypeid)) $map['infotypeid'] = $infotypeid;
 
 if(!empty($tty)) $map['tty'] = $tty;
 $psize   =   I('get.psize',30,'intval');
@@ -52,27 +48,26 @@ list($data,$pagestr) = Page::paging($pageConfig);
             <input type="hidden" name="tty" value="<?=$tty?>" />
             <!-- <b>显示</b><input style="width:50px;" name="psize" type="text" class="dfinput" value="<?=$psize?>"/>条 -->
             <!-- <b>编号</b><input name="id" type="text" class="dfinput" value="<?=$id?>"/> -->
-        <?php if ($pid<5): ?>
-            <input type="hidden" name="cid" id="cid"  value="0">
-             选择企业： <input type="text" id="cname" class="dfinput" value="<?=$cname?>">
+
+            <input type="hidden" name="user_id" id="user_id"  value="0">
+            选择企业： <input type="text" id="cname" class="dfinput" value="<?=$cname?>">
             <div class="qyxf" style="display: none">
                 <ul>
                     <li data-id="0">平台管理员</li>
                 </ul>
             </div>
-        <?php endif ?>
+
 
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>
             <script type="text/javascript">
                 $(function(){
-
                     $(".qyxf ul").on("click","li",function(){
 
-                        var cid=$(this).data("id");
+                        var user_id=$(this).data("id");
                         var cname=$(this).html();
-                        $("#cid").val(cid)
+                        $("#user_id").val(user_id)
                         $("#cname").val(cname)
                         $(".qyxf").hide()
                     })
@@ -82,15 +77,17 @@ list($data,$pagestr) = Page::paging($pageConfig);
                     $("#cname").val('')
                     var key=$(this).val()
                     $.get("include/json.php?action=xzqy&key="+key, function (data) {
-                      //  alert(data)
+                        //  alert(data)
                         $(".qyxf ul").html(data)
                     })
                     $(".qyxf").show()
                 })
                 $("#cname").keyup(function(){
+
                     var key=$(this).val()
+
                     $.get("include/json.php?action=xzqy&key="+key, function (data) {
-                      //  alert(data)
+                        //  alert(data)
                         $(".qyxf ul").html(data)
                     })
                     $(".qyxf").show()
@@ -114,60 +111,23 @@ list($data,$pagestr) = Page::paging($pageConfig);
        <tr class="first">
         <td onclick="selectAll(document.getElementById('sall'))" style="font-size:8px;cursor:pointer" width="24px">全选</td>
         <td width="24px">编号</td> <td width="200px">操作</td>
+        <td> 标题</td>
+        <td> 职位名称 </td>
+        <td>所属行业</td>
+        <td>职位性质</td>
+        <td>招收人数</td>
+        <td> 申请人数 </td>
 
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/    if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
-        <td> 图 </td>
-        <td> 标题 <span class="fr"></td>
-        <!-- <td> 浏览次数 </td> -->
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
-        <td> 标题 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==9):/*＜＞＜＞培训方式＜＞＜＞*/?>
-        <td> 图 </td>
-        <td> 名称 </td>
-       <td> 培训方式 </td>
-        <td> 报名人数 </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
-        <td> 名称 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==11):/*＜＞＜＞图文列表＜＞＜＞*/?>
-        <!-- <td width="24px"> 配图 </td> -->
-        <td> 配图 </td>
-        <td> 信息 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==12):/*＜＞＜＞路线＜＞＜＞*/?>
-    <td> 配图 </td>
-    <td> 标题 </td>
-    <td> 详情页图片 </td>
-    <td> 目的地 </td>
-    <td> 报名人数 </td>
-    <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==13):/*＜＞＜＞需报名新闻＜＞＜＞*/?>
-    <!-- <td width="24px"> 配图 </td> -->
-        <?php if($tty<>60){?>
-            <td> 配图 </td>
-        <?php } ?>
-
-    <td> 标题 </td>
-    <td> 报名人数 </td>
-   <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
-       <td> 问题 </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==16):/*＜＞＜＞职业证书＜＞＜＞*/?>
-        <td> 证书名称 </td>
-        <td> 配图 </td>
-        <td> 所属分类 </td>
-        <td> 报名人数 </td>
-
-   <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
            <td width="10%">发布者</td>
     <td width="10%">发布时间</td>
 </tr>
 <?php
     foreach ($data as $key => $bd) : extract($bd);
-
-                            #生成修改地址
     $query = queryString(true);
     $query['id'] = $id;
     $editUrl = getUrl($query, $showname.'_pro');
                             #时间
     $time =  date('Y-m-d H:i',$sendtime);
-    $img1 =  '<img src="'.src($img1).'" width="80" />';
 if($user_id){
     $publisher=v_id($user_id,"name","cmember");
 }else{
@@ -182,59 +142,17 @@ if($user_id){
         <td><?=$key+1?></td>
         <td>
             <a href="<?=$editUrl?>" class="thick ">编辑</a>|
-            <?php if ($ty==10 || $showtype==1): //团队?>
-                <a data-class="btn-warm" class="json <?=$istop==1?'btn-warm':'' ?>" data-url="isindex&id=<?=$id?>"><?=config('webarr.isindex')[$istop] ?></a>|
-            <?php endif ?>
             <a data-class="btn-danger" class="json <?=$isgood==1?'btn-danger':'' ?>" data-url="isgood&id=<?=$id?>"><?=Config::get('webarr.isgood')[$isgood] ?></a>|
             <a data-class="btn-warm" class="json <?=$isstate==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$id?>"><?=Config::get('webarr.isstate')[$isstate] ?></a>|
-            <!-- <a href="<?=$editUrl?>" class="thick edits">编辑</a>| -->
             <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
         </td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/if ($showtype==1):/*＜＞＜＞新闻＜＞＜＞*/?>
-        <td><?=$img1?></td>
+
         <td><?=$title?></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==5):/*＜＞＜＞单条＜＞＜＞*/?>
-            <td><?=$title?><!-- <span class="fr"><a href="link.php?showtype=6&istop=<?php echo $id ?>">下属列表</a></span> --></td>
-            <td><a href="pic.php?ti=<?=$id?>">图集(<?php echo M('pic')->where("ti=$id and isstate=1")->count()?>条)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==9):/*＜＞＜＞产品＜＞＜＞*/?>
-        <td><?=$img1?></td>
-        <td><?=$title?>)</a></td>
         <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
-        <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-        <?php if ($ty==11): ?><td><?=isset($d1[$istop]) ? $d1[$istop] : '','&emsp;',isset($d2[$istop2]) ? $d2[$istop2] : '' ?></td><?php endif ?>
-        <!-- <td><?=$hits?></td> -->
-        <!-- <a href="pic.php?ti=<?=$id?>&cid=5">户型介绍(<?//=M('pic')->where("ti=$id and cid=5 and isstate=1")->count()?>条)</a> -->
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==10):/*＜＞＜＞产品分类＜＞＜＞*/?>
-        <td><?=$title?><span class="fr" style="display:none"><?php echo M('news')->where("istop=$id")->count(); ?></span></td>
-<!-- <td><span data-content="<?=$introduce?>" class="lookinfo layui-btn layui-btn-primary layer-demolist">查看简介</span></td> -->
-<?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==11):/*＜＞＜＞图文列表＜＞＜＞*/?>
-        <td><?=$img1?></td>
-        <td><?=$title,'&emsp;',$ftitle,'&emsp;',$name?><a href="pic.php?ti=<?php echo $id?>">图集(<?php echo M('pic')->where("ti=$id")->count(); ?>)</a>&emsp;&emsp;<a href="link.php?showtype=5&istop=<?php echo $id ?>">历程(<?php echo M('news')->where("istop=$id")->count(); ?>)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==12):/*＜＞＜＞路线＜＞＜＞*/?>
-            <td><?=$img1?></td>
+        <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
             <td><?=$title?></td>
-            <td><a href="pic.php?ti=<?php echo $id?>">图集(<?php echo M('pic')->where("ti=$id")->count(); ?>)</a></td>
-            <td><?=$destination?></td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==13):/*＜＞＜＞报名新闻＜＞＜＞*/?>
-        <?php if($tty<>60){?>
-                <td><?=$img1?></td>
-            <?php } if($ty==64){?>
-                <td> <?=Config::get('webarr.infotypeid')[$infotypeid]?> </td>
-            <?php }?>
+            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=$id and isstate=0")->count(); ?>未审核)</a></td>
 
-            <td><?=$title?></td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-        <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==15):/*＜＞＜＞常见问题＜＞＜＞*/?>
-            <!-- <td width="24px"> 配图 </td> -->
-            <td> <?=$title?> </td>
-            <?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/elseif ($showtype==16):/*＜＞＜＞职业证书＜＞＜＞*/?>
-            <td> <?=$title?> </td>
-            <td><?=$img1?></td>
-            <td> <?=Config::get('webarr.certificate')[$certificate_lid]?> </td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("bid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("bid=$id and isstate=0")->count(); ?>未审核)</a></td>
-
-<?php /*＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞＜＞*/endif?>
 
      <td><?=$publisher?></td>
      <td><?=$time?></td>
