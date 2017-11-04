@@ -132,6 +132,14 @@ return [
         'legal' => '法定代表人',
         'uploadimg' => '营业执照',
 
+        'b_img' => '企业头像',
+        'b_logo' => '企业LOGO',
+        'weixin' => '微信',
+        'qq' => 'QQ',
+        'jing' => '经度',
+        'wei' => '纬度',
+        'siteurl' => '官网',
+
     ],
 
     'recaptcha' => '验证码不正确。',

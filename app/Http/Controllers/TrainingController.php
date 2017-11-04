@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 use App\Training;
@@ -292,3 +292,14 @@ class TrainingController extends Training
 
 }
 
+function get_ssarr()
+{
+    $data = \Illuminate\Support\Facades\DB::table('nature')->select('id','pid','typeid','catname')->orderBy('disorder','desc')->orderBy('id','asc')->get();
+
+    foreach ($data as $v) {
+        $d[$v->typeid][$v->pid][$v->id]=$v->catname;
+    }
+
+    return $d;
+
+}

@@ -349,3 +349,14 @@ function uppro($file, &$fields) {
          return false;
      }
 }
+function ifUploadCheckIt(Request $request, $file, $origin, $mind) {
+     if ($file = $request->file($file)) {
+     	if ($file->isValid()) {
+     		@unlink(public_path() . '/uploadfile/upload' . $origin);
+     		return File::section('upload_img')->upload($file);
+     	} else {
+            return noticeResponseJson(412, '执行失败', trans('validation.attributes.'.));
+     	}
+     }
+     return false;
+}

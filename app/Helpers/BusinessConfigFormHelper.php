@@ -116,6 +116,12 @@ class BusinessConfigFormHelper{
 		$this->input_text($l,$i,0);
 		return $this;
 	}
+	//生成input
+	public function input2($l,$i){
+		$this->in = 'input';
+		$this->input_text($l,$i,2);
+		return $this;
+	}
 	//生成textarea
 	public function textarea($l,$i){
 		$this->in = 'textarea';
@@ -134,7 +140,8 @@ class BusinessConfigFormHelper{
 		switch ($this->in) {
 			case 'input':
 			case 'time':
-				$str = '<div class="layui-form-item">'.$this->temp.'</div>';
+				// $str = '<div class="layui-form-item">'.$this->temp.'</div>';
+				$str = $this->temp;
 				break;
 			case 'radio':
 				$str = '<div class="layui-form-item">
@@ -172,9 +179,9 @@ class BusinessConfigFormHelper{
 
 	//编辑器调用
 	public function editor($lablename='信息内容',$name='content',$width = '47%', $height = '350',$b=''){ if($this->in_if === false) return $this;global $$name;$val  = htmlspecialchars_decode($$name);?>
-		<div class="job-posted-dv">
-		    <span class="job-posted-property"><?php echo $lablename?></span>
-		    <div class="job-posted-values">
+		<div class="useredit-form-dv clearfix">
+		    <span class="authentication-form-left fl"><?php echo $lablename?></span>
+		    <div class="authentication-form-right fr">
 		       <?php echo $this->initEditor($name,$width,$height)?>
 		    </div>
 		</div>
@@ -220,10 +227,10 @@ class BusinessConfigFormHelper{
 
 
 	public function select($d,$lm,$n){ ?>
-        <div class="job-posted-dv">
-            <span title="<?php echo $lm?>" class="job-posted-property"><b>*</b><?php echo $lm?></span>
-            <div class="job-posted-values">
-                <select name="<?php echo $n?>">
+        <div class="useredit-form-dv clearfix">
+            <span title="<?php echo $lm?>" class="authentication-form-left fl"><b>*</b><?php echo $lm?></span>
+            <div class="authentication-form-right fr">
+                <select class="user-edit-select" name="<?php echo $n?>">
                     <?php foreach ($d as $k => $v): $sl=$k==$this->$n?'selected':'' ?>
                         <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
                     <?php endforeach ?>
@@ -311,7 +318,7 @@ HTML;
 			'%lablename%' => $lablename,
 		];
 
-		if($type){//textarea
+		if($type==1){//textarea
 			$tpl = <<<HTML
      	%word% <label title="%name%" class="layui-form-label">%lablename%<b>*</b></label>
 				<div class="layui-input-%display%">
@@ -324,6 +331,19 @@ HTML;
 		if($this->in_if === false) $temp = '';
 
 		}else{
+			if ($type == 2) {
+		// %word%
+		$tpl = <<<HTML
+		<div class="useredit-form-dv clearfix">
+		    <span class="authentication-form-left fl"><b>*</b>%lablename%</span>
+		    <div class="authentication-form-right fr">
+			    <p class="useredit-p">%value%</p>
+		        %word%
+		    </div>
+		</div>
+HTML;
+			}else {
+
 			// %word%
 			$tpl = <<<HTML
 			<div class="useredit-form-dv clearfix">
@@ -334,6 +354,7 @@ HTML;
 			    </div>
 			</div>
 HTML;
+			}
 			$temp = str_replace(array_keys($replaceMap), array_values($replaceMap), $tpl);
 
 		# 使用ifs函数 如果条件不成立 输出空
@@ -372,50 +393,38 @@ HTML;
 		$replaceMap = [
 			'%name%'      => $imgname,
 			'%value%'     => $this->$imgname,
-			'%src%'       => img($this->$imgname, '/img/default-img.png'),
+			'%src%'       => img($this->$imgname, '/img/com-logo.jpg'),
 			'%lablename%' => $lablename,
 			'%imgsize%'   => $imgsize,
 			'%picsize%'   => '不小于100px，JPG、PNG、GIF格式，小于300k。',
 		];
 			// <a href="%src%" target="_blank">查看图片</a>
 		$tpl = <<<HTML
-		<div class="post-message-div clearfix">
-            <div style="width:11.45%" class="post-message-left fl">
-                <span><b>*</b>%lablename%</span>
-            </div>
-			<div style="width:87.7%" class="post-message-right fr">
-			    <div class="default-img-box">
-			        <img id="%name%" src="%src%" />
-				    <input type="hidden" name="%name%" value="%value%">
-				    <input type="hidden" name="imgsize_%name%" value="%imgsize%">
-			    </div>
-			    <div class="company-logo-upload">
-			        <div class="user-headimg-upload clearfix">
-			            <div class="user-file-cover">
-			                <p>选择文件</p>
-			                <input onchange="previewImage(this,'%name%')" name="%name%" type="file"/>
+		<div class="useredit-form-dv clearfix">
+			<div class="useredit-form-dv clearfix">
+			    <span class="authentication-form-left fl">%lablename%</span>
+			    <div class="authentication-form-right fr">
+			       <div class="company-logo">
+			            <img id="%name%" src="%src%" />
+			       	    <input type="hidden" name="%name%" value="%value%">
+			       	    <input type="hidden" name="imgsize_%name%" value="%imgsize%">
+			       </div>
+			        <div class="company-logo-upload">
+			            <div class="user-headimg-upload clearfix">
+			                <div class="user-file-cover">
+			                    <p>选择文件</p>
+			                    <input onchange="previewImage(this,'%name%')" name="%name%" type="file"/>
+			                </div>
+			                <p class="user-file-notice">选择上传后将直接替换。</p>
 			            </div>
-			            <p class="user-file-notice">选择上传后将直接替换。</p>
+			            <p class="headimg-upload-limit">%picsize%</p>
 			        </div>
-			        <p class="headimg-upload-limit">%picsize%</p>
 			    </div>
 			</div>
+
 		</div>
 
 HTML;
-		/*<label title="%name%" class="layui-form-label">%lablename%<b>*</b></label>
-		<div class="site-demo-upload fl">
-		<img src="%src%" height="40" />
-			<input type="hidden" name="%name%" value="%value%">
-			<input type="hidden" name="imgsize_%name%" value="%imgsize%">
-			<div class="site-demo-upbar">
-				<div class="layui-box layui-upload-button">
-					<input type="file" onchange="if(this.value){this.title=this.value;document.getElementById('%name%').innerHTML=this.value}" name="%name%" class="layui-upload-file">
-					<em id="%name%"></em><span class="layui-upload-icon"><i class="layui-icon"></i>上传图片</span>
-				</div>
-			</div>
-			<b style="position: absolute; bottom: -18px;width:220px">图片大小: %picsize% K内,%imgsize%px</b>
-		</div>*/
 		$echoString = str_replace(array_keys($replaceMap), array_values($replaceMap), $tpl);
 
 		# 使用ifs函数 如果条件不成立 输出空

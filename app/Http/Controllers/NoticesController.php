@@ -55,9 +55,10 @@ class NoticesController extends Controller
         $_title = ['系统消息'];
         $_first = 'notices';
         $_next = '';
+        $ckey = '';
         // extract($data);
 
-        return View('business.notices', compact('user', 'action_types', 'pagenewslist', '_title', '_first', '_next'));
+        return View('business.notices', compact('user', 'ckey', 'action_types', 'pagenewslist', '_title', '_first', '_next'));
     }
 
     public function push($force = false)

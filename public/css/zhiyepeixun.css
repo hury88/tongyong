@@ -160,7 +160,9 @@
 	display: block;
 }
 .qypeixinCon ul li a img{
-	width: 100%;
+	/*width: 100%;*/
+	width:250px;
+	height:150px;
 }
 .qypeixinCon ul .list{
 	margin-right: 0;
@@ -228,7 +230,7 @@
 	width: 50%;
 	float: left;
 	background: #fff;
-	
+
 }
 .dagang1Right h2{
 	color: #fff;
@@ -302,7 +304,7 @@
 .dagang1Right1_4 a img{
 	vertical-align: middle;
 	margin-right: 10px;
-	
+
 }
 .dagang2{
 	background: #fff;
@@ -327,7 +329,7 @@
     text-align: center;
     width: 67%;
     margin: 0 auto;
-    padding-bottom: 5px;  
+    padding-bottom: 5px;
 }
 .dagang2Tit ul li .dagangon{
 	border-bottom: 2px solid #d71418;
@@ -499,7 +501,7 @@
     left: 0;
     width: 100%;
     bottom: 0;
-    
+
 }
 .zhiboLeft{
 	width: 30%;
@@ -576,7 +578,7 @@
 }
 .zhiyepx1 ul .liat1 a{
 	background: #e94a4c;
-	color: #fff;	
+	color: #fff;
 }
 .zhiyepx1 ul .liat2 a{
 	border: 1px solid #36bdea;
@@ -584,11 +586,11 @@
 }
 .zhiyepx1 ul .liat3 a{
 	background: #96bb1e;
-	color: #fff;	
+	color: #fff;
 }
 .zhiyepx1 ul .liat4 a{
 	background: #60ba76;
-	color: #fff;	
+	color: #fff;
 }
 .zhiyepx1 ul .liat a{
 	background: #e1a112;
@@ -653,7 +655,7 @@
 }
 .zhiyepx2Con ul li{
 	width: 31.3%;
-	float: left;  
+	float: left;
 	margin-right: 30px;
 	margin-bottom: 25px;
 }
@@ -700,7 +702,7 @@
 .zhiyepx2Conbom .p1 a{
 	color: #323333;
 	font-size: 16px;
-	
+
 }
 .zhiyepx2Conbom p{
 	padding-bottom: 15px;

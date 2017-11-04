@@ -123,7 +123,7 @@ class BusinessController extends base\UserController
         $compact['pagenewslist'] = \Auth::user()->hasManyEducation()->where('tty', $GLOBALS['tty'])->where('isstate', 1)->where(function ($query) {
             empty($_GET['title']) or $query->where('title', 'like', '%' . $_GET['title'] . '%');
         })->paginate($this->paginate)->toArray($this->toArray);
-//        $compact['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid=' . intval($_GET['certificate_lid']) : '';
+       $compact['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid=' . intval($_GET['certificate_lid']) : '';
         return $compact;
     }
 
@@ -190,15 +190,24 @@ class BusinessController extends base\UserController
     /**
      * 用户管理
      */
-    public function config(&$compact)
+    public function config()
     {
         $request = request();
         $rules = [
 //            'org' => 'required|between:2,20',
-            'registerid' => 'required|numeric',
-            'legal' => 'required|between:2,6',
-            'business_time' => 'required_with:business_time|date_format:Y-m-d',
-            'islonger' => 'required_with:islonger',
+            'business_name' => 'required|between:2,20',
+            'contact' => 'required|between:2,4',
+            'weixin' => 'required',
+            'qq' => 'required|numeric',
+            'location' => 'required|min:2',
+            'jing' => 'required|numeric',
+            'wei' => 'required|numeric',
+            // 'wei' => 'required:business_time|date_format:Y-m-d',
+            'size' => 'required|numeric',
+            'cate' => 'required|numeric',
+            'nature' => 'required|numeric',
+            'siteurl' => 'required|url',
+            'business_introduction' => 'required',
 //            'uploadimg' => 'image',
         ];
 
@@ -207,14 +216,40 @@ class BusinessController extends base\UserController
         if ($validator->fails()) {
             return noticeResponseJson(412, '执行失败', $errors);
         }
-        $img = upload($request, 'uploadimg');
-        if (!$img) {
-            return noticeResponseJson(412, '执行失败', '上传失败!');
+
+        dd($request->all());
+        $user = \Auth::user();
+        $business = $user->profile;
+
+        if ($filename = ifUploadCheckIt($request, 'img', $business->img, 'b_img')) {
+            $business->img  = $filename;
         }
 
-        $user = \Auth::user();
+        if ($filename = ifUploadCheckIt($request, 'img'), $business->img) {
+            $business->img  = $filename;
+        }
+
+        dd($file = \Input::file('img'));
+
+        if ( $file = \Input::file('img') ) {
+            if ($img = upload($request, 'img')) {
+                            # code...
+                        }
+        }
+
+        $img = upload($request, 'img');
+        if (!$img) {
+            return noticeResponseJson(412, '执行失败', '企业头像上传失败!');
+        }
+        $logo = upload($request, 'logo');
+        if (!$logo) {
+            return noticeResponseJson(412, '执行失败', '企业LOGO上传失败!');
+        }
+
+        // users表更新
         $user_id = $user->id;
         $business = $user->profile;
+        $business->img = $img;
         $business->img = $img;
         $business->certified_status = 1;
         $business->business_time = $request->get('islonger') ? null : $request->get('business_time');
