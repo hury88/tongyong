@@ -27,10 +27,11 @@ class UserController extends Controller
     /**
      * Inicializa variables para la validacion de perfil.
      */
+
     public function __construct()
     {
         $first = isset($GLOBALS['uri'][1]) ? $GLOBALS['uri'][1] : 'profile';
-
+        $title='';
         $next = isset($GLOBALS['uri'][2]) ? $GLOBALS['uri'][2] : '';
         if ($menu_first = trans("business.menu.$first")) {
             $title = [$menu_first['title']];

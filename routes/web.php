@@ -42,6 +42,8 @@ require __DIR__.'/web/business.php';
 require __DIR__.'/web/certificate.php';
 //职业培训
 require __DIR__.'/web/training.php';
+//职业招聘
+require __DIR__.'/web/job.php';
 //Wpanel Routes
 // require __DIR__.'/web/wpanel.php';
 

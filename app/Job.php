@@ -4,15 +4,17 @@ namespace app;
 
 use Exception;
 use App\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Job extends Model
 {
+    use SoftDeletes;
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'job';
+    protected $table = 'training';
 
     public $primaryKey = 'id';
 
@@ -37,15 +39,98 @@ class Job extends Model
 
     public function v_list($where=[],$field=['*'],$num=null)
     {
-
         return $this->parseWhere($where)
+            ->where('isstate','=' ,'1')
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')
             ->take($num)
             ->get($field);
     }
-    /**
+    //在线学习
+    public function v_onlinelist($onlineid,$field=['*'],$num=null)
+    {
+        return $this
+            ->where('isstate','=' ,'1')
+            ->where('ty','=' ,'66')
+            ->where('onlineid','=',$onlineid)
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->take($num)
+            ->get($field);
+    }
+    //最新直播
+    public function v_xinglist($field=['*'],$num=null)
+    {
+        return $this ->where('isstate','=' ,'1')
+            ->where('pid','=' ,'2')
+            ->where('trainingid','=' ,'1')
+            ->latest('id')
+            ->take($num)
+            ->get($field);
+    }
+    //推荐直播
+    public function v_tuijianlist($field=['*'],$num=null)
+    {
+        return $this
+            ->where('isstate','=' ,'1')
+            ->where('pid','=' ,'2')
+            ->where('trainingid','=' ,'1')
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->take($num)
+            ->get($field);
+    }
+    public function v_id_arr($id)
+    {
+        return $this->findOrFail($id);
+    }
+    public function v_pages($where=[],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,$field=['*'],$num=15,$linknum=5){
+        return $this->parseWhere($where)
+            ->where("isstate","=" ,"1")
+            ->where(function($query) use($title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid){
+                if($title) {
+                    $query->where('title','like' ,'%'.$title.'%');
+                }
+                if($neixunid) {
+                    $query->where('neixunid','=' ,$neixunid);
+                }
+                if($publicid) {
+                    $query->where('publicid','=' ,$publicid);
+                }
+                if($industryid) {
+                    $query->where('industryid','=' ,$industryid);
+                }
+                if($trainingid) {
+                    $query->where('trainingid','=' ,$trainingid);
+                }
+                if($qualificationidarr&&$qualificationidarr[0]>0){
+                    $query->where('qualificationid','in' ,$qualificationidarr);
+                }
+            })
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->select($field)
+            ->paginate($num)
+            ->toArray($linknum);
+    }
+    public function v_seachpages($key,$where=[],$field,$num=15,$linknum=5){
+        return $this
+            ->where('pid','5')
+            ->where('isstate','1')
+            ->where('title','like','%'.$key.'%')
+            ->latest('isgood')
+            ->latest('disorder')
+            ->latest('id')
+            ->select($field)
+            ->paginate($num)
+            ->toArray($linknum);
+    }
+
+    /*
      * [parseWhere 解析条件]
      * @param  [type] $where [description]
      * @return [type]        [description]
@@ -59,8 +144,8 @@ class Job extends Model
                 return self::where('pid','=',$where[0])->where('ty','=',$where[1]);
             } elseif($where[2]) {
                 return self::where('pid','=',$where[0])
-                        ->where('ty','=',$where[1])
-                        ->where('tty','=',$where[2]);
+                    ->where('ty','=',$where[1])
+                    ->where('tty','=',$where[2]);
             }
         }
         throw new Exception('Model:News 条件解析出错 in parseWhere');
