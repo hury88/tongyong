@@ -2,12 +2,14 @@
 require './include/common.inc.php';
 define('TABLE_NEWS',1);
 require WEB_ROOT.'./include/chkuser.inc.php';
-$table = 'news';
-$showname = 'master';
+$table = 'job';
+$showname = 'job';
 $istop = I('get.istop',0,'intval');
+$industryidname='';
 if (!empty($id) ) { //显示页面 点击修改  只传了id
 	$row = M($table)->find($id);
 	extract($row);
+    $industryidname=v_id($industryid,'catname','nature');
 }
 $opt = new Output;//输出流  输出表单元素
 if (isset($_GET['action']) && $_GET['action']=='delImg') {
@@ -28,8 +30,6 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 </head>
 
 <body>
-
-
 	<div class="content clr">
 		<?php Style::weizhi() ?>
 		<div class="right clr">
@@ -41,131 +41,120 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
 				<div class="miaoshu clr">
 					<div id="tab1" class="tabson">
 						<div class="formtext">Hi，<b><?=$_SESSION['Admin_UserName']?></b>，欢迎您使用信息发布功能！</div>
-						<!-- 表单提交 --><form id="dataForm" class="layui-form" method="post" enctype="multipart/form-data">
+						<!-- 表单提交 --><form id="dataForm" method="post" enctype="multipart/form-data">
 						<?php Style::output();Style::submitButton() ?>
-						<input type="hidden" name="pid" value="<?php echo $pid?>" />
-						<input type="hidden" name="ty"  value="<?php echo $ty?>"  />
-						<input type="hidden" name="tty" value="<?php echo $tty?>" />
+                            <?php
+                            if(isset($industryid)){
+                                $industryid1 = v_id($industryid,"pid","nature");
+                            }else{
+                                $industryid1=get_first(79);
+                            }
+                            $d3=get_arr(79);
+                            $d4=get_arr(79,$industryid1);
+
+
+
+                            if(isset($positionid)&&$positionid>0) {
+                                $positionid2 = v_id($positionid,"pid","nature");
+                                $positionid1 = v_id($positionid2,"pid","nature");
+                            }else{
+                                $positionid1=get_first(80);
+                                $positionid2=get_first(80,$positionid1);
+                            }
+
+                            $d31=get_arr(80);
+                            $d42=get_arr(80,$positionid1);
+                            $d53=get_arr(80,$positionid2);
+                            ?>
+                            <input type="hidden" name="pid" value="<?php echo $pid?>" />
+                            <input type="hidden" name="ty"  value="<?php echo $ty?>"  />
+                            <input type="hidden" name="tty" value="<?php echo $tty?>" />
+                                <label title="行业类型" class="layui-form-label">行业类型<b>*</b></label>
+                                <select name="industryid1" style="width:400px;height:35px;font-size:15px;"  id="industryid1">
+                                    <?php foreach ($d3 as $k => $v): $sl=$k==$industryid1?'selected':'' ?>
+                                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <select name="industryid" style="width:400px;height:35px;font-size:15px;"  id="industryid">
+                                    <?php foreach ($d4 as $k => $v): $sl=$k==$industryid?'selected':'' ?>
+                                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                                    <?php endforeach ?>
+                                </select>
+
+
+                                <div style="clear: both">
+                                <label title="职位类型" class="layui-form-label">职位类型<b>*</b></label>
+                                <select name="positionid1" style="width:400px;height:35px;font-size:15px;"  id="positionid1">
+                                    <?php foreach ($d31 as $k => $v): $sl=$k==$positionid1?'selected':'' ?>
+                                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                                    <?php endforeach ?>
+                                </select>
+
+                                <select name="positionid2" style="width:400px;height:35px;font-size:15px;"  id="positionid2">
+                                    <?php foreach ($d42 as $k => $v): $sl=$k==$positionid2?'selected':'' ?>
+                                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                                    <?php endforeach ?>
+                                </select>
+
+                                <select name="positionid" style="width:400px;height:35px;font-size:15px;"  id="positionid">
+                                    <?php foreach ($d53 as $k => $v): $sl=$k==$positionid?'selected':'' ?>
+                                        <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            <div class="layui-form">
+
 <?php
 
-/*$opt->verify('')->input('页面标题','seotitle')->input('页面关键字','keywords')->textarea('页面描述','description');*/
-
-	switch ($showtype) {
-		case 1://＜＞＜＞新闻动态＜＞＜＞
-
-			// (!isset($title) || ! $title ) && $title = $system_sitename . '官方公告';
-		    $opt
-				->img('配图','img1')
-				// ->ifs($istop==1)->img('配图','img2','387*253')->endifs()
-				->input('标题','title')
-//				->cache()->input('发布者','name')->input('点击量','hits')->flur()
-//				->textarea('介绍','description')
-				// ->cache()->input('点赞数','dotlike')->input('分享数','share')->flur()
-				// ->textarea('简介','introduce')
-				->editor('信息内容')
-			;
-			break;
-		case 5://＜＞＜＞单条＜＞＜＞
-
-			$opt
-				->input('标题','title')
-				->editor('信息内容')
-				// ->ifs($ty==7)->textarea('内容', 'content')->endifs()
-				// ->ifs($ty==28)->input('QQ','ftitle')->endifs()
-			;
-			break;
-		case 9://＜＞＜＞产品＜＞＜＞
-				// $d = M('news')->where('pid=1 and ty=23')->order(config('other.order'))->getField('id,title');Output::select($d,'小游戏','istop');
-			//复选框
-			// $d = M('news')->where(m_gWhere(14,19))->getField('id,title');
 			(!isset($name) || ! $name ) && $name = '';
 			$opt
-				//单选框
-				// ->choose('类型','istop')->radio('木纹',1,2)->radio('石纹',2)->flur()
-				//复选框
-				// ->choose('标签','relative')->checkboxSet($d)->flur()
-				// ->img('列表图','img1',$ty)
-				->img('列表图','img1')
-				// ->ifs($ty<>14)->img('二维码','img1')->endifs()
-				// ->ifs($ty==14)->img('二维码','img2','165*165')->endifs()
-				// ->cache()->input('标题','title')->input('副标题','ftitle')->verify('')->input('浏览次数','hits')->flur()
-				->input('标题', 'title')
-				->input('摘要', 'ftitle')
-				->choose('培训方式','trainingid')->radioSet(Config::get('webarr.trainingid'))->flur()
-				->input('购买链接', 'source')
-				->display('inline')->input('价格', 'price')
-				->textarea('介绍', 'description')
-				->editor('Specifications')
-				->editor('Accessories','content2')
-				->editor('Advantages','content3')
-				// ->time('项目名','sendtime')
-				// ->input('售价','price')->input('电话','name')->flur()
-			;
+                ->input('职位名称', 'title')
+                ->input('职位发布地址', 'address')
+                ->choose('职位性质','work_nature')->radioSet(Config::get('business.work_nature'))->flur()
+                ->choose('职位月薪','salary')->radioSet(Config::get('business.salary'))->flur()
+                ->choose('亮点标签标签','relative')->checkboxSet(Config::get('business.relative'))->flur()
+                ->input('招收人数', 'recruit_num')
+                ->choose('学历要求','education')->radioSet(Config::get('business.education'))->flur()
+                ->choose('经验要求','experience')->radioSet(Config::get('business.experience'))->flur()
 
-			break;
-		case 10://＜＞＜＞产品分类＜＞＜＞
-			$opt
-				->cache()->input('名称','title')->flur();
-			break;
-		case 11://＜＞＜＞图文列表＜＞＜＞
-			$opt
-				->img('配图', 'img1')
-				->input('信息标题', 'title')
-
-				 ->textarea('介绍', 'description')
-				->editor('信息内容', 'content')
-
-				// ->word('一行一个:之间用换行隔开即可')->textarea('介绍', 'content')
-				// ->cache()->ifs($ty==11)->input('名称','title')->input('职务','ftitle')->endifs()->flur()
-				// ->editor('信息内容')
-			;
-			break;
-		case 12://＜＞＜＞路线＜＞＜＞
-			$opt
-				->img('配图','img1')
-				// ->ifs($istop==1)->img('配图','img2','387*253')->endifs()
-				->input('标题','title')
-				->input('推荐人群', 'ftitle')
-				->input('目的地','destination')
-				->input('席位情况','introduce')
-				->cache()->time('游学开始时间', 'starttime')->time('游学结束时间', 'endtime')->flur()
-				->cache()->time('报名开始时间', 'bstarttime')->time('报名结束时间', 'bendtime')->flur()
-				// ->cache()->input('点赞数','dotlike')->input('分享数','share')->flur()
-				// ->textarea('简介','introduce')
-				->editor('路线详情')
-				->editor('详情介绍','content2')
-			;
-			break;
-		case 13://＜＞＜＞报名新闻＜＞＜＞
-			if($tty<>60){
-				$opt->img('配图','img1');
-			}
-			if($ty==64){
-				$opt->choose('所属分类','infotypeid')->radioSet(Config::get('webarr.infotypeid'))->flur();
-
-			}
-			$opt
-				->input('标题','title')
-//
-				->editor('信息内容')
-			;
-			break;
-		case 15://＜＞＜＞问答＜＞＜＞
-			$opt
-				->input('标题','title')
-				->editor('答案')
-			;
-			break;
-		case 16://＜＞＜＞职业证书＜＞＜＞
-			$opt
-				->input('证书名称','title')
-				->choose('所属分类','certificate_lid')->radioSet(Config::get('webarr.certificate'))->flur()
-				->editor('详情')
-			;
-			break;
-	}
+				->editor('其他要求', 'content2')
+				->editor('职位描述');
+?>
+                            </div>
 
 
+<?php
 include('js/foot');
 
 ?>
+            <script type="text/javascript">
+                $("#industryid1").change(function () {
+                    //alert(1)
+                var industryid1=$(this).val();
+
+                $.get("include/json.php?action=hyfl1&industryid1="+industryid1, function (data) {
+                    $("#industryid").html(data)
+                    })
+                })
+
+
+                $("#positionid1").change(function () {
+                    var positionid1=$(this).val();
+                    $.get("include/json.php?action=zwfl1&positionid1="+positionid1, function (data) {
+                        $("#positionid2").html(data);
+                        var positionid2=$("#positionid2").val();
+                        $.get("include/json.php?action=zwfl2&positionid2="+positionid2, function (data) {
+
+                            $("#positionid").html(data)
+                        })
+                    })
+
+                })
+                $("#positionid2").change(function () {
+                    var positionid2=$(this).val();
+
+                    $.get("include/json.php?action=zwfl2&positionid2="+positionid2, function (data) {
+
+                        $("#positionid").html(data)
+                    })
+                })
+            </script>

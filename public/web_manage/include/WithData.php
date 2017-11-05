@@ -199,7 +199,7 @@ class WithData
             'pid'				=>		I('pid', 0, 'intval'),
             'ty'				=>		I('ty' , 0, 'intval'),
             'tty'				=>		I('tty', 0, 'intval'),
-            'certificate_lid'				=>		I('certificate_lid', 0, 'intval'),
+            'certificate_lid'				=>		I('post.certificate_lid', 0, 'intval'),
             'title'				=>		I('post.title','','trim,htmlspecialchars'),
             'ftitle'			=>		I('post.ftitle','','trim,htmlspecialchars'),
             'content'			=>		I('post.content',''),
@@ -257,11 +257,11 @@ class WithData
             'pid'				=>		I('pid', 0, 'intval'),
             'ty'				=>		I('ty' , 0, 'intval'),
             'tty'				=>		I('tty', 0, 'intval'),
-            'industryid'				=>		I('industryid', 0, 'intval'),
-            'neixunid'				=>		I('neixunid', 0, 'intval'),
-            'trainingid'				=>		I('trainingid', 0, 'intval'),
-            'qualificationid'				=>		I('qualificationid', 0, 'intval'),
-            'publicid'				=>		I('publicid', 0, 'intval'),
+            'industryid'				=>		I('post.industryid', 0, 'intval'),
+            'neixunid'				=>		I('post.neixunid', 0, 'intval'),
+            'trainingid'				=>		I('post.trainingid', 0, 'intval'),
+            'qualificationid'				=>		I('post.qualificationid', 0, 'intval'),
+            'publicid'				=>		I('post.publicid', 0, 'intval'),
             'title'				=>		I('post.title','','trim,htmlspecialchars'),
             'ftitle'			=>		I('post.ftitle','','trim,htmlspecialchars'),
             'content'			=>		I('post.content',''),
@@ -293,6 +293,64 @@ class WithData
             'endtime'      	=>		I('post.endtime',0,'strtotime'),
             'bstarttime'      	=>		I('post.bstarttime',0,'strtotime'),
             'bendtime'      	=>		I('post.bendtime',0,'strtotime'),
+
+        );
+        /*if ($fields['ty'] == 9 && empty($fields['istop'])) {
+            ajaxReturn(-1,'请选择案例分类');
+        }*/
+        uppro('img1',$fields,'ajax');
+        uppro('img2',$fields,'ajax');
+        uppro('img3',$fields,'ajax');
+        uppro('file',$fields,'file');
+        // uppro('img5',$fields,'water',$water_path);
+        $this->logInsert = "添加信息: ".$fields['title'];
+        $this->logUpdate = '更新信息: '.$fields['title'];
+        return $fields;
+    }
+
+    public function job()
+    {
+        $istop = I('post.istop',0,'intval');
+        $relative = isset($_POST['relative']) && is_array($_POST['relative'])?implode(',',$_POST['relative']):'';
+        $fields = array(
+            'pid'				=>		I('pid', 0, 'intval'),
+            'ty'				=>		I('ty' , 0, 'intval'),
+            'tty'				=>		I('tty', 0, 'intval'),
+            'nature'				=>		I('post.nature', 0, 'intval'),
+            'work_nature'				=>		I('post.work_nature', 0, 'intval'),
+            'industryid'				=>		I('post.industryid', 0, 'intval'),
+            'salary'				=>		I('post.salary', 0, 'intval'),
+            'education'				=>		I('post.education', 0, 'intval'),
+            'experience'				=>		I('post.experience', 0, 'intval'),
+            'title'				=>		I('post.title','','trim,htmlspecialchars'),
+            'ftitle'			=>		I('post.ftitle','','trim,htmlspecialchars'),
+            'recruit_num'			=>		I('post.recruit_num','','trim,htmlspecialchars'),
+            'content'			=>		I('post.content',''),
+            'content2'       	=>		I('post.content2',''),
+            'content3'       	=>		I('post.content3',''),
+            'content4'       	=>		I('post.content4',''),
+            'content5'       	=>		I('post.content5',''),
+            'name'				=>		I('post.name','','trim'),
+            'source'			=>		I('post.source','','trim,htmlspecialchars'),
+            'address'			=>		I('post.address','','trim,htmlspecialchars'),
+            'destination'			=>		I('post.destination','','trim,htmlspecialchars'),
+            'introduce'			=>		I('post.introduce','','trim,htmlspecialchars'),
+            'price'				=>		I('post.price','','trim,htmlspecialchars'),
+            'linkurl'			=>		I('post.linkurl','','trim,htmlspecialchars'),
+            'period'				=>		I('post.period','','trim,htmlspecialchars'),
+            'link1'				=>		I('post.link1','','trim,htmlspecialchars'),
+            'link2'				=>		I('post.link2','','trim,htmlspecialchars'),
+            #资讯
+            //SEO
+            'seotitle'		    =>		I('post.seotitle','','trim'),
+            'keywords'		    =>		I('post.keywords','','trim'),
+            'description'		=>		I('post.description','','trim'),
+            'relative'			=>		$relative,
+            'disorder'      	=>		I('post.disorder',0,'intval'),
+            'hits'      		=>		I('post.hits',1,'intval'),
+            'istop'      	 	=>		I('post.istop',0,'intval'),
+            'isgood'      	 	=>		I('post.isgood',0,'intval'),
+            'sendtime'      	=>		I('post.sendtime',0,'strtotime'),
 
         );
         /*if ($fields['ty'] == 9 && empty($fields['istop'])) {

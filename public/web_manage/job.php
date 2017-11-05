@@ -12,15 +12,28 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
 
+$industryid =   I('get.industryid',0,'intval');
+$industryid1 =   I('get.industryid1',0,'intval');
+if($industryid){
+    $industryid=$industryid;
+}else{
+    if($industryid1){
+        $industryid=get_first(79,$industryid1);
+    }else{
+        $industryid=0;
+    }
+}
 $user_id =   I('get.user_id',0,'intval');
+$work_nature=   I('get.work_nature',0,'intval');
 if(!empty($user_id)){
     $map['user_id'] =$user_id;
     $cname=v_id($user_id,"member_name","users");
 }else{
     $cname='管理员';
 }
-
 if(!empty($tty)) $map['tty'] = $tty;
+if(!empty($work_nature)) $map['work_nature'] = $work_nature;
+if(!empty($industryid)) $map['industryid'] = $industryid;
 $psize   =   I('get.psize',30,'intval');
 $pageConfig = array(
     /*条件*/'where' => $map,
@@ -56,8 +69,16 @@ list($data,$pagestr) = Page::paging($pageConfig);
                     <li data-id="0">平台管理员</li>
                 </ul>
             </div>
-
-
+<?php
+            $d1=get_arr(79);
+            Output::select2($d1, '行业类型', 'industryid1');
+            if($industryid1){
+                $d2=get_arr(79,$industryid1);
+                Output::select2s($d2, '行业种类', 'industryid');
+            }
+              $d = config('business.work_nature');
+              Output::select2($d, '工作性质', 'work_nature');
+              ?>
         关键字<input name="title" type="text" class="dfinput" value="<?=$title?>"/>
         <input name="search" type="submit" class="btn" value="搜索"/></td>
     </form>
@@ -111,9 +132,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
        <tr class="first">
         <td onclick="selectAll(document.getElementById('sall'))" style="font-size:8px;cursor:pointer" width="24px">全选</td>
         <td width="24px">编号</td> <td width="200px">操作</td>
-        <td> 标题</td>
         <td> 职位名称 </td>
-        <td>所属行业</td>
         <td>职位性质</td>
         <td>招收人数</td>
         <td> 申请人数 </td>
@@ -148,9 +167,8 @@ if($user_id){
         </td>
 
         <td><?=$title?></td>
-        <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
-        <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
-            <td><?=$title?></td>
+        <td> <?=Config::get('business.work_nature')[$work_nature]?> </td>
+            <td><?=$recruit_num?></td>
             <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=$id and isstate=0")->count(); ?>未审核)</a></td>
 
 

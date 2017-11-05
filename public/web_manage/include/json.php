@@ -36,6 +36,36 @@ if($action=='xzqy'){
     }
     echo $str;
     exit();
+}elseif($action=='hyfl1'){
+    $industryid1=I('get.industryid1','0','intval');
+    $d5=get_arr(79,$industryid1);
+    $str='';
+    foreach  ($d5 as $k => $v){
+        $sl=$k==$industryid1?'selected':'';
+        $str.="<option {$sl} value=\"{$k}\">{$v}</option>";
+    }
+    echo $str;
+    exit();
+}elseif($action=='zwfl1'){
+    $positionid1=I('get.positionid1','0','intval');
+    $d3=get_arr(80,$positionid1);
+    $str='';
+    foreach  ($d3 as $k => $v){
+        $sl=$k==$positionid1?'selected':'';
+        $str.="<option {$sl} value=\"{$k}\">{$v}</option>";
+    }
+    echo $str;
+    exit();
+}elseif($action=='zwfl2'){
+    $positionid2=I('get.positionid2','0','intval');
+    $d5=get_arr(80,$positionid2);
+    $str='';
+    foreach  ($d5 as $k => $v){
+        $sl=$k==$positionid2?'selected':'';
+        $str.="<option {$sl} value=\"{$k}\">{$v}</option>";
+    }
+    echo $str;
+    exit();
 }
 
 //function deletePics($ids){//删除关联图片
