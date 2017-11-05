@@ -78,7 +78,7 @@ class RegisterPersonController extends Controller
 
         $yzm->pop();
 
-        return handleResponseJson(200, '注册成功!', $this->redirectTo);
+        return handleResponseJson(200, '注册成功!', $this->redirectPath());
     }
 
     /**
@@ -92,7 +92,7 @@ class RegisterPersonController extends Controller
 
         $yzm->pop();
 
-        return handleResponseJson(200, '注册成功!', $this->redirectTo);
+        return handleResponseJson(200, '注册成功!', $this->redirectPath());
 
         /*$this->sendRegistrationEmail($request->all());
         return redirect($this->redirectTo);*/
@@ -170,4 +170,13 @@ class RegisterPersonController extends Controller
                 }
             }
     */
+
+   public function redirectPath()
+   {
+       if ($r = Request()->get('r')) {
+           return base64_decode($r);
+       }
+       return $this->redirectTo;
+   }
+
 }

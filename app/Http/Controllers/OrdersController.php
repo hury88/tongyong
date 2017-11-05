@@ -9,6 +9,7 @@ namespace app\Http\Controllers;
  */
 
 use App\Address;
+use App\Training;
 use App\Business;
 use App\Comment;
 use App\Helpers\productsHelper;
@@ -50,7 +51,7 @@ class OrdersController extends Controller
      */
     public function __construct(OrderRepository $order)
     {
-        // $this->middleware('App\Http\Middleware\Authenticate');
+        $this->middleware('App\Http\Middleware\Authenticate');
 
         $this->order = $order;
     }
@@ -63,163 +64,52 @@ class OrdersController extends Controller
      *
      * @return Response
      */
-    public function create($tranning_id, Request $request)
+    public function create($training_id, Request $request)
     {
-        dd($request);
-        $quantity = $request->get('quantity');
-
-        //if there is not quantity requested, the value is 1 as defect
-        if (!$quantity) {
-            $quantity = 1;
-        }
-
         //making sure if the product requested exists, otherwise, we throw a http exception
         try {
-            $product = Product::findOrFail($productId);
+            $training = Training::findOrFail($training_id);
         } catch (ModelNotFoundException $e) {
             throw new NotFoundHttpException();
         }
 
-        $user = \Auth::user();
+        $orderStatus_new = config('config.order.status_reverse.new');
 
-        //checking if the user is logged
-        if ($user) {
-            $basicCart = Order::ofType($destination)->where('user_id', $user->id)->first();
+        $person = \Auth::user()->hasOnePerson;
+        $order = new Order();
+        if (Order::where('training_id', $training_id)->where('status', $orderStatus_new)->first()) {
+            return handleResponseJson(201, '不可重复报名');
+        }
+        // 生成订单号
+        $order->orderno = Order::orderno();
+        $order->seller_id = $training->user_id;
+        $order->training_id = $training->id;
+        $order->training_img = $training->img1;
+        $order->training_title = $training->title;
+        $order->price = $training->price;
 
-            if (!$basicCart) {
-                $basicCart = new Order();
-                $basicCart->user_id = $user->id;
-                $basicCart->type = $destination;
-                $basicCart->status = 'open';
-                $basicCart->save();
+        $order->buyer_id = $person->user_id;
+        $order->buyer_name = $person->real_name;
+        $order->status = $orderStatus_new;
 
-                $log = Log::create([
-                    'action_type_id' => '1',
-                    'details'        => $destination,
-                    'source_id'      => $basicCart->id,
-                    'user_id'        => $user->id,
-                ]);
-            }
+        $orderid = $order->save();
 
-            //if the request has an email address, we keep it, otherwise we use the user one
-            if ($request->has('email')) {
-                $v = Validator::make($request->all(), ['email' => 'required|email']);
-                if ($v->fails()) {
-                    $email = $user->email;
-                } else {
-                    $email = $request->input('email');
-                }
-            } else {
-                $email = $user->email;
-            }
+        if ($orderid) {
+            $training->enroll_num = $training->enroll_num +1;
+            $training->save();
 
-            //creating visrtual order
-            if ($destination != 'wishlist') {
-                $this->addToCartVirtualsProduct($product, $email, $basicCart->id, $quantity);
-            }
-
-            //checking if the user already has a product so it can be added
-            $orderDetail = OrderDetail::where('order_id', $basicCart->id)
-                ->where('product_id', $product->id)
-                ->first();
-
-            //creating the order detail
-            if ($orderDetail) {
-                $orderDetail->price = $product->price;
-                $orderDetail->quantity = $orderDetail->quantity + $quantity;
-            } else {
-                $orderDetail = new OrderDetail();
-                $orderDetail->order_id = $basicCart->id;
-                $orderDetail->product_id = $product->id;
-                $orderDetail->price = $product->price;
-                $orderDetail->quantity = $quantity;
-                $orderDetail->status = 1;
-            }
-
-            //saving detail order
-            $orderDetail->save();
-
-            $log = Log::create([
-                'action_type_id' => '4',
-                'details'        => $basicCart->id,
-                'source_id'      => $orderDetail->id,
-                'user_id'        => $user->id,
+            $notice = Notice::create([
+                'user_id'        => "0,$order->seller_id,$order->buyer_id",
+                'sender_id'      => -1,
+                'action_type_id' => 4,
+                'source_id'      => $orderid,
+                'status'         => 1,
             ]);
-
-            //callback url
-            if ($destination == 'wishlist') {
-                Session::push('message', trans('store.productAddedToWishList'));
-
-                return redirect()->route('orders.show_wish_list');
-            } elseif ($destination == 'later') {
-                Session::push('message', trans('store.productsSavedForLater'));
-
-                return redirect()->route('products.show', [$productId]);
-            } else {
-                Session::push('message', trans('store.productAdded'));
-
-                return redirect()->route('orders.show_cart');
-            }
+            return handleResponseJson(200, '报名成功,去个人中心查看', route('p_order'));
+        } else {
+            return handleResponseJson(201, '报名失败', '请稍后再试');
         }
 
-        //creating the user guest shopping cart
-        else {
-
-            /**
-             * $user_cart is used to keep track the user shopping cart.
-             *
-             * @var [array]
-             */
-            $user_cart = Session::get('user.cart');
-
-            /*
-             * $user_cart is used to keep track the user shopping cart details
-             * @var [array]
-             */
-            $user_cart_content = Session::get('user.cart_content');
-
-            //Checking if the user has a session cart, otherwise, it's created
-            if (!is_array($user_cart)) {
-                $user_cart = [];
-            }
-
-            //Checking if the user has content in the shopping cart, otherwise, it's added.
-            if (!is_array($user_cart_content)) {
-                $user_cart_content = [];
-            }
-
-            //Checking if the user has the product in the shopping cart,  otherwise, it's pushed up
-            if (!in_array($productId, $user_cart)) {
-                array_push($user_cart, $productId);
-            }
-
-            //Checking if the user has quantity on the selected product, if so, it's quantity is updated, otherwise, 1 is added as defect.
-            if (!isset($user_cart_content[$productId])) {
-                $user_cart_content[$productId] = $quantity;
-            } else {
-                $user_cart_content[$productId] += $quantity;
-            }
-
-            //Saving session for user logged
-            Session::put('user.cart_content', $user_cart_content);
-            Session::put('user.cart', $user_cart);
-            Session::save();
-            Session::push('message', trans('store.productAdded'));
-
-            if ($destination == 'wishlist') {
-                /*
-                 * flashWishList lets you save the product wished after login action.
-                 * This var will be delete automatic in show show wishlist route.
-                 */
-                Session::put('flashWishList.productId', $productId);
-                Session::put('flashWishList.quantity', $quantity);
-                Session::save();
-
-                return redirect()->route('orders.show_wish_list');
-            } else {
-                return redirect()->route('orders.show_cart');
-            }
-        }
     }
 
     /**

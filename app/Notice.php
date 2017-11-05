@@ -54,7 +54,15 @@ class Notice extends Model
         if (!isset($attr['title'])) {
             $attr['title'] = ActionType::find($attr['action_type_id'])->notice_title;
         }
-        $attr['created_at'] = date('Y-m-d H:is');
+        if (strpos($attr['user_id'], ',')) {
+            $user_id_set = explode(',', $attr['user_id']);
+            $user_id_set = array_unique($user_id_set);
+            foreach ($user_id_set as $user_id) {
+                $attr['user_id'] = $user_id;
+                self::insert($attr);
+            }
+            return true;
+        }
         return self::insert($attr);
         // parent::create($attr);
     }

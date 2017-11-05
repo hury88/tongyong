@@ -8,7 +8,10 @@ use App\Helpers\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
+function _r_($box)
+{
+	return sprintf($box, base64_encode(url()->previous()));
+}
 
 
 if (!function_exists('v_show')) {

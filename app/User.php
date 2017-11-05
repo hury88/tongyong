@@ -76,6 +76,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    public function hasOnePerson()
+    {
+        return $this->hasOne('App\Person');
+    }
+
     /**
      * 不同会员关联订单表
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

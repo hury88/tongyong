@@ -1,6 +1,6 @@
 <?php
 
-Route::post('enroll/{$tranning_id}', ['uses' => 'OrdersController@create', 'as' => 'orders.create']);
+Route::post('enroll/{training_id}', ['uses' => 'OrdersController@create', 'as' => 'orders.create']);
 /*
 Route::get('orders/report/{type}/{filter}', ['uses' => 'OrdersController@reports', 'as' => 'orders.report']);
 

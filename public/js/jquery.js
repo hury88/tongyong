@@ -119,7 +119,11 @@ function model_handle(state,title,message,redirect){
 		}
 		break;
 		case h_w:
-		dialog(3,[message, title],{cancel:["取消"],confirm:["刷新", "?"]});
+		if (redirect) {
+			dialog(3,[message, title],{cancel:["取消"],confirm:["确定", redirect]});
+		} else {
+			dialog(3,[message, title],{cancel:["取消"],confirm:["确定", "?"]});
+		}
 		break;
 		default:
 		break;
@@ -209,7 +213,7 @@ function dialog(type, config, active)
 			if (typeof active.confirm == 'object') {
 			    b2 = active.confirm[0];
 			    if (typeof active.confirm[1] != 'undefined') {
-					$(document).on("click.hr", "button.kwj-button--confirm", function(){
+					$(document).on("click", "button.kwj-button--confirm", function(){
 					    window.location.href = active.confirm[1];
 					})
 			    }
@@ -221,7 +225,7 @@ function dialog(type, config, active)
 			if (typeof active.cancel == 'object') {
 			    b1 = active.cancel[0];
 		        if (typeof active.cancel[1] != 'undefined') {
-		    		$(document).on("click.hr", "button.kwj-button--confirm", function(){
+		    		$(document).on("click", "button.kwj-button--confirm", function(){
 			        	if (active.cancel[1] === false) {
 						    window.location.reload();
 			        	} else {

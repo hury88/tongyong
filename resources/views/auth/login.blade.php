@@ -21,10 +21,10 @@
                  <div class="form-title">
                      <ul class="form-title-ul">
                          <li class="form-title-li {{request()->has('org') ? '' : 'active'}}">
-                             <a href="/login?person=true">学生登录</a>
+                             <a href="/login?person=true{{$_r1_}}">学生登录</a>
                          </li>
                          <li class="form-title-li {{request()->has('org') ? 'active' : ''}}">
-                             <a href="/login?org=true">企业登录</a>
+                             <a href="/login?org=true{{$_r1_}}">企业登录</a>
                          </li>
                      </ul>
                  </div>
@@ -39,10 +39,13 @@
                   	<!-- return model(this) -->
                       <input onclick="" type="submit" value="登录"/>
                   </div>
+                  @if($_r_)
+                  <input type="hidden" name="r" value="{{$_r_}}">
+                  @endif
                   {{ csrf_field() }}
               </form>
               <div class="other-link">
-                  <a href="{{route('password.request')}}">忘记密码?</a><span>|</span><a href="{{u('register', request()->has('org')?'org':'person')}}">用户注册</a>
+                  <a href="{{route('password.request')}}">忘记密码?</a><span>|</span><a href="{{u('register', request()->has('org')?'org':'person')}}{{$_r0_}}">用户注册</a>
               </div>
                <div class="third-login">
                    <h3>使用第三方登录</h3>

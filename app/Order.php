@@ -35,13 +35,21 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
+        'orderno',
         'buyer_id',
-        'address_id',
+        'seller_id',
+        'buyer_name',
+        'tranning_id',
+        'tranning_title',
+        'tranning_img',
         'status',
         'type',
         'description',
         'end_date',
-        'seller_id',
+        'price',
+        'pay_style',
+        'created_at',
+        'updated_at',
     ];
 
     protected $appends = ['translatedStatus'];
@@ -85,7 +93,7 @@ class Order extends Model
         $status_changed = (isset($this->original['status']) && $this->attributes['status'] != $this->original['status']) || (isset($options['status']) && $this->attributes['status'] != $options['status']);
         $saved = parent::save($options);
         if ($saved) {
-            $this->createLog();
+            // $this->createLog();
             if ($status_changed) {
                 $this->sendNotice();
             }
@@ -94,19 +102,10 @@ class Order extends Model
         return $saved;
     }
 
-    public function getDetailsAttribute()
-    {
-        return $this->hasMany('App\OrderDetail')->get();
-    }
 
     public function getTranslatedStatusAttribute()
     {
         return trans('globals.order_status.'.$this->status);
-    }
-
-    public function inDetail()
-    {
-        return $this->hasMany('App\OrderDetail');
     }
 
     public function createLog()
@@ -134,14 +133,15 @@ class Order extends Model
     {
         if (!empty($this->seller_id) && !empty($this->user_id) && $this->type == 'order') {
             switch ($this->status) {
-            case 'open':
+            case 'new':
                 Notice::create([
-                    'action_type_id' => 1,
+                    'action_type_id' => 4,
                     'source_id'      => $this->id,
                     'user_id'        => $this->seller_id,
                     'sender_id'      => $this->user_id,
+                    'title' => '',
                 ]);
-            break;
+            break;/*
             case 'pending':
                 Notice::create([
                     'action_type_id' => 2,
@@ -172,7 +172,7 @@ class Order extends Model
                     'user_id'        => $this->user_id,
                     'sender_id'      => $this->seller_id,
                 ]);
-            break;
+            break;*/
         }
         }
         // $this->sendMail();
@@ -219,6 +219,19 @@ class Order extends Model
                 $message->to($data['email'])->subject($data['subject']);
             });
         }
+    }
+
+    public static function orderNo()
+    {
+
+        do {
+            //生成订单号
+            $orderNo = time() . mt_rand(1000, 9999);
+            //去重
+            $findOrderNo = self::where('orderno', $orderNo)->first();
+        } while ( $findOrderNo );
+
+        return $orderNo;
     }
 
     /**

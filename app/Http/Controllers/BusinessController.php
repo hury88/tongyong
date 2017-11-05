@@ -183,11 +183,11 @@ class BusinessController extends base\UserController
      */
     public function order(&$compact)
     {
-        $_GET['orderBy'] = isset($_GET['orderBy']) ? (int)$_GET['orderBy'] : 'created_at';
-        $_GET['trade_no'] = isset($_GET['trade_no']) && $_GET['trade_no'] ? (int)$_GET['trade_no'] : '';
+        $_GET['orderBy'] = isset($_GET['orderBy']) && $_GET['orderBy'] ? $_GET['orderBy'] : 'created_at';
+        $_GET['orderno'] = isset($_GET['orderno']) && $_GET['orderno'] ? (int)$_GET['orderno'] : '';
         $compact['pagenewslist'] = \Auth::user()->hasManyOrder()
             ->where(function ($query) {
-                empty($_GET['trade_no']) or $query->where('trade_no', intval($_GET['trade_no']));
+                empty($_GET['orderno']) or $query->where('orderno', intval($_GET['orderno']));
         })->orderBy($_GET['orderBy'], 'desc')->paginate($this->paginate)->toArray($this->toArray);
         $compact['ckey'] = '';
         foreach ($_GET as $key => $value) {

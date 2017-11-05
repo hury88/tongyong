@@ -51,6 +51,9 @@
                                     <input class="submit" type="submit" value="注册"/>
                                 </div>
                                 <input type="hidden" name="mark" value="telphone">
+                                @if($_r_)
+                                <input type="hidden" name="r" value="{{$_r_}}">
+                                @endif
                                 {!! csrf_field() !!}
                             @yield('formEnd')
                         </div>
@@ -77,13 +80,16 @@
                                     <input class="submit" type="submit" value="注册"/>
                                 </div>
                                 <input type="hidden" name="mark" value="email">
+                                @if($_r_)
+                                <input type="hidden" name="r" value="{{$_r_}}">
+                                @endif
                                 {!! csrf_field() !!}
                             @yield('formEnd')
                         </div>
                     </div>
                 </div>
                 <div class="register-right fr">
-                    <a class="register-other-link" href="{{route('login')}}">已有账号，去登录？ >></a>
+                    <a class="register-other-link" href="{{route('login')}}{{$_r0_}}">已有账号，去登录？ >></a>
                     <div class="third-login">
                         <h3>使用第三方登录</h3>
                         <div class="third-login-type">

@@ -239,6 +239,7 @@ return [
         'certification_request' => '企业会员实名认证申请',
         'certification_refuse' => '企业会员实名认证失败',
         'certification_ok' => '企业会员实名认证成功',
+        'order_new' => '有一个新订单',
         'x' => '提款',
         'xx' => '退款',
     ],
@@ -262,8 +263,10 @@ return [
 
     'order' => [
         'orderBy' => [ 'created_at' => '按下单时间', 'status' => '按订单状态'],
-        'pay_style' => [1=>'支付宝支付', 2=>'微信支付'],
-        'status' => ['新订单'],
+        'pay_style' => ['待支付', '支付宝支付', '微信支付'],
+        'status' => [1=>'已取消', 2=>'已关闭', 3=>'未付款', 4 => '已付款'],
+        // 'pending','received','sent'
+        'status_reverse' => ['cancelled' => 1,'closed' => 2, 'new' => 3, 'paid' => 4],
     ],
 
     'other'                  => [
@@ -361,31 +364,3 @@ return [
     'r404' => '<iframe src="/404.html" style="width:100%;height:800px" frameborder="0"></iframe>',
 
 ];
-
-
-
-<li><a href="javascript:void(0);" onclick="sele('','请选择')" class="">请选择</a></li>
-
-											<li id="t_0">
-												<a href="javascript:void(0);" onclick="sele('2092','外商独资')" class="">外商独资</a>
-											</li>
-
-											<li id="t_1">
-												<a href="javascript:void(0);" onclick="sele('2093','合资/合作')" class="">合资/合作</a>
-											</li>
-
-											<li id="t_2">
-												<a href="javascript:void(0);" onclick="sele('2094','国营企业/上市公司')" class="">国营企业/上市公司</a>
-											</li>
-
-											<li id="t_3">
-												<a href="javascript:void(0);" onclick="sele('2095','民营/私营企业/非上市公司')" class="">民营/私营企业/非上市公司</a>
-											</li>
-
-											<li id="t_4">
-												<a href="javascript:void(0);" onclick="sele('2096','外企代表处')" class="">外企代表处</a>
-											</li>
-
-											<li id="t_5">
-												<a href="javascript:void(0);" onclick="sele('2097','其它')" class="">其它</a>
-											</li>

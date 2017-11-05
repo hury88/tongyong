@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
             view()->share('boot_bread', $boot_bread);
             view()->share('boot_title', $boot_title);
         }
+        $r = $request->has('r') ? $request->get('r') : '';
+        view()->share('_r_', $r);
+        view()->share('_r1_', $r ? "&r=$r" : '');
+        view()->share('_r0_', $r ? "?r=$r" : '');
 
         //自定义验证码规则
         /*Validator::extend('phone', function($attribute, $value, $parameters){

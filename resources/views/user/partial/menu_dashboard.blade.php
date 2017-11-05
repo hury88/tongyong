@@ -6,13 +6,13 @@
                     <a href="javascript:;">会员中心</a>
                 </li>
                 <li class="link-active">
-                    <a href="javascript:;">简历中心</a>
+                    <a href="/person/jianli">简历中心</a>
                 </li>
                 <li>
-                    <a href="javascript:;">订单中心</a>
+                    <a href="/person/order">订单中心</a>
                 </li>
                 <li>
-                    <a href="javascript:;">账户设置</a>
+                    <a href="/person">账户设置</a>
                 </li>
                 <li>
                     <a href="javascript:;">积分商城</a>

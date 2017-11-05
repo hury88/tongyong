@@ -157,4 +157,12 @@ class LoginController extends Controller
     {
         return 'username';
     }
+
+    public function redirectTo()
+    {
+        if ($r = Request()->get('r')) {
+            return base64_decode($r);
+        }
+        return $this->redirectTo;
+    }
 }

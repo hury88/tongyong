@@ -12,8 +12,7 @@ $config_status = config('config.order.status');
 </style>
     <form>
         <div class="order-search">
-            <?php Form::select2(config('config.order.orderBy'), '选择排序方式', 'order_style')?>
-            <input name="trade_no" value="{{$_GET['trade_no']}}" class="order-manager-inp" type="text" placeholder="输入订单编号"/>
+            <input name="orderno" value="{{$_GET['orderno']}}" class="order-manager-inp" type="text" placeholder="输入订单编号"/>
             <input class="order-manager-sub" type="submit" value="搜索结果">
         </div>
     </form>
@@ -24,12 +23,13 @@ $config_status = config('config.order.status');
         <td class="manager-firstth">
             <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
         </td>
-        <td>{{$trade_no}}</td>
+        <td>{{$orderno}}</td>
+            <?php Form::select2(config('config.order.orderBy'), '选择排序方式', 'order_style')?>
         <td>{{$buyer_name}}</td>
         <td class="manager-fourtd">
-            <img class="order-mess-img" src="{{img($tranning_img)}}"/>
+            <img class="order-mess-img" src="{{img($training_img)}}"/>
             <div class="order-name">
-                <p>{{$tranning_title}}</p>
+                <p>{{$training_title}}</p>
                 <span>{{$config_pay_style[$pay_style]}}</span>
             </div>
         </td>

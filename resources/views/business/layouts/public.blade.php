@@ -18,9 +18,9 @@
 @section('scripts')
     @parent
     <script>
-        $('img').click(function(){
+       /* $('img').click(function(){
             notie.alert(4, '<img src="'+this.src+'" alt=""/>', 3);
-        })
+        })*/
     </script>
 @if(defined('AT_CU'))
 <script type="text/javascript" src="/plugins/calendar.js"></script>

@@ -30,7 +30,72 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
 
     Route::get('/', ['as' => 'person', 'uses' => 'PersonController@profile']);
 
-    Route::get('profile', 'PersonController@profile');
+    Route::get('password', 'PersonController@password');
+    Route::post('xgmm', 'PersonController@xgmm');
+    Route::get('telphone', 'PersonController@telphone');
+    Route::get('getyzm/{type}', 'PersonController@getyzm');
+    Route::get('email', 'PersonController@email');
+    Route::post('xgtel', 'PersonController@xgtel');
+
+
+    Route::get('certified', 'PersonController@certified');
+    Route::post('smrz', 'PersonController@smrz');
+    Route::get('message', 'PersonController@message');
+    Route::get('message/view/{id}', 'PersonController@viewmessage');
+
+
+    Route::get('jianli', 'PersonController@jianli');
+    Route::get('jianli/add', 'PersonController@jianliadd');
+    Route::get('jianli/view/{id}', 'PersonController@jianliview');
+    Route::get('jianli/toudi', 'PersonController@jianlitoudi');
+    Route::get('jianli/msyq', 'PersonController@jianlimsyq');
+    Route::get('jianli/msyqview/{id}', 'PersonController@jianlimsyqview');
+    Route::get('jianli/down', 'PersonController@jianlidown');
+    Route::get('jianli/wdsc', 'PersonController@jianliwdsc');
+
+    Route::get('jianli/postadd/{id}', 'PersonController@jianlipostadd');
+    Route::get('jianli/postadd2/{id}', 'PersonController@jianlipostadd2');
+    Route::get('jianli/postadd3/{id}', 'PersonController@jianlipostadd3');
+    Route::get('jianli/postadd4/{id}', 'PersonController@jianlipostadd4');
+    Route::get('jianli/postadd5/{id}', 'PersonController@jianlipostadd5');
+    Route::get('jianli/postadd6/{id}', 'PersonController@jianlipostadd6');
+    Route::get('jianli/postadd7/{id}', 'PersonController@jianlipostadd7');
+    Route::get('jianli/postadd8/{id}', 'PersonController@jianlipostadd8');
+    Route::get('jianli/postadd9/{id}', 'PersonController@jianlipostadd9');
+    Route::get('jianli/postadd10/{id}', 'PersonController@jianlipostadd10');
+
+
+    Route::get('jianli/top/{id}', 'PersonController@jianlitop');
+    Route::get('jianli/mr/{id}', 'PersonController@jianlimr');
+    Route::get('jianli/del/{id}', 'PersonController@jianlidel');
+    Route::get('jianli/edit/{id}', 'PersonController@jianliedit');
+    //简历-新增时获取对应模板
+    Route::get('jianli/mbxz/{type}', 'PersonController@jianlimbxz');
+    Route::get('jianli/mbxg/{type}', 'PersonController@jianlimbxg');
+
+
+
+
+    Route::get('order', 'PersonController@order');
+    Route::get('order/view/{id}', 'PersonController@orderview');
+    Route::get('order/sqtk/{id}', 'PersonController@ordersqtk');
+    Route::get('order/pay/{id}', 'PersonController@orderpay');
+    Route::get('order/paysucc/{id}', 'PersonController@orderpaysucc');
+
+
+
+    Route::get('order/bmbzypx/{type?}', 'PersonController@orderbmbzypx');
+    Route::get('order/bmbzyzs/{type?}', 'PersonController@orderbmbzyzs');
+    Route::get('order/bmbgjjy/{type?}', 'PersonController@orderbmbgjjy');
+    Route::get('order/bmbview/{id}', 'PersonController@orderbmbview');
+
+
+
+
+
+
+
+
 
     Route::post('profile/save', 'PersonController@saveProfile');
 
