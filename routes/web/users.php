@@ -76,8 +76,8 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
 
 
 
-    Route::get('order', 'PersonController@order');
-    Route::get('order/view/{id}', 'PersonController@orderview');
+    Route::get('order', ['as' => 'p_order', 'uses' => 'PersonController@order']);
+    Route::get('order/view/{id}', ['as' => 'p_o_v', 'uses' => 'PersonController@orderview']);
     Route::get('order/sqtk/{id}', 'PersonController@ordersqtk');
     Route::get('order/pay/{id}', 'PersonController@orderpay');
     Route::get('order/paysucc/{id}', 'PersonController@orderpaysucc');

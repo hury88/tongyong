@@ -264,9 +264,9 @@ return [
     'order' => [
         'orderBy' => [ 'created_at' => '按下单时间', 'status' => '按订单状态'],
         'pay_style' => ['待支付', '支付宝支付', '微信支付'],
-        'status' => [1=>'已取消', 2=>'已关闭', 3=>'未付款', 4 => '已付款'],
+        'status' => [1=>'已取消', 2=>'已退款', 3=>'未付款', 4 => '已付款'],
         // 'pending','received','sent'
-        'status_reverse' => ['cancelled' => 1,'closed' => 2, 'new' => 3, 'paid' => 4],
+        'status_reverse' => ['cancelled' => 1,'refund' => 2, 'new' => 3, 'paid' => 4],
     ],
 
     'other'                  => [
