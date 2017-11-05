@@ -66,12 +66,11 @@ $opt = new Output;
 //							 ->word('Enter your Skype Name')->input('skype', 'link1')
 							 ->word('外链')->input('关注微博', 'link1')
 							 ->word('外链')->input('咨询链接', 'link2')
-							/*->input('Facebook','link1')
-							->input('Twitter', 'link2')
-							->input('Tumblr','link3')
-							->input('Pinterest','link4')
-							->input('Youtube','link5')
-							->input('Google+','link6')*/
+
+							->input('举报电话','link3')
+//							->input('Pinterest','link4')
+//							->input('Youtube','link5')
+//							->input('Google+','link6')
 						    ->textarea('版权信息','copyright')
 //						    ->textarea('置放统计代码','header')
 						  //$opt->input('网站头部标题','indexabout')
