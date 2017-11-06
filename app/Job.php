@@ -117,18 +117,6 @@ class Job extends Model
             ->paginate($num)
             ->toArray($linknum);
     }
-    public function v_seachpages($key,$where=[],$field,$num=15,$linknum=5){
-        return $this
-            ->where('pid','5')
-            ->where('isstate','1')
-            ->where('title','like','%'.$key.'%')
-            ->latest('isgood')
-            ->latest('disorder')
-            ->latest('id')
-            ->select($field)
-            ->paginate($num)
-            ->toArray($linknum);
-    }
 
     /*
      * [parseWhere 解析条件]

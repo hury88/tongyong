@@ -4,6 +4,7 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
+
 @stop
 @section('bodyNextLabel')
     <body>
@@ -19,36 +20,29 @@
     @section('content')
         <div class="sqzwNav">
             <div class="sqzwNavsech">
-                <select name="">
-                    <option value="">合肥</option>
-                    <option value="">合肥</option>
-                    <option value="">合肥</option>
-                </select>
-                <input type="text" name="" id="" value="" placeholder="输入职位关键词：如技术总监" class="txt"/>
-                <input type="submit" name="" id="" value="搜索" class="btn"/>
+                <form action="" method="get" id="seach">
+                    <input type="hidden" name="academyid" id="academyid" value="{{$academyid}}">
+                    <input type="hidden" name="infotypeid" id="infotypeid"  value="{{$infotypeid}}">
+                    <input type="hidden" name="order" id="order" value="{{$order}}">
+                    <select name="">
+                        <option value="">合肥</option>
+                        <option value="">合肥</option>
+                        <option value="">合肥</option>
+                    </select>
+                    <input type="text" name="title" id="title" value="{{$title}}" placeholder="输入标题关键词" class="txt"/>
+                    <input type="submit" value="搜索" class="btn"/>
+                </form>
             </div>
-            <div class="sqzwNavlist">
+            <div class="sqzwNavlist title">
                 <p>
-                    <a href="">北京大学</a>
-                    <a href="">清华大学</a>
-                    <a href="">安徽农业大学</a>
-                    <a href="">中国科技大学</a>
-                    <a href="">北京大学 </a>
-                    <a href="">清华大学</a>
-                    <a href="">宁波大学 </a>
-                    <a href="">中国地质大学(北京) </a>
-                    <a href="">首都师范大学</a>
-                </p>
-                <p>
-                    <a href="">计算机硬件</a>
-                    <a href="">计算机硬件</a>
-                    <a href="">计算机硬件</a>
-                    <a href="">计算机硬件</a>
-                    <a href="">计算机硬件</a>
+                    @foreach(explode("|",$boot_config['link5']) as $val)
+                        @if($loop->index<15)
+                            <a href="javascript:void(0);" class="gkey">{{$val}}</a>
+                        @endif
+                    @endforeach
                 </p>
             </div>
         </div>
-
         <!-- 内容-->
 
         <div class="zplbCon">
@@ -68,44 +62,35 @@
                 </ul>
             </div>
             <div class="zplbban">
-                <img src="img/zplb1.jpg" style="width: 100%;"/>
+                <img src="/img/zplb1.jpg" style="width: 100%;"/>
             </div>
             <!--开始-->
             <div class="zplbxzwz">
                 <div class="zplbxzwz1">
-                    您已选择：<img src="img/sqzwwz.jpg"><i>合肥</i><img src="img/zplbxx5.jpg">
+                    您已选择：<img src="/img/sqzwwz.jpg"><i>合肥</i><img src="img/zplbxx5.jpg">
                 </div>
                 <div class="zplbxzwz2">
                     <div class="zplbxzwz2a">
                         <div class="yxxxfbl">
                             院校
                         </div>
-                        <div class="yxxxfbr">
-                            <span>全部</span>
-                            <span>北京大学 </span>
-                            <span> 清华大学 </span>
-                            <span>中国科学院大学  </span>
-                            <span>香港大学</span>
-                            <span>香港中文大学</span>
-                            <span>台湾大学 </span>
-                            <span>南方医科大学 </span>
-                            <span>青岛大学</span>
-                            <span>中国地质大学(北京)</span>
-                            <span> 首都师范大学</span>
-                            <span>上海师范大学 </span>
-                            <span>宁波大学</span>
-                            <span> 浙江师范大学</span>
+                        <div class="yxxxfbr academyid">
+
+                            <span class="yx @if($academyid==0) on @endif">全部</span>
+                            @foreach($yxarr as $key=>$val)
+                                    <span class="yx @if($key==$academyid) on @endif " data-id="{{$key}}">{{$val}}</span>
+                            @endforeach
                         </div>
                     </div>
                     <div class="zplbxzwz2a">
                         <div class="zplbxzwz2al">
                             分类
                         </div>
-                        <div class="yxxxfbr">
-                            <span>全部</span>
-                            <span>招生信息</span>
-                            <span>宣讲会信息</span>
-                            <span>校园活动</span>
+                        <div class="yxxxfbr infotypeid">
+                            <span class="xxlb @if($academyid==0) on @endif">全部</span>
+                            @foreach($xxarr as $key=>$val)
+                                <span class="xxlb @if($key==$infotypeid) on @endif " data-id="{{$key}}">{{$val}}</span>
+                            @endforeach
                         </div>
                     </div>
                     <div class="zplbxzwz2a">
@@ -113,121 +98,33 @@
                             更  多
                         </div>
                         <div class="zplbxzwz2ar">
-                            <select name="">
-                                <option value="">更新日期</option>
-                                <option value="">更新日期1</option>
-                                <option value="">更新日期1</option>
-                                <option value="">更新日期1</option>
+                            <select name="" class="order">
+                                <option value="0" @if($order==0) selected @endif>更新日期</option>
+                                <option value="1" @if($order==1) selected @endif>热门信息</option>
+                                <option value="2" @if($order==2) selected @endif>推荐信息</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!--结束-->
             <div class="yxxxfbCon">
                 <ul>
+                    @foreach($pagenewslist['data'] as $val)
                     <li>
                         <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
+                            <p class="pb1"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}" style="color:#323333">{{$val['title']}}</a></p>
+                            <p  class="pb2">{!! str_limit(strip_tags(htmlspecialchars_decode($val['content'])), 300, '...') !!}</p>
+                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}">阅读全文>></a>
                         </div>
                         <div class="yxxxfbConr">
-                            <img src="img/yxzpfb1.jpg"/>
+                            <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$val['id'])}}"> <img src="{{img($val['img1'])}}"/></a>
                         </div>
                     </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb2.jpg"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb3.jpg"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb4.jpg"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb1.jpg"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb2.jpg"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb3.jpg"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="yxxxfbConl">
-                            <p class="pb1">学生举报学校违规被查</p>
-                            <p  class="pb2">近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日，部分媒体报道西北工业大学附中在重污染天气Ι级应急响应期间补课，因教育局工作人员向学校透露投诉人电话号码近日因教育局工作人员向学校透露投诉人电话号码......</p>
-                            <a href="">阅读全文>></a>
-                        </div>
-                        <div class="yxxxfbConr">
-                            <img src="img/yxzpfb4.jpg"/>
-                        </div>
-                    </li>
+                     @endforeach
                 </ul>
-                <div class="web-pager">
-                    <a class="pager-now" href="javascript:;">1</a>
-                    <a href="javascript:;">2</a>
-                    <a href="javascript:;">3</a>
-                    <a href="javascript:;">4</a>
-                    <a href="javascript:;">5</a>
-                    <a href="javascript:;">6</a>
-                    <a href="javascript:;">7</a>
-                    <a href="javascript:;">8</a>
-                    <a href="javascript:;">9</a>
-                    <a href="javascript:;">10</a>
-                    <span>…</span>
-                    <a href="javascript:;">100</a>
-                    <a href="javascript:;" class="scrip-a"><img src="img/zhizhen.jpg"></a>
-                    <form>
-                        <span class="script-span">跳转到：</span>
-                        <input class="pager-form-inp" type="text"/>
-                        <input class="pager-form-sub" type="button" value="GO">
-                    </form>
-
-                </div>
+                @include('partial.paginator')
 
             </div>
 
@@ -254,6 +151,32 @@
                 $('.qzzptTit .kefu').click(function(){
                     $(this).parents('.qzzptTit').next('.qzzptTxt').slideToggle();
                     $(this).children().css("background-image","url('img/zqzpt2.jpg')")
+                })
+
+                    $('.academyid .yx').click(function () {
+                        var ss=$(this).data('id');
+                        $('.academyid .yx').removeClass('on');
+                        $(this).addClass('on')
+                        $("#academyid").val(ss);
+                        $("#seach").submit()
+                    })
+
+                $('.infotypeid .xxlb').click(function () {
+                    var ss=$(this).data('id');
+                    $('.infotypeid .xxlb').removeClass('on');
+                    $(this).addClass('on')
+                    $("#infotypeid").val(ss);
+                    $("#seach").submit()
+                })
+                $('.zplbxzwz2ar .order').change(function () {
+                    var ss=$(this).val();
+                    $("#order").val(ss);
+                    $("#seach").submit()
+                })
+                $(".title .gkey").click(function () {
+                    var ss=$(this).text()
+                    $('#title').val(ss)
+                    $("#seach").submit()
                 })
             </script>
 @stop

@@ -72,7 +72,33 @@ class News extends Model
             ->paginate($num)
             ->toArray($linknum);
     }
-
+    public function v_yxpages($where=[],$title,$academyid,$infotypeid,$order,$field=['*'],$num=15,$linknum=5){
+        return $this->parseWhere($where)
+            ->where("isstate","=" ,"1")
+            ->where(function($query) use($title,$academyid,$infotypeid,$order){
+                $order=(int)$order;
+                if($title) {
+                    $query->where('title','like' ,'%'.$title.'%');
+                }
+                if($academyid) {
+                    $query->where('academyid','=' ,$academyid);
+                }
+                if($infotypeid) {
+                    $query->where('infotypeid','=' ,$infotypeid);
+                }
+                if($order==0){
+                    $query->latest('id');
+                }elseif($order==1){
+                    $query->latest('hits');
+                }elseif($order==2){
+                    $query->latest('isgood');
+                }
+            })
+            ->latest('disorder')
+            ->select($field)
+            ->paginate($num)
+            ->toArray($linknum);
+    }
     /*
      * [parseWhere 解析条件]
      * @param  [type] $where [description]

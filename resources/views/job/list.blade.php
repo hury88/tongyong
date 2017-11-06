@@ -31,22 +31,11 @@
                     </div>
                     <div class="sqzwNavlist">
                         <p>
-                            <a href="">销售总监</a>
-                            <a href="">销售人员</a>
-                            <a href="">销售人员</a>
-                            <a href="">销售总监</a>
-                            <a href="">销售人员</a>
-                            <a href="">销售人员</a>
-                            <a href="">销售总监</a>
-                            <a href="">销售人员</a>
-                            <a href="">销售人员</a>
-                        </p>
-                        <p>
-                            <a href="">计算机硬件</a>
-                            <a href="">计算机硬件</a>
-                            <a href="">计算机硬件</a>
-                            <a href="">计算机硬件</a>
-                            <a href="">计算机硬件</a>
+                            @foreach(explode("|",$boot_config['link4']) as $val)
+                                @if($loop->index<15)
+                                    <a href="javascript:void(0);" class="gkey">{{$val}}</a>
+                                @endif
+                            @endforeach
                         </p>
                     </div>
                 </div>

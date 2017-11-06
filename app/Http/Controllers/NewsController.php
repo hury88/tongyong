@@ -104,7 +104,7 @@ class NewsController extends Controller
         // $carousel = $news->v_list([$request->get($pid,0),$request->get($ty,0),$request->get($tty,0)]);
 //        $newslist = $news->v_list([$GLOBALS['pid'],$GLOBALS['ty']],["id","title","sendtime","img1","content"],9);
 //
-//        $list['newslist']=$newslist;
+//      $list['newslist']=$newslist;
         $list['hot_info']=$this->hot_info();
         $ckey='';
         $list['new_job']=$this->new_job();

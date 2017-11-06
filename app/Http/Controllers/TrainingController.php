@@ -173,7 +173,7 @@ class TrainingController extends Training
         $sanlist = $this->sanlist();
         $Training = new Training();
         $ckey='';
-        if(isset($_GET['title'])&&$_GET['title']!=0){
+        if(isset($_GET['title'])&&$_GET['title']!=''){
 
             $title=$_GET['title'];
             $ckey.='&title='.$title;

@@ -113,6 +113,7 @@ if (isset($_GET['action']) && $_GET['action']=='delImg') {
                 ->choose('职位月薪','salary')->radioSet(Config::get('business.salary'))->flur()
                 ->choose('亮点标签标签','relative')->checkboxSet(Config::get('business.relative'))->flur()
                 ->input('招收人数', 'recruit_num')
+                ->time('招聘结束时间', 'endtime')
                 ->choose('学历要求','education')->radioSet(Config::get('business.education'))->flur()
                 ->choose('经验要求','experience')->radioSet(Config::get('business.experience'))->flur()
 

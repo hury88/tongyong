@@ -37,7 +37,7 @@ if(!empty($industryid)) $map['industryid'] = $industryid;
 $psize   =   I('get.psize',30,'intval');
 $pageConfig = array(
     /*条件*/'where' => $map,
-    /*排序*/'order' => 'isgood desc,disorder desc,sendtime desc',
+    /*排序*/'order' => 'isgood desc,disorder desc,issued desc,sendtime desc',
     /*条数*/'psize' => $psize,
     /*表  */'table' => $table,
     );
@@ -136,6 +136,8 @@ list($data,$pagestr) = Page::paging($pageConfig);
         <td>职位性质</td>
         <td>招收人数</td>
         <td> 申请人数 </td>
+        <td> 信息状态 </td>
+        <td> 结束时间 </td>
 
            <td width="10%">发布者</td>
     <td width="10%">发布时间</td>
@@ -147,6 +149,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
     $editUrl = getUrl($query, $showname.'_pro');
                             #时间
     $time =  date('Y-m-d H:i',$sendtime);
+    $endtime =  date('Y-m-d H:i',$endtime);
 if($user_id){
     $publisher=v_id($user_id,"name","cmember");
 }else{
@@ -169,9 +172,11 @@ if($user_id){
         <td><?=$title?></td>
         <td> <?=Config::get('business.work_nature')[$work_nature]?> </td>
             <td><?=$recruit_num?></td>
+            <td><?=Config::get('webarr.issued')[$issued] ?></td>
             <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=$id and isstate=0")->count(); ?>未审核)</a></td>
 
 
+     <td><?=$endtime?></td>
      <td><?=$publisher?></td>
      <td><?=$time?></td>
  </tr>

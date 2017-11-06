@@ -1,93 +1,55 @@
 @extends('layouts.master')
 
-@section('title') {{$id_arr->business_name}} @parent @stop
+@section('title') {{$id_arr->title}}@parent @stop
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhaopin.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/guojijiaoyu.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common_guojijiaoyu.css"/>
 @stop
 @section('bodyNextLabel')
-<body>
-<div class="pager-wrap personal-center">
-    @stop
-    @section('content')
-        <div class="zyzp">
-            <div class="zyzpBanner">
-                <img src="/img/zyzpbanner.jpg" style="width: 100%;"/>
+    <body>
+    <div class="pager-wrap personal-center">
+        @stop
+        @section('breadcrumbs')
+            <div class="gjlhBanner" style="margin-top: 67px;">
+                <img src="{{$banimgsrc}}" style="width: 100%;"/>
             </div>
+        @stop
 
-            <div class="zyzpTit">
-                <div class="zyzpTit1">
-                    <p>
-                        <a href="/"><img src="/img/zyzptop.png"/></a>
-                        <span>所在位置：</span>
-                        <a href="/">首页></a>
-                        <a href="{{u('training','business')}}">培训机构></a>
-                        <a href="javascript:void(0);">{{$id_arr->business_name}}</a>
+        @section('content')
+
+            <div class="gjlhbx">
+                <div class="gjlhbxAll">
+                    <p class="xwdtmbx">
+                        <a href="/"><img src="/img/sqzwtop.png" style="vertical-align: middle"/>所在位置：首页 </a>> <a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}</a>> <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>><a href="javascript:void(0);">{{$id_arr->title}}</a>
                     </p>
-                </div>
-                <div class="zyzpTit2">
-                    <div class="zyzpTit2Left">
-                        <img src="{{img($id_arr->logo)}}"/>
-                    </div>
-                    <div class="zyzpTit2Right">
-                        <p style="font-size: 20px;padding-bottom:10px;">{{$id_arr->business_name}}</p>
-                        <p class="qyxz">
-                            <span>企业性质：{{config("config.business.nature.".$id_arr->nature)}}</span>
-                            <span>企业规模：{{config("config.business.size.".$id_arr->size)}}</span>
-                            <span>所属行业：{{config("config.business.cate.".$id_arr->cate)}}</span>
+                    <div class="liuxuexq">
+                        <h3>{{$id_arr->title}}</h3>
+                        <p class="pi1">
+                            <span>更新时间：{{date("y-m-d",$id_arr->sendtime)}} </span>
+                            <span>来源：<i>{{$id_arr->qyname}}</i></span>
                         </p>
-                        <p>官网：<a href="{{$id_arr->siteurl}}"><i>{{$id_arr->business_name}}</i></a></p>
-                        <p>地址：{{$id_arr->location}}</p>
+                        {!! htmlspecialchars_decode($id_arr->content) !!}
+                        <div class="liuxuexqyema">
+
+                            @if($id_arr->previd>0)
+                                <a href="{{$id_arr->prevlink}}" style="float: left;font-weight: bold;color: #666666;">【上一篇】{{$id_arr->prev}}</a>
+                            @else
+                                <a href="{{$id_arr->prevlink}}" style="float: left;font-weight: bold;color: #666666;">【已经是第一篇了】</a>
+                            @endif
+                            @if($id_arr->nextid>0)
+                                <a href="{{$id_arr->nextlink}}" style="float: right;font-weight: bold;color: #666666;">【下一篇】{{$id_arr->next}}</a>
+                            @else
+                                <a href="{{$id_arr->nextlink}}" style="float: right;font-weight: bold;color: #666666;">【已经是最后一篇了】</a>
+                            @endif
+                            <div style="clear: both"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="zyzpCon">
-            <div class="zyzpConnav">
-                <ul>
-                    <li><a href="javascript:void(0);" class="zyzpon">公司介绍</a></li>
-                    <li><a href="javascript:void(0);">招聘职位</a></li>
-                    <li><a href="javascript:void(0);">职业培训 </a></li>
-                    <li><a href="javascript:void(0);">职业证书 </a></li>
-                </ul>
-            </div>
-            <div class="zyzpTxt">
-                {!! htmlspecialchars_decode($id_arr->business_introduction) !!}
-            </div>
-            <div class="zyzpTxt" style="display: none">
-                开发中
-            </div>
-            <div class="zyzpTxt"  style="display: none">
-                开发中
-            </div>
-            <div class="zyzpTxt" style="display: none">
-                开发中
-            </div>
-
-        </div>
-        <div class="gap">
-
-        </div>
+@stop
 
 
-        <script type="text/javascript" src="/js/jquery.js"></script>
-        <script type="text/javascript">
-            $(".zyzpConnav li").click(function(){
-                var i = $(this).index();
-
-                $(".zyzpConnav li a").removeClass("zyzpon");
-                $(this).find('a').addClass("zyzpon");
-                $(".zyzpCon .zyzpTxt").eq(i).show().siblings(".zyzpCon .zyzpTxt").hide();
-            });
-        </script>
-    @stop {{-- end content --}}
 
 
-    @section('footer')
-    @parent
-    @stop
 
-    @section('scripts')
-    @parent
 
-    @stop

@@ -217,6 +217,7 @@ return [
 
         'isstate'   => ['未审核', '已审核', 'isstate'],
         'status'   => ['未阅读', '已阅读', 'status'],
+        'issued'   => ['未发布', '已发布', 'issued'],
         'isgood'    => ['未推荐', '已推荐', 'isgood'],
         'certified'    => ['未认证', '已认证', 'certified'],
         'istop'     => ['未置顶', '置顶', 'istop'],

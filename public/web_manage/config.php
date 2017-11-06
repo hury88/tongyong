@@ -68,9 +68,9 @@ $opt = new Output;
 							 ->word('外链')->input('咨询链接', 'link2')
 
 							->input('举报电话','link3')
-//							->input('Pinterest','link4')
-//							->input('Youtube','link5')
-//							->input('Google+','link6')
+                        ->word('多个用“|”隔开！例：“客服及技术支持|人力资源”')->input('求职者平台关键字','link4')
+                        ->word('多个用“|”隔开！例：“客服及技术支持|人力资源”')->input('院校信息发布关键字','link5')
+                        ->word('多个用“|”隔开！例：“客服及技术支持|人力资源”')->input('招聘列表关键字+','link6')
 						    ->textarea('版权信息','copyright')
 //						    ->textarea('置放统计代码','header')
 						  //$opt->input('网站头部标题','indexabout')

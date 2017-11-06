@@ -1,4 +1,4 @@
-
+@if($pagenewslist['last_page']>0)
 <div class="web-pager" data-pages="{{$pagenewslist['last_page']}}">
     <?php if(isset($ckey)){$ckey=$ckey;}else {$ckey='';}?>
 
@@ -45,3 +45,8 @@
 
     })
 </script>
+    @else
+    <div style="width:100%;height:300px;text-align: center">
+        <span style="font-size: 24px;color:#333">暂无所要查看的信息请查看其他信息</span>
+    </div>
+    @endif

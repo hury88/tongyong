@@ -31,21 +31,11 @@
                     </div>
                     <div class="sqzwNavlist">
                         <p>
-                            <a href="">销售总监 </a>
-                            <a href="">销售人员</a>
-                            <a href="">销售行政/商务</a>
-                            <a href="">客服及技术支持</a>
-                            <a href="">人力资源</a>
-                            <a href="">行政/后勤</a>
-                            <a href=""> 高级管理</a>
-                            <a href="">项目管理</a>
-                            <a href="">IT管理</a>
-                        </p>
-                        <p>
-                            <a href="">计算机软件/系统集成</a>
-                            <a href="">互联网</a>
-                            <a href="">网络游戏</a>
-                            <a href="">通信技术开发及应用</a>
+                            @foreach(explode("|",$boot_config['link4']) as $val)
+                                @if($loop->index<15)
+                                    <a href="javascript:void(0);" class="gkey">{{$val}}</a>
+                                @endif
+                            @endforeach
                         </p>
                     </div>
                 </div>
@@ -295,30 +285,10 @@
                         </div>
 
 
-
-                        <div class="web-pager" style="padding-top: 30px;">
-                            <a class="pager-now" href="javascript:;">1</a>
-                            <a href="javascript:;">2</a>
-                            <a href="javascript:;">3</a>
-                            <a href="javascript:;">4</a>
-                            <a href="javascript:;">5</a>
-                            <a href="javascript:;">6</a>
-                            <a href="javascript:;">7</a>
-                            <a href="javascript:;">8</a>
-                            <a href="javascript:;">9</a>
-                            <a href="javascript:;">10</a>
-                            <span>…</span>
-                            <a href="javascript:;">100</a>
-                            <a href="javascript:;" class="scrip-a"><img src="img/zhizhen.jpg"></a>
-                            <form>
-                                <span class="script-span">跳转到：</span>
-                                <input class="pager-form-inp" type="text"/>
-                                <input class="pager-form-sub" type="button" value="GO">
-                            </form>
-
-                        </div>
+                        <div style="height: 30px;clear: both"></div>
+                        {{--@include('partial.paginator')--}}
                         <div class="zhuyi">
-                            <i>注意：</i>提示凡在中国职业培训网发布信息的企业不会以任何形式向求职者收取报名费、抵押金、保证金等费用。举报投诉电话：400-000-0000
+                            <i>注意：</i>提示凡在中国职业培训网发布信息的企业不会以任何形式向求职者收取报名费、抵押金、保证金等费用。举报投诉电话：{{$boot_config['link3']}}
                         </div>
                     </div>
 
