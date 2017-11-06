@@ -29,6 +29,13 @@ class Order extends Model
      */
     protected $table = 'orders';
 
+    // 支付方式
+    protected $payStyles = [];
+    // 订单状态
+    protected $statuses = [];
+    // 订单状态颠倒
+    protected $statusesReverse = [];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,7 +48,9 @@ class Order extends Model
         'buyer_name',
         'tranning_id',
         'tranning_title',
+        'training_period',
         'tranning_img',
+        'business_name',
         'status',
         'type',
         'description',
@@ -52,7 +61,14 @@ class Order extends Model
         'updated_at',
     ];
 
-    protected $appends = ['translatedStatus'];
+    public function __construct()
+    {
+        $this->payStyles = config('config.order.pay_style');
+        $this->statuses = config('config.order.status');
+        $this->statusesReverse = config('config.order.status_reverse');
+    }
+
+    protected $appends = [];
 
     public function user()
     {
@@ -103,11 +119,6 @@ class Order extends Model
     }
 
 
-    public function getTranslatedStatusAttribute()
-    {
-        return trans('globals.order_status.'.$this->status);
-    }
-
     public function createLog()
     {
         $actions = [];
@@ -133,7 +144,16 @@ class Order extends Model
     {
         if (!empty($this->seller_id) && !empty($this->user_id) && $this->type == 'order') {
             switch ($this->status) {
-            case 'new':
+            case 3:// new
+                Notice::create([
+                    'action_type_id' => 4,
+                    'source_id'      => $this->id,
+                    'user_id'        => "$this->buyer_id|$this->seller_id",
+                    'sender_id'      => 0,
+                    'title' => "恭喜您的订单($this->orderno)创建成功|您收到了一个新的订单($this->orderno)",
+                ]);
+            break;
+            default:
                 Notice::create([
                     'action_type_id' => 4,
                     'source_id'      => $this->id,
@@ -410,14 +430,27 @@ class Order extends Model
         }
     }
 
-    public function scopeOfType($query, $type)
+    public function getPayStyleAttribute()
     {
-        return $query->whereType($type);
+        return $this->payStyles[$this->attributes['pay_style']];
     }
 
-    public function scopeOfStatus($query, $status)
+    public function getStatusAttribute()
     {
-        return $query->where('orders.status', $status);
+        return $this->statuses[$this->attributes['status']];
+    }
+    // 培训详情用到
+    public function scopeOfEncroll($query, $buyer_id, $training_id)
+    {
+        return $query->whereBuyerId($buyer_id)->whereTrainingId($training_id);
+    }
+    public function scopeOrdernoLike($query, $val)
+    {
+        return $query->where('orderno', 'like', "%$val%");
+    }
+    public function scopeTheStatus($query, $status)
+    {
+        return $query->whereStatus($this->statusesReverse[$status]);
     }
 
     public function scopeOfDates($query, $from, $to = '')

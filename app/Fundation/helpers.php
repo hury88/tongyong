@@ -12,6 +12,10 @@ function _r_($box)
 {
 	return sprintf($box, base64_encode(url()->previous()));
 }
+function qq_online($qq)
+{
+	return 'http://wpa.qq.com/msgrd?v=3&uin='.$qq.'&site=qq&menu=yes';
+}
 
 
 if (!function_exists('v_show')) {

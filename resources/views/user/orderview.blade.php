@@ -1,6 +1,6 @@
 @extends('layouts.master')
-
-@section('title')个人中心 @parent @stop
+<?php extract($order) ?>
+@section('title')订单详情 - 个人中心 @parent @stop
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_gerenzhongxin.css"/>
     <link rel="stylesheet" type="text/css" href="/css/personalCenter.css"/>
@@ -18,7 +18,7 @@
         <div class="order-detials-mess">
             <table width="100%" border="0">
                 <tr class="order-mess-trfirst">
-                    <td><TABLE width="100%"><TD width="22%">订单编号：291798983</TD><TD width="78%">创建时间：2017-04-19 13:26:12</TD></TABLE></td>
+                    <td><TABLE width="100%"><TD width="22%">订单编号：{{$orderno}}</TD><TD width="78%">创建时间：{{$created_at}}</TD></TABLE></td>
                 </tr>
                 <tr class="order-mess-second">
                     <td><TABLE width="100%">
@@ -34,18 +34,18 @@
                 <tr class="order-mess-third">
                     <td><TABLE width="100%">
                             <TD width="33%">
-                                <img class="order-mess-img" src="/img/brand-img.png"/>
+                                <img class="order-mess-img" src="{{img($training_img)}}"/>
                                 <div class="order-name">
-                                    <p>2017联想集团《技能培训》视频教程</p>
-                                    <span>在线支付</span>
+                                    <p>{{$order['training_title']}}</p>
+                                    <span>{{$pay_style}}</span>
                                 </div>
                             </TD>
-                            <TD width="14%">20节-10小时12分钟</TD>
-                            <TD width="10.8%">联想集团</TD>
+                            <TD width="14%">{{$training_period}}</TD>
+                            <TD width="10.8%">{{$business_name}}</TD>
                             <TD width="10.8%"></TD>
-                            <TD width="10.8%">￥29.00</TD>
-                            <TD width="10.8%">已付款</TD>
-                            <TD width="10.8%" class="praise">评价</TD>
+                            <TD width="10.8%">￥{{$price}}</TD>
+                            <TD width="10.8%">{{$status}}</TD>
+                            <TD width="10.8%" class="praise">{{''}}</TD>
                         </TABLE></td>
                 </tr>
             </table>

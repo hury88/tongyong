@@ -54,8 +54,8 @@ class Notice extends Model
         if (!isset($attr['title'])) {
             $attr['title'] = ActionType::find($attr['action_type_id'])->notice_title;
         }
-        if (strpos($attr['user_id'], ',')) {
-            $user_id_set = explode(',', $attr['user_id']);
+        if (strpos($attr['user_id'], '|')) {
+            $user_id_set = explode('|', $attr['user_id']);
             $user_id_set = array_unique($user_id_set);
             foreach ($user_id_set as $user_id) {
                 $attr['user_id'] = $user_id;

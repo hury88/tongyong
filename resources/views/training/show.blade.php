@@ -42,11 +42,17 @@
                             <span class="erweima"><img src="/img/xlsys.png"/>扫码关注我们了解更多培训信息</span>
                             <a href="javasript:void(0);" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
                         </div>
+                        @if(auth()->check() && App\Order::ofEncroll(auth()->id(), $id_arr->id)->first())
+                        <div class="dagang1Right1_2">
+                            <a href="javasript:void(0);" class="aaa2">已报名</a>
+                        </div>
+                        @else
                         <div class="dagang1Right1_2 form" action="{{route('orders.create', $id_arr->id)}}">
                             <a href="javasript:void(0);" class="aaa1">免费试看</a>
-                                {{csrf_field()}}
-                                <a href="javascript:;" onclick="return model(this)" class="aaa2">我要报名</a>
+                            {{csrf_field()}}
+                            <a href="javascript:;" onclick="return model(this)" class="aaa2">我要报名</a>
                         </div>
+                        @endif
                         <p class="dagang1Right1_4">
                             <span>报名人数{{$id_arr->enroll_num}}</span>
                             <a href="{{$boot_config['link2']}}"><img src="/img/xlsys1.png"/>在线咨询</a>

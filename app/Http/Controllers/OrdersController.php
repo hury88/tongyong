@@ -73,39 +73,33 @@ class OrdersController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $orderStatus_new = config('config.order.status_reverse.new');
-
         $person = \Auth::user()->hasOnePerson;
         $order = new Order();
-        if (Order::where('training_id', $training_id)->where('status', $orderStatus_new)->first()) {
-            return handleResponseJson(201, '不可重复报名');
+        if (Order::ofEncroll($person->user_id, $training_id)->theStatus('new')->first()) {
+            return handleResponseJson(201, '您已报名过此课程,请去订单中心查看详情');
         }
+
         // 生成订单号
         $order->orderno = Order::orderno();
         $order->seller_id = $training->user_id;
         $order->training_id = $training->id;
         $order->training_img = $training->img1;
         $order->training_title = $training->title;
+        $order->training_period = $training->period;
         $order->price = $training->price;
 
         $order->buyer_id = $person->user_id;
         $order->buyer_name = $person->real_name;
-        $order->status = $orderStatus_new;
+
+        $business = Business::whereUserId($order->seller_id)->select('business_name')->first();
+        $order->business_name =  is_null($business) ? '中国职业培训网' : $business->business_name;
 
         $orderid = $order->save();
 
         if ($orderid) {
             $training->enroll_num = $training->enroll_num +1;
             $training->save();
-
-            $notice = Notice::create([
-                'user_id'        => "0,$order->seller_id,$order->buyer_id",
-                'sender_id'      => -1,
-                'action_type_id' => 4,
-                'source_id'      => $orderid,
-                'status'         => 1,
-            ]);
-            return handleResponseJson(200, '报名成功,去个人中心查看', route('p_order'));
+            return handleResponseJson(200, '报名成功,进入个人中心查看', route('p_order'));
         } else {
             return handleResponseJson(201, '报名失败', '请稍后再试');
         }

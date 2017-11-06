@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use Auth;
+use App\Order;
 use DB;
 
 
@@ -189,15 +190,13 @@ class PersonController extends base\UserController
     public function message()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-        return view('user.profile', $data);
+        return view('user.profile', compact('user'));
     }
 
     public function viewmessage()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-        return view('user.profile', $data);
+        return view('user.profile', compact('user'));
     }
 
 
@@ -1087,27 +1086,49 @@ class PersonController extends base\UserController
 
     public function order()
     {
-        $data = [];
-        $data['user'] = User::findOrFail(\Auth::id())->relationsToArray();
+        $user = User::findOrFail(\Auth::id())->relationsToArray();
 
-        $_GET['orderBy'] = isset($_GET['orderBy']) && $_GET['orderBy'] ? $_GET['orderBy'] : 'created_at';
-        $_GET['orderno'] = isset($_GET['orderno']) && $_GET['orderno'] ? (int)$_GET['orderno'] : '';
-        $data['pagenewslist'] = \Auth::user()->hasManyOrder()
+        // 支付方式
+        $config_pay_style = config('config.order.pay_style');
+        // 订单状态
+        $config_status = config('config.order.status');
+
+        $_GET['orderno'] = isset($_GET['orderno']) && $_GET['orderno'] ? $_GET['orderno'] : '';
+        $_GET['status'] = isset($_GET['status']) && $_GET['status'] ? $_GET['status'] : '';
+        $pagenewslist = \Auth::user()->hasManyOrder()
             ->where(function ($query) {
-                empty($_GET['orderno']) or $query->where('orderno', intval($_GET['orderno']));
-        })->orderBy($_GET['orderBy'], 'desc')->paginate($this->paginate)->toArray($this->toArray);
-        $data['ckey'] = '';
+                empty($_GET['orderno']) or $query->ordernoLike($_GET['orderno']);
+                empty($_GET['status']) or $query->theStatus($_GET['status']);
+        })->latest('created_at')->paginate($this->paginate)->toArray($this->toArray);
+        $order_count_new = Order::theStatus('new')->count();
+        $order_count_paid = Order::theStatus('paid')->count();
+        $order_count_refund = Order::theStatus('refund')->count();
+        $order_count_cancelled = Order::theStatus('cancelled')->count();
+        $ckey = $ckey_no_status = '';
         foreach ($_GET as $key => $value) {
-            if($key<>'page' && $value) $data['ckey'] .= "&$key=$value";
+            if($key<>'page' && $value) $ckey .= "&$key=$value";
+            if($key<>'status' && $key<>'page' && $value) $ckey_no_status .= "&$key=$value";
         }
-        return view('user.profile', $data);
+        return view('user.profile', compact(
+             'user',
+             'config_pay_style',
+             'config_status',
+             'pagenewslist',
+             'ckey_no_status',
+             'order_count_new',
+             'order_count_paid',
+             'order_count_refund',
+             'order_count_cancelled',
+             'ckey'));
     }
 
-    public function orderview(Request $id)
+    public function orderview($id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-        return view('user.orderview', $data);
+        $order = Order::findOrFail($id)->toArray();
+        // $order['pay_style'] = config('config.order.pay_style.' . $order['pay_style']);
+        // $order['status'] = config('config.order.status.' . $order['status']);
+        return view('user.orderview', compact('user', 'order'));
     }
 
 
