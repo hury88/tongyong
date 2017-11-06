@@ -29,8 +29,24 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
     Route::get('dashboard', 'PersonController@dashBoard');
 
     Route::get('/', ['as' => 'person', 'uses' => 'PersonController@profile']);
+    Route::get('/profile', 'PersonController@profile');
 
     Route::get('password', 'PersonController@password');
+    Route::post('upload/headimg', ['as' => 'uploadheadimg', function(){
+        $request = request();
+        $person = auth()->user()->profile;
+        $headimg = upload($request, 'headimg');
+        if ($headimg) {
+            $person->headimg = $headimg;
+            if ($person->save()) {
+                return handleResponseJson(201, '头像上传成功!');
+            }
+            return noticeResponseJson(412, '抱歉', '头像上传失败,请稍后再试');
+        } else {
+            return noticeResponseJson(412, '执行失败', '请先上传头像');
+        }
+    }]);
+
     Route::post('xgmm', 'PersonController@xgmm');
     Route::get('telphone', 'PersonController@telphone');
     Route::get('getyzm/{type}', 'PersonController@getyzm');
@@ -40,7 +56,7 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
 
     Route::get('certified', 'PersonController@certified');
     Route::post('smrz', 'PersonController@smrz');
-    Route::get('message', 'PersonController@message');
+    Route::get('message', ['as' => 'p_notices', 'uses' => 'NoticesController@person']);
     Route::get('message/view/{id}', 'PersonController@viewmessage');
 
 
@@ -95,7 +111,80 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
 
 
 
+    // 修改手机号
+    Route::post('profile/telphone/bind/new', ['as' => 'p_telphone', 'uses' => 'PersonController@post_telphone']);
+    // 修改邮箱号
+    Route::post('profile/email/bind/new', ['as' => 'p_email', 'uses' => 'PersonController@post_email']);
 
+    Route::group(['middleware' => function($request, Closure $next){
+        $rules = [
+            'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:users',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
+        return $next($request);
+    }], function () {
+        Route::post('/telphone/yzm', ['as' => 'p_telphone_yzm',function (Request $request) {
+
+            $telphone = request()->get('telphone');
+            // 生成验证码
+            $yzm = new YZM($telphone);
+            $code = $yzm->push();
+
+            // 调取验证码短信模板
+            $response_view = view('notify.yzm.sms', compact('code'))->render();
+
+            if (Send::sms($telphone, $response_view)) {
+
+                if ( $yzm->debug() ) {
+                    return handleResponseJson(2011, $response_view);
+                } else {
+                    return handleResponseJson(2011, '短信验证码发送成功, 请注意查收.');
+                }
+            } else {
+                return handleResponseJson(412, '发送验证码失败, 请重试!');
+            }
+        }]);
+
+    });
+//    发送邮箱
+    Route::group(['middleware' => function($request, Closure $next){
+        $rules = [
+            'email' => 'required|email|unique:users',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
+        return $next($request);
+    }], function () {
+        Route::post('/mail/yzm', ['as' => 'p_email_yzm',function (Request $request) {
+
+            $email = request()->get('email');
+            // 生成验证码
+            $yzm = new YZM($email);
+            $code = $yzm->push();
+
+            $name = request()->get('name');
+
+            // 调取验证码短信模板
+            $response_view = view('notify.yzm.email', compact('code', 'name'))->render();
+
+            if (Send::mail($email, '验证你的电子邮件地址', $response_view)) {
+
+                return handleResponseJson(2011, '邮件验证码发送成功, 请注意查收.');
+            }
+
+            return handleResponseJson(412, '发送邮件失败, 请重试！');
+        }]);
+
+    });
+
+    /*
 
     Route::post('profile/save', 'PersonController@saveProfile');
 
@@ -173,5 +262,5 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
     //Freeproducts
     Route::put('freeproducts/subscribe/{id}', ['uses' => 'FreeProductsController@subscribe', 'as' => 'freeproducts.subscribe']);
 
-    Route::get('myFreeProducts', ['uses' => 'FreeProductsController@myFreeProducts', 'as' => 'freeproducts.my_free_products']);
+    Route::get('myFreeProducts', ['uses' => 'FreeProductsController@myFreeProducts', 'as' => 'freeproducts.my_free_products']);*/
 });

@@ -18,18 +18,45 @@ use Validator;
 use Auth;
 use App\Order;
 use DB;
+use App\Notice;
+use YZM;
 
 
 class PersonController extends base\UserController
 {
     private $paginate = 15;
     private $toArray = 10;
+
     /**
      * Inicializa variables para la validacion de perfil.
      */
     public function __construct()
     {
+        $first = isset($GLOBALS['uri'][1]) ? $GLOBALS['uri'][1] : 'default';
+        $next = isset($GLOBALS['uri'][2]) ? $GLOBALS['uri'][2] : 'default';
+        /*$menu_first = trans("users.menu.$first");
+        if ($menu_first != "users.menu.$first") {
 
+            if($next && isset($menu_first['next'][$next])) {
+                $next =
+            }
+        }*/
+
+        /*$next = isset($GLOBALS['uri'][2]) ? $GLOBALS['uri'][2] : '';
+        $menu_first = trans("business.menu.$first");
+        if ($menu_first != "business.menu.$first") {
+            $title = [$menu_first['title']];
+            if (isset($menu_first['next'])) {
+                if (!$next) {
+                    $next = key($menu_first['next']);
+                }
+                array_unshift($title, $menu_first['next'][$next]['title']);
+            }
+        }
+
+        view()->share('_title', $title);*/
+        view()->share('_first', $first);
+        view()->share('_next', $next);
     }
 
     /**
@@ -38,21 +65,22 @@ class PersonController extends base\UserController
     public function password()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
 
         return view('user.profile', $data);
     }
+
     /**
      * 重置密码-xiugai
      */
     public function xgmm(Request $request)
     {
         $data = $request->all(); //接收所有的数据
-        $oldpass=$request->input('oldpass');
-        $password=$request->input('pass1');
+        $oldpass = $request->input('oldpass');
+        $password = $request->input('pass1');
         $rules = [
-            'oldpass'=>'required|between:6,20',
-            'pass1'=>'required|between:6,20|confirmed',
+            'oldpass' => 'required|between:6,20',
+            'pass1' => 'required|between:6,20|confirmed',
         ];
         $messages = [
             'required' => '密码不能为空',
@@ -61,7 +89,7 @@ class PersonController extends base\UserController
         ];
         $validator = Validator::make($data, $rules, $messages);
         $user = \Auth::user();
-        $validator->after(function($validator) use ($oldpass, $user) {
+        $validator->after(function ($validator) use ($oldpass, $user) {
             if (!\Hash::check($oldpass, $user->password)) { //原始密码和数据库里的密码进行比对
                 $validator->errors()->add('oldpass', '原密码错误'); //错误的话显示原始密码错误
             }
@@ -80,7 +108,7 @@ class PersonController extends base\UserController
     public function telphone()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
@@ -90,57 +118,74 @@ class PersonController extends base\UserController
     public function email()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
 
         return view('user.profile', $data);
     }
-    /*
-     * 修改信息
+
+    /**
+     * 修改手机
      */
-    public function xgtel(Request $request)
+    public function post_telphone(Request $request)
     {
         $user = \Auth::user();
-        if($request->type=="tel"){
-            $tel=$request->tel;
-            $nums=DB::table("users")->where("telphone",$tel)->count();
-            if(!$nums){
-                $user->telphone=$tel;
-                $user->save();      //成功后，保存新密码
-                return 200;
-            } else{
-                return 300;
-            }
-        }elseif($request->type=="email"){
-            $tel=$request->email;
-            $nums=DB::table("users")->where("email",$tel)->count();
-            if(!$nums){
-                $user->email=$tel;
-                $user->save();      //成功后，保存新密码
-                return 200;
-            } else{
-                return 300;
-            }
-        }else{
-            return 300;
+
+        $rules = [
+            'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:users',
+            'yzm' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
         }
-        return 200;
+
+        $telphone = $request->get('telphone');
+        $yzm = new YZM($telphone);
+        if ($yzm->legal($request->yzm)) {
+            $yzm->pop();
+            $user->telphone = $telphone;
+            if ($user->save()) {
+                return handleResponseJson(200, '手机号修改成功.', '/person');
+            }
+            return handleResponseJson(412, '手机号修改失败,请稍后再试.');
+        }
+        return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
     }
+
     /**
-     * 修改手机-获取验证码
+     * 修改邮箱
      */
-    public function getyzm($type)
+    public function post_email(Request $request)
     {
-        if($type=="tel"){
+        $user = \Auth::user();
 
-        }elseif($type=="email"){
+        $rules = [
+            'email' => 'required|email|unique:users',
+            'yzm' => 'required',
+        ];
 
-        }else{
-            return 300;
+        $validator = Validator::make($request->all(), $rules);
+
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
         }
-        return 200;
+
+        $email = $request->email;
+        $yzm = new YZM($email);
+        if ($yzm->legal($request->yzm)) {
+            $yzm->pop();
+            $user->email = $email;
+            if ($user->save()) {
+                return handleResponseJson(200, '邮箱修改成功.', '/person');
+            }
+            return handleResponseJson(412, '邮箱修改失败,请稍后再试.');
+        }
+        return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
     }
-
-
 
 
     /**
@@ -148,12 +193,8 @@ class PersonController extends base\UserController
      */
     public function certified()
     {
-        $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-
-        $user_sm= DB::table("person_sm")->where("user_id",$user['id'])->get();
-        $data['user_sm']=$user_sm;
-        return view('user.profile', $data);
+        $user = \Auth::user()->relationsToArray();
+        return view('user.profile', compact('user'));
     }
 
 
@@ -163,34 +204,66 @@ class PersonController extends base\UserController
      */
     public function smrz(Request $request)
     {
-        $user_id=\Auth::id();
-        $issm=DB::table("person_sm")->where("user_id",$user_id)->count();
-        $info['user_id']=$user_id;
-        $info['realname']=$request->realname;
-        $info['sex']=$request->sex;
-        $info['card']=$request->card;
-        $info['year']=$request->year;
-        $info['month']=$request->month;
-        $info['day']=$request->day;
-        //身份证图片上传 未加
-        if(!$issm){
-            $id=DB::table("person_sm")->insert($info);
-            DB::table("users")->where("id",$user_id)->update(array("certified"=>1));
-        }else{
-            $id=DB::table("person_sm")->where("user_id",$user_id)->update($info);
-            DB::table("users")->where("id",$user_id)->update(array("certified"=>1));
-        }
-        return  redirect('person/certified');
-    }
+        $rules = [
+            'real_name' => 'required|between:2,6',
+            'gendar' => 'required|not_in',
+            'year' => 'required|numeric',
+            'month' => 'required|numeric',
+            'day' => 'required|numeric',
+            'card' => 'required|numeric|digits:18',
+            'front' => 'image|mimes:jpg,jpeg,bmp,png',
+            'back' => 'image|mimes:jpg,jpeg,bmp,png',
+        ];
 
-    /**
-     * 消息
-     * 此处暂无内容，需关联操作
-     */
-    public function message()
-    {
-        $user = User::findOrFail(\Auth::id())->relationsToArray();
-        return view('user.profile', compact('user'));
+        $validator = Validator::make($request->all(), $rules);
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
+        $front = upload($request, 'front');
+        if (!$front) {
+            return noticeResponseJson(412, '执行失败', '身份证正面照上传失败!');
+        }
+        $back = upload($request, 'back');
+        if (!$back) {
+            return noticeResponseJson(412, '执行失败', '身份证背面照上传失败!');
+        }
+
+        $person = \Auth::user()->profile;
+
+        $person->year = intval($request->year);
+        $person->month = intval($request->month);
+        $person->day = intval($request->day);
+        $person->birthday = date("$person->year-$person->month-$person->day");
+
+        $person->card = $request->card;
+        $person->card_front = $front;
+        $person->card_back = $back;
+        $person->certified_status = 1;
+        $person->gendar = $request->gendar;
+        $person->real_name = $request->real_name;
+        if ($person->save()) {
+            #发送认证请求
+            $flag = Notice::create([
+                'user_id'        => 0,
+                'sender_id'      => $person->user_id,
+                'action_type_id' => 6,
+                'source_id'      => 0,
+                'status'         => 1,
+                'title' => "个人会员实名认证申请",
+            ]);
+            Notice::create([
+                'user_id'        => $person->user_id,
+                'sender_id'      => 0,
+                'action_type_id' => 6,
+                'source_id'      => 0,
+                'status'         => 1,
+            ]);
+            if ($flag) {
+                return handleResponseJson(200, '申请认证成功!', '?');
+            }
+        }
+        return handleResponseJson(412, '申请认证失败!');
     }
 
     public function viewmessage()
@@ -206,9 +279,9 @@ class PersonController extends base\UserController
     public function jianli()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-        $data['nums']=DB::table("jianli")->where("user_id",$user['id'])->count();
-        $data['list']=DB::table("jianli")->where("user_id",$user['id'])->get();
+        $data['user'] = $user;
+        $data['nums'] = DB::table("jianli")->where("user_id", $user['id'])->count();
+        $data['list'] = DB::table("jianli")->where("user_id", $user['id'])->get();
 
 
         return view('user.profile', $data);
@@ -217,23 +290,23 @@ class PersonController extends base\UserController
     public function jianliadd()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.jianliadd', $data);
     }
 
     //置顶
     public function jianlitop($id)
     {
-        $id=(int)$id;
+        $id = (int)$id;
         $user = \Auth::id();
-        DB::table("jianli")->where("id","<>",$id)->where("user_id",$user)->update(array("istop"=>0));
-        $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update(array("istop"=>1));
-        if($id){
-            $data['status']=200;
-            $data['content']=0;
-        } else{
-            $data['status']=300;
-            $data['content']="网络故障！";
+        DB::table("jianli")->where("id", "<>", $id)->where("user_id", $user)->update(array("istop" => 0));
+        $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update(array("istop" => 1));
+        if ($id) {
+            $data['status'] = 200;
+            $data['content'] = 0;
+        } else {
+            $data['status'] = 300;
+            $data['content'] = "网络故障！";
 
         }
         return json_encode($data);
@@ -242,16 +315,16 @@ class PersonController extends base\UserController
     //默认
     public function jianlimr($id)
     {
-        $id=(int)$id;
+        $id = (int)$id;
         $user = \Auth::id();
-        DB::table("jianli")->where("id","<>",$id)->where("user_id",$user)->update(array("ismr"=>0));
-        $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update(array("ismr"=>1));
-        if($id){
-            $data['status']=200;
-            $data['content']=0;
-        } else{
-            $data['status']=300;
-            $data['content']="网络故障！";
+        DB::table("jianli")->where("id", "<>", $id)->where("user_id", $user)->update(array("ismr" => 0));
+        $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update(array("ismr" => 1));
+        if ($id) {
+            $data['status'] = 200;
+            $data['content'] = 0;
+        } else {
+            $data['status'] = 300;
+            $data['content'] = "网络故障！";
 
         }
         return json_encode($data);
@@ -260,37 +333,37 @@ class PersonController extends base\UserController
     //删除
     public function jianlidel($id)
     {
-        $id=(int)$id;
+        $id = (int)$id;
         $user = \Auth::id();
-        $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->delete();
-        if($id){
-            $data['status']=200;
-            $data['content']=0;
-        } else{
-            $data['status']=300;
-            $data['content']="网络故障！";
+        $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->delete();
+        if ($id) {
+            $data['status'] = 200;
+            $data['content'] = 0;
+        } else {
+            $data['status'] = 300;
+            $data['content'] = "网络故障！";
 
         }
         return json_encode($data);
     }
 
-    public function jianlipostadd(Request $request,$id)
+    public function jianlipostadd(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $info['user_id']=$user;
-            $info['addtime']=time();
-            $info['ip']=$request->getClientIp();
-            if($id){
-                $res=DB::table("jianli")->insert($info);
-            }else{
-                $res=DB::table("jianli")->where("user_id",$user)->where("id",$id)->update($info);
+        if ($user) {
+            $info = $request->all();
+            $info['user_id'] = $user;
+            $info['addtime'] = time();
+            $info['ip'] = $request->getClientIp();
+            if ($id) {
+                $res = DB::table("jianli")->insert($info);
+            } else {
+                $res = DB::table("jianli")->where("user_id", $user)->where("id", $id)->update($info);
             }
-            if($res){
-                $data['status']=200;
-                $data['id']= DB::getPdo()->lastInsertId();
-                $data['content']= "<div class=\"form-line clearfix\">
+            if ($res) {
+                $data['status'] = 200;
+                $data['id'] = DB::getPdo()->lastInsertId();
+                $data['content'] = "<div class=\"form-line clearfix\">
                                 <span class=\"resume-table-trone font-bold\">简历名称：</span>
                                 <div class=\"my-joinjob-textar\">{$info['nid']}</div>
                             </div>
@@ -382,24 +455,24 @@ class PersonController extends base\UserController
                                 <span class=\"resume-table-trone font-bold\">海外工作/学习经历：</span>
                                 <div class=\"my-joinjob-textar\">{$info['remark']}</div>
                             </div>";
-            }else{
-                $data['status']=300;
-                $data['id']=0;
-                $data['content']=0;
+            } else {
+                $data['status'] = 300;
+                $data['id'] = 0;
+                $data['content'] = 0;
             }
             return json_encode($data);
         }
     }
 
-    public function jianlipostadd2(Request $request,$id)
+    public function jianlipostadd2(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($info);
-            if($id){
-                $data['status']=200;
-                $data['content']= " <div class=\"form-line clearfix\">
+        if ($user) {
+            $info = $request->all();
+            $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($info);
+            if ($id) {
+                $data['status'] = 200;
+                $data['content'] = " <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone font-bold\">期望工作性质：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -441,42 +514,42 @@ class PersonController extends base\UserController
                                     </div>
                                 </div>
                             </div>";
-            }else{
-                $data['status']=300;
-                $data['content']=0;
+            } else {
+                $data['status'] = 300;
+                $data['content'] = 0;
             }
             return json_encode($data);
         }
     }
 
-    public function jianlipostadd3(Request $request,$id)
+    public function jianlipostadd3(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
+        if ($user) {
+            $info = $request->all();
 //            var_dump($info);die;
-            $gzjy="";
-            $data=array();
-            foreach($info['qymc'] as $key=>$vf){
-                if($info['qymc'][$key]){
-                    $data[]=array(
-                        "qymc"=>   $info['qymc'][$key],
-                        "qylb"=>   $info['qylb'][$key],
-                        "gzsj"=>   $info['gzsj'][$key],
-                        "zwmc"=>   $info['zwmc'][$key],
-                        "price"=>   $info['price'][$key],
-                        "gzms"=>   $info['gzms'][$key],
-                        "qygm"=>   $info['qygm'][$key],
-                        "qyxz"=>   $info['qyxz'][$key]
+            $gzjy = "";
+            $data = array();
+            foreach ($info['qymc'] as $key => $vf) {
+                if ($info['qymc'][$key]) {
+                    $data[] = array(
+                        "qymc" => $info['qymc'][$key],
+                        "qylb" => $info['qylb'][$key],
+                        "gzsj" => $info['gzsj'][$key],
+                        "zwmc" => $info['zwmc'][$key],
+                        "price" => $info['price'][$key],
+                        "gzms" => $info['gzms'][$key],
+                        "qygm" => $info['qygm'][$key],
+                        "qyxz" => $info['qyxz'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['gzjy']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
-                    $content.=" <div class=\"form-line clearfix\">
+            if (count($data) > 0) {
+                $up['gzjy'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
+                    $content .= " <div class=\"form-line clearfix\">
                             <span class=\"resume-table-trone font-bold\">企业名称：</span>
                             <div class=\"resume-table-trseven\">
                                 <p class=\"user-information-p\">{$vf['qymc']}</p>
@@ -535,9 +608,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -545,30 +618,30 @@ class PersonController extends base\UserController
     }
 
 
-    public function jianlipostadd4(Request $request,$id)
+    public function jianlipostadd4(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $gzjy="";
-            $data=array();
-            foreach($info['xxmc'] as $key=>$vf){
-                if($info['xxmc'][$key]){
-                    $data[]=array(
-                        "xxmc"=>   $info['xxmc'][$key],
-                        "sj"=>   $info['sj'][$key],
-                        "zy"=>   $info['zy'][$key],
-                        "istz"=>   $info['istz'][$key],
-                        "xl"=>   $info['xl'][$key]
+        if ($user) {
+            $info = $request->all();
+            $gzjy = "";
+            $data = array();
+            foreach ($info['xxmc'] as $key => $vf) {
+                if ($info['xxmc'][$key]) {
+                    $data[] = array(
+                        "xxmc" => $info['xxmc'][$key],
+                        "sj" => $info['sj'][$key],
+                        "zy" => $info['zy'][$key],
+                        "istz" => $info['istz'][$key],
+                        "xl" => $info['xl'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['jybj']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+            if (count($data) > 0) {
+                $up['jybj'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                 <span class=\"resume-table-trone font-bold\">学校名称：</span>
                                 <div class=\"resume-table-trseven\">
                                     <p class=\"user-information-p\">{$vf['xxmc']}</p>
@@ -605,9 +678,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -615,29 +688,29 @@ class PersonController extends base\UserController
     }
 
 
-    public function jianlipostadd5(Request $request,$id)
+    public function jianlipostadd5(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $gzjy="";
-            $data=array();
-            foreach($info['hdjx'] as $key=>$vf){
-                if($info['hdjx'][$key]){
-                    $data[]=array(
-                        "hdjx"=>   $info['hdjx'][$key],
-                        "jxsj"=>   $info['jxsj'][$key],
-                        "xnzw"=>   $info['xnzw'][$key],
-                        "zwsj"=>   $info['zwsj'][$key]
+        if ($user) {
+            $info = $request->all();
+            $gzjy = "";
+            $data = array();
+            foreach ($info['hdjx'] as $key => $vf) {
+                if ($info['hdjx'][$key]) {
+                    $data[] = array(
+                        "hdjx" => $info['hdjx'][$key],
+                        "jxsj" => $info['jxsj'][$key],
+                        "xnzw" => $info['xnzw'][$key],
+                        "zwsj" => $info['zwsj'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['zxqk']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
-                    $content.=" <div class=\"form-line clearfix\">
+            if (count($data) > 0) {
+                $up['zxqk'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
+                    $content .= " <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone font-bold\">获得奖项：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -668,9 +741,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -678,30 +751,31 @@ class PersonController extends base\UserController
     }
 
 
-
-    public function jianlipostadd6(Request $request,$id)
+    public function jianlipostadd6(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $gzjy="";
-            $data=array();
-            foreach($info['jnyy'] as $key=>$vf){
-                if($info['jnyy'][$key]){
-                    $data[]=array(
-                        "jnyy"=>   $info['jnyy'][$key],
-                        "zdy"=>   $info['zdy'][$key],
-                        "zwcd"=>   $info['zwcd'][$key]
+        if ($user) {
+            $info = $request->all();
+            $gzjy = "";
+            $data = array();
+            foreach ($info['jnyy'] as $key => $vf) {
+                if ($info['jnyy'][$key]) {
+                    $data[] = array(
+                        "jnyy" => $info['jnyy'][$key],
+                        "zdy" => $info['zdy'][$key],
+                        "zwcd" => $info['zwcd'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['jntc']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
-                    if($vf['zdy'])$zdy="【{$vf['zdy']}】";else{$zdy="";}
-                    $content.=" <div class=\"form-line clearfix\">
+            if (count($data) > 0) {
+                $up['jntc'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
+                    if ($vf['zdy']) $zdy = "【{$vf['zdy']}】"; else {
+                        $zdy = "";
+                    }
+                    $content .= " <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone font-bold\">技能/语言：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -718,9 +792,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -728,32 +802,31 @@ class PersonController extends base\UserController
     }
 
 
-
-    public function jianlipostadd7(Request $request,$id)
+    public function jianlipostadd7(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $gzjy="";
-            $data=array();
-            foreach($info['sj'] as $key=>$vf){
-                if($info['sj'][$key]){
-                    $data[]=array(
-                        "sj"=>   $info['sj'][$key],
-                        "kc"=>   $info['kc'][$key],
-                        "jg"=>   $info['jg'][$key],
-                        "dd"=>   $info['dd'][$key],
-                        "zs"=>   $info['zs'][$key],
-                        "ms"=>   $info['ms'][$key]
+        if ($user) {
+            $info = $request->all();
+            $gzjy = "";
+            $data = array();
+            foreach ($info['sj'] as $key => $vf) {
+                if ($info['sj'][$key]) {
+                    $data[] = array(
+                        "sj" => $info['sj'][$key],
+                        "kc" => $info['kc'][$key],
+                        "jg" => $info['jg'][$key],
+                        "dd" => $info['dd'][$key],
+                        "zs" => $info['zs'][$key],
+                        "ms" => $info['ms'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['pxjl']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
-                    $content.=" <div class=\"form-line clearfix\">
+            if (count($data) > 0) {
+                $up['pxjl'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
+                    $content .= " <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone font-bold\">时间：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -796,9 +869,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -806,30 +879,31 @@ class PersonController extends base\UserController
     }
 
 
-
-    public function jianlipostadd8(Request $request,$id)
+    public function jianlipostadd8(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $gzjy="";
-            $data=array();
-            foreach($info['kc'] as $key=>$vf){
-                if($info['kc'][$key]){
-                    $data[]=array(
-                        "kc"=>   $info['kc'][$key],
-                        "zdy"=>   $info['zdy'][$key],
-                        "sj"=>   $info['sj'][$key]
+        if ($user) {
+            $info = $request->all();
+            $gzjy = "";
+            $data = array();
+            foreach ($info['kc'] as $key => $vf) {
+                if ($info['kc'][$key]) {
+                    $data[] = array(
+                        "kc" => $info['kc'][$key],
+                        "zdy" => $info['zdy'][$key],
+                        "sj" => $info['sj'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['zs']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
-                    if($vf['zdy'])$zdy="【{$vf['zdy']}】";else{$zdy="";}
-                    $content.="<div class=\"form-line clearfix\">
+            if (count($data) > 0) {
+                $up['zs'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
+                    if ($vf['zdy']) $zdy = "【{$vf['zdy']}】"; else {
+                        $zdy = "";
+                    }
+                    $content .= "<div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone\">证书名称：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -849,9 +923,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -859,14 +933,14 @@ class PersonController extends base\UserController
     }
 
 
-    public function jianlipostadd9(Request $request,$id)
+    public function jianlipostadd9(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $up['qt']=json_encode($info);
-            $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-            $content=" <div class=\"form-line clearfix\">
+        if ($user) {
+            $info = $request->all();
+            $up['qt'] = json_encode($info);
+            $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+            $content = " <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone\">兴趣爱好：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -942,42 +1016,41 @@ class PersonController extends base\UserController
                                     <p class=\"user-information-p\">{$info['qt']}</p>
                                 </div>
                             </div>";
-                $res['status'] = 200;
-                $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
-            }
+            $res['status'] = 200;
+            $res['content'] = $content;
+        } else {
+            $res['status'] = 300;
+            $res['content'] = 0;
+        }
 
-            return json_encode($res);
+        return json_encode($res);
     }
 
 
-
-    public function jianlipostadd10(Request $request,$id)
+    public function jianlipostadd10(Request $request, $id)
     {
         $user = \Auth::id();
-        if($user){
-            $info=$request->all();
-            $gzjy="";
-            $data=array();
-            foreach($info['xmmc'] as $key=>$vf){
-                if($info['xmmc'][$key]){
-                    $data[]=array(
-                        "xmmc"=>   $info['xmmc'][$key],
-                        "sj"=>   $info['sj'][$key],
-                        "xmms"=>   $info['xmms'][$key],
-                        "zrms"=>   $info['zrms'][$key]
+        if ($user) {
+            $info = $request->all();
+            $gzjy = "";
+            $data = array();
+            foreach ($info['xmmc'] as $key => $vf) {
+                if ($info['xmmc'][$key]) {
+                    $data[] = array(
+                        "xmmc" => $info['xmmc'][$key],
+                        "sj" => $info['sj'][$key],
+                        "xmms" => $info['xmms'][$key],
+                        "zrms" => $info['zrms'][$key]
                     );
                 }
             }
-            if(count($data)>0){
-                $up['xmjy']=json_encode($data);
-                $id=DB::table("jianli")->where("id",$id)->where("user_id",$user)->update($up);
-                $content="";
-                foreach($data as $key=> $vf){
+            if (count($data) > 0) {
+                $up['xmjy'] = json_encode($data);
+                $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($up);
+                $content = "";
+                foreach ($data as $key => $vf) {
 //                    if($vf['zdy'])$zdy="【{$vf['zdy']}】";else{$zdy="";}
-                    $content.=" <div class=\"form-line clearfix\">
+                    $content .= " <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone\">项目名称：</span>
                                     <div class=\"resume-table-trtwo\">
@@ -1006,9 +1079,9 @@ class PersonController extends base\UserController
                 }
                 $res['status'] = 200;
                 $res['content'] = $content;
-            }else{
-                $res['status']=300;
-                $res['content']=0;
+            } else {
+                $res['status'] = 300;
+                $res['content'] = 0;
             }
 
             return json_encode($res);
@@ -1016,12 +1089,11 @@ class PersonController extends base\UserController
     }
 
 
-
     public function jianliview($id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-        $data['list']=DB::table("jianli")->find($id);
+        $data['user'] = $user;
+        $data['list'] = DB::table("jianli")->find($id);
         return view('user.jianliview', $data);
     }
 
@@ -1029,24 +1101,16 @@ class PersonController extends base\UserController
     public function jianliedit($id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
-        $data['list']=DB::table("jianli")->find($id);
+        $data['user'] = $user;
+        $data['list'] = DB::table("jianli")->find($id);
         return view('user.jianliedit', $data);
     }
-
-
-
-
-
-
-
-
 
 
     public function jianlitoudi()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
@@ -1054,7 +1118,7 @@ class PersonController extends base\UserController
     public function jianlimsyq()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
@@ -1062,21 +1126,21 @@ class PersonController extends base\UserController
     public function jianlimsyqview(Request $id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
     public function jianlidown()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
     public function jianliwdsc()
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
@@ -1095,31 +1159,31 @@ class PersonController extends base\UserController
 
         $_GET['orderno'] = isset($_GET['orderno']) && $_GET['orderno'] ? $_GET['orderno'] : '';
         $_GET['status'] = isset($_GET['status']) && $_GET['status'] ? $_GET['status'] : '';
-        $pagenewslist = \Auth::user()->hasManyOrder()
-            ->where(function ($query) {
-                empty($_GET['orderno']) or $query->ordernoLike($_GET['orderno']);
-                empty($_GET['status']) or $query->theStatus($_GET['status']);
+        $order = \Auth::user()->hasManyOrder();
+        $pagenewslist = $order->where(function ($query) {
+            empty($_GET['orderno']) or $query->ordernoLike($_GET['orderno']);
+            empty($_GET['status']) or $query->theStatus($_GET['status']);
         })->latest('created_at')->paginate($this->paginate)->toArray($this->toArray);
-        $order_count_new = Order::theStatus('new')->count();
-        $order_count_paid = Order::theStatus('paid')->count();
-        $order_count_refund = Order::theStatus('refund')->count();
-        $order_count_cancelled = Order::theStatus('cancelled')->count();
+        $order_count_new = $order->theStatus('new')->count();
+        $order_count_paid = $order->theStatus('paid')->count();
+        $order_count_refund = $order->theStatus('refund')->count();
+        $order_count_cancelled = $order->theStatus('cancelled')->count();
         $ckey = $ckey_no_status = '';
         foreach ($_GET as $key => $value) {
-            if($key<>'page' && $value) $ckey .= "&$key=$value";
-            if($key<>'status' && $key<>'page' && $value) $ckey_no_status .= "&$key=$value";
+            if ($key <> 'page' && $value) $ckey .= "&$key=$value";
+            if ($key <> 'status' && $key <> 'page' && $value) $ckey_no_status .= "&$key=$value";
         }
         return view('user.profile', compact(
-             'user',
-             'config_pay_style',
-             'config_status',
-             'pagenewslist',
-             'ckey_no_status',
-             'order_count_new',
-             'order_count_paid',
-             'order_count_refund',
-             'order_count_cancelled',
-             'ckey'));
+            'user',
+            'config_pay_style',
+            'config_status',
+            'pagenewslist',
+            'ckey_no_status',
+            'order_count_new',
+            'order_count_paid',
+            'order_count_refund',
+            'order_count_cancelled',
+            'ckey'));
     }
 
     public function orderview($id)
@@ -1135,49 +1199,45 @@ class PersonController extends base\UserController
     public function ordersqtk(Request $id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.ordersqtk', $data);
     }
 
     public function orderpay(Request $id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.orderpay', $data);
     }
 
     public function orderpaysucc(Request $id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.orderpaysucc', $data);
     }
 
 
-
-
-
-
-    public function orderbmbzypx($type=null)
+    public function orderbmbzypx($type = null)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
 
-    public function orderbmbzyzs($type=null)
+    public function orderbmbzyzs($type = null)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
 
-    public function orderbmbgjjy($type=null)
+    public function orderbmbgjjy($type = null)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 
@@ -1185,17 +1245,16 @@ class PersonController extends base\UserController
     public function orderbmbview(Request $id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user']=$user;
+        $data['user'] = $user;
         return view('user.orderbmbview', $data);
     }
 
 
-
     public function jianlimbxz($type)
     {
-        switch($type){
+        switch ($type) {
             case "gzjy":
-                $content=" <div class=\"form-line clearfix\">
+                $content = " <div class=\"form-line clearfix\">
                                     <span class=\"resume-table-trone\"><b>*</b>企业名称：</span>
                                     <div class=\"resume-table-trseven\" colspan=\"3\">
                                         <input type=\"text\" class=\"resume-company-name\" name=\"qymc[]\"/>
@@ -1268,7 +1327,7 @@ class PersonController extends base\UserController
                                 </div>";
                 break;
             case "jybj":
-                $content=" <div class=\"form-line clearfix\">
+                $content = " <div class=\"form-line clearfix\">
                                     <span class=\"resume-table-trone\"><b>*</b>学校名称：</span>
                                     <div class=\"resume-table-trseven\" colspan=\"3\">
                                         <input type=\"text\" class=\"resume-company-name\" name=\"xxmc[]\"/>
@@ -1310,7 +1369,7 @@ class PersonController extends base\UserController
                                 </div>";
                 break;
             case "zxqk":
-                $content="<div class=\"form-line clearfix\">
+                $content = "<div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\">获得奖项：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -1340,7 +1399,7 @@ class PersonController extends base\UserController
                             </div>";
                 break;
             case "jntc":
-                $content=" <div class=\"form-line clearfix\">
+                $content = " <div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>技能/语言：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -1372,7 +1431,7 @@ class PersonController extends base\UserController
                                 </div>";
                 break;
             case "pxjl":
-                $content="<div class=\"form-line clearfix\">
+                $content = "<div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>时间：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -1418,7 +1477,7 @@ class PersonController extends base\UserController
                                 </div>";
                 break;
             case "zs":
-                $content=" <div class=\"form-line clearfix\">
+                $content = " <div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>培训课程：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -1444,7 +1503,7 @@ class PersonController extends base\UserController
                             </div>";
                 break;
             case "xmjy":
-                $content="  <div class=\"form-line clearfix\">
+                $content = "  <div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>项目名称：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -1476,15 +1535,15 @@ class PersonController extends base\UserController
                                 </div>";
                 break;
             default:
-                $content=0;
+                $content = 0;
                 break;
         }
-        if($content){
-            $data['status']=200;
-            $data['content']=$content;
-        }else{
-            $data['status']=300;
-            $data['content']="网络故障，请联系管理员";
+        if ($content) {
+            $data['status'] = 200;
+            $data['content'] = $content;
+        } else {
+            $data['status'] = 300;
+            $data['content'] = "网络故障，请联系管理员";
         }
         return json_encode($data);
     }
@@ -1492,14 +1551,15 @@ class PersonController extends base\UserController
     /*
      * 简历-获取对应的修改信息
      */
-    function jianlimbxg(Request $request,$type){
-        $id=(int)$request->id;
-        $user=\Auth::id();
-        $res=DB::table("jianli")->where("id",$id)->where("user_id",$user)->first();
-        $csrf=csrf_field();
-        switch($type){
+    function jianlimbxg(Request $request, $type)
+    {
+        $id = (int)$request->id;
+        $user = \Auth::id();
+        $res = DB::table("jianli")->where("id", $id)->where("user_id", $user)->first();
+        $csrf = csrf_field();
+        switch ($type) {
             case "jbxx":
-                $content="<form onsubmit=\"return ck_jladd1(this)\">
+                $content = "<form onsubmit=\"return ck_jladd1(this)\">
                             {$csrf}
                             <div class=\"form-line clearfix\">
                                 <div class=\"form-line clearfix\">
@@ -1638,7 +1698,7 @@ class PersonController extends base\UserController
                 break;
 
             case "qzyx":
-                $content=" <form onsubmit=\"return ck_jladd2(this)\">
+                $content = " <form onsubmit=\"return ck_jladd2(this)\">
                             {$csrf}
                             <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
@@ -1726,7 +1786,7 @@ class PersonController extends base\UserController
                 break;
 
             case "qt":
-                $content="  <form onsubmit=\"return ck_jladd9(this)\" id=\"add_zs_form\">
+                $content = "  <form onsubmit=\"return ck_jladd9(this)\" id=\"add_zs_form\">
                             {{ csrf_field() }}
                             <div class=\"form-line clearfix\">
                                 <div class=\"form-line-left fl\">
@@ -1814,12 +1874,12 @@ class PersonController extends base\UserController
 
 
             case "gzjy":
-                $info=json_decode($res->gzjy,true);
-                $content="<form onsubmit=\"return ck_jladd3(this)\" id=\"add_gzjy_form\">
+                $info = json_decode($res->gzjy, true);
+                $content = "<form onsubmit=\"return ck_jladd3(this)\" id=\"add_gzjy_form\">
                             {$csrf}
                             <div id=\"add_gzjy_div\">";
-                foreach($info as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                     <span class=\"resume-table-trone\"><b>*</b>企业名称：</span>
                                     <div class=\"resume-table-trseven\" colspan=\"3\">
                                         <input type=\"text\" class=\"resume-company-name\" name=\"qymc[]\"/>
@@ -1891,7 +1951,7 @@ class PersonController extends base\UserController
                                 </div>
                                 </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -1902,12 +1962,12 @@ class PersonController extends base\UserController
 
 
             case "jybj":
-                $info=json_decode($res->jybj,true);
-                $content=" <form onsubmit=\"return ck_jladd4(this)\" id=\"add_jybj_form\">
+                $info = json_decode($res->jybj, true);
+                $content = " <form onsubmit=\"return ck_jladd4(this)\" id=\"add_jybj_form\">
                             {$csrf}
                              <div id=\"add_jybj_div\">";
-                foreach($info as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                     <span class=\"resume-table-trone\"><b>*</b>学校名称：</span>
                                     <div class=\"resume-table-trseven\" colspan=\"3\">
                                         <input type=\"text\" class=\"resume-company-name\" name=\"xxmc[]\" value='{$vf['xxmc']}'/>
@@ -1948,7 +2008,7 @@ class PersonController extends base\UserController
                                 </div>
                                 </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -1958,14 +2018,13 @@ class PersonController extends base\UserController
                 break;
 
 
-
             case "zxqk":
-                $info=json_decode($res->zxqk,true);
-                $content=" <form onsubmit=\"return ck_jladd5(this)\" id=\"add_zxqk_form\">
+                $info = json_decode($res->zxqk, true);
+                $content = " <form onsubmit=\"return ck_jladd5(this)\" id=\"add_zxqk_form\">
                             {$csrf}
                              <div id=\"add_zxqk_div\">";
-                foreach($info as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\">获得奖项：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -1994,7 +2053,7 @@ class PersonController extends base\UserController
                                 </div>
                             </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -2005,12 +2064,12 @@ class PersonController extends base\UserController
 
 
             case "jntc":
-                $info=json_decode($res->jntc,true);
-                $content=" <form onsubmit=\"return ck_jladd6(this)\" id=\"add_jntc_form\">
+                $info = json_decode($res->jntc, true);
+                $content = " <form onsubmit=\"return ck_jladd6(this)\" id=\"add_jntc_form\">
                             {$csrf}
                              <div id=\"add_jntc_div\">";
-                foreach($info as $key=> $vf){
-                    $content.=" <div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= " <div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>技能/语言：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -2041,7 +2100,7 @@ class PersonController extends base\UserController
                                     </div>
                                 </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -2051,14 +2110,13 @@ class PersonController extends base\UserController
                 break;
 
 
-
             case "pxjl":
-                $info=json_decode($res->pxjl,true);
-                $content=" <form onsubmit=\"return ck_jladd7(this)\" id=\"add_pxjl_form\">
+                $info = json_decode($res->pxjl, true);
+                $content = " <form onsubmit=\"return ck_jladd7(this)\" id=\"add_pxjl_form\">
                             {$csrf}
                              <div id=\"add_pxjl_div\">";
-                foreach($info as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>时间：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -2103,7 +2161,7 @@ class PersonController extends base\UserController
                                     </div>
                                 </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -2113,14 +2171,13 @@ class PersonController extends base\UserController
                 break;
 
 
-
             case "zs":
-                $info=json_decode($res->zs,true);
-                $content="<form onsubmit=\"return ck_jladd8(this)\" id=\"add_zs_form\">
+                $info = json_decode($res->zs, true);
+                $content = "<form onsubmit=\"return ck_jladd8(this)\" id=\"add_zs_form\">
                             {$csrf}
                              <div id=\"add_zs_div\">";
-                foreach($info as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>培训课程：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -2145,7 +2202,7 @@ class PersonController extends base\UserController
                                 </div>
                             </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -2156,12 +2213,12 @@ class PersonController extends base\UserController
 
 
             case "xmjy":
-                $info=json_decode($res->xmjy,true);
-                $content="<form onsubmit=\"return ck_jladd10(this)\" id=\"add_xmjy_form\">
+                $info = json_decode($res->xmjy, true);
+                $content = "<form onsubmit=\"return ck_jladd10(this)\" id=\"add_xmjy_form\">
                             {$csrf}
                              <div id=\"add_xmjy_div\">";
-                foreach($info as $key=> $vf){
-                    $content.="<div class=\"form-line clearfix\">
+                foreach ($info as $key => $vf) {
+                    $content .= "<div class=\"form-line clearfix\">
                                     <div class=\"form-line-left fl\">
                                         <span class=\"resume-table-trone\"><b>*</b>项目名称：</span>
                                         <div class=\"resume-table-trtwo\">
@@ -2192,7 +2249,7 @@ class PersonController extends base\UserController
                                     </div>
                                 </div>";
                 }
-                $content.="</div>
+                $content .= "</div>
                             <div class=\"form-line clearfix\">
                                 <div class=\"resume-table-trsix fr\">
                                     <input class=\"resume-table-inp\" type=\"submit\" value=\"保存\"/>
@@ -2202,22 +2259,19 @@ class PersonController extends base\UserController
                 break;
 
 
-
             default:
-                $content=0;
+                $content = 0;
                 break;
         }
-        if($content){
-            $data['status']=200;
-            $data['content']=$content;
-        }else{
-            $data['status']=300;
-            $data['content']="网络故障，请联系管理员";
+        if ($content) {
+            $data['status'] = 200;
+            $data['content'] = $content;
+        } else {
+            $data['status'] = 300;
+            $data['content'] = "网络故障，请联系管理员";
         }
         return json_encode($data);
     }
-
-
 
 
 }

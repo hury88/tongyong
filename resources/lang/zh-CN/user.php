@@ -1,7 +1,36 @@
 <?php
 
 return [
-
+        'menu' => [
+            'profile' => ['title' => '会员首页',
+                'next' => [
+                    'default' => ['title' => '基本信息'],
+                    'password' => ['title' => '安全设置'],
+                    'certified' => ['title' => '实名认证'],
+                    'message' => ['title' => '消息管理'],
+                ]
+            ],
+            'jianli' => ['title' => '简历中心',
+                'next' => [
+                    'default' => ['title' => '我的简历'],
+                    'toudi' => ['title' => '简历投递记录'],
+                    'down' => ['title' => '谁下载了我的简历'],
+                    'msyq' => ['title' => '工作邀请'],
+                ]
+            ],
+            'order' => ['title' => '订单中心',
+                'next' => [
+                    'default' => ['title' => '简历收件箱'],
+                    'downloaded' => ['title' => '已下载简历'],
+                ]
+            ],
+            'order' => ['title' => '账户设置',
+                'next' => [
+                    'receive' => ['title' => '简历收件箱'],
+                    'downloaded' => ['title' => '已下载简历'],
+                ]
+            ],
+        ],
         'account'                      => '账号',
         'facebook'                     => 'Facebook',
         'twitter'                      => 'Twitter',

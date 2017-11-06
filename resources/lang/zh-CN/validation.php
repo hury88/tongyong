@@ -140,6 +140,14 @@ return [
         'wei' => '纬度',
         'siteurl' => '官方网址',
 
+        'business_name' => '企业名称',
+        'real_name' => '真实姓名',
+
+        'card' => '身份证号码',
+        'front' => '身份证正面照',
+        'back' => '身份证背面照',
+        'gendar' => '性别',
+
     ],
 
     'recaptcha' => '验证码不正确。',

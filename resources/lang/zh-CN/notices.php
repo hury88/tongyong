@@ -21,6 +21,9 @@ return [
         'order:rate'       => '订单 #[source_id]已评价',
         'order:received'   => '订单 #[source_id]已收到',
         'order:processing' => '订单 #[source_id]已处理',
+        'certification_person:request' => '您的认证信息已提交，请等待审核',
+        'certification_person:refuse' => '您的认证信息未通过，如有疑问，请联系网站客服协助解决',
+        'certification_person:ok' => '恭喜您实名认证已通过',
     ],
 
     'all_title'   => '短消息',

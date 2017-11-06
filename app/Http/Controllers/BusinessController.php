@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Notice;
+use YZM;
 
 class BusinessController extends base\UserController
 {
@@ -256,6 +257,69 @@ class BusinessController extends base\UserController
 
 
     }
+
+    /**
+    * 修改手机
+    */
+   public function telphone(Request $request)
+   {
+       $user = \Auth::user();
+
+       $rules = [
+           'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:users',
+           'yzm' => 'required',
+       ];
+
+       $validator = Validator::make($request->all(), $rules);
+
+       $errors = $validator->errors(); // 输出的错误，自己打印看下
+       if ($validator->fails()) {
+           return noticeResponseJson(412, '执行失败', $errors);
+       }
+
+       $telphone = $request->get('telphone');
+       $yzm = new YZM($telphone);
+       if ($yzm->legal($request->yzm)) {
+           $yzm->pop();
+           $user->telphone = $telphone;
+           if ($user->save()) {
+               return handleResponseJson(200, '手机号修改成功.', route('b_config'));
+           }
+           return handleResponseJson(412, '手机号修改失败,请稍后再试.');
+       }
+       return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
+   }
+   /**
+    * 修改邮箱
+    */
+   public function email(Request $request)
+   {
+       $user = \Auth::user();
+
+       $rules = [
+           'email' => 'required|email|unique:users',
+           'yzm' => 'required',
+       ];
+
+       $validator = Validator::make($request->all(), $rules);
+
+       $errors = $validator->errors(); // 输出的错误，自己打印看下
+       if ($validator->fails()) {
+           return noticeResponseJson(412, '执行失败', $errors);
+       }
+
+       $email = $request->email;
+       $yzm = new YZM($email);
+       if ($yzm->legal($request->yzm)) {
+           $yzm->pop();
+           $user->email = $email;
+           if ($user->save()) {
+               return handleResponseJson(200, '邮箱修改成功.', route('b_config'));
+           }
+           return handleResponseJson(412, '邮箱修改失败,请稍后再试.');
+       }
+       return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
+   }
 
     /**
      * 安全设置

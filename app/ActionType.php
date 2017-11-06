@@ -48,11 +48,6 @@ class ActionType extends Model
         return trans("notices.templates.$this->source_type:$this->action");
     }
 
-    public function getNoticeTitleAttribute()
-    {
-        return config("config.notices.{$this->source_type}_{$this->action}");
-    }
-
     public function getLinkAttribute()
     {
         return trans("notices.links.$this->source_type");

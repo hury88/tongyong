@@ -14,10 +14,10 @@
 	@section('user_wrap')
 	<div class="pager-wrap order-detials-box">
 	    <div class="wrap-box nation-edu clearfix">
-	        <div class="nation-edu-left fl">
+	        <div class="nation-edu-left fl" style="background-image:{{$user['certified'] ? 'url(/img/login-status.png)' : 'url()'}}">
 		    	<div class="headimg-img">
-		    	    <img src="/img/header-img.png"/>
-		    	    <p>修改头像</p>
+		    	    <img src="{{img($user['headimg'], '/img/header-img.png')}}"/>
+		    	    <a href="/person"><p>修改头像</p></a>
 		    	</div>
 		    	<div class="personal-username">欢迎回来，{{$user['member_name']}}</div>
 		    	<form action="{{ route('logout')}}" method="post"><a class="quit-personal" href="javascript:;">退出</a>{!! csrf_field() !!}</form>
@@ -45,15 +45,10 @@
 						@elseif($GLOBALS['uri'][1]=="email")
 							@include('user.right.email')
 						@elseif($GLOBALS['uri'][1]=="certified")
-							@if($user['certified']==1)
-								@include('user.right.certified')
-							@else
-								@include('user.right.certified_wrz')
-							@endif
-
+							@include('user.right.certified')
 						@elseif($GLOBALS['uri'][1]=="message")
 							@if(empty($GLOBALS['uri'][2]))
-								@include('user.right.message')
+								@include('user.right.notices')
 							@else
 								@include('user.right.message_view')
 							@endif
@@ -101,4 +96,7 @@
 @section('scripts')
     @parent
 	<script src="/js/ckform.js" type="text/javascript"></script>
+	@if(defined('NEED_ALERT'))
+	@include('partial.dialog')
+	@endif
 @stop

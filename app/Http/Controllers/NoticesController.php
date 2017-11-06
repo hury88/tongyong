@@ -61,6 +61,22 @@ class NoticesController extends Controller
         return View('business.notices', compact('user', 'ckey', 'action_types', 'pagenewslist', '_title', '_first', '_next'));
     }
 
+    /**
+     * 个人中心消息管理
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|\think\response\View
+     */
+    public function person()
+    {
+        $pagenewslist = Notice::auth()->desc()->paginate(20)->toArray();
+        Notice::auth()->where('status', 1)->update(['status' => 2]);
+//        $_first = 'message';
+        $user = \Auth::user()->relationsToArray();
+
+        $_first = 'message';
+
+        return View('user.profile', compact('user', 'ckey', 'pagenewslist', '_first', '_next'));
+    }
+
     public function push($force = false)
     {
         $date = date('Y-m-d H:i:s');

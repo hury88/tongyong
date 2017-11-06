@@ -5,7 +5,7 @@ $notices = config('config.notices');
 @section('inbox')
 <div class="system-messages">
     <ul class="system-messages-ul">
-        @foreach($pagenewslist['data'] as $key => $list)<?php extract($list);$actions = $action_types[$action_type_id];$title = $notices[$actions['source_type'].'_'.$actions['action']] ?>
+        @foreach($pagenewslist['data'] as $key => $list)<?php extract($list)?>
         <li class="system-messages-li {{$status == 1 ? 'no-read' : ''}}">
             <a href="javascript:;" class="clearfix">
                 <div class="system-mess-left fl">
@@ -23,8 +23,6 @@ $notices = config('config.notices');
         </li>
         @endforeach
     </ul>
-    <div class="web-pager">
-       @include('partial.paginator')
-    </div>
+    @include('partial.paginator')
 </div>
 @stop

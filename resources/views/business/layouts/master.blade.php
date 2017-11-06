@@ -22,7 +22,7 @@
 @section('footer')
 @stop
 @section('scripts')
-<script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
+<?php /*<script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
 <script>
     var Lh = $(".member-safety-left").height();
     var WH = $(window).height();
@@ -39,5 +39,5 @@
         //FF下用JS实现自定义滚动条
         $(".member-safety-right").niceScroll({cursorborder:"",cursorcolor:"rgba(0,0,0,0)",boxzoom:true});
     })
-</script>
+</script>*/ ?>
 @stop

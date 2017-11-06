@@ -3,19 +3,19 @@
         <div class="order-center-left fl">
             <ul>
                 <li class="link-location">
-                    <a href="javascript:;">会员中心</a>
+                    <a href="?">会员中心</a>
                 </li>
-                <li class="link-active">
+                <li id="person-menu-jianli">
                     <a href="/person/jianli">简历中心</a>
                 </li>
-                <li>
+                <li id="person-menu-order">
                     <a href="/person/order">订单中心</a>
                 </li>
-                <li>
+                <li id="person-menu-default">
                     <a href="/person">账户设置</a>
                 </li>
-                <li>
-                    <a href="javascript:;">积分商城</a>
+                <li id="person-menu-shop">
+                    <a href="javascript:alert('上线中');">积分商城</a>
                 </li>
             </ul>
         </div>
@@ -25,3 +25,6 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById("person-menu-{{$_first}}").className = "link-active";
+</script>

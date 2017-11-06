@@ -8,7 +8,7 @@ $th = ['订单编号', '用户', '培训课程', '价格', '状态'];
 </style>
     <form>
         <div class="order-search">
-            <?php Form::select2(config('config.order.orderBy'), '选择排序方式', 'order_style')?>
+            <?php Form::select2(config('config.order.orderBy'), '选择排序方式', 'orderBy')?>
             <input name="orderno" value="{{$_GET['orderno']}}" class="order-manager-inp" type="text" placeholder="输入订单编号"/>
             <input class="order-manager-sub" type="submit" value="搜索结果">
         </div>

@@ -253,7 +253,7 @@ function dialog(type, config, active)
 
 	// console.log(buttons);
 
- 	alert({
+ 	kwDialog({
  		title : title,
  		text : text,
  		icon : icon,

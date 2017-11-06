@@ -32,7 +32,7 @@ class Notice extends Model
      *
      * @var [array]
      */
-    protected $actionsType = [1, 2, 3, 8, 9, 10, 11, 14, 15];
+    protected $actionsType = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
     // protected $hidden = [ 'action', 'source' ];
 
@@ -50,20 +50,20 @@ class Notice extends Model
      */
     public static function create(array $attr = [])
     {
-        $ac = ActionType::find($attr['action_type_id']);
         if (!isset($attr['title'])) {
-            $attr['title'] = ActionType::find($attr['action_type_id'])->notice_title;
+            $attr['title'] = ActionType::find($attr['action_type_id'])->notice_template;
         }
         if (strpos($attr['user_id'], '|')) {
             $user_id_set = explode('|', $attr['user_id']);
             $user_id_set = array_unique($user_id_set);
+            $user_title_set = explode('|', $attr['title']);
             foreach ($user_id_set as $user_id) {
                 $attr['user_id'] = $user_id;
-                self::insert($attr);
+                parent::create($attr);
             }
             return true;
         }
-        return self::insert($attr);
+        return parent::create($attr);
         // parent::create($attr);
     }
 
