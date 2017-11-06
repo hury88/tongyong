@@ -133,47 +133,77 @@ class JobController extends Job
         }else{
             $title='';
         }
-//        if(isset($_GET['neixunid'])&&$_GET['neixunid']!=0){
-//            $neixunid=(int)$_GET['neixunid'];
-//            $ckey.='&neixunid='.$neixunid;
-//        }else{
-//            $neixunid=0;
-//        }
-//        if(isset($_GET['publicid'])&&$_GET['publicid']!=0){
-//            $publicid=(int)$_GET['publicid'];
-//            $ckey.='&publicid='.$publicid;
-//        }else{
-//            $publicid=0;
-//        }
-//        if(isset($_GET['qualificationid'])&&$_GET['qualificationid']!=0){
-//            $qualificationid=$_GET['qualificationid'];
-//            $qualificationidarr=explode(',',$qualificationid);
-//            $ckey.='&qualificationid='.$qualificationid;
-//        }else{
-//            $qualificationidarr=array();
-//            $qualificationid=0;
-//        }
-//        if(isset($_GET['industryid'])&&$_GET['industryid']!=0){
-//            $industryid=(int)$_GET['industryid'];
-//            $ckey.='&industryid='.$industryid;
-//        }else{
-//            $industryid=0;
-//        }
-//        if(isset($_GET['trainingid'])&&$_GET['trainingid']!=0){
-//            $trainingid=(int)$_GET['trainingid'];
-//            $ckey.='&trainingid='.$trainingid;
-//        }else{
-//            $trainingid=0;
-//        }
-//
-//        $sousuoarr=get_ssarr();
-//        $industryids=$sousuoarr[75][0];
-//        $neixunids=$sousuoarr[73][0];
-//        $publicids=$sousuoarr[74][0];
-//        $qiyezige=$sousuoarr[76];
-//        $pagenewslist=$Job->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,['id','title','price','enroll_num','img1','content'],16,9);
-//        return view('job/list', compact('pagenewslist','sanlist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids','qiyezige','qualificationidarr'));
-        return view('job/list', compact('sanlist'));
+        if(isset($_GET['salary'])&&$_GET['salary']!=0){
+            $salary=(int)$_GET['salary'];
+            $ckey.='&salary='.$salary;
+        }else{
+            $salary=0;
+        }
+
+        if(isset($_GET['education'])&&$_GET['education']!=0){
+            $education=(int)$_GET['education'];
+            $ckey.='&education='.$education;
+        }else{
+            $education=0;
+        }
+        if(isset($_GET['experience'])&&$_GET['experience']!=0){
+            $experience=(int)$_GET['experience'];
+            $ckey.='&experience='.$experience;
+        }else{
+            $experience=0;
+        }
+        if(isset($_GET['nature'])&&$_GET['nature']!=0){
+            $nature=(int)$_GET['nature'];
+            $ckey.='&nature='.$nature;
+        }else{
+            $nature=0;
+        }
+        if(isset($_GET['stime'])&&$_GET['stime']!=0){
+            $stime=(int)$_GET['stime'];
+            $ckey.='&stime='.$stime;
+        }else{
+            $stime=0;
+        }
+        if(isset($_GET['order'])&&$_GET['order']!=0){
+            $order=(int)$_GET['order'];
+            $ckey.='&order='.$order;
+        }else{
+            $order=0;
+        }
+        if(isset($_GET['work_nature'])&&$_GET['work_nature']!=0){
+            $work_nature=(int)$_GET['work_nature'];
+            $ckey.='&work_nature='.$work_nature;
+        }else{
+            $work_nature=0;
+        }
+        if(isset($_GET['industryid'])&&$_GET['industryid']!=0){
+            $industryid=(int)$_GET['industryid'];
+            $industryidarr=explode(',',$industryid);
+            $ckey.='&industryid='.$industryid;
+        }else{
+            $industryidarr=array();
+            $industryid=0;
+        }
+        if(isset($_GET['positionid'])&&$_GET['positionid']!=0){
+            $positionid=(int)$_GET['positionid'];
+            $positionidarr=explode(',',$positionid);
+            $ckey.='&positionid='.$positionid;
+        }else{
+            $positionidarr=array();
+            $positionid=0;
+        }
+        $salaryarr=config("config.business.salary");
+        $work_naturearr=config("config.business.work_nature");
+        $naturearr=config("config.business.nature");
+        $stimearr=config("config.business.stime");
+        $experiencearr=config("config.business.experience");
+        $educationarr=config("config.business.education");
+        $sousuoarr=get_ssarr();
+        $industryids=$sousuoarr[79];
+        $positionids=$sousuoarr[80];
+        $pagenewslist=$Job->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],$title,$salary,$education,$experience,$nature,$stime,$order,$work_nature,$industryidarr,$positionidarr,['job.id','job.title','job.sendtime','job.salary','job.cityid','job.work_nature','job.education','job.experience','job.user_id','job.industryid','job.relative','businesses.logo','businesses.user_id','businesses.business_name'],8,9);
+//        dd($pagenewslist);
+        return view('job/list', compact('sanlist','title','order','positionid','positionids','positionidarr','naturearr','nature','educationarr','education','experiencearr','experience','stimearr','stime','industryid','industryids','positionid','industryidarr','salaryarr','salary','ckey','work_nature','work_naturearr','pagenewslist'));
     }
     //院校信息发布
     public function newslist()

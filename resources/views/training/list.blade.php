@@ -192,7 +192,7 @@
                 <div class="job-result clearfix">
                     <p class="job-notice fl">您的选择结果：</p>
                     <ul class="fl">
-                        @if($qualificationidarr) @foreach($qualificationidarr as $vc) <li>{{v_id($vc,'catname','nature')}}<i class="job-selected-icon" data-id="{{$vc}}"></i></li> @endforeach @endif
+                        @if($qualificationidarr&&$qualificationidarr[0]>0)  @foreach($qualificationidarr as $vc) <li>{{v_id($vc,'catname','nature')}}<i class="job-selected-icon" data-id="{{$vc}}"></i></li> @endforeach @endif
                     </ul>
                 </div>
                 <div class="job-lists-box">

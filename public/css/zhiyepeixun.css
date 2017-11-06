@@ -1030,7 +1030,7 @@
 }
 .tiptop a {
      display: block;
-    background: url(../img/close.png) no-repeat;
+    background: url(../images/close.png) no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 33px;
@@ -1056,7 +1056,7 @@
     background: #fff;
     /* box-shadow: 1px 8px 10px 1px #9b9b9b; */
     border-radius: 1px;
-    behavior: url(../img/pie.htc);
+    behavior: url(../images/pie.htc);
     display: none;
     z-index: 111111;
     border: 5px solid #2f2f3f;
@@ -1141,8 +1141,8 @@
 .small_list ul li.on .bun_bg{display:block;}
 .btn{display:block;width:20px;height:73px;background-color:#777;background-repeat:no-repeat;background-position:center center;cursor:pointer;}
 .btn:hover{background-color:#e7000e;}
-.left_btn{float:left;margin-right:10px;background-image:url(../img/left_btn.png);}
-.right_btn{float:right;background-image:url(../img/right_btn.png);}
+.left_btn{float:left;margin-right:10px;background-image:url(../images/left_btn.png);}
+.right_btn{float:right;background-image:url(../images/right_btn.png);}
 
 .jobselect-cover{
 	position:absolute;
@@ -1185,7 +1185,7 @@
 	float: right;
 	width: 21px;
 	height: 21px;
-	background: url(../img/job-selected.png) no-repeat center;
+	background: url(../images/job-selected.png) no-repeat center;
 	margin-top: 15px;
 }
 .job-result{
@@ -1218,7 +1218,7 @@
 	height: 11px;
 	margin-left: 6px;
 	display: inline-block;
-	background:url(../img/job-selected.png) no-repeat center center;
+	background:url(../images/job-selected.png) no-repeat center center;
 }
 .job-lists-box{
 	width: 100%;
@@ -1262,7 +1262,7 @@
 	border: 1px solid #f5b517;
 }
 .job-lists-content .job-lists-dv .job-big-type{
-	background: url(../img/job-pull-close.png) no-repeat 7px center;
+	background: url(../images/job-pull-close.png) no-repeat 7px center;
 	padding:0 7px 0 27px;
 	font-size: 12px;
 	color: #333;
@@ -1274,7 +1274,7 @@
 	cursor: default;
 }
 .job-lists-content .job-lists-dv.job-selected-box .job-big-type{
-	background:#f5b517 url(../img/job-select-dui.png) no-repeat 7px center;
+	background:#f5b517 url(../images/job-select-dui.png) no-repeat 7px center;
 	color: #fff;
 }
 .job-small-type{
@@ -1289,7 +1289,7 @@
 	border: 1px solid #f5b517;
 }
 .job-small-type li{
-	background: url(../img/job-select-dui.png) no-repeat left center;
+	background: url(../images/job-select-dui.png) no-repeat left center;
 	padding-left: 20px;
 	font-size: 12px;
 	color: #333;
@@ -1300,7 +1300,7 @@
 	cursor: pointer;
 }
 .job-small-type .select-item{
-	background: url(../img/job-son-dui.png) no-repeat left center;
+	background: url(../images/job-son-dui.png) no-repeat left center;
 }
 .job-operate{
 	height:61px;
