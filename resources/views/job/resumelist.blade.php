@@ -20,14 +20,29 @@
 
                 <!--搜素-->
                 <div class="sqzwNav">
-                    <div class="sqzwNavsech">
-                        <select name="">
-                            <option value="">合肥</option>
-                            <option value="">合肥</option>
-                            <option value="">合肥</option>
-                        </select>
-                        <input type="text" name="" id="" value="" placeholder="输入职位关键词：如技术总监" class="txt"/>
-                        <input type="submit" name="" id="" value="搜索" class="btn"/>
+                    <div class="recruit-chose-box">
+                        <div class="search-person">
+                            <div class="recruit-pull">
+                                <p class="recruit-alltxt"> <i>关键字</i></p>
+                            </div>
+                            <input class="recruit-inp" placeholder="职位名称" type="text" />
+                            <a href="javascript:;" class="recruit-city">
+                                <span id="citySpan">合肥</span>
+                                <i id = "changeCity">+</i>
+                            </a>
+                        </div>
+                        <div class="search-hagnye">
+                            <input type="text" placeholder="选择行业" readonly/>
+                            <a class="hangye-pull" id="hangye-pull1" href="javascript:;">+</a>
+                        </div>
+                        <div class="search-hagnye">
+                            <input type="text" placeholder="选择职位" readonly/>
+                            <a class="hangye-pull" id="hangye-pull2" href="javascript:;">+</a>
+                        </div>
+                        <div class="recruit-search-inp">
+                            <input type="submit" value="搜索"/>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="sqzwNavlist">
                         <p>

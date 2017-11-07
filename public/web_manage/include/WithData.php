@@ -276,8 +276,6 @@ class WithData
             'price'				=>		I('post.price','','trim,htmlspecialchars'),
             'linkurl'			=>		I('post.linkurl','','trim,htmlspecialchars'),
             'period'				=>		I('post.period','','trim,htmlspecialchars'),
-            'link1'				=>		I('post.link1','','trim,htmlspecialchars'),
-            'link2'				=>		I('post.link2','','trim,htmlspecialchars'),
             #资讯
             //SEO
             'seotitle'		    =>		I('post.seotitle','','trim'),
@@ -319,6 +317,7 @@ class WithData
             'nature'				=>		I('post.nature', 0, 'intval'),
             'work_nature'				=>		I('post.work_nature', 0, 'intval'),
             'industryid'				=>		I('post.industryid', 0, 'intval'),
+            'positionid'				=>		I('post.positionid', 0, 'intval'),
             'salary'				=>		I('post.salary', 0, 'intval'),
             'education'				=>		I('post.education', 0, 'intval'),
             'experience'				=>		I('post.experience', 0, 'intval'),

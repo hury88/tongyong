@@ -76,7 +76,7 @@
                         </div>
                         <div class="yxxxfbr academyid">
 
-                            <span class="yx @if($academyid==0) on @endif">全部</span>
+                            <span class="yx @if($academyid<1) on @endif">全部</span>
                             @foreach($yxarr as $key=>$val)
                                     <span class="yx @if($key==$academyid) on @endif " data-id="{{$key}}">{{$val}}</span>
                             @endforeach
@@ -87,7 +87,7 @@
                             分类
                         </div>
                         <div class="yxxxfbr infotypeid">
-                            <span class="xxlb @if($academyid==0) on @endif">全部</span>
+                            <span class="xxlb @if($infotypeid<1) on @endif">全部</span>
                             @foreach($xxarr as $key=>$val)
                                 <span class="xxlb @if($key==$infotypeid) on @endif " data-id="{{$key}}">{{$val}}</span>
                             @endforeach

@@ -97,6 +97,7 @@
   });
   $(".job-operate .operate-reset").click(function(){
     $(".job-result ul").empty();
+      $(".job-small-type li").removeClass('select-item')
     if($(".jobselect-mask h2 span").is(":hidden")){
 
     }else{

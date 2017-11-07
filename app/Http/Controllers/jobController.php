@@ -40,44 +40,31 @@ class JobController extends Job
     public function __construct()
     {
 
-
-            $banimgsrc = img($GLOBALS['pid_data']->img1);
-
-        view()->share('banimgsrc', $banimgsrc);
     }
 //招聘信息详情
     public function show($id)
     {
+
         $viewrow =  $id;
-        $Training= new Training();
-        $id_arr=$Training->v_id_arr($id);
+        $Job= new Job();
+        $sanlist = $this->sanlist();
+        $id_arr=$Job->v_id_arr($id);
+        //dd($id_arr);
         if(!$id_arr){
             about(404);
         }
+        $Job->enroll_num = $Job->enroll_num +1;
+        $Job->save();
         if($id_arr->user_id){
-            $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'users');
+        $userinfo= Business::where('user_id','=',$id_arr->user_id)->select("*")->get();
         }else{
-            $id_arr->qyname="平台管理员";
+        $userinfo='';
         }
-     //   $arr=$this->newsorder($id);
-//        $id_arr->previd=$arr['previd'];
-//        $id_arr->nextid=$arr['nextid'];
-//        if($id_arr->previd>0){
-//            $id_arr->prevlink=u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$id_arr->previd);
-//            $id_arr->prev=v_id($id_arr->previd,"title");
-//
-//        }else{
-//            $id_arr->prevlink='javascript:void(0)';
-//        }
-//        if($id_arr->nextid>0){
-//            $id_arr->nextlink=u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$id_arr->nextid);
-//            $id_arr->next=v_id($id_arr->nextid,"title");
-//        }else{
-//            $id_arr->nextlink='javascript:void(0);';
-//        }
-        $userinfo= Business::where('user_id','=',$id_arr->user_id)->select("logo","business_name",'business_introduction')->get();
-        $qiyegood = $this->goodlist([2], ['id','ty','img1', 'title','introduce', 'price','img1', 'enroll_num','content'], 4);
-        return view('job/show', compact('id_arr','userinfo','qiyegood'));
+        $sousuoarr=get_ssarr();
+        $industryids=$sousuoarr[79];
+        $positionids=$sousuoarr[80];
+        $joblist=$this->job_list($id_arr->user_id);
+        return view('job/show', compact('id_arr','userinfo','qiyegood','sanlist','industryids','positionids','joblist'));
     }
     //文章排序
     protected function newsorder($id)
@@ -133,47 +120,77 @@ class JobController extends Job
         }else{
             $title='';
         }
-//        if(isset($_GET['neixunid'])&&$_GET['neixunid']!=0){
-//            $neixunid=(int)$_GET['neixunid'];
-//            $ckey.='&neixunid='.$neixunid;
-//        }else{
-//            $neixunid=0;
-//        }
-//        if(isset($_GET['publicid'])&&$_GET['publicid']!=0){
-//            $publicid=(int)$_GET['publicid'];
-//            $ckey.='&publicid='.$publicid;
-//        }else{
-//            $publicid=0;
-//        }
-//        if(isset($_GET['qualificationid'])&&$_GET['qualificationid']!=0){
-//            $qualificationid=$_GET['qualificationid'];
-//            $qualificationidarr=explode(',',$qualificationid);
-//            $ckey.='&qualificationid='.$qualificationid;
-//        }else{
-//            $qualificationidarr=array();
-//            $qualificationid=0;
-//        }
-//        if(isset($_GET['industryid'])&&$_GET['industryid']!=0){
-//            $industryid=(int)$_GET['industryid'];
-//            $ckey.='&industryid='.$industryid;
-//        }else{
-//            $industryid=0;
-//        }
-//        if(isset($_GET['trainingid'])&&$_GET['trainingid']!=0){
-//            $trainingid=(int)$_GET['trainingid'];
-//            $ckey.='&trainingid='.$trainingid;
-//        }else{
-//            $trainingid=0;
-//        }
-//
-//        $sousuoarr=get_ssarr();
-//        $industryids=$sousuoarr[75][0];
-//        $neixunids=$sousuoarr[73][0];
-//        $publicids=$sousuoarr[74][0];
-//        $qiyezige=$sousuoarr[76];
-//        $pagenewslist=$Job->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],$title,$neixunid,$publicid,$qualificationidarr,$industryid,$trainingid,['id','title','price','enroll_num','img1','content'],16,9);
-//        return view('job/list', compact('pagenewslist','sanlist','ckey','title', 'neixunid', 'publicid', 'qualificationid', 'trainingid','industryid','industryids','neixunids','publicids','qiyezige','qualificationidarr'));
-        return view('job/list', compact('sanlist'));
+        if(isset($_GET['salary'])&&$_GET['salary']!=0){
+            $salary=(int)$_GET['salary'];
+            $ckey.='&salary='.$salary;
+        }else{
+            $salary=0;
+        }
+
+        if(isset($_GET['education'])&&$_GET['education']!=0){
+            $education=(int)$_GET['education'];
+            $ckey.='&education='.$education;
+        }else{
+            $education=0;
+        }
+        if(isset($_GET['experience'])&&$_GET['experience']!=0){
+            $experience=(int)$_GET['experience'];
+            $ckey.='&experience='.$experience;
+        }else{
+            $experience=0;
+        }
+        if(isset($_GET['nature'])&&$_GET['nature']!=0){
+            $nature=(int)$_GET['nature'];
+            $ckey.='&nature='.$nature;
+        }else{
+            $nature=0;
+        }
+        if(isset($_GET['stime'])&&$_GET['stime']!=0){
+            $stime=(int)$_GET['stime'];
+            $ckey.='&stime='.$stime;
+        }else{
+            $stime=0;
+        }
+        if(isset($_GET['order'])&&$_GET['order']!=0){
+            $order=(int)$_GET['order'];
+            $ckey.='&order='.$order;
+        }else{
+            $order=0;
+        }
+        if(isset($_GET['work_nature'])&&$_GET['work_nature']!=0){
+            $work_nature=(int)$_GET['work_nature'];
+            $ckey.='&work_nature='.$work_nature;
+        }else{
+            $work_nature=0;
+        }
+        if(isset($_GET['industryid'])&&$_GET['industryid']!=0){
+            $industryid=(int)$_GET['industryid'];
+            $industryidarr=explode(',',$industryid);
+            $ckey.='&industryid='.$industryid;
+        }else{
+            $industryidarr=array();
+            $industryid=0;
+        }
+        if(isset($_GET['positionid'])&&$_GET['positionid']!=0){
+            $positionid=(int)$_GET['positionid'];
+            $positionidarr=explode(',',$positionid);
+            $ckey.='&positionid='.$positionid;
+        }else{
+            $positionidarr=array();
+            $positionid=0;
+        }
+        $salaryarr=config("config.business.salary");
+        $work_naturearr=config("config.business.work_nature");
+        $naturearr=config("config.business.nature");
+        $stimearr=config("config.business.stime");
+        $experiencearr=config("config.business.experience");
+        $educationarr=config("config.business.education");
+        $sousuoarr=get_ssarr();
+        $industryids=$sousuoarr[79];
+        $positionids=$sousuoarr[80];
+        $pagenewslist=$Job->v_pages([$GLOBALS['pid'], $GLOBALS['ty']],$title,$salary,$education,$experience,$nature,$stime,$order,$work_nature,$industryidarr,$positionidarr,['job.id','job.title','job.sendtime','job.salary','job.cityid','job.work_nature','job.education','job.experience','job.user_id','job.industryid','job.relative','businesses.logo','businesses.user_id','businesses.business_name'],8,9);
+//        dd($pagenewslist);
+        return view('job/list', compact('sanlist','title','order','positionid','positionids','positionidarr','naturearr','nature','educationarr','education','experiencearr','experience','stimearr','stime','industryid','industryids','positionid','industryidarr','salaryarr','salary','ckey','work_nature','work_naturearr','pagenewslist'));
     }
     //院校信息发布
     public function newslist()
@@ -281,6 +298,13 @@ class JobController extends Job
     return view('job/resumeview', compact('id_arr'));
 
 }
+//企业职位列表
+    private function job_list($user_id)
+    {
+        $str = $this->v_list([$GLOBALS['pid'],$GLOBALS['ty']],$user_id,["title","sendtime"],14);
+
+        return $str;
+    }
 }
 function get_ssarr()
 {

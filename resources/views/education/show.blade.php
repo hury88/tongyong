@@ -100,7 +100,13 @@
                                 <img src="{{img($boot_config['img1'])}}" width="120px;"/>
                                 </div>
                             </div>
-                            <p class="py2"><a href="javascript:void(0);">我要报名</a></p>
+                            @if(auth()->check() && App\Enroll::ofEncroll(auth()->id(), $id_arr->id)->first())
+                                <p class="py2"><a href="javascript:void(0);">已报名</a></p>
+                            @else
+                                    {{csrf_field()}}
+                                    <p class="py2 form" action="{{route('education.create', $id_arr->id)}}">{{csrf_field()}}<a href="javascript:void(0);"  onclick="return model(this)" >我要报名</a></p>
+                            @endif
+
                             <p class="py3">
                                 <span>报名人数 {{App\Enroll::get_count($GLOBALS['pid'],$id_arr->id,'')}}</span>
                                 <a href="{{$boot_config['link2']}}" target="_blank"><img src="/img/xlsys1.png"/>在线咨询</a>
@@ -164,4 +170,6 @@
             $(".lianluxq3 .lianluxq3Con").eq(index).show()
         })
     </script>
+            <script type="text/javascript" src="/js/jquery.js"></script>
+            <script type="text/javascript" src="/js/alert.min.js"></script>
 @stop
