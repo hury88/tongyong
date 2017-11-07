@@ -119,6 +119,30 @@ class Notice extends Model
         }
         return $flag;
     }
+    public static function sendOrder($person_id, $business_id, $order_id, $orderno)
+    {
+        #发送给个人
+        $flag = Notice::create([
+            'action_type_id' => 4,
+            'source_id'      => $order_id,
+            'user_id'        => $person_id,
+            'sender_id'      => $business_id,
+            'title' => "恭喜您的订单创建成功",
+            'content' => "订单号:$orderno",
+        ]);
+        #发送给企业
+        if ($flag) {
+            Notice::create([
+                'action_type_id' => 4,
+                'source_id'      => $order_id,
+                'user_id'        => $business_id,
+                'sender_id'      => $person_id,
+                'title' => "您收到了一个新的订单($orderno)",
+                'content' => "订单号:$orderno",
+            ]);
+        }
+        return $flag;
+    }
 
     /**
      * create many notices.

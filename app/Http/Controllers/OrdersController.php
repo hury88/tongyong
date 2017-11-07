@@ -72,8 +72,11 @@ class OrdersController extends Controller
         } catch (ModelNotFoundException $e) {
             throw new NotFoundHttpException();
         }
-
-        $person = \Auth::user()->hasOnePerson;
+        try {
+            $person = \Auth::user()->hasOnePerson;
+        } catch (Exception $e) {
+            throw new NotFoundHttpException();
+        }
         $order = new Order();
         if (Order::ofEncroll($person->user_id, $training_id)->theStatus('new')->first()) {
             return handleResponseJson(201, '您已报名过此课程,请去订单中心查看详情');
@@ -87,6 +90,7 @@ class OrdersController extends Controller
         $order->training_title = $training->title;
         $order->training_period = $training->period;
         $order->price = $training->price;
+        $order->status = 3;
 
         $order->buyer_id = $person->user_id;
         $order->buyer_name = $person->real_name;
@@ -95,8 +99,8 @@ class OrdersController extends Controller
         $order->business_name =  is_null($business) ? '中国职业培训网' : $business->business_name;
 
         $orderid = $order->save();
-
         if ($orderid) {
+            Notice::sendOrder($order->buyer_id, $order->seller_id, $order->id, $order->orderno);
             $training->enroll_num = $training->enroll_num +1;
             $training->save();
             return handleResponseJson(200, '报名成功,进入个人中心查看', route('p_order'));
