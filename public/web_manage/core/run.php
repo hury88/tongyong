@@ -16,6 +16,7 @@ defined('RUNNEED_PATH') or define('RUNNEED_PATH', CORE_PATH . 'runneed' . DS);
 defined('EXTEND_PATH') or define('EXTEND_PATH', CORE_PATH . 'extend' . DS);
 defined('VENDOR_PATH') or define('VENDOR_PATH', CORE_PATH . 'vendor' . DS);
 defined('CONF_PATH') or define('CONF_PATH', ROOT_PATH .'../../config/config' . EXT); // 配置文件目录
+defined('RESOURCES_PATH') or define('RESOURCES_PATH', ROOT_PATH .'../../resources/lang/zh-CN/notices' . EXT); // 配置文件目录
 defined('CONF_EXT') or define('CONF_EXT', EXT); // 配置文件后缀
 defined('ENV_PREFIX') or define('ENV_PREFIX', 'PHP_'); // 环境变量的配置前缀
 

@@ -237,12 +237,23 @@ return [
     ],
 
     'notices' => [
+        'certification' => '企业会员实名认证申请',
+        'certification_person' => '个人会员实名认证申请',
         'certification_request' => '企业会员实名认证申请',
         'certification_refuse' => '企业会员实名认证失败',
         'certification_ok' => '企业会员实名认证成功',
         'order_new' => '有一个新订单',
         'x' => '提款',
         'xx' => '退款',
+    ],
+    'trans' => [
+        'request' => '申请',
+        'ok' => '通过',
+        'refuse' => '拒绝',
+    ],
+    'action_types' => [
+        'certification' => '企业会员实名认证申请',
+        'certification_person' => '个人会员实名认证申请',
     ],
     'business' => [
         'size' => [1=>'10-20人',2=> '20-50人',3=> '50-100人', 4=>'100-500人',5=> '500人以上'],

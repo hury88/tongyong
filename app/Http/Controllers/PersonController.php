@@ -244,22 +244,8 @@ class PersonController extends base\UserController
         $person->real_name = $request->real_name;
         if ($person->save()) {
             #发送认证请求
-            $flag = Notice::create([
-                'user_id'        => 0,
-                'sender_id'      => $person->user_id,
-                'action_type_id' => 6,
-                'source_id'      => 0,
-                'status'         => 1,
-                'title' => "个人会员实名认证申请",
-            ]);
-            Notice::create([
-                'user_id'        => $person->user_id,
-                'sender_id'      => 0,
-                'action_type_id' => 6,
-                'source_id'      => 0,
-                'status'         => 1,
-            ]);
-            if ($flag) {
+            if (Notice::sendCertification($person->user_id)) {
+
                 return handleResponseJson(200, '申请认证成功!', '?');
             }
         }

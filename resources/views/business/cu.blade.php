@@ -151,7 +151,117 @@
         })
     })
 </script>
-    @endif
+@elseif($table == 'job')
+        <?php
+            if(isset($industryid)){
+                $industryid1 = v_id($industryid,"pid","nature");
+            }else{
+                $industryid = 0;
+                $industryid1 = get_first(79);
+            }
+            $d3=get_arr(79);
+            $d4=get_arr(79, $industryid1);
+
+
+
+            if(isset($positionid)&&$positionid>0) {
+                $positionid2 = v_id($positionid,"pid","nature");
+                $positionid1 = v_id($positionid2,"pid","nature");
+            }else{
+                $positionid = 0;
+                $positionid1=get_first(80);
+                $positionid2=get_first(80,$positionid1);
+            }
+
+            $d31=get_arr(80);
+            $d42=get_arr(80,$positionid1);
+            $d53=get_arr(80,$positionid2);
+        ?>
+            <div class="job-posted-dv">
+                <span title="行业类型" class="job-posted-property"><b>*</b>行业类型</span>
+                <div class="job-posted-values">
+                   <select id="industryid1">
+                       <?php foreach ($d3 as $k => $v): $sl=$k==$industryid1?'selected':'' ?>
+                           <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                       <?php endforeach ?>
+                   </select>
+                   <select name="industryid" id="industryid">
+                       <?php foreach ($d4 as $k => $v): $sl=$k==$industryid?'selected':'' ?>
+                           <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                       <?php endforeach ?>
+                   </select>
+                </div>
+                <span title="职位类型" class="job-posted-property"><b>*</b>职位类型</span>
+                <div class="job-posted-values">
+                   <select name="positionid1" id="positionid1">
+                       <?php foreach ($d31 as $k => $v): $sl=$k==$positionid1?'selected':'' ?>
+                           <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                       <?php endforeach ?>
+                   </select>
+
+                   <select name="positionid2" id="positionid2">
+                       <?php foreach ($d42 as $k => $v): $sl=$k==$positionid2?'selected':'' ?>
+                           <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                       <?php endforeach ?>
+                   </select>
+
+                   <select name="positionid" id="positionid">
+                       <?php foreach ($d53 as $k => $v): $sl=$k==$positionid?'selected':'' ?>
+                           <option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
+                       <?php endforeach ?>
+                   </select>
+                </div>
+            </div>
+    <?php
+
+        $form
+            ->input('职位名称', 'title')
+            ->input('职位发布地址', 'address')
+            ->choose('职位性质','work_nature')->radioSet(config('config.business.work_nature'))->flur()
+            ->choose('职位月薪','salary')->radioSet(config('config.business.salary'))->flur()
+            ->choose('亮点标签标签','relative')->checkboxSet(config('config.business.relative'))->flur()
+            ->input('招收人数', 'recruit_num')
+            ->time('招聘结束时间', 'endtime')
+            ->choose('学历要求','education')->radioSet(config('config.business.education'))->flur()
+            ->choose('经验要求','experience')->radioSet(config('config.business.experience'))->flur()
+
+            ->editor('其他要求', 'content2')
+            ->editor('职位描述')
+        ;
+    ?>
+    <script type="text/javascript">
+        $("#industryid1").change(function () {
+            //alert(1)
+        var industryid1=$(this).val();
+
+        $.get("include/json.php?action=hyfl1&industryid1="+industryid1, function (data) {
+            $("#industryid").html(data)
+            })
+        })
+
+
+        $("#positionid1").change(function () {
+            var positionid1=$(this).val();
+            $.get("include/json.php?action=zwfl1&positionid1="+positionid1, function (data) {
+                $("#positionid2").html(data);
+                var positionid2=$("#positionid2").val();
+                $.get("include/json.php?action=zwfl2&positionid2="+positionid2, function (data) {
+
+                    $("#positionid").html(data)
+                })
+            })
+
+        })
+        $("#positionid2").change(function () {
+            var positionid2=$(this).val();
+
+            $.get("include/json.php?action=zwfl2&positionid2="+positionid2, function (data) {
+
+                $("#positionid").html(data)
+            })
+        })
+    </script>
+@endif
         <div class="post-message-div clearfix">
             <div class="post-message-right fr">
                 <input class="post-message-inp save" type="submit" value="发布"/>

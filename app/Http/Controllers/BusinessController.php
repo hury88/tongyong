@@ -26,7 +26,7 @@ class BusinessController extends base\UserController
             parent::__construct();
     }
 
-    private $fillTable = ['certificate', 'education', 'training', 'order'];
+    private $fillTable = ['certificate', 'education', 'training', 'order', 'job'];
 
     private $paginate = 15;
     private $toArray = 10;
@@ -38,7 +38,7 @@ class BusinessController extends base\UserController
     public function profile()
     {
         $user = \Auth::user()->relationsToArray();
-        $notices = Notice::auth()->desc()->take(6)->get(['title','created_at']);
+        $notices = Notice::auth()->desc()->take(6)->get(['title', 'created_at']);
         return view('business.profile', compact('user', 'notices'));
     }
 
@@ -47,6 +47,26 @@ class BusinessController extends base\UserController
      */
     public function job(&$compact)
     {
+        $_GET['title'] = isset($_GET['title']) ? $_GET['title'] : '';
+
+        $_GET['industryid'] = isset($_GET['industryid']) ? (int)$_GET['industryid'] : 0;
+        $_GET['industryid1'] = isset($_GET['industryid1']) ? (int)$_GET['industryid1'] : 0;
+        if(empty($_GET['industryid']) && $_GET['industryid1']){
+            $_GET['industryid'] = get_first(79, $_GET['industryid1']);
+        }
+        $_GET['work_nature'] = isset($_GET['work_nature']) ? (int)$_GET['work_nature'] : 0;
+
+        $compact['pagenewslist'] = \Auth::user()->hasManyJob()->where('ty', $GLOBALS['ty'])->where(function ($query) {
+            // 招聘职位名称
+            $_GET['title'] and $query->where('title', 'like', '%' . $_GET['title'] . '%');
+            $_GET['industryid'] and $query->where('industryid', $_GET['industryid']);
+            $_GET['work_nature'] and $query->where('work_nature', $_GET['work_nature']);
+        })->paginate($this->paginate)->toArray($this->toArray);
+        $compact['ckey'] = '';
+        foreach ($_GET as $key => $value) {
+            if ($key <> 'page' && $value) $compact['ckey'] .= "&$key=$value";
+        }
+
         return $compact;
     }
 
@@ -74,13 +94,13 @@ class BusinessController extends base\UserController
         $_GET['qualificationid'] = isset($_GET['qualificationid']) ? intval($_GET['qualificationid']) : 0;
         $_GET['trainingid'] = isset($_GET['trainingid']) ? intval($_GET['trainingid']) : 0;
 
-        if(empty($_GET['qualificationid'])){
-            if($_GET['qualificationid1']){
-                if(empty($_GET['qualificationid2'])){
+        if (empty($_GET['qualificationid'])) {
+            if ($_GET['qualificationid1']) {
+                if (empty($_GET['qualificationid2'])) {
                     $_GET['qualificationid2'] = get_first(76, $_GET['qualificationid1']);
                 }
                 $_GET['qualificationid'] = get_first(76, $_GET['qualificationid2']);
-            }else{
+            } else {
                 $_GET['qualificationid'] = 0;
             }
 
@@ -95,7 +115,7 @@ class BusinessController extends base\UserController
         })->paginate($this->paginate)->toArray($this->toArray);
         $compact['ckey'] = '';
         foreach ($_GET as $key => $value) {
-            if($key<>'page' && $value) $compact['ckey'] .= "&$key=$value";
+            if ($key <> 'page' && $value) $compact['ckey'] .= "&$key=$value";
         }
         return $compact;
     }
@@ -124,7 +144,7 @@ class BusinessController extends base\UserController
         $compact['pagenewslist'] = \Auth::user()->hasManyEducation()->where('tty', $GLOBALS['tty'])->where('isstate', 1)->where(function ($query) {
             empty($_GET['title']) or $query->where('title', 'like', '%' . $_GET['title'] . '%');
         })->paginate($this->paginate)->toArray($this->toArray);
-       $compact['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid=' . intval($_GET['certificate_lid']) : '';
+        $compact['ckey'] = isset($_GET['certificate_lid']) ? '&certificate_lid=' . intval($_GET['certificate_lid']) : '';
         return $compact;
     }
 
@@ -162,15 +182,7 @@ class BusinessController extends base\UserController
         $business->legal = $request->get('legal');
         $business->registerid = $request->get('registerid');
         if ($business->save()) {
-            #发送认证请求
-            $flag = Notice::create([
-                'user_id'        => 0,
-                'sender_id'      => $user_id,
-                'action_type_id' => 1,
-                'source_id'      => $user_id,
-                'status'         => 1,
-            ]);
-            if ($flag) {
+            if (Notice::sendCertification($user_id, 'is_business')) {
                 return handleResponseJson(200, '申请认证成功!', '?');
             }
         }
@@ -189,10 +201,10 @@ class BusinessController extends base\UserController
         $compact['pagenewslist'] = \Auth::user()->hasManyOrder()
             ->where(function ($query) {
                 empty($_GET['orderno']) or $query->where('orderno', intval($_GET['orderno']));
-        })->orderBy($_GET['orderBy'], 'desc')->paginate($this->paginate)->toArray($this->toArray);
+            })->orderBy($_GET['orderBy'], 'desc')->paginate($this->paginate)->toArray($this->toArray);
         $compact['ckey'] = '';
         foreach ($_GET as $key => $value) {
-            if($key<>'page' && $value) $compact['ckey'] .= "&$key=$value";
+            if ($key <> 'page' && $value) $compact['ckey'] .= "&$key=$value";
         }
         return $compact;
     }
@@ -230,11 +242,11 @@ class BusinessController extends base\UserController
         $business = $user->profile;
 
         if ($filename = ifUploadCheckIt($request, 'img', $business->img, 'b_img')) {
-            $business->img  = $filename;
+            $business->img = $filename;
         }
 
         if ($filename = ifUploadCheckIt($request, 'logo', $business->logo, 'b_logo')) {
-            $business->logo  = $filename;
+            $business->logo = $filename;
         }
 
         $business->contact = $request->get('contact');
@@ -251,7 +263,7 @@ class BusinessController extends base\UserController
 
         // users->business表更新
         if ($business->save()) {
-           return handleResponseJson(200, '设置成功!', '?');
+            return handleResponseJson(200, '设置成功!', '?');
         }
         return handleResponseJson(412, '设置失败!');
 
@@ -259,67 +271,68 @@ class BusinessController extends base\UserController
     }
 
     /**
-    * 修改手机
-    */
-   public function telphone(Request $request)
-   {
-       $user = \Auth::user();
+     * 修改手机
+     */
+    public function telphone(Request $request)
+    {
+        $user = \Auth::user();
 
-       $rules = [
-           'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:users',
-           'yzm' => 'required',
-       ];
+        $rules = [
+            'telphone' => 'required|regex:/^1[34578][0-9]{9}$/|unique:users',
+            'yzm' => 'required',
+        ];
 
-       $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
-       $errors = $validator->errors(); // 输出的错误，自己打印看下
-       if ($validator->fails()) {
-           return noticeResponseJson(412, '执行失败', $errors);
-       }
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
 
-       $telphone = $request->get('telphone');
-       $yzm = new YZM($telphone);
-       if ($yzm->legal($request->yzm)) {
-           $yzm->pop();
-           $user->telphone = $telphone;
-           if ($user->save()) {
-               return handleResponseJson(200, '手机号修改成功.', route('b_config'));
-           }
-           return handleResponseJson(412, '手机号修改失败,请稍后再试.');
-       }
-       return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
-   }
-   /**
-    * 修改邮箱
-    */
-   public function email(Request $request)
-   {
-       $user = \Auth::user();
+        $telphone = $request->get('telphone');
+        $yzm = new YZM($telphone);
+        if ($yzm->legal($request->yzm)) {
+            $yzm->pop();
+            $user->telphone = $telphone;
+            if ($user->save()) {
+                return handleResponseJson(200, '手机号修改成功.', route('b_config'));
+            }
+            return handleResponseJson(412, '手机号修改失败,请稍后再试.');
+        }
+        return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
+    }
 
-       $rules = [
-           'email' => 'required|email|unique:users',
-           'yzm' => 'required',
-       ];
+    /**
+     * 修改邮箱
+     */
+    public function email(Request $request)
+    {
+        $user = \Auth::user();
 
-       $validator = Validator::make($request->all(), $rules);
+        $rules = [
+            'email' => 'required|email|unique:users',
+            'yzm' => 'required',
+        ];
 
-       $errors = $validator->errors(); // 输出的错误，自己打印看下
-       if ($validator->fails()) {
-           return noticeResponseJson(412, '执行失败', $errors);
-       }
+        $validator = Validator::make($request->all(), $rules);
 
-       $email = $request->email;
-       $yzm = new YZM($email);
-       if ($yzm->legal($request->yzm)) {
-           $yzm->pop();
-           $user->email = $email;
-           if ($user->save()) {
-               return handleResponseJson(200, '邮箱修改成功.', route('b_config'));
-           }
-           return handleResponseJson(412, '邮箱修改失败,请稍后再试.');
-       }
-       return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
-   }
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            return noticeResponseJson(412, '执行失败', $errors);
+        }
+
+        $email = $request->email;
+        $yzm = new YZM($email);
+        if ($yzm->legal($request->yzm)) {
+            $yzm->pop();
+            $user->email = $email;
+            if ($user->save()) {
+                return handleResponseJson(200, '邮箱修改成功.', route('b_config'));
+            }
+            return handleResponseJson(412, '邮箱修改失败,请稍后再试.');
+        }
+        return noticeResponseJson(303, '验证码校验失败.', '不匹配或已失效');
+    }
 
     /**
      * 安全设置
@@ -415,11 +428,14 @@ class BusinessController extends base\UserController
             $id = $table;
             $table = $GLOBALS['pid_path'];
         }
-        if(empty($table))$table = $GLOBALS['pid_path'];
+        if (empty($table)) $table = $GLOBALS['pid_path'];
         if (in_array($table, $this->fillTable)) {
             #出入表名
             $WithData = new \App\Helpers\WithData($table, $id, $request->all());
             $return = $WithData->submit(\Auth::user()->id);
+            if ($return === false) {
+                return $WithData->error;
+            }
             $redirect = $request->path();
             $redirect = preg_replace('/cu(.*)$/', '', $redirect);
             return handleResponseJson($return[0], $return[1], u($redirect));

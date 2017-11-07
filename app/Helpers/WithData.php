@@ -2,6 +2,7 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Validator;
 /**
  *public function submit()     统一提交
  *#以下方法名对应表名称
@@ -65,7 +66,7 @@ class WithData
 
         );
         if ($fields['tty']==54 && empty($certificate_lid)) {
-        	$this->error = [203, '请选择一个证书类型'];
+        	$this->error = handleResponseJson(203, '请选择一个证书类型');
         	return false;
         }
 
@@ -144,25 +145,25 @@ class WithData
     public function training()
     {
         $fields = array(
-            'pid'				=>		(int)$GLOBALS['pid'],
-            'ty'				=>		(int)$GLOBALS['ty'],
-            'tty'				=>		0,
-            'industryid'		=>		$this->I('industryid', 0, 'intval'),
-            'neixunid'			=>		$this->I('neixunid', 0, 'intval'),
-            'trainingid'		=>		$this->I('trainingid', 0, 'intval'),
-            'qualificationid'	=>		$this->I('qualificationid', 0, 'intval'),
-            'publicid'			=>		$this->I('publicid', 0, 'intval'),
-            'title'				=>		$this->I('title','','htmlspecialchars'),
-            'name'				=>		$this->I('name','','htmlspecialchars'),
-            'ftitle'			=>		$this->I('ftitle','','htmlspecialchars'),
-            'content'			=>		$this->I('content',''),
-            'content2'       	=>		$this->I('content2',''),
-            'content3'       	=>		$this->I('content3',''),
-            'content4'       	=>		$this->I('content4',''),
-            'introduce'			=>		$this->I('introduce','','htmlspecialchars'),
-            'price'				=>		$this->I('price', 0.00,'floatval'),
-            'period'			=>		$this->I('period','','htmlspecialchars'),
-            'sendtime'      	=>		time(),
+            'pid'               =>      (int)$GLOBALS['pid'],
+            'ty'                =>      (int)$GLOBALS['ty'],
+            'tty'               =>      0,
+            'industryid'        =>      $this->I('industryid', 0, 'intval'),
+            'neixunid'          =>      $this->I('neixunid', 0, 'intval'),
+            'trainingid'        =>      $this->I('trainingid', 0, 'intval'),
+            'qualificationid'   =>      $this->I('qualificationid', 0, 'intval'),
+            'publicid'          =>      $this->I('publicid', 0, 'intval'),
+            'title'             =>      $this->I('title','','htmlspecialchars'),
+            'name'              =>      $this->I('name','','htmlspecialchars'),
+            'ftitle'            =>      $this->I('ftitle','','htmlspecialchars'),
+            'content'           =>      $this->I('content',''),
+            'content2'          =>      $this->I('content2',''),
+            'content3'          =>      $this->I('content3',''),
+            'content4'          =>      $this->I('content4',''),
+            'introduce'         =>      $this->I('introduce','','htmlspecialchars'),
+            'price'             =>      $this->I('price', 0.00,'floatval'),
+            'period'            =>      $this->I('period','','htmlspecialchars'),
+            'sendtime'          =>      time(),
         );
         /*if ($fields['ty'] == 9 && empty($fields['istop'])) {
             ajaxReturn(-1,'请选择案例分类');
@@ -177,6 +178,82 @@ class WithData
         // uppro('img5',$fields,'water',$water_path);
         $this->logInsert = '添加培训信息('.$fields['pid'].','.$fields['ty'].','.'): '.$fields['title'];
         $this->logUpdate = '更新培训信息('.$fields['pid'].','.$fields['ty'].','.'): '.$fields['title'];
+        return $fields;
+    }
+
+    public function job()
+    {
+        $rules = [
+            'title' => 'required',
+            'address' => 'required',
+            'work_nature' => 'required',
+            'salary' => 'required',
+            'relative' => 'required',
+            'recruit_num' => 'required',
+            'endtime' => 'required|date',
+            'education' => 'required',
+            'experience' => 'required',
+            'content2' => 'required',
+            'content' => 'required',
+        ];
+        $message = [
+            'title.required' => '职位名称 项必填',
+            'address.required' => '职位发布地址 项必填',
+            'work_nature.required' => '职位性质 项必选',
+            'salary.required' => '职位月薪 项必选',
+            'relative.required' => '亮点标签标签 项必选',
+            'recruit_num.required' => '招收人数 项必填',
+            'endtime.required' => '招聘结束时间 项必需',
+            'endtime.date' => '招聘结束时间 格式不正确',
+            'education.required' => '学历要求 项必填',
+            'experience.required' => '经验要求 项必填',
+            'content2.required' => '其他要求 项必填',
+            'content.required' => '职位描述 项必填',
+        ];
+
+        $validator = Validator::make($this->data, $rules, $message);
+
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            $this->error = noticeResponseJson(412, '执行失败', $errors);
+            return false;
+        }
+
+        $relative = $this->I('relative', [],'');
+        $relative = $relative && implode(',', $relative);
+        $fields = array(
+            'pid'				=>		(int)$GLOBALS['pid'],
+            'ty'				=>		(int)$GLOBALS['ty'],
+            'tty'				=>		0,
+            'title'				=>		$this->I('title','','htmlspecialchars'),
+            'address'           =>      $this->I('address','','htmlspecialchars'),
+            'work_nature'       =>      $this->I('work_nature', 0, 'intval'),
+            'salary'            =>      $this->I('salary', 0, 'intval'),
+            'relative'          =>      $relative,
+            'recruit_num'       =>      $this->I('recruit_num', ''),
+            'endtime'           =>      $this->I('content2', time()+3600*24*7, 'strtotime'),
+            'education'         =>      $this->I('education', 0, 'intval'),
+            'experience'        =>      $this->I('experience', 0, 'intval'),
+            'content2'          =>      $this->I('content2',''),
+            'content'           =>      $this->I('content',''),
+            'issued'            =>      1,
+            'sendtime'      	=>		time(),
+        );
+
+
+        /*if ($fields['ty'] == 9 && empty($fields['istop'])) {
+            ajaxReturn(-1,'请选择案例分类');
+        }*/
+        // uppro('img1',$fields);
+        // uppro('img2',$fields);
+        // uppro('img3',$fields);
+        // uppro('img4',$fields);
+        // uppro('img5',$fields);
+        // uppro('img6',$fields);
+        // uppro('file',$fields);
+        // uppro('img5',$fields,'water',$water_path);
+        $this->logInsert = '添加招聘信息('.$fields['pid'].','.$fields['ty'].'): '.$fields['title'];
+        $this->logUpdate = '更新招聘信息('.$fields['pid'].','.$fields['ty'].'): '.$fields['title'];
         return $fields;
     }
 	public function pic()
@@ -213,7 +290,7 @@ class WithData
 
 	private function I($get, $default='', $filter='htmlspecialchars')
 	{
-		if (isset($this->data[$get])) {
+		if (isset($this->data[$get]) && $filter) {
 			$val = call_user_func($filter, $this->data[$get]);
 			return $val ? : $default;
 		}
@@ -227,9 +304,9 @@ class WithData
 		$table     = $this->table;
 		$logUpdate = $this->logUpdate;
 		$logInsert = $this->logInsert;
-		if (!$this->fields) {
-			return $this->error;
-		}
+        if ($this->error) {
+            return false;
+        }
 		if ( $id ) {// 执行更新
 			// $this->fields['id'] = $id;
 			$where = ['id' => $id, 'user_id' => $user_id];

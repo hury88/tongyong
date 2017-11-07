@@ -295,6 +295,7 @@ function noticeResponseJson($state,$title,$message,$redirect=false){
 
 function get_arr($typeid,$pid=0)
 {
+	$d = [];
     $data = DB::table('nature')->select('id','catname')->where("pid",$pid)->where("typeid",$typeid)->orderBy('disorder','desc')->orderBy('id','asc')->get();
 
     foreach ($data as $v) {

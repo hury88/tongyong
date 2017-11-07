@@ -5,13 +5,13 @@ return [
     //'actions' => [1,2,3,8,9,11,13],
     //links to the sourcece type of actions
     'links' => [
-        'order' => route('orders.show_order', ['source_id']),
+        // 'order' => route('orders.show_order', ['source_id']),
     ],
     //templates to the actions types
     'templates' => [
-        'certification:request' => '已创建新订单 #[source_id]',
-        'certification:refuse' => '实名认证未被通过 #[source_id]',
-        'certification:ok' => '实名认证通过 #[source_id]',
+        'certification:request' => '您的认证信息已提交，请等待审核',
+        'certification:refuse' => '您的认证信息未通过，如有疑问，请联系网站客服协助解决',
+        'certification:ok' => '恭喜您实名认证已通过',
         'order:open'       => '已创建新订单 #[source_id]',
         'order:pending'    => '订单 #[source_id]等待处理中',
         'order:comment'    => '订单 #[source_id]有一条新评论',
@@ -24,6 +24,8 @@ return [
         'certification_person:request' => '您的认证信息已提交，请等待审核',
         'certification_person:refuse' => '您的认证信息未通过，如有疑问，请联系网站客服协助解决',
         'certification_person:ok' => '恭喜您实名认证已通过',
+        'encroll:person' => '报名成功',// 9 encroll
+        'encroll:business' => '有用户报名',// 10 encroll
     ],
 
     'all_title'   => '短消息',

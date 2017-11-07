@@ -3,8 +3,7 @@
 @section('form')
 <?php
     // define('AT_NO', 1);
-$th = ['职位名称', '所属行业', '更新日期', '招聘地点', '招聘状态', '投递简历', '邀请简历', '浏览数'];
-$trainingid_s = config('config.webarr.trainingid');
+$th = ['职位名称', '职位性质', '招收人数', '申请人数', '信息状态', '结束时间', '浏览数'];
 $ty = $GLOBALS['ty'];
 $url  = route('b_'.$GLOBALS['pid_path']).u($GLOBALS['ty_path']);
 $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
@@ -12,25 +11,14 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
 <form id="jsSoForm">
     <div class="order-search">
         <?php
-            if($ty==28){
-                $d = get_arr(75);
-                Form::select2($d, '行业', 'industryid');
-            }elseif($ty==65){
-                $d = get_arr(73);
-                Form::select2($d, '内训分类', 'neixunid');
-                $d = get_arr(74);
-                Form::select2($d, '公开课分类', 'publicid');
+            $d1 = get_arr(79);
+            Form::select2($d1, '行业类型', 'industryid1');
+            if($_GET['industryid1']){
+                $d2 = get_arr(79, $_GET['industryid1']);
+                Form::select2s($d2, '行业种类', 'industryid');
             }
-                $d = get_arr(76);
-                Form::select2($d, '职业资格类', 'qualificationid1');
-                if($_GET['qualificationid1']){
-                    $d = get_arr(76,$_GET['qualificationid1']);
-                    Form::select2s($d, '职业资格种类', 'qualificationid2');
-
-                    $d = get_arr(76,$_GET['qualificationid2']);
-                    Form::select2s($d, '职业资格', 'qualificationid');
-                }
-                Form::select2($trainingid_s, '培训方式', 'trainingid');
+            $business_work_nature = config('business.work_nature');
+            Form::select2($business_work_nature, '工作性质', 'work_nature');
         ?>
         <input class="order-manager-sub" type="submit" value="搜索结果">
         <a class="certificate-but" href="{{$url}}/create">发布信息</a>
@@ -44,10 +32,13 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
     <td class="manager-firstth">
         <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
-    <td><img src="{{img($img1)}}" width="80"></td>
     <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
-    <td>{{$trainingid_s[$trainingid]}}</td>
+    <td>{{$business_work_nature[$work_nature]}}</td>
+    <td>{{$recruit_num}}</td>
+    <td>{{$isstate}}</td>
     <td>{{$enroll_num}}</td>
+    <td>{{date('Y-m-d', $endtime)}}</td>
+    <td>{{$hits}}</td>
     <td>{{date('Y-m-d', $sendtime)}}</td>
     <td>
         <a class="resume-remove color-trblue" href="{{$url}}/update/{{$id}}">修改</a>

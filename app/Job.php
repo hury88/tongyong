@@ -14,7 +14,7 @@ class Job extends Model
      *
      * @var string
      */
-    protected $table = 'training';
+    protected $table = 'job';
 
     public $primaryKey = 'id';
 

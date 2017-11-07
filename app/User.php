@@ -115,6 +115,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Training');
     }
 
+    public function hasManyJob()
+    {
+        return $this->hasMany('App\Job');
+    }
+
     /*public function getHasPhoneAttribute()
     {
         return !is_null($this->mobile_phone) || !is_null($this->work_phone)

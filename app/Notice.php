@@ -11,6 +11,7 @@ namespace app;
 use App\Eloquent\Collection;
 use App\Eloquent\Model;
 use App\ActionType;
+use App\Education;
 
 class Notice extends Model
 {
@@ -50,6 +51,7 @@ class Notice extends Model
      */
     public static function create(array $attr = [])
     {
+        $attr['created_at'] = date('Y-m-d H:i:s');
         if (!isset($attr['title'])) {
             $attr['title'] = ActionType::find($attr['action_type_id'])->notice_template;
         }
@@ -59,12 +61,63 @@ class Notice extends Model
             $user_title_set = explode('|', $attr['title']);
             foreach ($user_id_set as $user_id) {
                 $attr['user_id'] = $user_id;
-                parent::create($attr);
+                self::insert($attr);
             }
             return true;
         }
-        return parent::create($attr);
+        return self::insert($attr);
         // parent::create($attr);
+    }
+    public static function sendCertification($sender_id, $is_person=1)
+    {
+        if($is_person == 1) {
+            $action_type_id = 6;
+            $title = '个人会员实名认证申请';
+        } else {
+            $action_type_id = 1;
+            $title = '企业会员实名认证申请';
+        }
+        #发送认证请求
+        $flag = Notice::create([
+            'user_id'        => 0,
+            'sender_id'      => $sender_id,
+            'action_type_id' => $action_type_id,
+            'source_id'      => 0,
+            'title' => $title,
+        ]);
+        if ($flag) {
+            Notice::create([
+                'user_id'        => $sender_id,
+                'sender_id'      => 0,
+                'action_type_id' => $action_type_id,
+                'source_id'      => 0,
+            ]);
+        }
+        return $flag;
+    }
+    public static function sendEnroll($business_id, $education_title, $url)
+    {
+        $person = \Auth::user()->profile;
+        #发送给个人
+        $public_content = '查看<a href="'.$url.'" target="_blank">'.$education_title.'</a>';
+        $flag = Notice::create(array(
+            'user_id'        => $person->user_id,
+            'sender_id'      => $business_id,
+            'action_type_id' => 9,
+            'source_id'      => 0,
+            'content' => $public_content.'最新动态',
+        ));
+        #发送给企业
+        if ($flag) {
+            Notice::create([
+                'user_id'        => $business_id,
+                'sender_id'      => $person->user_id,
+                'action_type_id' => 10,
+                'source_id'      => 0,
+                'content' => "用户@{$person->real_name},刚刚报名了{$education_title}项目;".$public_content,
+            ]);
+        }
+        return $flag;
     }
 
     /**

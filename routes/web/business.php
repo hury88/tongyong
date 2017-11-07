@@ -45,6 +45,8 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
             Route::get($index.'/{action}', 'BusinessController@dispatch');
+            Route::post($index.'/cu/{id}', 'BusinessController@with');
+            Route::post($index.'/cu', 'BusinessController@with');
         }
     });
     // 简历路由组
@@ -53,6 +55,8 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
             Route::get($index, 'BusinessController@dispatch');
             Route::get($index.'/{action}/{id}', 'BusinessController@dispatch');
             Route::get($index.'/{action}', 'BusinessController@dispatch');
+            Route::post($index.'/cu/{id}', 'BusinessController@with');
+            Route::post($index.'/cu', 'BusinessController@with');
         }
     });
     // 职业培训管理

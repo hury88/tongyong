@@ -527,6 +527,17 @@ HTML;
 		unset($checked,$val,$title,$disabled);
 		return $this;
 	}
+
+	public function td($val)
+	{
+		echo '<td>'.$val.'</td>';
+		return $this;
+	}
+	public function td_img($val)
+	{
+		echo '<td><img src="'.src($val).'" width="80"></td>';
+		return $this;
+	}
 	//+-----------------------------------------------------------------
 
 }

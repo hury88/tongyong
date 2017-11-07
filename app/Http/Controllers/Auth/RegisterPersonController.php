@@ -29,7 +29,7 @@ class RegisterPersonController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/user';
 
     /**
      * 用户的角色类型 个人1, 企业2

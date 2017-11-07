@@ -137,16 +137,17 @@ class FormHelper{
 				$str = '<div class="layui-form-item">'.$this->temp.'</div>';
 				break;
 			case 'radio':
-				$str = '<div class="layui-form-item">
-                       			   <label title="'.$this->inputName.'" class="layui-form-label">'.$this->labelName.'<b>*</b></label>
-                       			   <div class="layui-input-block">
+
+				$str = '<div class="job-posted-dv">
+							 <span class="job-posted-property"><b>*</b>'.$this->labelName.'</span>
+						     <div class="job-posted-values">
 									'.$this->temp.'</div></div>';
 				break;
 			case 'checkbox':
-				$str = '<div class="layui-form-item" pane="">
-                       			   <label title="'.$this->inputName.'" class="layui-form-label">'.$this->labelName.'<b>*</b></label>
-                       			   <div class="layui-input-block">
-									'.$this->temp.'</div></div>';
+				$str = '<div class="job-posted-dv">
+               			    <span class="job-posted-property"><b>*</b>'.$this->labelName.'</span>
+					     	<div class="job-posted-values">
+							'.$this->temp.'</div></div>';
 				break;
 			case 'textarea':
 				$str = '<div class="layui-form-item layui-form-text"> '.$this->temp.'</div>';
@@ -181,18 +182,18 @@ class FormHelper{
 	<?php return $this;}
 
 	//生成select $d:d $lm=lablename $n:name $v:value $t:text
-	public static function selects($d,$lm,$n,$multi,$vv='v',$tt='t'){?>
-		  <div class="layui-form-item">
-			  <label title="<?php echo $n?>" class="layui-form-label"><?php echo $lm?><b>*</b></label>
-			  <div class="layui-input-block">
-			    <select name="<?php echo $n?>[]" multiple style="width:80%;height:10%;" lay-filter="">
-			      <?php foreach ($d as $v => $t): $sl=in_array($$vv, $multi)?'selected':'' ?>
-	  					<option <?php echo $sl?> value="<?php echo $$vv?>"><?php echo $$tt?></option>
-	  			  <?php endforeach ?>
-			    </select>
-			  </div>
-		 </div>
-	<?php }
+	public function selects($d,$lm,$n,$vv='v',$tt='t'){ $multi = $this->$n ? explode(',', $this->$n): []?>
+	<div class="job-posted-dv">
+		<span title="<?php echo $lm?>" class="job-posted-property"><b>*</b><?php echo $lm?></span>
+		<div class="job-posted-values">
+			<select name="<?php echo $n?>[]" multiple style="height:10%;" lay-filter="">
+				<?php foreach ($d as $v => $t): $sl=in_array($$vv, $multi)?'selected':'' ?>
+				<option <?php echo $sl?> value="<?php echo $$vv?>"><?php echo $$tt?></option>
+			<?php endforeach ?>
+			</select>
+		</div>
+	</div>
+	<?php return $this;}
 
 	//分组下拉框
 	//$d:未处理的分类
@@ -236,7 +237,7 @@ class FormHelper{
 	public static function select2($d,$lm,$n){  $$n = isset($_GET[$n]) ? $_GET[$n] : '';  ?>
 			    <select title="<?php echo $lm?>" name="<?php echo $n?>">
 			    		<option value="0"><?php echo $lm?></option>
-			    	<?php foreach ($d as $k => $v): $sl=$k==$$n?'selected':'' ?>
+			    	<?php foreach ((array)$d as $k => $v): $sl=$k==$$n?'selected':'' ?>
 			    		<option <?php echo $sl?> value="<?php echo $k?>"><?php echo $v?></option>
 			    	<?php endforeach ?>
 			    </select>
@@ -506,7 +507,7 @@ HTML;
 		$this->in = 'radio';
 		if ($disabled) {$disabled='disabled';}
 		if ($val==$this->inputVal || $checked) {$checked='checked';}
-		$this->temp .= '<input '.$checked.' type="radio" '.$disabled.' name="'.$this->inputName.'" value="'.$val.'" title="'.$title.'">';
+		$this->temp .= '<input '.$checked.' type="radio" '.$disabled.' name="'.$this->inputName.'" value="'.$val.'" title="'.$title.'">'.'<span>'.$title.'</span>';
 		UNSET($checked,$val,$title,$disabled);
 		return $this;
 	}
@@ -525,7 +526,7 @@ HTML;
 	public function checkbox($title,$val,$checked='',$disabled=''){
 		$this->in = 'checkbox';
 		if ($disabled) {$disabled='disabled ';}
-		$this->temp .= '<input type="checkbox" name="'.$this->inputName.'[]" lay-skin="primary" value="'.$val.'" title="'.$title.'" '.$disabled.$checked.'>';
+		$this->temp .= '</span><input type="checkbox" name="'.$this->inputName.'[]" lay-skin="primary" value="'.$val.'" title="'.$title.'" '.$disabled.$checked.'>'.'<span>'.$title.'</span>';;
 		unset($checked,$val,$title,$disabled);
 		return $this;
 	}

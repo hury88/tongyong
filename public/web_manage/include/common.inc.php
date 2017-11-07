@@ -97,4 +97,6 @@ if($bd=M('config')->find(1)){
 
 $webarr = Config::get('webarr');
 //定义后台每页显示条目数量
+// 加载 通知消息模板
+Config::set(include RESOURCES_PATH);
 ?>
