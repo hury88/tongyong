@@ -12,9 +12,9 @@ $map = array('pid'=>$pid,'ty'=>$ty,'tty'=>0);
 $id    =   I('get.id','','trim');if(!empty($id))$map['id'] = array('like',"%$id%");
 $title =   I('get.title','','trim');if(!empty($title))$map['title'] = array('like',"%$title%");
 $user_id =   I('get.user_id',0,'intval');
-if(!empty($user_id)){
+if($user_id){
     $map['user_id'] =$user_id;
-    $cname=v_id($user_id,"member_name","users");
+    $cname=v_id($user_id,"business_name","businesses",'user_id');
 }else{
     $cname='管理员';
 }
@@ -136,9 +136,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
     $img2 =  '<img src="'.src($img2).'" width="80" />';
 if($user_id){
-    $publisher=v_id($user_id,"member_name","users");
+    $publisher=v_id($user_id,"business_name","businesses",'user_id');
 }else{
-    $publisher="平台管理员";
+    $publisher='管理员';
 }
 
     // $title = '<a href="' . U('blog/view', ['id'=>$id]) . '" target="_blank">'.$title.'</a>';
@@ -167,7 +167,7 @@ if($user_id){
             <td><?=$destination?></td>
         <?php }?>
         <?php if(in_array($tty,array(21,24,25,29,30,33,34))){?>
-        <td><a href="enroll.php?bid=<?php echo $id?>&typeid=<?php echo $tty;?>">共有（<?php echo M('enroll')->where("tid=".$id." and typeid=".$tty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid={$id} and typeid={$tty} and isstate=0")->count(); ?>未审核)</a></td>
+            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id."and isstate=0")->count(); ?>未审核)</a></td>
         <?php }?>
 
      <td><?=$publisher?></td>

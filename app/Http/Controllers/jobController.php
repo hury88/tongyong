@@ -301,7 +301,7 @@ class JobController extends Job
 //企业职位列表
     private function job_list($user_id)
     {
-        $str = $this->v_list([$GLOBALS['pid'],$GLOBALS['ty']],$user_id,["title","sendtime"],14);
+        $str = $this->v_list([$GLOBALS['pid'],$GLOBALS['ty']],$user_id,["title","relative",'id'],14);
 
         return $str;
     }

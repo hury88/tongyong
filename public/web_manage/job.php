@@ -25,9 +25,9 @@ if($industryid){
 }
 $user_id =   I('get.user_id',0,'intval');
 $work_nature=   I('get.work_nature',0,'intval');
-if(!empty($user_id)){
+if($user_id){
     $map['user_id'] =$user_id;
-    $cname=v_id($user_id,"member_name","users");
+    $cname=v_id($user_id,"business_name","businesses",'user_id');
 }else{
     $cname='管理员';
 }
@@ -151,9 +151,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
     $time =  date('Y-m-d H:i',$sendtime);
     $endtime =  date('Y-m-d H:i',$endtime);
 if($user_id){
-    $publisher=v_id($user_id,"name","cmember");
+    $publisher=v_id($user_id,"business_name","businesses",'user_id');
 }else{
-    $publisher="平台管理员";
+    $publisher='管理员';
 }
 
     // $title = '<a href="' . U('blog/view', ['id'=>$id]) . '" target="_blank">'.$title.'</a>';
@@ -173,7 +173,7 @@ if($user_id){
         <td> <?=Config::get('business.work_nature')[$work_nature]?> </td>
             <td><?=$recruit_num?></td>
             <td><?=Config::get('webarr.issued')[$issued] ?></td>
-            <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=$id")->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=$id and isstate=0")->count(); ?>未审核)</a></td>
+        <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id."and isstate=0")->count(); ?>未审核)</a></td>
 
 
      <td><?=$endtime?></td>

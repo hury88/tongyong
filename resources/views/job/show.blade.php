@@ -85,30 +85,124 @@
                 <div class="sqzwCon">
                     <div class="kyfdtop">
                         <img src="/img/zstop.jpg"/>
-
                         <span>所在位置：</span>
                         <a href="/">首页></a>>
                         <a href="{{u($GLOBALS['pid_path'])}}">{{$GLOBALS['pid_data']->catname}}</a>>
                         <a href="{{u($GLOBALS['pid_path'], $GLOBALS['ty_path'])}}">{{$GLOBALS['ty_data']->catname}}</a>>
                         <a href="javascript:void(0);">{{$id_arr->title}}</a>
                     </div>
+                    <div class="sqzwAll">
                    @if($userinfo)
                        {{dd($userinfo)}}
+                            <div class="sqzwleft">
+                                <img src="{{img($userinfo->logo)}}"/>
+                                <div class="lxgs">
+                                    <h3>联想集团有限公司</h3>
+                                    <p>规模：500-900人</p>
+                                    <p>行业：互联网&nbsp;游戏&nbsp;软件</p>
+                                    <p>性质：股份制企业</p>
+                                    <p>官网：https://www.lenovo.com.cn/</p>
+                                    <p>地址：安徽省合肥市高新区创新产业园二期F12栋##银行大楼</p>
+                                    <p class="map"><img src="img/sqzwmap.jpg"/></p>
+                                </div>
+                                <div class="gszw">
+                                    <h3>该企业的其他职位</h3>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                    <p>
+                                        <i></i>
+                                        <a href="">交通银行客服代表</a>
+                                        <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    </p>
+                                </div>
+                                <div class="sqzwsys">
+                                    <div class="sqzwsysleft">
+                                        <img src="img/sqzwsys.jpg"/>
+                                    </div>
+                                    <div class="sqzwsysright">
+                                        <p>扫一扫</p>
+                                        <p>立即分享该职位</p>
+                                    </div>
+                                </div>
+                            </div>
                     @else
-
-                    <div class="sqzwAll">
                         <div class="sqzwleft">
-                            <a href="{{u('about','contact')}}"><img src="{{img($boot_config['logo1'])}}"/>
+                            <a href="{{u('about','contact')}}" style="width: 100%"><img src="{{img($boot_config['logo1'])}}"/></a>
                             <div class="lxgs">
                                 <h3></h3>
                             </div>
                             <div class="gszw">
                                 <h3>其他职位</h3>
+
                                 @foreach($joblist as $val)
                                 <p>
+                                    <?php $ds=explode(',',$val['relative']);?>
                                     <i></i>
                                     <a href="{{u('job',$GLOBALS['ty_path'],$val['id'])}}">&nbsp;{{$val['title']}}</a>
-                                    <span>&nbsp;&nbsp;&nbsp;(无销售性质&nbsp;五险一金&nbsp;班车&nbsp;年终奖)</span>
+                                    <span>&nbsp;&nbsp;&nbsp;({{config('config.business.relative.'.$ds[0])}}&nbsp;{{config('config.business.relative.'.$ds[1])}}&nbsp;{{config('config.business.relative.'.$ds[2])}}&nbsp;{{config('config.business.relative.'.$ds[3])}})</span>
                                 </p>
                                 @endforeach
                             </div>
@@ -122,7 +216,7 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                    @endif
                         <div class="sqzwright">
                             <div class="sqzwright1">
                                 <div class="wangye">

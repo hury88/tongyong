@@ -37,9 +37,9 @@ if($qualificationid){
         $qualificationid=0;
     }
 }
-if(!empty($user_id)){
+if($user_id){
     $map['user_id'] =$user_id;
-    $cname=v_id($user_id,"member_name","users");
+    $cname=v_id($user_id,"business_name","businesses",'user_id');
 }else{
     $cname='管理员';
 }
@@ -180,9 +180,9 @@ list($data,$pagestr) = Page::paging($pageConfig);
     $time =  date('Y-m-d H:i',$sendtime);
     $img1 =  '<img src="'.src($img1).'" width="80" />';
 if($user_id){
-    $publisher=v_id($user_id,"member_name","users");
+    $publisher=v_id($user_id,"business_name","businesses",'user_id');
 }else{
-    $publisher="平台管理员";
+    $publisher='管理员';
 }
 
     // $title = '<a href="' . U('blog/view', ['id'=>$id]) . '" target="_blank">'.$title.'</a>';
@@ -206,7 +206,7 @@ if($user_id){
         <td><?=$title?></td>
 
         <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
-        <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=".$id." and typeid=".$ty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0 and typeid=".$ty)->count(); ?>未审核)</a></td>
+        <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=".$id." and typeid=".$ty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
 
      <td><?=$publisher?></td>
      <td><?=$time?></td>

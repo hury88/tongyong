@@ -328,10 +328,10 @@ function v_list($table, $field = '*', $where = [], $limit=0){
 
     return $data;
 }
-function v_id($id,$field='',$table='news')
+function v_id($id,$field='',$table='news', $pk='id')
 {
     if ($field) {
-        return M($table)->where("`id`=$id")->getField($field);
+        return M($table)->where("`$pk`=$id")->getField($field);
     } else {
         return M($table)->find($id);
     }
