@@ -12,7 +12,8 @@ function model(that, actionUrl){
     form.find('input,textarea,select').each(function(i){
     	if (this.type=="file") {
 	        hiddenForm.append(this.name, this.files[0])
-    	} else if(this.type == 'radio'){
+    	}else if(this.type == 'checkbox'){
+    	}else if(this.type == 'radio'){
 	        hiddenForm.append(this.name, this.checked);
     	} else {
 	        hiddenForm.append(this.name, this.value);

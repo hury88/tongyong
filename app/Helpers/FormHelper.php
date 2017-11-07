@@ -273,7 +273,7 @@ class FormHelper{
 			'%word%'      => $this->word,
 			'%display%'   => 'inline',
 			'%name%'      => $inputname,
-			'%value%'     => isset($this->$inputname) ? date("Y-m-d", $this->$inputname) : '',
+			'%value%'     => $this->$inputname ? date("Y-m-d", $this->$inputname) : '',
 			'%lablename%' => $lablename,
 		];
 
@@ -489,10 +489,9 @@ HTML;
 		if (empty($inputName) || empty($labelName)) {
 			exit('设置选择框时inputName是必须的');
 		}
-		global $$inputName;
 		$this->labelName = $labelName;
 		$this->inputName = $inputName;
-		$this->inputVal  = $$inputName;
+		$this->inputVal  = $this->$inputName;
 		return $this;
 	}
 
@@ -526,7 +525,8 @@ HTML;
 	public function checkbox($title,$val,$checked='',$disabled=''){
 		$this->in = 'checkbox';
 		if ($disabled) {$disabled='disabled ';}
-		$this->temp .= '</span><input type="checkbox" name="'.$this->inputName.'[]" lay-skin="primary" value="'.$val.'" title="'.$title.'" '.$disabled.$checked.'>'.'<span>'.$title.'</span>';;
+		$class = $checked ? 'input-checkbox-selected' : '';
+		$this->temp .= '<span class="checkbox '.$class.'"><input type="checkbox" name="'.$this->inputName.'[]" lay-skin="primary" value="'.$val.'" title="'.$title.'" '.$disabled.$checked.'>'.''.$title.'</span>';;
 		unset($checked,$val,$title,$disabled);
 		return $this;
 	}

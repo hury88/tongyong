@@ -167,7 +167,7 @@ if($user_id){
             <td><?=$destination?></td>
         <?php }?>
         <?php if(in_array($tty,array(21,24,25,29,30,33,34))){?>
-            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id."and isstate=0")->count(); ?>未审核)</a></td>
+            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
         <?php }?>
 
      <td><?=$publisher?></td>

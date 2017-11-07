@@ -177,13 +177,13 @@ if($user_id){
         <?php }?>
         <?php if (in_array($tty,array(56,61))){?>
             <td><?=$img1?></td>
-            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id."and isstate=0")->count(); ?>未审核)</a></td>
+            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
         <?php }?>
         <?php if($tty==61){?>
             <td><?=$img2?></td>
         <?php }?>
         <?php if (in_array($tty,array(60,54,57))){?>
-            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id."and isstate=0")->count(); ?>未审核)</a></td>
+            <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
         <?php }?>
         <?php if (in_array($tty,array(55,58,62))){?>
             <td><?=$img1?></td>

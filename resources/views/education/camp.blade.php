@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                ﻿<div style="width: 100%;clear:both;height:0px;"></div>
+                <div style="width: 100%;clear:both;height:0px;"></div>
                 <script src="/js/index.js"></script>
 
                 <!--特效结束-->

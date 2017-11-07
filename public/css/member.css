@@ -1,5 +1,5 @@
 /*
-°²È«ÉèÖÃ*/
+ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½*/
 .member-safety-wrap{
     background: #eef1f5;
 }
@@ -805,7 +805,7 @@
     color: #d71718;
     border-radius: 5px;
 }
-/*ÆóÒµ»áÔ±Ê×Ò³*/
+/*ï¿½ï¿½Òµï¿½ï¿½Ô±ï¿½ï¿½Ò³*/
 .personal-member-index{
     width: 100%;
 }
@@ -1021,7 +1021,7 @@
 
 
 
-/*ÃæÊÔÑûÇë*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .interview-invitation-cover{
     position:absolute;
     width: 100%;
@@ -1220,7 +1220,7 @@
 }
 
 /*
-Î¯Íñ¾Ü¾øµ¯´°*/
+Î¯ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .decline-mask{
     width: 629px;
     height: 330px;
@@ -1323,7 +1323,7 @@
     font-size: 16px;
 }
 /*
-¼òÀúÊÕ¼þÏä*/
+ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½*/
 .resume-inbox{
     padding-bottom:24px;
 }
@@ -1349,7 +1349,7 @@
     color: #2c68b2;
 }
 /*
-ÏÂÔØ¼òÀúµ¯³ö¿ò*/
+ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .resume-download-mask{
     width:434px;
     height: 245px;
@@ -1417,7 +1417,7 @@
     font-size: 16px;
 }
 /*
-Ö°Î»·¢²¼*/
+Ö°Î»ï¿½ï¿½ï¿½ï¿½*/
 .safety-content-box h3 a{
     background:url(../img/xiugai-icon.png) no-repeat left center;
     float: right;
@@ -1572,6 +1572,22 @@
     color: #666;
     margin-bottom:11px;
 }
+
+.job-posted-values span.checkbox{
+    height:36px;
+    display: inline-block;
+    padding:0 11px;
+    border:1px solid #e5e5e5;
+    float:left;
+    margin-right: 8px;
+    border-radius: 3px;
+    background: #f3f3f3;
+    text-align: center;
+    line-height: 36px;
+    color: #666;
+    margin-bottom:11px;
+    position:relative;
+}
  .job-add{
     height: 36px;
     line-height: 36px;
@@ -1641,7 +1657,7 @@
     width: 90%;
 }
 /*
-ÊµÃûÈÏÖ¤*/
+Êµï¿½ï¿½ï¿½ï¿½Ö¤*/
 .authentication-guide{
     height:83px;
     background: #f2f6d8;
@@ -1853,7 +1869,7 @@
     height: 171px;
     margin-bottom:220px;
 }
-/*ÏµÍ³ÏûÏ¢*/
+/*ÏµÍ³ï¿½ï¿½Ï¢*/
 .system-messages{
     width: 100%;
     padding-bottom: 18px;
@@ -1897,7 +1913,7 @@
     font-size: 16px;
 }
 /*
-ÓÃ»§¹ÜÀí*/
+ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .user-manager{
    width: 100%;
 }
@@ -2099,7 +2115,7 @@
     font-size: 16px;
 }
 /*
-ÓÃ»§¹ÜÀí ÐÞ¸ÄÓÊÏäºÅ*/
+ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .user-form-dv p{
     color: #333;
     font-size: 14px;
@@ -2118,7 +2134,7 @@
     color: #fff;
 }
 /*
-ÔºÐ£ÁÐ±í*/
+ÔºÐ£ï¿½Ð±ï¿½*/
 .order-manager-content .academy-table tr td{
     padding:8px 0;
 }
@@ -2216,7 +2232,7 @@
     line-height:46px;
 }
 /*
-Ö¤Êé¹ÜÀí*/
+Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .certificate-title{
     padding:14px 0 0 0;
     margin-top: 14px;
@@ -2276,7 +2292,7 @@
     padding:40px 0 120px 0;
 }
 /*
-Ö¤Êé¹ÜÀíÁÐ±í*/
+Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½*/
 .certificate-trone{
     width:9%;
 }
@@ -2313,7 +2329,7 @@
     text-align: left;
 }
 
-/*webkitÄÚºË*/
+/*webkitï¿½Úºï¿½*/
 .member-safety-right::-webkit-scrollbar {
     width:0px;
     height:0px;
@@ -2340,7 +2356,7 @@
     width:10px;
     height:10px;
 }
-/*oÄÚºË*/
+/*oï¿½Úºï¿½*/
 .member-safety-right .-o-scrollbar{
     -moz-appearance: none !important;
     background: rgba(0,255,0,0) !important;

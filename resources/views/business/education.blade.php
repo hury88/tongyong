@@ -42,7 +42,8 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path'], $GLOBALS['tty_path']);
     @endif
     <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     @if(in_array($tty, [24,25,29,30]))
-    <!-- <td><a href="pic.php?ti=<?php echo $id?>">图集(<?php //echo M('pic')->where("ti=$id")->count(); ?>)</a></td> -->
+     <td></td>
+    <!-- <td><a href="pic.php?ti=<?php echo $id?>">图集(<?php //echo M('pic')->where("ti=$id")->count(); ?>)</a></td>-->
     <td>{{$destination}}</td>
     @endif
     @if(in_array($tty, [21,24,25,29,30,33,34]))

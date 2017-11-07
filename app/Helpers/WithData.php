@@ -84,6 +84,57 @@ class WithData
 
     public function education()
     {
+        if(in_array($GLOBALS['tty'], [24,25,29,30])){
+            $rules = [
+                'title' => 'required',
+                'ftitle' => 'required',
+                'from' => 'required',
+                'destination' => 'required',
+                'introduce' => 'required',
+                'content' => 'required',
+                'starttime' => 'required|date',
+                'endtime' => 'required|date',
+                'bstarttime' => 'required|date',
+                'bendtime' => 'required|date',
+                'content' => 'required',
+                'content2' => 'required',
+            ];
+            $message = [
+                'title.required' => '标题 项必填',
+                'ftitle.required' => '推荐人群 项必填',
+                'from.required' => '出发地 项必填',
+                'destination.required' => '目的地 项必填',
+                'introduce.required' => '席位情况 项必填',
+                'starttime.required' => '游学开始时间 项必填',
+                'starttime.date' => '游学开始时间 格式不正确',
+                'endtime.required' => '游学结束时间 项必需',
+                'endtime.date' => '游学结束时间 格式不正确',
+                'bstarttime.required' => '报名开始时间 项必需',
+                'bstarttime.date' => '报名开始时间 格式不正确',
+                'bendtime.required' => '报名结束时间 项必需',
+                'bendtime.date' => '报名结束时间 格式不正确',
+                'content.required' => '路线详情 项必需',
+                'content2.required' => '详情介绍 项必填',
+            ];
+        }elseif($GLOBALS['tty']<>27){
+            $rules = [
+                'title' => 'required',
+                'content' => 'required',
+            ];
+            $message = [
+                'title.required' => '标题 项必填',
+                'content.required' => '详情内容 项必填',
+            ];
+        }
+
+
+        $validator = Validator::make($this->data, $rules, $message);
+
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            $this->error = noticeResponseJson(412, '执行失败', $errors);
+            return false;
+        }
         // $file = \Input::file('img1');
 
         $fields = array(
@@ -144,6 +195,36 @@ class WithData
 
     public function training()
     {
+        $rules = [
+            'title' => 'required',
+            'name' => 'required',
+            'period' => 'required',
+            'price' => 'required',
+            'introduce' => 'required',
+            'content' => 'required',
+            'content2' => 'required',
+            'content3' => 'required',
+            'content4' => 'required',
+        ];
+        $message = [
+            'title.required' => '课程名称 项必填',
+            'name.required' => '讲师姓名 项必填',
+            'period.required' => '课时 项必填',
+            'price.required' => '价格 项必填',
+            'introduce.required' => '开播时间 项必填',
+            'content.required' => '课程介绍 项必填',
+            'content2.required' => '课程大纲 项必填',
+            'content3.required' => '讲师介绍 格式不正确',
+            'content4.required' => '游学结束时间 项必填',
+        ];
+        $validator = Validator::make($this->data, $rules, $message);
+
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            $this->error = noticeResponseJson(412, '执行失败', $errors);
+            return false;
+        }
+
         $fields = array(
             'pid'               =>      (int)$GLOBALS['pid'],
             'ty'                =>      (int)$GLOBALS['ty'],
@@ -183,6 +264,7 @@ class WithData
 
     public function job()
     {
+//        dd(request()->all());
         $rules = [
             'title' => 'required',
             'address' => 'required',
@@ -218,22 +300,22 @@ class WithData
             $this->error = noticeResponseJson(412, '执行失败', $errors);
             return false;
         }
-
-        $relative = $this->I('relative', [],'');
-        $relative = $relative && implode(',', $relative);
+//
+//        $relative = $this->I('relative', [],'');
+//        $relative = $relative && implode(',', $relative);
         $fields = array(
             'pid'				=>		(int)$GLOBALS['pid'],
             'ty'				=>		(int)$GLOBALS['ty'],
             'tty'				=>		0,
-            'title'			=>		$this->I('title','','htmlspecialchars'),
-            'address'          =>      $this->I('address','','htmlspecialchars'),
-            'work_nature'     =>      $this->I('work_nature', 1, 'intval'),
-            'salary'           =>      $this->I('salary', 1, 'intval'),
-            'relative'         =>      $relative,
-            'recruit_num'      =>      $this->I('recruit_num', ''),
-            'endtime'           =>      $this->I('content2', time()+3600*24*7, 'strtotime'),
-            'education'         =>      $this->I('education', 1, 'intval'),
-            'experience'        =>      $this->I('experience', 1, 'intval'),
+            'title'				=>		$this->I('title','','htmlspecialchars'),
+            'address'           =>      $this->I('address','','htmlspecialchars'),
+            'work_nature'       =>      $this->I('work_nature', 0, 'intval'),
+            'salary'            =>      $this->I('salary', 0, 'intval'),
+            'relative'          =>       $this->I('relative', '',''),
+            'recruit_num'       =>      $this->I('recruit_num', ''),
+            'endtime'           =>      $this->I('endtime', time()+3600*24*7, 'strtotime'),
+            'education'         =>      $this->I('education', 0, 'intval'),
+            'experience'        =>      $this->I('experience', 0, 'intval'),
             'content2'          =>      $this->I('content2',''),
             'content'           =>      $this->I('content',''),
             'issued'            =>      1,
@@ -290,8 +372,11 @@ class WithData
 
 	private function I($get, $default='', $filter='htmlspecialchars')
 	{
-		if (isset($this->data[$get]) && $filter) {
-			$val = call_user_func($filter, $this->data[$get]);
+		if (isset($this->data[$get])) {
+		    $val = $this->data[$get];
+		    if( $filter) {
+                $val = call_user_func($filter, $val);
+            }
 			return $val ? : $default;
 		}
 		return $default;

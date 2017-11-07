@@ -96,7 +96,7 @@
                             <div class="sqzwleft">
                                 <img src="{{img($userinfo[0]['logo'])}}"/>
                                 <div class="lxgs">
-                                    <h3>{{img($userinfo[0]['business_name'])}}</h3>
+                                    <h3>{{$userinfo[0]['business_name']}}</h3>
                                     <p>规模：{{config('config.business.size.'.$userinfo[0]['size'])}}</p>
                                     <p>行业：{{v_id($userinfo[0]['cate'],'catname','nature')}}</p>
                                     <p>性质：{{config('config.business.nature.'.$userinfo[0]['nature'])}}</p>
@@ -106,13 +106,25 @@
                                 </div>
                                 <div class="gszw">
                                     <h3>该企业的其他职位</h3>
+                                    <?php $relative = config('config.business.relativ'); ?>
                                     @foreach($joblist as $val)
                                         <p>
-                                            <?php $ds=explode(',',$val['relative']);?>
+                                            <?php $ds=explode(',',$val['relative']);$i=0?>
                                             <i></i>
                                             <a href="{{u('job',$GLOBALS['ty_path'],$val['id'])}}">&nbsp;{{$val['title']}}</a>
-                                            <span>&nbsp;&nbsp;&nbsp;({{config('config.business.relative.'.$ds[0])}}&nbsp;{{config('config.business.relative.'.$ds[1])}}&nbsp;{{config('config.business.relative.'.$ds[2])}}&nbsp;{{config('config.business.relative.'.$ds[3])}})</span>
+                                            <span>(@foreach($ds as $tab)
+                                                     <?php
+                                                        if(!isset($relative[$tab])){
+                                                            continue;
+                                                        }
+                                                        echo $relative[$tab];
+                                                        ++$i;
+                                                        if($i==5)break;
+                                                    ?>
+                                                     {{$relative}}
+                                                @endforeach)</span>
                                         </p>
+                                        @endforeach
                                 </div>
                                 <div class="sqzwsys">
                                     <div class="sqzwsysleft">
@@ -138,7 +150,17 @@
                                     <?php $ds=explode(',',$val['relative']);?>
                                     <i></i>
                                     <a href="{{u('job',$GLOBALS['ty_path'],$val['id'])}}">&nbsp;{{$val['title']}}</a>
-                                    <span>&nbsp;&nbsp;&nbsp;({{config('config.business.relative.'.$ds[0])}}&nbsp;{{config('config.business.relative.'.$ds[1])}}&nbsp;{{config('config.business.relative.'.$ds[2])}}&nbsp;{{config('config.business.relative.'.$ds[3])}})</span>
+                                <span>(@foreach($ds as $tab)
+                                    <?php
+                                    if(!isset($relative[$tab])){
+                                        continue;
+                                    }
+                                    echo $relative[$tab];
+                                    ++$i;
+                                    if($i==5)break;
+                                    ?>
+                                    {{$relative}}
+                                 @endforeach)</span>
                                 </p>
                                 @endforeach
                             </div>
@@ -203,7 +225,7 @@
                                 </div>
                                 <div class="sqzwright2a1">
                                     <div class="sqzwright2l1">
-                                        <img src="img/sqzwhr.jpg"/>
+                                        <img src="/img/sqzwhr.jpg"/>
                                     </div>
                                     <div class="sqzwright2c1">
                                         <p class="p1"><i>HR</i>&nbsp;45623153</p>

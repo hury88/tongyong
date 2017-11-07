@@ -10,6 +10,8 @@ if (!empty($id) ) { //显示页面 点击修改  只传了id
 	$row = M($table)->find($id);
 	extract($row);
     $industryidname=v_id($industryid,'catname','nature');
+}else{
+    $content2='<p>性别:</p><p>语言：</p><p>优先专业:</p><p>技能要求:</p><p>证书要求:</p>';
 }
 $opt = new Output;//输出流  输出表单元素
 if (isset($_GET['action']) && $_GET['action']=='delImg') {

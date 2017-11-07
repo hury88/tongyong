@@ -153,6 +153,7 @@
 </script>
 @elseif($table == 'job')
         <?php
+
             if(isset($industryid)){
                 $industryid1 = v_id($industryid,"pid","nature");
             }else{
@@ -176,7 +177,24 @@
             $d31=get_arr(80);
             $d42=get_arr(80,$positionid1);
             $d53=get_arr(80,$positionid2);
+            $zwxz = config('config.business.work_nature');
+            $zwyx =config('config.business.salary');
+            $xlyq =config('config.business.education');
+            $gzjy =config('config.business.experience');
+
         ?>
+            <style>
+                .job-posted-values span.checkbox.input-checkbox-selected{
+                    background: #f5a915;
+                    color: #fff;
+                    border:1px solid #f5a915;
+                }
+
+                .job-posted-values span.checkbox input{
+                    width:100%;
+                    height:100%;
+                }
+            </style>
             <div class="job-posted-dv">
                 <span title="行业类型" class="job-posted-property"><b>*</b>行业类型</span>
                 <div class="job-posted-values">
@@ -191,6 +209,8 @@
                        <?php endforeach ?>
                    </select>
                 </div>
+            </div>
+            <div class="job-posted-dv">
                 <span title="职位类型" class="job-posted-property"><b>*</b>职位类型</span>
                 <div class="job-posted-values">
                    <select name="positionid1" id="positionid1">
@@ -212,55 +232,87 @@
                    </select>
                 </div>
             </div>
+        <input name="relative" type="hidden" value="{{$form->relative}}" id="relative">
     <?php
-
+            if(empty($form->content2)){
+                $form->content2='<p>性别:</p><p>语言：</p><p>优先专业:</p><p>技能要求:</p><p>证书要求:</p>';
+            }
         $form
             ->input('职位名称', 'title')
             ->input('职位发布地址', 'address')
-            ->choose('职位性质','work_nature')->radioSet(config('config.business.work_nature'))->flur()
-            ->choose('职位月薪','salary')->radioSet(config('config.business.salary'))->flur()
+            ->select($zwxz, '职位性质', 'work_nature')
+            ->select($zwyx, '职位月薪', 'salary')
             ->choose('亮点标签标签','relative')->checkboxSet(config('config.business.relative'))->flur()
             ->input('招收人数', 'recruit_num')
             ->time('招聘结束时间', 'endtime')
-            ->choose('学历要求','education')->radioSet(config('config.business.education'))->flur()
-            ->choose('经验要求','experience')->radioSet(config('config.business.experience'))->flur()
-
+            ->select($xlyq, '学历要求', 'education')
+            ->select($gzjy, '经验要求', 'experience')
             ->editor('其他要求', 'content2')
             ->editor('职位描述')
         ;
     ?>
-    <script type="text/javascript">
-        $("#industryid1").change(function () {
-            //alert(1)
-        var industryid1=$(this).val();
+            <script type="text/javascript">
 
-        $.get("include/json.php?action=hyfl1&industryid1="+industryid1, function (data) {
-            $("#industryid").html(data)
-            })
-        })
-
-
-        $("#positionid1").change(function () {
-            var positionid1=$(this).val();
-            $.get("include/json.php?action=zwfl1&positionid1="+positionid1, function (data) {
-                $("#positionid2").html(data);
-                var positionid2=$("#positionid2").val();
-                $.get("include/json.php?action=zwfl2&positionid2="+positionid2, function (data) {
-
-                    $("#positionid").html(data)
+                $("#industryid1").change(function () {
+                    var industryid1=$(this).val();
+                    $.get("/business/json/industryid1/"+industryid1, function (data) {
+                        $("#industryid").html(data)
+                    })
                 })
-            })
 
-        })
-        $("#positionid2").change(function () {
-            var positionid2=$(this).val();
+                $("#positionid1").change(function () {
+                    var positionid1=$(this).val();
+                    $.get("/business/json/positionid1/"+positionid1, function (data) {
 
-            $.get("include/json.php?action=zwfl2&positionid2="+positionid2, function (data) {
+                        $("#positionid2").html(data);
+                        var positionid2=$("#positionid2").val();
+                        $.get("/business/json/positionid2/"+positionid2, function (data) {
+                            $("#positionid").html(data)
+                        })
+                    })
+                })
+                $("#positionid2").change(function () {
+                    var positionid2=$(this).val();
+                    $.get("/business/json/positionid2/"+positionid2, function (data) {
+                        $("#positionid").html(data)
+                    })
+                })
 
-                $("#positionid").html(data)
-            })
-        })
-    </script>
+                /* 单选选中样式*/
+                /*$("input[type='radio']").each(function(){
+                    $(this).parent('span').click(function(){
+                        $(this).addClass("input-radio-selected").siblings().removeClass("input-radio-selected");
+                    })
+                })*/
+                /*多选选中样式*/
+                $('span.checkbox').click(function(){
+                    if($('.input-checkbox-selected').length >= 8){
+                        model_notice(412, '标签数目太多','最多只能选择8个标签');
+                        return false;
+                    }
+                    $(this).toggleClass("input-checkbox-selected").children('input').prop('checked',function(i,v){
+                        return !v;
+                    });
+                   $(this).find('input').attr('checked',true)
+                   $(this).find('input').addClass('cur')
+                    var cd='';
+                    $('.input-checkbox-selected').each(function(){
+                        var ss=$(this).children().val()
+                       cd+= ','+ss
+                    })
+                    cd=cd.substr(1)
+                    $("#relative").val(cd);
+                })
+
+
+                /*$("input[type='checkbox']").each(function(){
+                    $(this).parent(".checkbox").click(function(){
+                        $(this).toggleClass("input-checkbox-selected");
+                    })
+                })*/
+
+
+            </script>
 @endif
         <div class="post-message-div clearfix">
             <div class="post-message-right fr">

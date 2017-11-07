@@ -276,6 +276,8 @@ class WithData
             'price'				=>		I('post.price','','trim,htmlspecialchars'),
             'linkurl'			=>		I('post.linkurl','','trim,htmlspecialchars'),
             'period'				=>		I('post.period','','trim,htmlspecialchars'),
+            'link1'				=>		I('post.link1','','trim,htmlspecialchars'),
+            'link2'				=>		I('post.link2','','trim,htmlspecialchars'),
             #资讯
             //SEO
             'seotitle'		    =>		I('post.seotitle','','trim'),

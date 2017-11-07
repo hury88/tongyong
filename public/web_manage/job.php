@@ -173,7 +173,7 @@ if($user_id){
         <td> <?=Config::get('business.work_nature')[$work_nature]?> </td>
             <td><?=$recruit_num?></td>
             <td><?=Config::get('webarr.issued')[$issued] ?></td>
-        <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id."and isstate=0")->count(); ?>未审核)</a></td>
+        <td><a href="baoming.php?bid=<?php echo $id?>&typeid=<?php echo $tty?>">共有（<?php echo M('enroll')->where("tid=".$id)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
 
 
      <td><?=$endtime?></td>
