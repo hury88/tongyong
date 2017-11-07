@@ -5,7 +5,6 @@ namespace app;
 use Exception;
 use App\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use function foo\func;
 
 class Education extends Model
 {

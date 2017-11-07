@@ -143,14 +143,21 @@ class Order extends Model
     public function sendNotice()
     {
         if (!empty($this->seller_id) && !empty($this->user_id) && $this->type == 'order') {
-            switch ($this->status) {
+            switch ($this->attributes['status']) {
             case 3:// new
                 Notice::create([
                     'action_type_id' => 4,
                     'source_id'      => $this->id,
-                    'user_id'        => "$this->buyer_id|$this->seller_id",
-                    'sender_id'      => 0,
-                    'title' => "恭喜您的订单($this->orderno)创建成功|您收到了一个新的订单($this->orderno)",
+                    'user_id'        => $this->buyer_id,
+                    'sender_id'      => $this->seller_id,
+                    'title' => "恭喜您的订单($this->orderno)创建成功",
+                ]);
+                Notice::create([
+                    'action_type_id' => 4,
+                    'source_id'      => $this->id,
+                    'user_id'        => $this->seller_id,
+                    'sender_id'      => $this->buyer_id,
+                    'title' => "您收到了一个新的订单($this->orderno)",
                 ]);
             break;
             default:

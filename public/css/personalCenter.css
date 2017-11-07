@@ -2246,7 +2246,7 @@
     overflow:hidden;
     margin-bottom: 18px;
 }
-.system-messages-li a{
+.system-messages-li .diva{
     min-height: 73px;
     display: block;
     padding:14px 0 21px 106px;

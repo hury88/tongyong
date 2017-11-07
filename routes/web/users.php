@@ -29,7 +29,7 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
     Route::get('dashboard', 'PersonController@dashBoard');
 
     Route::get('/', ['as' => 'person', 'uses' => 'PersonController@profile']);
-    Route::get('/profile', 'PersonController@profile');
+    Route::get('/profile', ['as' => 'p_enroll', 'uses' => 'PersonController@profile']);
 
     Route::get('password', 'PersonController@password');
     Route::post('upload/headimg', ['as' => 'uploadheadimg', function(){
@@ -52,7 +52,6 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
     Route::get('getyzm/{type}', 'PersonController@getyzm');
     Route::get('email', 'PersonController@email');
     Route::post('xgtel', 'PersonController@xgtel');
-
 
     Route::get('certified', 'PersonController@certified');
     Route::post('smrz', 'PersonController@smrz');
