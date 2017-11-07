@@ -40,44 +40,31 @@ class JobController extends Job
     public function __construct()
     {
 
-
-            $banimgsrc = img($GLOBALS['pid_data']->img1);
-
-        view()->share('banimgsrc', $banimgsrc);
     }
 //招聘信息详情
     public function show($id)
     {
+
         $viewrow =  $id;
-        $Training= new Training();
-        $id_arr=$Training->v_id_arr($id);
+        $Job= new Job();
+        $sanlist = $this->sanlist();
+        $id_arr=$Job->v_id_arr($id);
+        //dd($id_arr);
         if(!$id_arr){
             about(404);
         }
+        $Job->enroll_num = $Job->enroll_num +1;
+        $Job->save();
         if($id_arr->user_id){
-            $id_arr->qyname=v_id($id_arr->user_id,'member_name', 'users');
+        $userinfo= Business::where('user_id','=',$id_arr->user_id)->select("*")->get();
         }else{
-            $id_arr->qyname="平台管理员";
+        $userinfo='';
         }
-     //   $arr=$this->newsorder($id);
-//        $id_arr->previd=$arr['previd'];
-//        $id_arr->nextid=$arr['nextid'];
-//        if($id_arr->previd>0){
-//            $id_arr->prevlink=u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$id_arr->previd);
-//            $id_arr->prev=v_id($id_arr->previd,"title");
-//
-//        }else{
-//            $id_arr->prevlink='javascript:void(0)';
-//        }
-//        if($id_arr->nextid>0){
-//            $id_arr->nextlink=u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$id_arr->nextid);
-//            $id_arr->next=v_id($id_arr->nextid,"title");
-//        }else{
-//            $id_arr->nextlink='javascript:void(0);';
-//        }
-        $userinfo= Business::where('user_id','=',$id_arr->user_id)->select("logo","business_name",'business_introduction')->get();
-        $qiyegood = $this->goodlist([2], ['id','ty','img1', 'title','introduce', 'price','img1', 'enroll_num','content'], 4);
-        return view('job/show', compact('id_arr','userinfo','qiyegood'));
+        $sousuoarr=get_ssarr();
+        $industryids=$sousuoarr[79];
+        $positionids=$sousuoarr[80];
+        $joblist=$this->job_list($id_arr->user_id);
+        return view('job/show', compact('id_arr','userinfo','qiyegood','sanlist','industryids','positionids','joblist'));
     }
     //文章排序
     protected function newsorder($id)
@@ -311,6 +298,13 @@ class JobController extends Job
     return view('job/resumeview', compact('id_arr'));
 
 }
+//企业职位列表
+    private function job_list($user_id)
+    {
+        $str = $this->v_list([$GLOBALS['pid'],$GLOBALS['ty']],$user_id,["title","sendtime"],14);
+
+        return $str;
+    }
 }
 function get_ssarr()
 {

@@ -37,10 +37,12 @@ class Job extends Model
     protected $fillable = [
     ];
 
-    public function v_list($where=[],$field=['*'],$num=null)
+    public function v_list($where=[],$user_id,$field=['*'],$num=null)
     {
+        if($user_id){$user_id=$user_id;}else{$user_id=0;}
         return $this->parseWhere($where)
             ->where('isstate','=' ,'1')
+            ->where('user_id','=',$user_id)
             ->latest('isgood')
             ->latest('disorder')
             ->latest('id')

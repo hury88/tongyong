@@ -1,6 +1,7 @@
 <?php
 
 Route::post('enroll/{training_id}', ['uses' => 'OrdersController@create', 'as' => 'orders.create']);
+Route::post('newsenroll/{education_id}', ['uses' => 'EnrollController@create', 'as' => 'education.create']);
 /*
 Route::get('orders/report/{type}/{filter}', ['uses' => 'OrdersController@reports', 'as' => 'orders.report']);
 
