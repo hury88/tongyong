@@ -39,7 +39,10 @@ class JobController extends Job
 
     public function __construct()
     {
+            $banimgsrc = img($GLOBALS['pid_data']->img1);
 
+
+        view()->share('banimgsrc', $banimgsrc);
     }
 //招聘信息详情
     public function show($id)

@@ -22,8 +22,8 @@
                 ->img('企业头像', 'headimg', '250*150')
                 ->input('企业姓名', 'business_name')
                 ->input('联系人', 'contact')
-                ->word('<a class="useredit-a" href="{{route('get_b_telphone')}}">修改手机号</a>')->input2('手机号', 'telphone')
-                ->word('<a class="useredit-a" href="{{route('get_b_email')}}">修改邮箱</a>')->input2('邮箱', 'email')
+                ->word('<a class="useredit-a" href="{{route(\'get_b_telphone\')}}">修改手机号</a>')->input2('手机号', 'telphone')
+                ->word('<a class="useredit-a" href="{{route(\'get_b_email\')}}">修改邮箱</a>')->input2('邮箱', 'email')
                 ->input('微信', 'weixin')
                 ->input('QQ', 'qq')
                 ->display('len-1')->input('所在地', 'location')
@@ -55,10 +55,11 @@
         <h4>企业信息</h4>
         <div class="user-contact">
             <?php
+                $ds=get_arr(75);
                 $form
                     ->img('上传logo', 'logo')
                     ->select(config('config.business.size'), '企业规模', 'size')
-                    ->select(config('config.business.cate'), '所属行业', 'cate')
+                    ->select($ds, '所属行业', 'cate')
                     ->select(config('config.business.nature'), '企业性质', 'nature')
                     ->input('官方网址', 'siteurl')
                     ->editor('企业介绍', 'business_introduction')
