@@ -1114,13 +1114,11 @@ class PersonController extends base\UserController
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
         $data['user'] = $user;
-        return view('user.profile', $data);
-    }
-
-
-    public function jianlimsyqview(Request $id)
-    {
-        $user = User::findOrFail(\Auth::id())->relationsToArray();
+        $data['pagenewslist'] = \Auth::user()->hasManyResume('person_id')
+            ->where(function ($query) {
+                $query->whereStatus(2);
+            })->orderBy('created_at', 'desc')/*->paginate($this->paginate)*/->get()->toArray(/*$this->toArray*/);
+//        $user = User::findOrFail(\Auth::id())->relationsToArray();
         $data['user'] = $user;
         return view('user.profile', $data);
     }

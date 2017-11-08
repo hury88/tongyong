@@ -31,10 +31,10 @@ Route::group(['prefix' => 'register'], function () {
 
 
 // Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('password/reset', 'Auth\ForgotPasswordController@get_pwd1')->name('password.request');
+Route::post('password/reset2', 'Auth\ForgotPasswordController@get_pwd2')->name('password.request2');
+Route::post('password/reset3', 'Auth\ForgotPasswordController@get_pwd3')->name('password.request3');
+Route::post('password/reset4', 'Auth\ForgotPasswordController@get_pwd4')->name('password.request4');
 
 use Illuminate\Http\Request;
 

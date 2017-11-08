@@ -59,7 +59,7 @@
 								@include('user.right.jianli')
 							@elseif($GLOBALS['uri'][2]=="toudi")
 								@include('user.right.jianlitoudi')
-							@elseif($GLOBALS['uri'][2]=="jianlimsyq")
+							@elseif($GLOBALS['uri'][2]=="msyq")
 								@include('user.right.jianlimsyq')
 							@elseif($GLOBALS['uri'][2]=="msyqview")
 								@include('user.right.jianlimsyqview')

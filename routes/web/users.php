@@ -64,7 +64,6 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
     Route::get('jianli/view/{id}', 'PersonController@jianliview');
     Route::get('jianli/toudi', 'PersonController@jianlitoudi');
     Route::get('jianli/msyq', 'PersonController@jianlimsyq');
-    Route::get('jianli/msyqview/{id}', 'PersonController@jianlimsyqview');
     Route::get('jianli/down', 'PersonController@jianlidown');
     Route::get('jianli/wdsc', 'PersonController@jianliwdsc');
 
