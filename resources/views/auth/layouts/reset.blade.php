@@ -9,6 +9,7 @@
     <div class="pager_wrap login_wrap">
 @stop
 @section('content')
+            <script type="text/javascript" src="/js/jquery.js"></script>
         @section('navigation')
         @stop
         @section('tophelp')

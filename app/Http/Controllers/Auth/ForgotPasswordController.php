@@ -36,7 +36,8 @@ class ForgotPasswordController extends Controller
      */
     public function get_pwd1()
     {
-        return view('auth.get_pwd1');
+
+        return  view('auth.get_pwd1');
     }
     public function get_pwd2()
     {

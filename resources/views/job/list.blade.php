@@ -265,11 +265,10 @@
                                 <div class="job-lists-dv">
                                     <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
                                     <ul class="job-small-type" style="max-height: 195px;overflow-y: auto">
-                                       @if($k<390)
+
                                         @foreach($positionids[$k] as $k1=>$v1)
                                             <li class="c{{$k1}} @if(in_array($k1,$positionidarr)) select-item @endif" data-id="{{$k1}}">{{$v1}}</li>
                                         @endforeach
-                                       @endif
                                     </ul>
                                 </div>
                             @endforeach

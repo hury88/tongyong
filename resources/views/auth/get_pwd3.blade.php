@@ -16,7 +16,8 @@
     <div class="findpwd-step1">
         <h2>安全验证</h2>
         <div class="findpwd-step1-form">
-            <form method="post" action="{{route('password.request3')}}">
+            <form method="post" action="{{route('password.request4')}}">
+                {{csrf_field()}}
                 <div class="findpwd-step1-code">
                     <input class="findpwd-step3" name="pwd" type="password" placeholder="请输入您的新密码"/>
                     <a class="small-key" href="javascript:;"></a>

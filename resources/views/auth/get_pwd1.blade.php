@@ -17,17 +17,35 @@
         <h2>确认账号</h2>
         <div class="findpwd-step1-form">
             <form method="post" action="{{route('password.request2')}}">
+                {{csrf_field()}}
                 <div class="findpwd-step1-div">
-                    <input type="text" name="tel" placeholder="请输入邮箱/手机号"/>
+                    <input type="text" name="telemail" id="telemail" placeholder="请输入邮箱/手机号"/>
                 </div>
                 <div class="findpwd-step1-code">
-                    <input type="text" name="yzm" placeholder="请输入验证码"/>
-                    <a href="javascript:;" class="findpwd-getcode"><img src="/img/code-img.png"/></a>
+                    <input type="text" name="yzm" id="yzm" placeholder="请输入验证码"/>
+                    <a href="javascript:void(0);"  class="findpwd-getcode"><img onClick="this.src=this.src+'?'" src="/yzm"/></a>
                 </div>
                 <div class="findpwd-step1-sub">
-                    <input type="submit" value="下一步"/>
+                    <input type="submit" value="下一步" id="submit"/>
                 </div>
             </form>
         </div>
+
+        <script type="text/javascript">
+            $('#submit').click(function () {
+                var telemail=$('#telemail').val()
+                var yzm=$('#yzm').val()
+                if(!telemail){
+                    alert('请输入你注册时邮箱/手机');
+                    $('#telemail').focus()
+                    return false
+                }
+                if(!yzm){
+                    alert('请输入验证码');
+                    $('#telemail').focus()
+                    return false
+                }
+            })
+        </script>
     </div>
 @stop
