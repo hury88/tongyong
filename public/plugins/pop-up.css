@@ -1,0 +1,127 @@
+.layer-popup{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200012;
+    background: rgba(0,0,0,.6);
+    opacity: 0.6;
+    filter:alpha(opacity=60);
+    -moz-opacity: 0.6;
+    display:none;
+}
+.tip-popup{
+    width: 533px;
+    height: 303px;
+    position: fixed;
+    background: #fff;
+    display:none;
+    border-radius:4px;
+    z-index: 200013;
+}
+.shengqingtiptop-pop a {
+    display: block;
+    background: url(../img/close.png) no-repeat;
+    background-size: 100% 100%;
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+    float: right;
+}
+.shengqingtiptop-pop{
+    padding: 15px 25px;
+    background: #2d80bb;
+    border-radius: 4px 4px 0 0;
+}
+.shengqingtiptop-pop span{
+    color: #ffffff;
+    font-size: 24px;
+}
+.shengqingtipbom-pop{
+    padding:42px 46px 0 25px;
+}
+.applyjob-intro{
+    width: 84px;
+    min-height: 36px;
+    line-height: 36px;
+    float: left;
+    text-align: right;
+}
+.applyjob-intro b{
+    color: #ff0000;
+    margin-right:5px;
+}
+.shengqingtipbom1-pop{
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.shengqingtipbom1-pop .apply-jobselect{
+    width: 365px;
+    height: 35px;
+    border: 1px solid #cccccc;
+    padding-left: 10px;
+    border-radius: 3px;
+    float:right;
+}
+.shengqingtipbom2-pop{
+    margin-bottom: 22px;
+    overflow: hidden;
+}
+.shengqingtipbom2-pop .apply-job-inp{
+    width: 365px;
+    height: 35px;
+    float:right;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+.shengqingtipbom2-pop .apply-job-inp input{
+    width:266px;
+    height: 34px;
+    padding-left:16px;
+    border-radius: 3px 0 0 3px;
+    float: left;
+}
+.shengqingtipbom2-pop .apply-job-inp img{
+    float:left;
+    width:83px;
+    height:35px;
+}
+.apply-submit{
+    width: 367px;
+    height:42px;
+    float:right;
+}
+.apply-submit input{
+    width: 104px;
+    height: 42px;
+    background: #ea5e58;
+    float: left;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.tip1 p,.tip1 span{
+    display: block;
+    text-align: center;
+}
+.tip1 p{
+    margin-top: 50px;
+    color: #323333;
+    font-size: 24px;
+}
+.tip1 p img{
+    padding-right: 15px;
+}
+.tip1 span{
+    width: 105px;
+    height: 45px;
+    color: #fff;
+    background: #ea5e58;
+    font-size: 16px;
+    text-align: center;
+    line-height: 45px;
+    margin: 0 auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
