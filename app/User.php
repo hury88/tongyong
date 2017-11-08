@@ -130,6 +130,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('App\Resume', $foreign_id);
     }
+    // 个人
+    public function hasManyCVS()
+    {
+        return $this->hasMany('App\CVS');
+    }
 
     /*public function getHasPhoneAttribute()
     {

@@ -4,8 +4,9 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
-    \    <script type="text/javascript">
-        window.onload = function() {
+    <link rel="stylesheet" type="text/css" href="/plugins/pop-up.css"/>
+    <script type="text/javascript">
+       /* window.onload = function() {
             add = document.getElementsByClassName("shenqingzhiwei17")[0];
 
             tip = document.getElementsByClassName("tip")[0];
@@ -28,7 +29,7 @@
         function bb() {
             tip.style.display = 'none';
             layer.style.display = 'none';
-        }
+        }*/
 
 
     </script>
@@ -179,7 +180,15 @@
                             <div class="sqzwright1">
                                 <div class="wangye">
                                     <span>网页制作，程序编辑</span>
-                                    <a href="javascript:;" class="shenqingzhiwei17">申请职位</a>
+                                    @if(auth()->user()->isPerson())
+                                    <a class="shenqingzhiwei17" recruit_id="{{$id_arr->id}}" business_name="{{$id_arr->business_name}}" href="javascript:;">申请职位</a>
+                                    @elseif(auth()->user()->isCompany())
+                                    <a href="javascript:alert('只有个人会员才能申请职位');">申请职位</a>
+                                    @else
+                                    <a href="javascript:alert('请先登录');">申请职位</a>
+                                    @endif
+
+                                    <!-- <a href="javascript:;" class="shenqingzhiwei17">申请职位</a> -->
                                 </div>
                                 <div class="sqzwwz">
                                     <img src="img/sqzwwz.jpg"/>
@@ -369,41 +378,14 @@
 
 
     @section('footer')
-            <div class="layer">
-
-            </div>
-            <div class="tip">
-                <div class="shengqingtiptop">
-                    <span>申请职位</span>
-                    <a class="close"></a>
-                </div>
-                <div class="shengqingtipbom">
-                    <div class="shengqingtipbom1">
-                        <img src="img/close1.png"/>选择简历
-                        <select name="">
-                            <option value="">请选择您要投放的简历</option>
-                            <option value="">请选择您要投放的简历</option>
-                            <option value="">请选择您要投放的简历</option>
-                            <option value="">请选择您要投放的简历</option>
-                        </select>
-                    </div>
-                    <div class="shengqingtipbom2">
-                        <img src="img/close1.png"/>验证码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="" id="" value="" placeholder="请填写验证码"/>
-                        <img src="img/yanzhengma.jpg"/>
-                        <p><a href="javascript:;" class="toudijianli">投递简历</a></p>
-                    </div>
-
-                </div>
-            </div>
             <!-- 申请职位成功弹窗-->
-            <div class="layer1">
+           <!--  <div class="layer1">
 
-            </div>
-            <div class="tip1">
-                <p><img src="img/shnegqingsucc.jpg"/>申请职位成功！</p>
-                <span class="guanbi">关闭</span>
-            </div>
+           </div>
+           <div class="tip1">
+               <p><img src="img/shnegqingsucc.jpg"/>申请职位成功！</p>
+               <span class="guanbi">关闭</span>
+           </div> -->
             <!-- 举报弹窗-->
             <div class="tip2">
                 <div class="tip21">
@@ -454,7 +436,7 @@
                                 <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
                                 <ul class="job-small-type">
                                     @foreach($industryids[$k] as $k1=>$v1)
-                                        <li class="c{{$k1}} data-id="{{$k1}}">{{$v1}}</li>
+                                        <li class="c{{$k1}}" data-id="{{$k1}}">{{$v1}}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -509,6 +491,37 @@
                     <a class="operate-reset" href="javascript:;">取消</a>
                 </div>
             </div>
+            @if(auth()->user()->isPerson())
+            <div class="layer-popup"> </div>
+            <div class="tip-popup">
+                <div class="shengqingtiptop-pop">
+                    <span>申请职位</span>
+                    <a class="close"></a>
+                </div>
+                <div class="shengqingtipbom-pop form" action="{{route('job.request')}}">
+                    <div class="shengqingtipbom1-pop">
+                        <input type="hidden" name="business_name" id="business_name">
+                        <input type="hidden" name="recruit_id" id="recruit_id">
+                        {{csrf_field()}}
+                        <span class="applyjob-intro"><b>*</b>选择简历</span>
+                        <select class="apply-jobselect" name="cvs_id">
+                            @foreach(auth::user()->hasManyCVS()->get(['id','nid'])->toArray() as $v)
+                            <option value="{{$v['id']}}">{{$v['nid']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- <div class="shengqingtipbom2-pop">
+                        <span class="applyjob-intro"><b>*</b>验证码</span>
+                        <div class="apply-job-inp">
+                            <input type="text" name="" id="" value="" placeholder="请填写验证码"/>
+                            <img src="/img/apply-img_01.jpg"/>
+                        </div>
+                    </div>-->
+                    <div class="apply-submit"><input onclick="return job(this)" type="submit" value="投递简历"/></div>
+                </div>
+            </div>
+
+            @endif
     @parent
     @stop
 
@@ -519,7 +532,7 @@
 
             <script type="text/javascript">
                 //	导航下拉
-                $('.mian_nav .list>li').hover(function() {
+                /*$('.mian_nav .list>li').hover(function() {
                     $(this).find('.dump').stop().slideDown();
                 }, function() {
                     $(this).find('.dump').stop().slideUp();
@@ -542,6 +555,31 @@
                 })
                 $('.sqzwNavlist p a').ckick(function(){
                     $(this).addClass('sqzwNavliston');
-                })
+                })*/
+
+                /*
+                 申请职位弹框*/
+                var payHeight = $(document).height();
+                $(".layer-popup").height(payHeight);
+                $(".shenqingzhiwei17").click(function(){
+                    $("#business_name").val($(this).attr("business_name"))
+                    $("#recruit_id").val($(this).attr("recruit_id"))
+                    $(".layer-popup").fadeIn("fast");
+                    $(".tip-popup").fadeIn("fast").css({
+                        left: ($(window).width() - $('.tip-popup').outerWidth())/2,
+                        top: ($(window).height() - $('.tip-popup').outerHeight())/2
+                    });
+                });
+
+                $(".shengqingtiptop-pop .close").click(function(){
+                    $(".layer-popup").fadeOut("fast");
+                    $(".tip-popup").fadeOut("fast");
+                });
+                function job(obj)
+                {
+                    $(".layer-popup").fadeOut("fast");
+                    $(".tip-popup").fadeOut("fast");
+                    return model(obj);
+                }
             </script>
     @stop
