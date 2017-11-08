@@ -1102,6 +1102,10 @@ class PersonController extends base\UserController
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
         $data['user'] = $user;
+        $data['pagenewslist'] = \Auth::user()->hasManyResume('person_id')
+            ->where(function ($query) {
+            })->orderBy('created_at', 'desc')/*->paginate($this->paginate)*/->get()->toArray(/*$this->toArray*/);
+        $data['user'] = $user;
         return view('user.profile', $data);
     }
 

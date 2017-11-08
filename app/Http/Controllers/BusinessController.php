@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Notice;
+use App\Resume;
 use YZM;
 
 class BusinessController extends base\UserController
@@ -90,14 +91,27 @@ class BusinessController extends base\UserController
     /**
      * 简历管理 修改简历状态
      */
-    public function resumeChangeStatus($id)
+    public function resumeChangeStatus($id, Request $request)
     {
-        $resume = Resume::b2r($id, \Auth::id());
-        dd($resume);
-        if ($resume) {
-
+        $resume = Resume::whereBusinessId(\Auth::id())->find($id);
+        if (is_null($resume)) {
+            return handleResponseJson(412, '要操作的简历不存在');
         }
-        return handleResponseJson(201, '您已报名过此课程,请去订单中心查看详情');
+        switch ($request->dao) {
+            case 'ok':
+                $resume->status = 2;
+                break;
+            case 'refuse':
+                $resume->status = 1;
+                break;
+            default:
+                abort(404);
+                break;
+        }
+        if ($resume->save()) {
+            return handleResponseJson(201, '操作成功');
+        }
+        return handleResponseJson(412, '操作失败,请稍后再试');
     }
 
     /**

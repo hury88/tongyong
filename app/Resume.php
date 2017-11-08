@@ -61,7 +61,6 @@ class Resume extends Model
         $status_changed = (isset($this->original['status']) && $this->attributes['status'] != $this->original['status']) || (isset($options['status']) && $this->attributes['status'] != $options['status']);
         $saved = parent::save($options);
         if ($saved) {
-            // $this->createLog();
             if ($status_changed || $new) {
                 $this->sendNotice();
             }
@@ -97,17 +96,17 @@ class Resume extends Model
                     'user_id'        => $this->person_id,
                     'sender_id'      => $this->business_id,
                     'sprintf' => $this->business_name,
-                    'content' => '请去简历中心查看详情'
+                    'content' => '很遗憾,您申请'.$this->title.'的职位刚刚被拒绝'
                 ]);
                 Notice::create([
                     'action_type_id' => 12,
                     'source_id'      => $this->id,
                     'user_id'        => $this->business_id,
                     'sender_id'      => $this->person_id,
-                    'title' => "您已成功发出面试邀请，请等待应聘者响应",
+                    'title' => "您刚刚拒绝了一位求职者",
                 ]);
             break;
-            case 2:// toRefuse
+            case 3:// toRefuse
                 Notice::create([
                     'action_type_id' => 13,
                     'source_id'      => $this->id,
@@ -124,8 +123,8 @@ class Resume extends Model
                     'title' => "很遗憾,您发出的面试刚刚被拒绝",
                 ]);
             break;
-            case 3:// ok
-                Notice::create([//发送给个人
+            case 2:// ok
+                $flag = Notice::create([//发送给个人
                     'action_type_id' => 14,
                     'source_id'      => $this->id,
                     'user_id'        => $this->person_id,
@@ -133,7 +132,8 @@ class Resume extends Model
                     'sprintf' => $this->business_name,
                     'content' => '请去简历中心查看详情'
                 ]);
-                Notice::create([
+                if($flag)
+                $a = Notice::create([
                     'action_type_id' => 14,
                     'source_id'      => $this->id,
                     'user_id'        => $this->business_id,

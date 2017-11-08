@@ -45,7 +45,7 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
         <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
     <td><img src="{{img($img1)}}" width="80"></td>
-    <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
+    <td><a class="color-blue" target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     <td>{{$trainingid_s[$trainingid]}}</td>
     <td>{{$enroll_num}}</td>
     <td>{{date('Y-m-d', $sendtime)}}</td>

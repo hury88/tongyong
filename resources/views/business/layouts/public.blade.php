@@ -1,6 +1,6 @@
 @extends('business.layouts.master')
 @section('title') @parent @stop
-@section('css') @parent @stop
+@section('css') @parent <style>a.color-blue{color:#3481bc !important}</style>@stop
 
 @section('main')
 <script type="text/javascript" src="/js/jquery.js"></script>

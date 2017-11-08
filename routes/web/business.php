@@ -60,7 +60,7 @@ Route::group(['prefix' => 'business', 'roles' => [0,2], 'middleware' => ['auth',
             Route::post($index.'/cu/{id}', 'BusinessController@with');
             Route::post($index.'/cu', 'BusinessController@with');
         }
-        Route::get('changeStatus/{id}', 'BusinessController@resumeChangeStatus');
+        Route::post('changeStatus/{id}', 'BusinessController@resumeChangeStatus');
     });
     // 职业培训管理
     Route::group(['prefix' => 'training'], function(){

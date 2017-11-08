@@ -46,7 +46,7 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path'], $GLOBALS['tty_path']);
     <td class="manager-firstth">
         <label><input id="delid{{$id}}" class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
-    <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
+    <td><a class="color-blue" target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     @if($tty==54)
         <td> <?=config('config.webarr.certificate')[$certificate_lid]?> </td>
     @endif

@@ -32,7 +32,7 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path']);
     <td class="manager-firstth">
         <label><input id="delid{{$id}}" class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
-    <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
+    <td><a class="color-blue" target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     <td>{{$business_work_nature[$work_nature]}}</td>
     <td>{{$recruit_num}}</td>
     <td>{{$isstate}}</td>

@@ -1,6 +1,6 @@
 @extends('business.layouts.public-list')
 <?php
-$th = ['求职者', '求职意向', '性别', '学历', '工作经验', '期望月薪', '招聘类别', '反馈状态'];
+$th = ['应聘岗位', '求职者', '求职意向', '性别', '学历', '工作经验', '期望月薪', '招聘类别', '反馈状态'];
 ?>
 @section('form')
 <style>
@@ -29,6 +29,7 @@ $th = ['求职者', '求职意向', '性别', '学历', '工作经验', '期望�
         <td class="manager-firstth">
             <label><input id="delid{{$id}}" class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
         </td>
+        <td>{{$title}}</td>
         <td>{{$cvs->name}}</td>
         <td>{{$cvs->gzxz}}-{{$cvs->cshy}}</td>
         <td>{{$cvs->sex}}</td>
@@ -43,7 +44,12 @@ $th = ['求职者', '求职意向', '性别', '学历', '工作经验', '期望�
     <script>
         $(".feedback").click(function(){
             var that = $(this);
-            $.post("{{route('b_resume').'/changeStatus'}}/" + that.data("id"), function(){
+            $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': "{{csrf_token()}}"
+               }
+            });
+            $.post("{{route('b_resume').'/changeStatus'}}/" + that.data("id"), {dao:that.data("dao")}, function(response){
                 var state = response.state,
                     title = response.title,
                     message = response.message,
