@@ -39,7 +39,7 @@
                                     </a>
                                 </div>
                                 @if(auth()->check() && App\Enroll::ofEncroll(auth()->id(), $id_arr->id)->first())
-                                <div class="baomingright form">
+                                <div class="baomingright">
                                     <a href="javascript:;">
                                         已报名
                                     </a>
@@ -52,8 +52,6 @@
                                     </a>
                                 </div>
                                 @endif
-
-
                             </div>
                             <div class="baomingCon">
                                 {!! htmlspecialchars_decode($id_arr->content) !!}
@@ -65,14 +63,9 @@
                 </div>
             </div>
 @stop
-
 @section('scripts')
 @parent <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/alert.min.js"></script>
 @stop
-
-
-
-
 
 

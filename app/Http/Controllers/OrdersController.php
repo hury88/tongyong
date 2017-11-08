@@ -89,7 +89,9 @@ class OrdersController extends Controller
         $order->training_img = $training->img1;
         $order->training_title = $training->title;
         $order->training_period = $training->period;
+        $order->training_path = u(v_id($training->pid,'path','news_cats'),v_id($training->ty,'path','news_cats'),$training->id);
         $order->price = $training->price;
+        $order->typeid = $training->ty;
         $order->status = 3;
 
         $order->buyer_id = $person->user_id;

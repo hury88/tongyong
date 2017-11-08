@@ -38,12 +38,25 @@
                     <div class="zslbxqLeft">
                         <div class="zslbxqTit">
                             <p class="rlzy">{{$id_arr->title}}</p>
-                            <p class="rlzysj">
-                                <span>更新时间：{{date("Y-m-d",$id_arr->sendtime)}}</span>
-                                <span>来源：<i>{{$id_arr->qyname}}</i></span>
-                                <span><img src="/img/jubao.png"/>举报</span>
-                                <a href="javascript:void(0)">我要报名</a>
-                            </p>
+                            @if(auth()->check() && App\Enroll::ofEncroll(auth()->id(), $id_arr->id)->first())
+                                <p class="rlzysj">
+                                    <span>更新时间：{{date("Y-m-d",$id_arr->sendtime)}}</span>
+                                    <span>来源：<i>{{$id_arr->qyname}}</i></span>
+                                    <span><img src="/img/jubao.png"/>举报</span>
+
+                                    <a href="javascript:void(0)">我要报名</a>
+                                </p>
+                            @else
+                                <p class="rlzysj form" action="{{route('certificate.create', $id_arr->id)}}">
+                                    <span>更新时间：{{date("Y-m-d",$id_arr->sendtime)}}</span>
+                                    <span>来源：<i>{{$id_arr->qyname}}</i></span>
+                                    <span><img src="/img/jubao.png"/>举报</span>
+                                    {{csrf_field()}}
+                                    <a href="javascript:void(0);" onclick="return model(this)" >
+                                        我要报名
+                                    </a>
+                                </p>
+                            @endif
                         </div>
                         <div class="zslbxqCon">
                            {!! htmlspecialchars_decode($id_arr->content) !!}
@@ -135,30 +148,10 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
-    @stop
-
+@stop
+        @section('scripts')
+            @parent <script type="text/javascript" src="/js/jquery.js"></script>
+            <script type="text/javascript" src="/js/alert.min.js"></script>
+@stop
 

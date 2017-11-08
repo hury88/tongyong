@@ -346,7 +346,8 @@ class CertificateController extends Controller
             $id_arr->nextlink = 'javascript:void(0);';
         }
         $newslist = $Certificate->v_list([$GLOBALS['pid'], $GLOBALS['ty'], $GLOBALS['tty']], ['id', 'title', 'img1', 'content']);
-        return view('education/introduce_view', compact('id_arr','newslist'));
+        return view('certificate/introduce_view', compact('id_arr','newslist'));
 
     }
+
 }

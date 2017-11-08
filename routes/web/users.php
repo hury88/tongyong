@@ -99,10 +99,10 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
 
 
 
-    Route::get('order/bmbzypx/{type?}', 'PersonController@orderbmbzypx');
-    Route::get('order/bmbzyzs/{type?}', 'PersonController@orderbmbzyzs');
-    Route::get('order/bmbgjjy/{type?}', 'PersonController@orderbmbgjjy');
-    Route::get('order/bmbview/{id}', 'PersonController@orderbmbview');
+    Route::get('order/bmbzypx/{type?}', ['as' => 'p_e_2', 'uses' => 'PersonController@orderbmbzypx']);
+    Route::get('order/bmbzyzs/{type?}', ['as' => 'p_e_3', 'uses' => 'PersonController@orderbmbzyzs']);
+    Route::get('order/bmbgjjy/{type?}',['as' => 'p_e_4', 'uses' => 'PersonController@orderbmbgjjy']);
+    Route::get('order/bmbview/{id}', ['as' => 'p_e_v', 'uses' => 'PersonController@orderbmbview']);
 
 
 

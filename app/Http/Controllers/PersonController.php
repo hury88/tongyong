@@ -18,6 +18,7 @@ use Validator;
 use Auth;
 use App\Order;
 use App\CVS;
+use App\NewsCats;
 use DB;
 use App\Notice;
 use YZM;
@@ -1210,36 +1211,91 @@ class PersonController extends base\UserController
 
     public function orderbmbzypx($type = null)
     {
+        $tyarr = (new NewsCats)->getNavigation(['catname', 'id'], 2);
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user'] = $user;
-        return view('user.profile', $data);
+
+        // 支付方式
+        $config_pay_style = config('config.order.pay_style');
+        // 订单状态
+        $config_status = config('config.order.status');
+        $_GET['key'] = isset($_GET['key']) && $_GET['key'] ? $_GET['key'] : '';
+        $_GET['typeid'] = isset($_GET['typeid']) && $_GET['typeid'] ? $_GET['typeid'] : 28;
+        $order = \Auth::user()->hasManyOrder();
+
+        $pagenewslist = $order->where(function ($query) {
+            empty($_GET['key']) or $query->where('training_title','like','%'.$_GET['key'].'%');
+            empty($_GET['typeid']) or $query->where('typeid','=',$_GET['typeid']);
+        })->latest('created_at')->paginate($this->paginate)->toArray($this->toArray);
+        $ckey = $ckey_no_status = '';
+        foreach ($_GET as $key => $value) {
+            if ($key <> 'page' && $value) $ckey .= "&$key=$value";
+            if ($key <> 'status' && $key <> 'page' && $value) $ckey_no_status .= "&$key=$value";
+        }
+        return view('user.profile', compact(
+            'user',
+            'pagenewslist',
+            'tyarr',
+            'ckey'));
     }
 
 
     public function orderbmbzyzs($type = null)
     {
+        $tyarr = (new NewsCats)->getNavigation(['catname', 'id'], 3);
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user'] = $user;
-        return view('user.profile', $data);
+
+        // 支付方式
+
+        $_GET['key'] = isset($_GET['key']) && $_GET['key'] ? $_GET['key'] : '';
+        $_GET['typeid'] = isset($_GET['typeid']) && $_GET['typeid'] ? $_GET['typeid'] : 9;
+        $order = \Auth::user()->hasManyEnroll();
+
+        $pagenewslist = $order->where(function ($query) {
+            empty($_GET['key']) or $query->where('title','like','%'.$_GET['key'].'%');
+            empty($_GET['typeid']) or $query->where('typeid','=',$_GET['typeid']);
+        })->latest('created_at')->paginate($this->paginate)->toArray($this->toArray);
+        $ckey = $ckey_no_status = '';
+        foreach ($_GET as $key => $value) {
+            if ($key <> 'page' && $value) $ckey .= "&$key=$value";
+            if ($key <> 'status' && $key <> 'page' && $value) $ckey_no_status .= "&$key=$value";
+        }
+        return view('user.profile', compact(
+            'user',
+            'pagenewslist',
+            'tyarr',
+            'ckey'));
     }
-
-
     public function orderbmbgjjy($type = null)
     {
+        $tyarr = (new NewsCats)->getNavigation(['catname', 'id'], 4);
         $user = User::findOrFail(\Auth::id())->relationsToArray();
-        $data['user'] = $user;
-        return view('user.profile', $data);
+
+
+        $_GET['key'] = isset($_GET['key']) && $_GET['key'] ? $_GET['key'] : '';
+        $_GET['typeid'] = isset($_GET['typeid']) && $_GET['typeid'] ? $_GET['typeid'] : 12;
+        $education = \Auth::user()->hasManyEnroll();
+
+        $pagenewslist = $education->where(function ($query) {
+            empty($_GET['key']) or $query->where('title','like','%'.$_GET['key'].'%');
+            empty($_GET['typeid']) or $query->where('typeid','=',$_GET['typeid']);
+        })->latest('created_at')->latest('id')->paginate($this->paginate)->toArray($this->toArray);
+        $ckey = $ckey_no_status = '';
+        foreach ($_GET as $key => $value) {
+            if ($key <> 'page' && $value) $ckey .= "&$key=$value";
+            if ($key <> 'status' && $key <> 'page' && $value) $ckey_no_status .= "&$key=$value";
+        }
+        return view('user.profile', compact(
+            'user',
+            'pagenewslist',
+            'tyarr',
+            'ckey'));
     }
-
-
     public function orderbmbview(Request $id)
     {
         $user = User::findOrFail(\Auth::id())->relationsToArray();
         $data['user'] = $user;
         return view('user.orderbmbview', $data);
     }
-
-
     public function jianlimbxz($type)
     {
         switch ($type) {
