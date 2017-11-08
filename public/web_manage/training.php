@@ -199,14 +199,14 @@ if($user_id){
             <a data-class="btn-danger" class="json <?=$isgood==1?'btn-danger':'' ?>" data-url="isgood&id=<?=$id?>"><?=Config::get('webarr.isgood')[$isgood] ?></a>|
             <a data-class="btn-warm" class="json <?=$isstate==1?'':'btn-warm' ?>" data-url="isstate&id=<?=$id?>"><?=Config::get('webarr.isstate')[$isstate] ?></a>|
             <!-- <a href="<?=$editUrl?>" class="thick edits">编辑</a>| -->
-            <a href="javascript:;" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
+            <a href="javascript:void(0);" data-id="<?=$id?>" data-opt="del" class="thick del">删除</a>
         </td>
 
         <td><?=$img1?></td>
         <td><?=$title?></td>
 
         <td> <?=Config::get('webarr.trainingid')[$trainingid]?> </td>
-        <td><a href="baoming.php?bid=<?php echo $id?>">共有（<?php echo M('enroll')->where("tid=".$id." and typeid=".$ty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
+        <td><a href="javascript:void(0);">共有（<?php echo M('enroll')->where("tid=".$id." and typeid=".$ty)->count();?>）报名<span></span>(有<?php echo M('enroll')->where("tid=".$id." and isstate=0")->count(); ?>未审核)</a></td>
 
      <td><?=$publisher?></td>
      <td><?=$time?></td>

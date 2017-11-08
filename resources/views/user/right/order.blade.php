@@ -46,12 +46,12 @@
             </td>
         </tr>
         <tr class="order-narmal-value order-especial-value">
-            <td class="edu-table-firsttd">
+            <td class="edu-table-firsttd"><a href="{{$training_path}}" style="display: block" target="_blank">
                 <img class="order-mess-img" src="{{img($training_img)}}"/>
                 <div class="order-name">
                     <p>{{$training_title}}</p>
                     <span>{{$pay_style}}</span>
-                </div>
+                </div></a>
             </td>
             <td>￥{{$price}}</td>
             <!-- <td></td> -->

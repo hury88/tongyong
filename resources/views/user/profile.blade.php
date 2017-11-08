@@ -27,6 +27,7 @@
 					@elseif($GLOBALS['uri'][1]=="jianli")
 						@include('user.left.jianli')
 					@elseif($GLOBALS['uri'][1]=="order")
+
 						@include('user.left.order')
 					@else
 						@include('user.left.person')
@@ -72,13 +73,16 @@
 
 
 						@elseif($GLOBALS['uri'][1]=="order")
+
 							@if(empty($GLOBALS['uri'][2]))
 								@include('user.right.order')
-							@elseif($GLOBALS['uri'][2]=="orderbmbzyzs")
+							@elseif($GLOBALS['uri'][2]=="bmbzypx")
+								@include('user.right.orderbmbzypx')
+							@elseif($GLOBALS['uri'][2]=="bmbzyzs")
 								@include('user.right.orderbmbzyzs')
+							@elseif($GLOBALS['uri'][2]=="bmbgjjy")
+								@include('user.right.orderbmbgjjy')
 							@endif
-
-
 						@endif
 
         	    	@show

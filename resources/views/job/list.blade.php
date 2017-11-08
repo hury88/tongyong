@@ -212,6 +212,7 @@
 
             <div class="jobselect-cover"></div>
             <div class="jobselect-mask" id="xzhy">
+
                 <h2>选择行业<span>最多只能选择五个 ！</span><a href="javascript:;" class="job-close"></a></h2>
                 <div class="job-result clearfix">
                     <p class="job-notice fl">您的选择结果：</p>
@@ -220,19 +221,17 @@
                     </ul>
                 </div>
                 <div class="job-lists-box">
-
-                    <div class="job-lists-content fl" style="display:block">
-
-                                @foreach($industryids[0] as $k=>$v)
-                                    <div class="job-lists-dv">
-                                        <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
-                                        <ul class="job-small-type">
-                                            @foreach($industryids[$k] as $k1=>$v1)
-                                                <li class="c{{$k1}} @if(in_array($k1,$industryidarr)) select-item @endif" data-id="{{$k1}}">{{$v1}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endforeach
+                    <div class="job-lists-content fl" style="display:block;width: 100%">
+                        @foreach($industryids[0] as $k=>$v)
+                            <div class="job-lists-dv" style="width: 525px;margin: auto 5px;">
+                                <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
+                                <ul class="job-small-type" style="width: 97%;">
+                                    @foreach($industryids[$k] as $k1=>$v1)
+                                        <li class="c{{$k1}} @if(in_array($k1,$industryidarr)) select-item @endif" data-id="{{$k1}}" style="width: 45%;float: left">{{$v1}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -266,7 +265,7 @@
                             @foreach($positionids[$key] as $k=>$v)
                                 <div class="job-lists-dv">
                                     <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
-                                    <ul class="job-small-type">
+                                    <ul class="job-small-type" style="max-height: 195px;overflow-y: auto">
                                        @if($k<390)
                                         @foreach($positionids[$k] as $k1=>$v1)
                                             <li class="c{{$k1}} @if(in_array($k1,$positionidarr)) select-item @endif" data-id="{{$k1}}">{{$v1}}</li>

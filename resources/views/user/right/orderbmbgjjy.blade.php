@@ -1,26 +1,38 @@
-
+<?php
+$key=$_GET['key'];
+$typeid=(int)$_GET['typeid'];
+?>
 <h3>国际教育报名表</h3>
 <div class="nation-edu-cate clearfix">
     <div class="nation-edu-cate-left fl">
         <ul>
-            <li>
-                <a href="javascript:;">国际留学</a>
-            </li>
-            <li>
-                <a href="javascript:;">国际夏令营</a>
-            </li>
-            <li class="education-li-active">
-                <a href="javascript:;">国际游学</a>
-            </li>
+            @foreach($tyarr as $val)
+                <li @if($typeid==$val->id) class="education-li-active" @endif>
+                    <a href="{{u('person','order','bmbgjjy').'?typeid='.$val->id}}"}>{{$val->catname}}</a>
+                </li>
+            @endforeach
         </ul>
     </div>
+
     <div class="nation-edu-cate-right fr">
-        <form>
+        <form action="" method="get">
             <div class="education-form">
-                <input class="eduform-inp" type="text" placeholder="请输入关键词"/>
-                <input class="eduform-sub" type="button" value="搜索"/>
+                <input name="typeid" value="{{$typeid}}" type="hidden">
+                <input class="eduform-inp" name="key" value="{{$key}}" type="text" placeholder="请输入关键词"/>
+                <input class="eduform-sub" type="submit" value="搜索"/>
             </div>
         </form>
+        <script src="/js/jquery.js"></script>
+        <script>
+            $('.eduform-sub').click(function () {
+                var ss=$('.eduform-inp').val()
+                if(!ss){
+                    alert("请输入关键词")
+                    return false
+                }
+
+            })
+        </script>
     </div>
 </div>
 <div class="nation-education-table">
@@ -30,107 +42,19 @@
             <th class="edu-table-secondth">报名时间</th>
             <th class="edu-table-thirldth">操作</th>
         </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="edu-table-firsttd">【国际游学】获得“安徽省诚信与自律建设先进单位”荣誉称号从</td>
-            <td>2017-08-12</td>
-            <td>
-                <a href="javascript:;">下载</a>
-                <a href="javascript:;">打印</a>
-                <a href="javascript:;">查看</a>
-            </td>
-        </tr>
+        @foreach($pagenewslist['data'] as $val)
+            <tr>
+                <td class="edu-table-firsttd"><a href="{{$val['path']}}" style="display: block" target="_blank">{{$val['title']}}</a></td>
+                <td>{{substr($val['created_at'],0,10)}}</td>
+                <td>
+                    <a href="javascript:void(0);">下载报名表</a><br>
+                    <a href="javascript:void(0);">打印报名表</a><br>
+                    <a href="javascript:void(0);" >完善报名表</a>
+{{--                    <a href="{{route('p_e_v')}}?pid=4" >完善报名表</a>--}}
+                </td>
+            </tr>
+        @endforeach
+
     </table>
 </div>
-<div class="web-pager">
-    <a class="pager-now" href="javascript:;">1</a>
-    <a href="javascript:;">2</a>
-    <a href="javascript:;">3</a>
-    <a href="javascript:;">4</a>
-    <a href="javascript:;">5</a>
-    <a href="javascript:;">6</a>
-    <a href="javascript:;">7</a>
-    <a href="javascript:;">8</a>
-    <a href="javascript:;">9</a>
-    <a href="javascript:;">10</a>
-    <span>…</span>
-    <a href="javascript:;">100</a>
-    <a href="javascript:;" class="scrip-a"><img src="/img/zhizhen.jpg"></a>
-    <form>
-        <span class="script-span">跳转到：</span>
-        <input class="pager-form-inp" type="text"/>
-        <input class="pager-form-sub" type="button" value="GO">
-    </form>
-
-</div>
+@include('partial.paginator')

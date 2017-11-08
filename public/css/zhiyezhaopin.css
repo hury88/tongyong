@@ -486,8 +486,8 @@
 }
 .job-lists-box .job-lists-content .job-lists-dv{
 	float:left;
-	width:342px;
-	margin:auto 88px 5px auto;
+	width:45%;
+	margin:auto 5px;
 	border:1px solid transparent;
 	position: relative;
 }
@@ -516,7 +516,7 @@
 	display:none;
 	background: #fff6df;
 	padding:0 7px;
-	width:327px;
+	width:96%;
 	position: absolute;
 	top:34px;
 	left: 0;
@@ -529,6 +529,8 @@
 	font-size: 12px;
 	color: #333;
 	height:24px;
+	width: 44%;
+	float: left;
 	line-height: 24px;
 	overflow: hidden;
 	text-overflow: ellipsis;

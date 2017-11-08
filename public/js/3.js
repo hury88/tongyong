@@ -5,7 +5,7 @@
 
   $("#hangye-pull1").click(function(){
     $(".jobselect-cover").fadeIn("fast");
-    $("#xzhy").fadeIn("fast").css({
+    $("#xzhy.jobselect-mask").fadeIn("fast").css({
       left: ($(window).width() - $('#xzhy').outerWidth())/2,
       top: ($(window).height() - $('#xzhy').outerHeight())/2
     });
@@ -13,7 +13,7 @@
 
   $("#hangye-pull2").click(function(){
     $(".jobselect-cover").fadeIn("fast");
-    $('#xzzw').fadeIn("fast").css({
+    $('#xzzw.jobselect-mask').fadeIn("fast").css({
       left: ($(window).width() - $('#xzzw').outerWidth())/2,
       top: ($(window).height() - $('#xzzw').outerHeight())/2
     });
@@ -69,6 +69,7 @@
 
 
   $("#xzhy .job-small-type li").click(function(){
+
       if($(this).hasClass("select-item")){
 
       }else {
@@ -76,11 +77,13 @@
           var linum = $("#xzhy .job-result ul").children().length;
 
           if (linum < 5) {
+
               $(this).addClass("select-item");
               var ss = $(this).data('id');
               $("#xzhy .job-result ul").append("<li>" + txt + "<i class='job-selected-icon' data-id='" + ss + "'></li>");
           } else {
-              $("#xzhy .jobselect-mask h2 span").show();
+
+              $("#xzhy h2 span").show();
           }
           $("#xzhy .job-result .job-selected-icon").click(function () {
               $(this).parent().remove();
@@ -88,7 +91,7 @@
               $(".c" + cc).removeClass('select-item')
               var nowlinum = $("#xzhy .job-result ul").children().length;
               if (nowlinum < 5) {
-                  $("#xzhy .jobselect-mask h2 span").hide();
+                  $("#xzhy h2 span").hide();
               }
           });
       }
@@ -96,11 +99,7 @@
   $("#xzhy .job-operate .operate-reset").click(function(){
       $("#xzhy .job-result ul").empty();
       $("#xzhy .job-small-type li").removeClass('select-item')
-      if($("#xzhy .jobselect-mask h2 span").is(":hidden")){
-
-      }else{
-          $("#xzhy .jobselect-mask h2 span").hide();
-      }
+      $("#xzhy h2 span").hide();
   })
   $('#xzhy .operate-comfirm').click(function(){
       var ids='';
@@ -113,7 +112,7 @@
       })
       ids=ids.substr(1)
       idsname=idsname.substr(1)
-
+        //alert(idsname)
       $("#industryid").val(ids)
       $("#industryidname").val(idsname)
       $(".jobselect-cover").fadeOut("fast");
@@ -136,7 +135,7 @@
           $(this).addClass("select-item");
           $("#xzzw .job-result ul").append("<li>"+txt+"<i class='job-selected-icon'  data-id='"+ss+"'></li>");
       }else{
-          $("#xzzw .jobselect-mask h2 span").show();
+          $("#xzzw h2 span").show();
       }
       $("#xzzw .job-result .job-selected-icon").click(function(){
           $(this).parent().remove();
@@ -144,18 +143,14 @@
           $(".c"+cc).removeClass('select-item')
           var nowlinum = $("#xzzw .job-result ul").children().length;
           if(nowlinum<5){
-              $("#xzzw .jobselect-mask h2 span").hide();
+              $("#xzzw h2 span").hide();
           }
       });
   });
   $("#xzzw .job-operate .operate-reset").click(function(){
       $("#xzzw .job-result ul").empty();
       $("#xzzw .job-small-type li").removeClass('select-item')
-      if($("#xzhy .jobselect-mask h2 span").is(":hidden")){
-
-      }else{
-          $("#xzhy .jobselect-mask h2 span").hide();
-      }
+      $("#xzzw h2 span").hide();
   })
   $('#xzzw .operate-comfirm').click(function(){
       var ids='';

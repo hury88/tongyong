@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Notice;
 use App\Enroll;
 use App\Education;
+use App\Certificate;
 use App\Repositories\OrderRepository;
 use App\User;
 use Carbon\Carbon;
@@ -50,6 +51,7 @@ class EnrollController extends Controller
      *
      * @return Response
      */
+    //国际教育报名
     public function create($tid, Request $request)
     {
         //making sure if the product requested exists, otherwise, we throw a http exception
@@ -73,18 +75,62 @@ class EnrollController extends Controller
         $enroll->uid = $person->id;
         $enroll->cuid = $education->user_id;
         $enroll->telphone = $person->telphone;
+        $enroll->path =url()->previous();
         $enroll->email = $person->email;
-        $enroll->typeid = $education->pid;
+        $enroll->typeid = $education->ty;
+
         $enrollid = $enroll->save();
 
         if ($enrollid) {
             $education->enroll_num = $education->enroll_num +1;
             Notice::sendEnroll($enroll->cuid, $enroll->title, url()->previous());
             $education->save();
-            return handleResponseJson(200, '报名成功,进入个人中心查看', route('p_enroll'));
+            return handleResponseJson(200, '报名成功,进入个人中心查看', route('p_e_4'));
         } else {
             return handleResponseJson(201, '报名失败', '请稍后再试');
         }
 
     }
+    //职业证书报名
+    public function certificate($tid, Request $request)
+    {
+        //making sure if the product requested exists, otherwise, we throw a http exception
+        try {
+            $Certificate = Certificate::findOrFail($tid);
+        } catch (ModelNotFoundException $e) {
+            throw new NotFoundHttpException();
+        }
+        try {
+            $person = \Auth::user();
+        } catch (Exception $e) {
+            throw new NotFoundHttpException();
+        }
+        $enroll = new Enroll();
+        if (Enroll::ofEncroll($person->id, $tid)->first()) {
+            return handleResponseJson(201, '您已报名过此项目,请去个人中心查看报名表');
+        }
+
+        // 生成报名
+        $enroll->tid = $Certificate->id;
+        $enroll->title = $Certificate->title;
+        $enroll->uid = $person->id;
+        $enroll->cuid = $Certificate->user_id;
+        $enroll->telphone = $person->telphone;
+        $enroll->path =url()->previous();
+        $enroll->email = $person->email;
+
+        $enroll->typeid = $Certificate->ty;
+        $enrollid = $enroll->save();
+
+        if ($enrollid) {
+            $Certificate->enroll_num = $Certificate->enroll_num +1;
+            Notice::sendEnroll($enroll->cuid, $enroll->title, url()->previous());
+            $Certificate->save();
+            return handleResponseJson(200, '报名成功,进入个人中心查看', route('p_e_3'));
+        } else {
+            return handleResponseJson(201, '报名失败', '请稍后再试');
+        }
+
+    }
+
 }

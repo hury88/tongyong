@@ -114,7 +114,7 @@ class JobController extends Job
     public function joblist()
     {
         $sanlist = $this->sanlist();
-//        /dd($sanlist);
+
         $Job = new Job();
         $ckey='';
         if(isset($_GET['title'])&&$_GET['title']!=''){
@@ -167,7 +167,7 @@ class JobController extends Job
             $work_nature=0;
         }
         if(isset($_GET['industryid'])&&$_GET['industryid']!=0){
-            $industryid=(int)$_GET['industryid'];
+            $industryid=$_GET['industryid'];
             $industryidarr=explode(',',$industryid);
             $ckey.='&industryid='.$industryid;
         }else{
@@ -175,7 +175,7 @@ class JobController extends Job
             $industryid=0;
         }
         if(isset($_GET['positionid'])&&$_GET['positionid']!=0){
-            $positionid=(int)$_GET['positionid'];
+            $positionid=$_GET['positionid'];
             $positionidarr=explode(',',$positionid);
             $ckey.='&positionid='.$positionid;
         }else{

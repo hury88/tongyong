@@ -93,7 +93,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Order', 'seller_id');
     }
 
-
+    public function hasManyEnroll()
+    {
+        if ($this->isPerson()) {
+            return $this->hasMany('App\Enroll', 'uid');
+        }
+        return $this->hasMany('App\Enroll', 'cuid');
+    }
     public function business()
     {
         return $this->hasOne('App\Business');

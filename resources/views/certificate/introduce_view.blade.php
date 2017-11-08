@@ -38,11 +38,20 @@
                                         详情介绍
                                     </a>
                                 </div>
-                                <div class="baomingright">
-                                    <a href="#####">
-                                        我要报名
-                                    </a>
-                                </div>
+                                @if(auth()->check() && App\Enroll::ofEncroll(auth()->id(), $id_arr->id)->first())
+                                    <div class="baomingright">
+                                        <a href="javascript:void(0);">
+                                            已报名
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="baomingright form" action="{{route('certificate.create', $id_arr->id)}}">
+                                        {{csrf_field()}}
+                                        <a href="javascript:void(0);" onclick="return model(this)" >
+                                            我要报名
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                             <div class="baomingCon">
                                 {!! htmlspecialchars_decode($id_arr->content) !!}
@@ -55,7 +64,10 @@
             </div>
 @stop
 
-
+@section('scripts')
+    @parent <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/alert.min.js"></script>
+@stop
 
 
 
