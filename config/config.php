@@ -275,6 +275,15 @@ return [
         // 'pending','received','sent'
         'status_reverse' => ['cancelled' => 1,'refund' => 2, 'new' => 3, 'paid' => 4],
     ],
+    // JIANLI
+    'resume' => [
+        'business_status' => [
+            '未处理',
+            '拒绝',
+            '邀请',
+            '被拒绝',
+        ],
+    ],
 
     'other'                  => [
         // 'nocontent'  => '<p style="text-align:center;width:100%;padding:20px 0;">内容更新中</p>',

@@ -54,7 +54,9 @@ class Notice extends Model
         $attr['created_at'] = date('Y-m-d H:i:s');
         if (!isset($attr['title'])) {
             $attr['title'] = ActionType::find($attr['action_type_id'])->notice_template;
+            if(isset($attr['sprintf'])) $attr['title'] = sprintf($attr['title'], $attr['sprintf']);
         }
+        unset($attr['sprintf']);
         if (strpos($attr['user_id'], '|')) {
             $user_id_set = explode('|', $attr['user_id']);
             $user_id_set = array_unique($user_id_set);
@@ -99,7 +101,7 @@ class Notice extends Model
     {
         $person = \Auth::user()->profile;
         #发送给个人
-        $public_content = '查看<a href="'.$url.'" target="_blank">'.$education_title.'</a>';
+        $public_content = '查看国际教育<a href="'.$url.'" target="_blank">'.$education_title.'</a>';
         $flag = Notice::create(array(
             'user_id'        => $person->user_id,
             'sender_id'      => $business_id,

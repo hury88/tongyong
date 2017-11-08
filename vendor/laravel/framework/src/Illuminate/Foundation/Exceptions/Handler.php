@@ -191,8 +191,12 @@ class Handler implements ExceptionHandlerContract
             __DIR__.'/views',
         ]);
 
-        if (view()->exists("errors::{$status}")) {
-            return response()->view("errors::{$status}", ['exception' => $e], $status, $e->getHeaders());
+        if (!config('app.debug') && view()->exists("errors::{$status}")) {
+            if(request()->wantsJson()) {
+                return handleResponseJson(412, '请按规定操作,以获得更好的服务.');
+            } else {
+                return response()->view("errors::{$status}", ['exception' => $e], $status, $e->getHeaders());
+            }
         } else {
             return $this->convertExceptionToResponse($e);
         }

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Session;
 use Validator;
 use Auth;
 use App\Order;
+use App\CVS;
 use DB;
 use App\Notice;
 use YZM;
@@ -341,11 +342,13 @@ class PersonController extends base\UserController
             $info['user_id'] = $user;
             $info['addtime'] = time();
             $info['ip'] = $request->getClientIp();
+
             if ($id) {
-                $res = DB::table("jianli")->insert($info);
-            } else {
                 $res = DB::table("jianli")->where("user_id", $user)->where("id", $id)->update($info);
+            } else {
+                $res = DB::table("jianli")->insert($info);
             }
+
             if ($res) {
                 $data['status'] = 200;
                 $data['id'] = DB::getPdo()->lastInsertId();
@@ -357,7 +360,7 @@ class PersonController extends base\UserController
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone font-bold\">姓名：</span>
                                     <div class=\"resume-table-trtwo chose-sex\">
-                                        <p class=\"user-information-p\">{$info['name']}</p>
+                                        <p class=\"user-information-p\">{$info['name']}  <span style=\"color:#999\">{$info['sex']}</span></p>
                                     </div>
                                 </div>
                                 <div class=\"form-line-right fr\">
@@ -453,6 +456,7 @@ class PersonController extends base\UserController
     public function jianlipostadd2(Request $request, $id)
     {
         $user = \Auth::id();
+
         if ($user) {
             $info = $request->all();
             $id = DB::table("jianli")->where("id", $id)->where("user_id", $user)->update($info);
@@ -1545,6 +1549,23 @@ class PersonController extends base\UserController
         $csrf = csrf_field();
         switch ($type) {
             case "jbxx":
+                if($res->sex=='女'){$sex1='';$sex2='checked';}else{$sex1='checked';$sex2='';}
+                if($res->hyzk=='已婚'){
+                    $hyzk1='';$hyzk2='selected';$hyzk3='';
+                }elseif($res->hyzk=='未婚'){
+                    $hyzk1='';$hyzk2='';$hyzk3='selected';
+                }else{
+                    $hyzk1='selected';$hyzk2='';$hyzk3='';
+                }
+                if($res->zzmm=='党员'){
+                    $zzmm1='selected';$zzmm2='';$zzmm3='';$zzmm4='';
+                }elseif($res->zzmm=='团员'){
+                    $zzmm1='';$zzmm2='selected';$zzmm3='';$zzmm4='';
+                }elseif($res->zzmm=='其他党社'){
+                    $zzmm1='';$zzmm2='';$zzmm3='selected';$zzmm4='';
+                }else{
+                    $zzmm1='';$zzmm2='';$zzmm3='';$zzmm4='selected';
+                }
                 $content = "<form onsubmit=\"return ck_jladd1(this)\">
                             {$csrf}
                             <div class=\"form-line clearfix\">
@@ -1557,13 +1578,13 @@ class PersonController extends base\UserController
                                 <div class=\"form-line-left fl\">
                                     <span class=\"resume-table-trone\"><b>*</b>姓名：</span>
                                     <div class=\"resume-table-trtwo chose-sex\">
-                                        <input class=\"myname\" type=\"text\" name=\"name\"/>
+                                        <input class=\"myname\" type=\"text\" name=\"name\" value='{$res->name}'/>
                                         <label class=\"chose-sex-boy\">
-                                            <input type=\"radio\" name=\"sex\" value=\"男\" checked/>
+                                            <input type=\"radio\" name=\"sex\" value=\"男\" {$sex1}/>
                                             <span>男</span>
                                         </label>
                                         <label class=\"chose-sex-girl\">
-                                            <input type=\"radio\" name=\"sex\"  value=\"女\" />
+                                            <input type=\"radio\" name=\"sex\"  value=\"女\" {$sex2}/>
                                             <span>女</span>
                                         </label>
                                     </div>
@@ -1636,9 +1657,9 @@ class PersonController extends base\UserController
                                     <div class=\"resume-table-trtwo\">
                                         <div class=\"my-joinjob-year\">
                                             <select name=\"hyzk\">
-                                                <option value=\"保密\">保密</option>
-                                                <option value=\"已婚\">已婚</option>
-                                                <option value=\"未婚\">未婚</option>
+                                                <option value=\"保密\" {$hyzk1}>保密</option>
+                                                <option value=\"已婚\" {$hyzk2}>已婚</option>
+                                                <option value=\"未婚\" {$hyzk3}>未婚</option>
                                             </select>
                                             <span></span>
                                         </div>
@@ -1659,10 +1680,10 @@ class PersonController extends base\UserController
                                     <div class=\"resume-table-trtwo\">
                                         <div class=\"my-joinjob-year\">
                                             <select name=\"zzmm\">
-                                                <option value=\"党员\">党员</option>
-                                                <option value=\"团员\">团员</option>
-                                                <option value=\"其他党社\">其他党社</option>
-                                                <option value=\"无党派人士\">无党派人士</option>
+                                                <option value=\"党员\" {$zzmm1}>党员</option>
+                                                <option value=\"团员\" {$zzmm2}>团员</option>
+                                                <option value=\"其他党社\" {$zzmm3}>其他党社</option>
+                                                <option value=\"无党派人士\" {$zzmm4}>无党派人士</option>
                                             </select>
                                             <span></span>
                                         </div>

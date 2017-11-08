@@ -92,6 +92,7 @@ class Job extends Model
     public function v_pages($where=[],$title,$salary,$education,$experience,$nature,$stime,$order,$work_nature,$industryidarr,$positionidarr,$field=['*'],$num=15,$linknum=5){
         return $this->parseWhere($where)
             ->W("isstate","=" ,"1")
+            ->W("issued","=" ,"1")
             ->where(function($query) use($title,$salary,$education,$experience,$nature,$stime,$order,$work_nature,$industryidarr,$positionidarr){
                 if($title) {
                     $query->W('title','like' ,'%'.$title.'%');
@@ -143,6 +144,8 @@ class Job extends Model
                 }
             })
             ->latest('job.disorder')
+            ->latest('job.updated_at')
+            ->latest('job.id')
             ->leftjoin('businesses','job.user_id','=','businesses.user_id')
             ->select($field)
             ->paginate($num)
@@ -194,4 +197,10 @@ class Job extends Model
     {
         return $query->where('job.'.$field,$condition,$value);
     }
+
+    public function scopeleftJoinBusiness()
+    {
+        return $this->leftjion('App\Business', 'job.user_id', '=', 'business.user_id');
+    }
+
 }

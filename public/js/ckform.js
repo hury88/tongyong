@@ -431,7 +431,7 @@ function  ck_jladd2(formlist){
 function  ck_jladd3(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -449,7 +449,7 @@ function  ck_jladd3(formlist){
 function  ck_jladd4(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -467,7 +467,7 @@ function  ck_jladd4(formlist){
 function  ck_jladd5(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -485,7 +485,7 @@ function  ck_jladd5(formlist){
 function  ck_jladd6(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -502,7 +502,7 @@ function  ck_jladd6(formlist){
 function  ck_jladd7(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -519,7 +519,7 @@ function  ck_jladd7(formlist){
 function  ck_jladd8(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -536,7 +536,7 @@ function  ck_jladd8(formlist){
 function  ck_jladd9(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();
@@ -552,7 +552,7 @@ function  ck_jladd9(formlist){
 function  ck_jladd10(formlist){
     if(!id){
         $("#nid").focus();
-        alert("请先填写简历的基本信息！");
+        alert("请先保存简历的基本信息!");
         return false;
     }
     var formdata=$(formlist).serialize();

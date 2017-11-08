@@ -389,20 +389,22 @@
                                         <input type="text" class="resume-company-name" name="xxmc[]"/>
                                     </div>
                                 </div>
+
                                 <div class="form-line clearfix">
                                     <div class="form-line-left fl">
                                         <span class="resume-table-trone"><b>*</b>时间：</span>
-                                        <div class="resume-table-trseven" colspan="3">
-                                            <input type="text" class="resume-company-name"  name="sj[]"/>
+                                        <div class="resume-table-trtwo">
+                                            <input class="resume-table-inp" type="text" name="sj[]"/>
                                         </div>
                                     </div>
                                     <div class="form-line-right fr">
                                         <span class="resume-table-trone"><b>*</b>专业名称：</span>
-                                        <div class="resume-table-trseven" colspan="3">
-                                            <input type="text" class="resume-company-name"   name="zy[]"/>
+                                        <div class="resume-table-trtwo">
+                                            <input class="resume-table-inp" type="text" name="zy[]"/>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-line clearfix">
                                 <div class="form-line-left fl">
                                     <span class="resume-table-trone"><b>*</b>是否统招：</span>

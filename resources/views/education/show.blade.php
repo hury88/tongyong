@@ -108,7 +108,7 @@
                             @endif
 
                             <p class="py3">
-                                <span>报名人数 {{App\Enroll::get_count($GLOBALS['pid'],$id_arr->id,'')}}</span>
+                                <span>报名人数 {{$id_arr->enroll_num}}</span>
                                 <a href="{{$boot_config['link2']}}" target="_blank"><img src="/img/xlsys1.png"/>在线咨询</a>
                             </p>
                         </div>

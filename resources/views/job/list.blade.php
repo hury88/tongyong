@@ -171,11 +171,10 @@
                                 <div class="zplbxxc">
                                     <a href="{{u('job',$GLOBALS['ty_path'],$val['id'])}}"><p class="p1">{{$val['title']}}</p></a>
                                     <p class="p2"><i>{{config('config.business.salary.'.$val['salary'])}}</i>  |   合肥   |  {{config('config.business.work_nature.'.$val['work_nature'])}}   |  {{config('config.business.education.'.$val['education'])}}  |    {{config('config.business.experience.'.$val['experience'])}}</p>
-                                    @if($val['user_id']>0)
-                                    <p class="p3">{{$val['business_name']}} ---{{v_id(v_id($val['industryid'],'pid','nature'),'catname','nature')}}</p>
-                                    @else
-                                    <p class="p3">平台发布---{{v_id(v_id($val['industryid'],'pid','nature'),'catname','nature')}}</p>
+                                    @if($val['user_id']==0)
+                                    <?php $val['business_name'] = '平台发布' ?>
                                     @endif
+                                    <p class="p3">{{$val['business_name']}} ---{{v_id(v_id($val['industryid'],'pid','nature'),'catname','nature')}}</p>
 
                                     <p class="p4">
                                         @foreach(explode(',',$val['relative']) as $v)
@@ -195,7 +194,7 @@
                                     }
                                     ?>
                                     <p>{{$as}}</p>
-                                    <a href="javascript:void(0)">申请职位</a>
+                                    <a href="javascript:jobRequest({{$val['id']}}, '{{$val['business_name']}}')">申请职位</a>
                                 </div>
                             </li>
                               @endforeach
@@ -284,6 +283,33 @@
                     <a class="operate-reset" href="javascript:;">取消</a>
                 </div>
             </div>
+
+<!-- <div class="layer"> </div>
+ <div class="tip">
+    <div class="shengqingtiptop">
+        <span>申请职位</span>
+        <a class="close"></a>
+    </div>
+    <div class="shengqingtipbom">
+        <div class="shengqingtipbom1">
+            <span class="applyjob-intro"><img src="img/close1.png"/>选择简历</span>
+            <select class="apply-jobselect" name="">
+                <option value="">请选择您要投放的简历</option>
+                <option value="">请选择您要投放的简历</option>
+                <option value="">请选择您要投放的简历</option>
+                <option value="">请选择您要投放的简历</option>
+            </select>
+        </div>
+        <div class="shengqingtipbom2">
+            <span class="applyjob-intro"><img src="img/close1.png"/>验证码</span>
+            <div class="apply-job-inp">
+                <input type="text" name="" id="" value="" placeholder="请填写验证码"/>
+                <img src="img/apply-img_01.jpg"/>
+            </div>
+        </div>
+        <div class="apply-submit"><input type="submit" value="投递简历"/></div>
+    </div>
+ </div> -->
 @stop {{-- end content --}}
 
 
@@ -293,6 +319,7 @@
             <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
             <script type="text/javascript" src="/js/3.js"></script>
             <script type="text/javascript">
+
                 $(".gkey").click(function () {
                     var ss=$(this).text()
                     $('#title').val(ss)
@@ -336,5 +363,35 @@
 
 @section('scripts')
   @parent
-
+@include('partial.dialog')
+<script>
+    //提交表单
+    function jobRequest(recruit_id, business_name){
+        //读取信息
+         // var hiddenForm = new FormData();
+        // $(that).attr('disabled',true);//按钮锁定
+        $.ajax({
+            url  : "{{route('job.request')}}",
+            type : "post",
+            dataType : 'json',
+            data : {
+                recruit_id : recruit_id,
+                business_name : business_name,
+                cvs_id : 23,
+            },
+            headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
+            success : function(response){
+            var state = response.state,
+                title = response.title,
+                message = response.message,
+                status = response.status,
+                redirect = response.redirect;
+                handing(status,state,title,message,redirect,function(){
+                    // $(that).removeAttr('disabled');//解除锁定
+                });
+            }
+        })
+        return false;
+    }
+</script>
 @stop

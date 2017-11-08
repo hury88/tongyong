@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as HttpRequest;
 use App\Http\Controllers\Controller;
 use App\Job;
 use App\User;
 use App\Business;
 use App\NewsCats;
 use App\News;
+use App\Resume;
+use App\CVS;
 /*
  * Antvel - Company CMS Controller
  *
@@ -39,11 +42,50 @@ class JobController extends Job
 
     public function __construct()
     {
+        #@身份验证
+        // $this->middleware('App\Http\Middleware\Authenticate', ['only' => 'request']);
+        if ($GLOBALS['pid_data']) {
             $banimgsrc = img($GLOBALS['pid_data']->img1);
-
-
-        view()->share('banimgsrc', $banimgsrc);
+            view()->share('banimgsrc', $banimgsrc);
+        }
     }
+
+    // 申请职位
+    public function request(HttpRequest $request)
+    {
+        if (is_null($request->business_name)) {
+            return noticeResponseJson(412, '数据不完整', '缺少企业名称');
+        }
+        try {
+            $csv = CVS::findOrFail($request->cvs_id);
+        } catch (ModelNotFoundException $e) {
+            return handleResponseJson(412, '您要投递的简历不存在,请刷新页面后重新选择');
+        }
+        try {
+            $job = Job::findOrFail($request->recruit_id);
+        } catch (ModelNotFoundException $e) {
+            throw new NotFoundHttpException();
+        }
+        if ($resume = Resume::c2b($csv->user_id, $job->user_id, $csv->id, $job->id)->first()) {
+            return handleResponseJson(203, '您已投递过该岗位');
+        }
+        $resume = new Resume();
+        $resume->title = $job->title;
+        $resume->job_id = $job->id;
+        $resume->job_cate_id = $job->ty;
+        $resume->job_cate_name = v_id($job->ty, 'catname', 'news_cats');
+        $resume->status = 0;
+        $resume->person_id = $csv->user_id;
+        $resume->business_id = $job->user_id;
+        $resume->cvs_id = $csv->id;
+        $resume->business_name = $request->business_name;
+        if ($resume->save([], 'new_resume')) {
+            $job->enroll_num = $job->enroll_num+1;$job->save();
+            return handleResponseJson(200, '简历投递成功');
+        }
+        return handleResponseJson(412, '抱歉简历投递失败,请稍后再试');
+    }
+
 //招聘信息详情
     public function show($id)
     {

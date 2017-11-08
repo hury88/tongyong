@@ -26,7 +26,7 @@ class BusinessController extends base\UserController
             parent::__construct();
     }
 
-    private $fillTable = ['certificate', 'education', 'training', 'order', 'job'];
+    private $fillTable = ['certificate', 'education', 'training', 'order', 'job', 'resume'];
 
     private $paginate = 15;
     private $toArray = 10;
@@ -75,8 +75,29 @@ class BusinessController extends base\UserController
      */
     public function resume(&$compact)
     {
-        $table = __FUNCTION__;
+        // $_GET['orderBy'] = isset($_GET['orderBy']) && $_GET['orderBy'] ? $_GET['orderBy'] : 'created_at';
+        // $_GET['orderno'] = isset($_GET['orderno']) && $_GET['orderno'] ? (int)$_GET['orderno'] : '';
+        $compact['pagenewslist'] = \Auth::user()->hasManyResume('business_id')
+            ->where(function ($query) {
+                // empty($_GET['orderno']) or $query->where('orderno', intval($_GET['orderno']));
+            })->orderBy('created_at', 'desc')->paginate($this->paginate)->toArray($this->toArray);
+        $compact['ckey'] = '';
+        foreach ($_GET as $key => $value) {
+            if ($key <> 'page' && $value) $compact['ckey'] .= "&$key=$value";
+        }
         return $compact;
+    }
+    /**
+     * 简历管理 修改简历状态
+     */
+    public function resumeChangeStatus($id)
+    {
+        $resume = Resume::b2r($id, \Auth::id());
+        dd($resume);
+        if ($resume) {
+
+        }
+        return handleResponseJson(201, '您已报名过此课程,请去订单中心查看详情');
     }
 
     /**

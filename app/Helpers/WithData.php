@@ -309,6 +309,8 @@ class WithData
             'tty'				=>		0,
             'title'				=>		$this->I('title','','htmlspecialchars'),
             'address'           =>      $this->I('address','','htmlspecialchars'),
+            'industryid'        =>      $this->I('industryid', 0, 'intval'),
+            'positionid'        =>      $this->I('positionid', 0, 'intval'),
             'work_nature'       =>      $this->I('work_nature', 0, 'intval'),
             'salary'            =>      $this->I('salary', 0, 'intval'),
             'relative'          =>       $this->I('relative', '',''),
@@ -396,6 +398,9 @@ class WithData
 			// $this->fields['id'] = $id;
 			$where = ['id' => $id, 'user_id' => $user_id];
 
+            $this->fields['updated_at'] = date('Y-m-d H:i:s');
+
+
 			if($update = DB::table($table)
 				->where('id', $id)
 				->where('user_id', $user_id)
@@ -410,6 +415,7 @@ class WithData
         }else{// 执行插入
 
 			$this->fields['user_id'] = $user_id;
+            $this->fields['created_at'] = date('Y-m-d H:i:s');
 
 			if($insert = DB::table($table)->insert($this->fields) ) {
 

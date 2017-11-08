@@ -44,7 +44,7 @@ $out_url  = u($GLOBALS['pid_path'], $GLOBALS['ty_path'], $GLOBALS['tty_path']);
 @foreach($pagenewslist['data'] as $key => $list)<?php extract($list) ?>
 <tr>
     <td class="manager-firstth">
-        <label><input class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
+        <label><input id="delid{{$id}}" class="xuanze" value="{{$id}}" type="checkbox"/>{{$key+1}}</label>
     </td>
     <td><a target="_blank" href="{{$out_url}}/{{$id}}">{{$title}}</a></td>
     @if($tty==54)

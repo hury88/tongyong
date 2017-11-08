@@ -13,14 +13,15 @@ class DeleteData
 	{
         $ids_arr = explode(',' , $ids);
         switch ($table) {
-            case 'xxxxx':
-                // $delStatus= $this->certificate($ids);
+            case 'resume':
+                $foreign_id = 'business_id';
                 break;
             default:
-                $delStatus= DB::table($table)->where('user_id', $user_id)->whereIn('id' , $ids_arr)->update(['deleted_at' => date('Y-m-d H:i:s')]);
-                $delStatus && \App\Log::create(['details' => "删除{$table}表数据:{$ids}", 'user_id' => $user_id]);
+                $foreign_id = 'user_id';
                 break;
         }
+        $delStatus= DB::table($table)->where($foreign_id, $user_id)->whereIn('id' , $ids_arr)->update(['deleted_at' => date('Y-m-d H:i:s')]);
+        // $delStatus && \App\Log::create(['details' => "删除{$table}表数据:{$ids}", 'user_id' => $user_id]);
         // $data = HR($t)->where($map)->select();
 
          if ( $delStatus ) {

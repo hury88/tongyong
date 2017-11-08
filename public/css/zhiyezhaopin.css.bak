@@ -11,23 +11,19 @@
 }
 .zyzpTit2{
 	overflow: hidden;
-	padding: 30px 30px 39px 30px;
+	
+	padding: 30px 30px 30px 30px;
 }
 .zyzpTit2 .zyzpTit2Left{
-	width: 241px;
-	height: 132px;
+	width: 30%;
 	float: left;
-	overflow: hidden;
 }
 .zyzpTit2 .zyzpTit2Right{
-	width: 765px;
-	float: right;
-	overflow: hidden;
-	height: 132px;
+	width: 70%;
+	float: left;
 }
 .zyzpTit2 .zyzpTit2Left img{
-	width: 241px;
-	height: 132px;
+	width: 85%;
 }
 .zyzpTit1 p span{
 	color: #8fbee2;

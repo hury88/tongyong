@@ -25,15 +25,15 @@
                 <ul class="index-recruit-ul">
                     <li class="index-recruit-li">
                         <p>高端招聘</p>
-                        <a href="javascript:;">编辑招聘信息   > </a>
+                        <a href="{{route('b_job')}}/high_level">编辑招聘信息</a>
                     </li>
                     <li class="index-recruit-li">
                         <p>企业招聘</p>
-                        <a href="javascript:;">编辑招聘信息   > </a>
+                        <a href="{{route('b_job')}}/enterprise">编辑招聘信息</a>
                     </li>
                     <li class="index-recruit-li index-recruit-on">
                         <p>校园招聘</p>
-                        <a href="javascript:;">暂无校园招聘信息 </a>
+                        <a href="{{route('b_job')}}/campus">暂无校园招聘信息 </a>
                     </li>
                 </ul>
             </div>

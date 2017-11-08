@@ -26,6 +26,10 @@ return [
         'certification_person:ok' => '恭喜您实名认证已通过',
         'encroll:person' => '报名成功',// 9 encroll
         'encroll:business' => '有用户报名',// 10 encroll
+        'resume:request' => '您刚刚给%s投递了简历',//11
+        'resume:fromRefuse' => '您在%s的职位申请已被拒绝',//12
+        'resume:toRefuse' => '您刚刚拒绝了%s发出的面试邀请',//13
+        'resume:ok' => '%s向您发出了面试邀请',//14
     ],
 
     'all_title'   => '短消息',

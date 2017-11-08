@@ -20,7 +20,7 @@ require WEB_ROOT.'./include/chkuser.inc.php';
         	<img src="images/logo.png" />
         </div>
 
-        <div class="daohang fl">
+        <div class="daohang fl" style="width:1000px">
 			<? if ($_SESSION['Admin_BigMyMenu']=="super"){?>
 
         	<a href="mains.php"  class="on" target="righthtml">
@@ -53,7 +53,11 @@ require WEB_ROOT.'./include/chkuser.inc.php';
             </a>
             <a href="info.php" target="righthtml">
                 <img src="images/bug5.png" />
-                <p>系统消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1])->count() ?>)</b></p>
+                <p>系统消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['in', '1,2,3,6,7,8']])->count() ?>)</b></p>
+            </a>
+            <a href="info_common.php" target="righthtml">
+                <img src="images/bug5.png" />
+                <p>普通消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['not in', '1,2,3,6,7,8']])->count() ?>)</b></p>
             </a>
             <a style="opacity:.8;border:2px solid rgba(0,0,0,.1)" id="menu" href="javascript:void(0);">
                 <img src="images/bug2.png" />

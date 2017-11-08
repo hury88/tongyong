@@ -14,6 +14,9 @@ Route::group(['prefix'=>'job'],function(){
     Route::get('campus/{id}', ['uses' => 'JobController@show']);
     Route::get('resume/{id}', [ 'uses' => 'JobController@resumeview']);
     Route::get('school/{id}', [ 'uses' => 'JobController@view']);
+
+    Route::post('request', 'JobController@request')->name('job.request');
+
 });
 
 
