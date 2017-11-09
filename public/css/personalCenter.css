@@ -1473,9 +1473,9 @@
 }
 .resume-table-trtwo .myname{
     height:34px;
-    width: 220px;
+    width: 210px;
     float:left;
-    text-indent: 10px;
+    padding-left: 10px;
     border: 1px solid #e5e5e5;
 }
 .chose-sex input[type=radio] {
@@ -1519,10 +1519,10 @@
     border: none;
 }
 .resume-table-trtwo .resume-table-inp{
-    width: 347px;
+    width: 337px;
     height:34px;
     border: 1px solid #e5e5e5;
-    text-indent: 10px;
+    padding-left: 10px;
 }
 .resume-table-trtwo .my-born-year{
   width: 172px;
@@ -1532,9 +1532,9 @@
     margin-right:3px;
 }
 .my-born-year input{
-    width: 125px;
+    width: 115px;
     height: 34px;
-    text-indent:10px;
+    padding-left:10px;
 }
 .my-born-year span{
     width:40px;
@@ -1559,6 +1559,7 @@
     -moz-appearance:none;
     -webkit-appearance:none;
     border:none;
+    padding-left: 10px;
 }
 .my-joinjob-year select::-ms-expand { display: none; }
 .my-joinjob-year span{
@@ -1609,9 +1610,10 @@
     margin-right: 6px;
 }
 .my-city input{
-    width: 66px;
+    width: 56px;
     height: 34px;
     float:left;
+    padding-left: 10px;
 }
 .my-city span{
     width: 40px;
@@ -1636,6 +1638,7 @@
     -moz-appearance:none;
     -webkit-appearance:none;
     border:none;
+    padding-left: 10px;
 }
 .my-city-select select::-ms-expand{ display: none; }
 .my-city-select span{
@@ -1658,9 +1661,10 @@
     padding-bottom:14px;
 }
 .resume-company-name{
-    width:884px;
+    width:874px;
     height: 34px;
     float:left;
+    padding-left: 10px;
     border: 1px solid #e5e5e5;
 }
 .my-work-time{
@@ -1713,9 +1717,9 @@
     border-right: 1px solid #e5e5e5;
 }
 .my-default input{
-    width: 443px;
+    width: 433px;
     height: 34px;
-    text-indent:10px;
+    padding-left:10px;
 }
 .add-other-mess{
     padding:5px 0 49px 34px;

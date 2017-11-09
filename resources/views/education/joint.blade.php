@@ -25,6 +25,7 @@
                     <div class="gjlhbxCon">
                         <ul>
                             <li>
+
                                 <p class="inter1"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'])}}" style="color: #444">{{$sanlist[0]['catname']}}</a></p>
                                 <div class="gjlhbxCon1">
                                     <div class="gjlhbxConleft">
@@ -42,7 +43,7 @@
                                     <div class="gjlhbxConright">
                                         <ul class="gjlhbxConright1">
                                              @foreach($guojigood as $val)
-                                            <li>
+                                            <li class="school_li_pic">
                                                 <div class="gjlhbxConright2">
                                                     <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                                     <div class="gjlhbxConright21">
@@ -76,7 +77,7 @@
                                     <div class="gjlhbxConright">
                                         <ul class="gjlhbxConright1">
                                             @foreach($guoneigood as $val)
-                                                <li>
+                                                <li class="school_li_pic">
                                                     <div class="gjlhbxConright2">
                                                         <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'],$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                                         <div class="gjlhbxConright21">

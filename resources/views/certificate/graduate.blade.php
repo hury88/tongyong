@@ -130,6 +130,7 @@
                             </div>
                         </div>
                         <div class="kyzxall1">
+                             <div class="certical-lists-warp">
                             @foreach($kaoyangood as $key=>$val)
                                 <div class="kyzxCon">
                                     <div class="kyzxConleft">
@@ -142,6 +143,7 @@
                                     </div>
                                 </div>
                             @endforeach
+                             </div>
                         </div>
                     </div>
                     <div class="zswenti">
@@ -156,6 +158,7 @@
                             <ul id="expmenu-freebie">
                                 <li>
                                     <ul class="expmenu">
+                                         <div class="certical-lists-warp">
                                         @foreach($wentigood as $key=>$val)
                                             <li>
                                                 <div class="header">
@@ -169,6 +172,7 @@
                                                 </ul>
                                             </li>
                                         @endforeach
+                                         </div>
                                     </ul>
                                 </li>
                             </ul>

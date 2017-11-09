@@ -96,6 +96,7 @@
                         </div>
                     </div>
                     <div class="kyzxall1">
+                        <div class="certical-lists-warp">
                         @foreach($gonggaogood as $val)
                         <div class="kyzxCon">
                             <div class="kyzxConleft">
@@ -108,7 +109,7 @@
                             </div>
                         </div>
                          @endforeach
-
+                        </div>
                     </div>
                 </div>
 @stop

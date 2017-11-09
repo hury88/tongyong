@@ -47,7 +47,7 @@
                             </div>
                             <div class='list2Center'>
                                 <div class='list2CenterLeft'>
-                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[1]['id'])}}'><img src='{{img($youxuegood[1]['img1'])}}'   style='width:100px;'/></a>
+                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[1]['id'])}}'><img src='{{img($youxuegood[1]['img1'])}}'  /></a>
                                 </div>
                                 <div class='list2CenterRight'>
                                     <p class='pu1'><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[1]['id'])}}'>{{$youxuegood[1]['title']}}</a></p>
@@ -57,7 +57,7 @@
                             </div>
                             <div class='list2Center'>
                                 <div class='list2CenterLeft'>
-                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[2]['id'])}}'><img src='{{img($youxuegood[2]['img1'])}}'   style='width:100px;'/></a>
+                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[2]['id'])}}'><img src='{{img($youxuegood[2]['img1'])}}' /></a>
                                 </div>
                                 <div class='list2CenterRight'>
                                     <p class='pu1'><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[2]['id'])}}'>{{$youxuegood[2]['title']}}</a></p>
@@ -75,7 +75,7 @@
                             </div>
                             <div class='list2Center'>
                                 <div class='list2CenterLeft'>
-                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[3]['id'])}}'><img src='{{img($youxuegood[3]['img1'])}}'   style='width:100px;'/></a>
+                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[3]['id'])}}'><img src='{{img($youxuegood[3]['img1'])}}'/></a>
                                 </div>
                                 <div class='list2CenterRight'>
                                     <p class='pu1'><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[3]['id'])}}'>{{$youxuegood[3]['title']}}</a></p>
@@ -85,7 +85,7 @@
                             </div>
                             <div class='list2Center'>
                                 <div class='list2CenterLeft'>
-                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[4]['id'])}}'><img src='{{img($youxuegood[4]['img1'])}}'   style='width:100px;'/></a>
+                                    <a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[4]['id'])}}'><img src='{{img($youxuegood[4]['img1'])}}' /></a>
                                 </div>
                                 <div class='list2CenterRight'>
                                     <p class='pu1'><a href='{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$youxuegood[4]['id'])}}'>{{$youxuegood[4]['title']}}</a></p>
@@ -131,6 +131,7 @@
                         </div>
                     </div>
                     <div class='kyzxall1'>
+                        <div class="certical-lists-warp">
                           @foreach($zixungood as $val)
                         <div class='kyzxCon'>
                             <div class='kyzxConleft'>
@@ -143,12 +144,14 @@
                             </div>
                         </div>
                           @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class='yxbaozhang'>
                     <p class='pt1'><a href='javascript:void(0);' style="color: #444">{{$sanlist[3]['catname']}}</a></p>
 
                     <p class='pt2'>专注游学、优质服务，为游学保驾护航</p>
+                    <div class="tour_yxbz">
                     <ul>
                         @foreach($baozhanggood as $val)
                         <li>
@@ -160,6 +163,7 @@
                         @endforeach
 
                     </ul>
+                    </div>
 
 
             </div>

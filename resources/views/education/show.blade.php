@@ -54,20 +54,37 @@
                                     <div id="btn-left" class="arrow-btn dasabled"></div>
                                     <div class="slider" id="thumbnail">
                                         <ul>
+
+                                            @if(isset(v_pic($id_arr->id)[0]))
+
                                             @foreach(v_pic($id_arr->id) as $key=>$val)
 
                                             <li @if($key==0) class='current' @endif style="float: none;"><a href="{{img($val->img1)}}"><span class="zzc"></span><img src="{{img($val->img1)}}" alt="{{$val->title}}" /></a></li>
                                             @endforeach
+                                            @else
+
+                                                <li  class='current'  style="float: none;"><a href="/img/2017020509510134.jpg"><span class="zzc"></span><img src="/img/2017020509510134.jpg" alt="" /></a></li>
+                                                <li  style="float: none;"><a href="/img/2017020509510134.jpg"><span class="zzc"></span><img src="/img/2017020509510134.jpg" alt="" /></a></li>
+                                                <li  style="float: none;"><a href="/img/2017020509510134.jpg"><span class="zzc"></span><img src="/img/2017020509510134.jpg" alt="" /></a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <div id="btn-right" class="arrow-btn"></div>
                                 </div>
+
+                                @if(isset(v_pic($id_arr->id)[0]))
+
 
                                 @foreach(v_pic($id_arr->id) as $key=>$val)
                                     @if($key==0)
                                     <div class="zoompic" onclick="javascript:void(0);" style="width: 415px;float: right;margin-left: 0;"><img src="{{img($val->img1)}}" width="386" height="386" alt="{{$val->title}}" /></div>
                                     @endif
                                 @endforeach
+                                @else
+                                    <div class="zoompic" onclick="javascript:void(0);" style="width: 415px;float: right;margin-left: 0;"><img src="/img/2017020509510134.jpg" width="386" height="386" alt="" /></div>
+
+
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -90,10 +107,10 @@
                             </div>
                         </div>
                         <div class="lianluxq2">
+                            <div style="display: none" class="bdsharebuttonbox"><a href="javascript:void(0);" class="bds_more" data-cmd="more"></a></div>
                             <p class="py1">
                                 <span><img src="/img/xlsys.png"/>扫码关注我们了解更多培训信息</span>
-                                <a href=""><img src="/img/xlfx.png"/><i>分享</i></a>
-
+                                <a href="javascript:void(0);" id="fenxiang"><img src="/img/xlfx.png"/><i>分享</i></a>
                             </p>
                             <div class="erweima" style="display: none; height: 140px;">
                                 <div style=" width: 120px;height:120px;overflow: hidden">
@@ -144,7 +161,9 @@
         }, function() {
             $(this).find('.dump').stop().slideUp();
         })
+        $('#fenxiang').click(function(){
 
+        })
     </script>
 
     <script type="text/javascript">

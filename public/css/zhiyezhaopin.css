@@ -274,9 +274,10 @@
 .recruitment-box .recruitment-mess-box{
 	position: absolute;
 	width: 100%;
-	height: 394px;
+	height: 294px;
 	text-align: center;
 	top:0;
+	overflow: hidden;
 	left: 0;
 	padding:100px 0 0 0;
 }
@@ -1005,11 +1006,12 @@ p{
 }
 .zplbTop ul{
 	overflow: hidden;
+	margin-right:-15px;
 }
 .zplbTop ul li{
-	width: 19%;
+	width:208px;
 	float: left;
-	margin-right: 10px;
+	margin-right:15px;
 	
 }
 .zplbTop ul .last1{
@@ -1070,16 +1072,18 @@ p{
 	padding: 20px 0;
 }
 .zplbxx ul li .zplbxxl{
-	width: 12%;
+	width:137px;
+	height: 74px;
     float: left;
     border: 1px solid #ccc;
-    padding: 10px;
+	overflow: hidden;
 }
 .zplbxx ul li .zplbxxl a img{
-	width: 100%;
+	width:137px;
+	height: 74px;
 }
 .zplbxx ul li .zplbxxc{
-	    width: 68%;
+	width:770px;
     float: left;
     margin-left: 25px;
 }
@@ -1111,8 +1115,8 @@ p{
 	color: #d71718;
 }
 .zplbxx ul li .zplbxxr{
-	width: 15%;
-	float: left;
+	width:86px;
+	float:right;
 }
 .zplbxx ul li .zplbxxr  p{
 	color: #999899;
@@ -1121,7 +1125,10 @@ p{
 .zplbxx ul li .zplbxxr a{
 	color: #d71718;
 	border: 1px solid #d71718;
-	padding: 5px 10px;
+	width: 84px;
+	height: 31px;
+	text-align: center;
+	line-height: 33px;
 	border-radius: 5px;
 }
 .zplbxx ul li .zplbxxr a:hover{

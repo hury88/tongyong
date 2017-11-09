@@ -16,15 +16,13 @@
     <div class="wrap-box examine-location">
         <h2>
             <span>所在位置：</span>
-            <a href="javascript:;">首页</a>
+            <a href="/">首页</a>
             <span> > </span>
-            <a href="javascript:;">订单中心中心</a>
+            <a href=“{{u('person','order')}}>订单中心</a>
             <span> > </span>
-            <a href="javascript:;">我的报名表</a>
+            <a href="{{u('person','order','bmbzypx')}}">职业证书报名表</a>
             <span> > </span>
-            <a href="javascript:;">职业证书报名表</a>
-            <span> > </span>
-            <a href="javascript:;">考研信息报名表查看</a>
+            <a href="javascript:javascript:void(0);">考研信息报名表查看</a>
         </h2>
     </div>
     <div class="wrap-box examine-show">

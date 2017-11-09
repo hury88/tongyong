@@ -49,7 +49,7 @@ $pid=v_id($typeid,'pid','news_cats');
                 <td>
                     <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}">下载报名表</a><br>
                     <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}">打印报名表</a><br>
-                    <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}" >完善报名表</a>
+                    <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}">完善报名表</a>
                     {{--                    <a href="{{route('p_e_v')}}?pid=3" >完善报名表</a>--}}
                 </td>
             </tr>
