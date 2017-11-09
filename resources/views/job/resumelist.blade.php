@@ -12,9 +12,46 @@
 @section('breadcrumbs')
 <div class="sqzw">
     <!--banner-->
-    <div class="">
+    <div class="recruitment-box">
         <img src="{{$banimgsrc}}" style="width: 100%;"/>
-    </div>
+        <div class="recruitment-mess-box">
+            <h2><img src="/img/ziti-icon.png"/></h2>
+            <div class="recruitment-operate">
+                <ul>
+                    <li><a href="{{u('register')}}"><b>1.学生/企业注册</b><span>……</span></a></li>
+                    <li><a href="{{u('login')}}"><b>2.学生/企业登录</b><span>……</span></a></li>
+                    @if(auth()->check())
+                        @if(auth()->user()->isPerson())
+                            <li><a href="{{u('person','jianli')}}"><b>3.学生发布简历/企业发布招聘</b></a></li>
+                        @else
+                            <li><a href="{{u('business','job','enterprise')}}"><b>3.学生发布简历/企业发布招聘</b></a></li>
+                        @endif
+                    @else
+                        <li><a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'"><b>3.学生发布简历/企业发布招聘</b></a></li>
+                    @endif
+                </ul>
+            </div>
+            <div class="recruitment-linka">
+                @if(auth()->check())
+                    @if(auth()->user()->isPerson())
+                        <a href="javascript:alert('只有个人会员才能发布招聘');">我要招聘</a>
+                    @else
+                        <a href="{{u('business','resume')}}">我要招聘</a>
+                    @endif
+                @else
+                    <a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'">我要招聘</a>
+                @endif
+                @if(auth()->check())
+                    @if(auth()->user()->isPerson())
+                        <a href="{{u('person','jianli')}}">发布简历</a>
+                    @else
+                        <a href="javascript:alert('只有个人会员才能发布简历');">发布简历</a>
+                    @endif
+                @else
+                    <a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'">发布简历</a>
+                @endif
+            </div>
+        </div>
 @stop
     @section('content')
 

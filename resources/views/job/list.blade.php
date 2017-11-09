@@ -4,6 +4,7 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
+    <link rel="stylesheet" type="text/css" href="/plugins/pop-up.css"/>
 @stop
 @section('bodyNextLabel')
     <body>
@@ -13,9 +14,47 @@
         @section('breadcrumbs')
             <div class="sqzw">
                 <!--banner-->
-                <div class="">
+                <div class="recruitment-box">
                     <img src="{{$banimgsrc}}" style="width: 100%;"/>
-                </div>
+                    <div class="recruitment-mess-box">
+                        <h2><img src="/img/ziti-icon.png"/></h2>
+                        <div class="recruitment-operate">
+                            <ul>
+                                <li><a href="{{u('register')}}"><b>1.学生/企业注册</b><span>……</span></a></li>
+                                <li><a href="{{u('login')}}"><b>2.学生/企业登录</b><span>……</span></a></li>
+                                @if(auth()->check())
+                                    @if(auth()->user()->isPerson())
+                                        <li><a href="{{u('person','jianli')}}"><b>3.学生发布简历/企业发布招聘</b></a></li>
+                                    @else
+                                        <li><a href="{{u('business','job','enterprise')}}"><b>3.学生发布简历/企业发布招聘</b></a></li>
+                                    @endif
+                                @else
+                                    <li><a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'"><b>3.学生发布简历/企业发布招聘</b></a></li>
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="recruitment-linka">
+                            @if(auth()->check())
+                                @if(auth()->user()->isPerson())
+                                    <a href="javascript:alert('只有个人会员才能发布招聘');">我要招聘</a>
+                                @else
+                                    <a href="{{u('business','resume')}}">我要招聘</a>
+                                @endif
+                            @else
+                                <a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'">我要招聘</a>
+                            @endif
+                            @if(auth()->check())
+                                @if(auth()->user()->isPerson())
+                                    <a href="{{u('person','jianli')}}">发布简历</a>
+                                @else
+                                    <a href="javascript:alert('只有个人会员才能发布简历');">发布简历</a>
+                                @endif
+                            @else
+                                <a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'">发布简历</a>
+                            @endif
+                        </div>
+                    </div>
+
         @stop
 
                 <!--搜素-->
@@ -194,7 +233,15 @@
                                     }
                                     ?>
                                     <p>{{$as}}</p>
-                                    <a href="javascript:jobRequest({{$val['id']}}, '{{$val['business_name']}}')">申请职位</a>
+                                    @if(auth()->check())
+                                        @if(auth()->user()->isPerson())
+                                        <a class="shenqingzhiwei17" recruit_id="{{$val['id']}}" business_name="{{$val['business_name']}}" href="javascript:;">申请职位</a>
+                                        @else
+                                        <a href="javascript:alert('只有个人会员才能申请职位');">申请职位</a>
+                                        @endif
+                                    @else
+                                    <a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'">申请职位</a>
+                                    @endif
                                 </div>
                             </li>
                               @endforeach
@@ -281,32 +328,37 @@
                 </div>
             </div>
 
-<!-- <div class="layer"> </div>
- <div class="tip">
-    <div class="shengqingtiptop">
-        <span>申请职位</span>
-        <a class="close"></a>
-    </div>
-    <div class="shengqingtipbom">
-        <div class="shengqingtipbom1">
-            <span class="applyjob-intro"><img src="img/close1.png"/>选择简历</span>
-            <select class="apply-jobselect" name="">
-                <option value="">请选择您要投放的简历</option>
-                <option value="">请选择您要投放的简历</option>
-                <option value="">请选择您要投放的简历</option>
-                <option value="">请选择您要投放的简历</option>
-            </select>
-        </div>
-        <div class="shengqingtipbom2">
-            <span class="applyjob-intro"><img src="img/close1.png"/>验证码</span>
-            <div class="apply-job-inp">
-                <input type="text" name="" id="" value="" placeholder="请填写验证码"/>
-                <img src="img/apply-img_01.jpg"/>
+            @if(auth()->check() && auth()->user()->isPerson())
+            <div class="layer-popup"> </div>
+            <div class="tip-popup">
+                <div class="shengqingtiptop-pop">
+                    <span>申请职位</span>
+                    <a class="close"></a>
+                </div>
+                <div class="shengqingtipbom-pop form" action="{{route('job.request')}}">
+                    <div class="shengqingtipbom1-pop">
+                        <input type="hidden" name="business_name" id="business_name">
+                        <input type="hidden" name="recruit_id" id="recruit_id">
+                        {{csrf_field()}}
+                        <span class="applyjob-intro"><b>*</b>选择简历</span>
+                        <select class="apply-jobselect" name="cvs_id">
+                            @foreach(auth::user()->hasManyCVS()->get(['id','nid'])->toArray() as $v)
+                            <option value="{{$v['id']}}">{{$v['nid']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- <div class="shengqingtipbom2-pop">
+                        <span class="applyjob-intro"><b>*</b>验证码</span>
+                        <div class="apply-job-inp">
+                            <input type="text" name="" id="" value="" placeholder="请填写验证码"/>
+                            <img src="/img/apply-img_01.jpg"/>
+                        </div>
+                    </div>-->
+                    <div class="apply-submit"><input onclick="return job(this)" type="submit" value="投递简历"/></div>
+                </div>
             </div>
-        </div>
-        <div class="apply-submit"><input type="submit" value="投递简历"/></div>
-    </div>
- </div> -->
+
+            @endif
 @stop {{-- end content --}}
 
 
@@ -362,33 +414,28 @@
   @parent
 @include('partial.dialog')
 <script>
-    //提交表单
-    function jobRequest(recruit_id, business_name){
-        //读取信息
-         // var hiddenForm = new FormData();
-        // $(that).attr('disabled',true);//按钮锁定
-        $.ajax({
-            url  : "{{route('job.request')}}",
-            type : "post",
-            dataType : 'json',
-            data : {
-                recruit_id : recruit_id,
-                business_name : business_name,
-                cvs_id : 23,
-            },
-            headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
-            success : function(response){
-            var state = response.state,
-                title = response.title,
-                message = response.message,
-                status = response.status,
-                redirect = response.redirect;
-                handing(status,state,title,message,redirect,function(){
-                    // $(that).removeAttr('disabled');//解除锁定
-                });
-            }
-        })
-        return false;
+    //*申请职位弹框*/
+    var payHeight = $(document).height();
+    $(".layer-popup").height(payHeight);
+    $(".shenqingzhiwei17").click(function(){
+        $("#business_name").val($(this).attr("business_name"))
+        $("#recruit_id").val($(this).attr("recruit_id"))
+        $(".layer-popup").fadeIn("fast");
+        $(".tip-popup").fadeIn("fast").css({
+            left: ($(window).width() - $('.tip-popup').outerWidth())/2,
+            top: ($(window).height() - $('.tip-popup').outerHeight())/2
+        });
+    });
+
+    $(".shengqingtiptop-pop .close").click(function(){
+        $(".layer-popup").fadeOut("fast");
+        $(".tip-popup").fadeOut("fast");
+    });
+    function job(obj)
+    {
+        $(".layer-popup").fadeOut("fast");
+        $(".tip-popup").fadeOut("fast");
+        return model(obj);
     }
 </script>
 @stop
