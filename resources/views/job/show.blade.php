@@ -5,34 +5,10 @@
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/plugins/pop-up.css"/>
-    <script type="text/javascript">
-       /* window.onload = function() {
-            add = document.getElementsByClassName("shenqingzhiwei17")[0];
-
-            tip = document.getElementsByClassName("tip")[0];
-
-            layer = document.getElementsByClassName("layer")[0];
-
-            clo = document.getElementsByClassName("close")[0];
-
-            add.onclick = aa;
-
-            clo.onclick = bb;
-        }
-
-        function aa() {
-            tip.style.display = 'block';
-            layer.style.display = 'block';
-        }
-
-
-        function bb() {
-            tip.style.display = 'none';
-            layer.style.display = 'none';
-        }*/
-
-
-    </script>
+    <link rel="stylesheet" type="text/css" href="/plugins/report.css"/>
+    <style>
+        .color-blue {color:#3481bc !important}
+    </style>
 @stop
 @section('bodyNextLabel')
     <body>
@@ -179,25 +155,27 @@
                         <div class="sqzwright">
                             <div class="sqzwright1">
                                 <div class="wangye">
-                                    <span>网页制作，程序编辑</span>
-                                    @if(auth()->user()->isPerson())
-                                    <a class="shenqingzhiwei17" recruit_id="{{$id_arr->id}}" business_name="{{$id_arr->business_name}}" href="javascript:;">申请职位</a>
-                                    @elseif(auth()->user()->isCompany())
-                                    <a href="javascript:alert('只有个人会员才能申请职位');">申请职位</a>
+                                    <span>{{$id_arr->title}}</span>
+                                    @if(auth()->check())
+                                        @if(auth()->user()->isPerson())
+                                        <a class="shenqingzhiwei17" recruit_id="{{$id_arr->id}}" business_name="{{$userinfo[0]['business_name']}}" href="javascript:;">申请职位</a>
+                                        @else
+                                        <a href="javascript:alert('只有个人会员才能申请职位');">申请职位</a>
+                                        @endif
                                     @else
-                                    <a href="javascript:alert('请先登录');">申请职位</a>
+                                    <a href="javascript:if(confirm('未登录,去登陆'))window.location.href='{{route('login'). _r_('?r=%s')}}'">申请职位</a>
                                     @endif
 
                                     <!-- <a href="javascript:;" class="shenqingzhiwei17">申请职位</a> -->
                                 </div>
                                 <div class="sqzwwz">
-                                    <img src="img/sqzwwz.jpg"/>
+                                    <img src="/img/sqzwwz.jpg"/>
                                     <a href="">合肥</a>
                                     <i>1小时前发布</i>
                                     <span>
-            	 				<img src="img/sqzwsc.jpg"/>
+            	 				<img src="/img/sqzwsc.jpg"/>
             	 				<a href="">收藏</a>
-            	 				<img src="img/sqzwfx.jpg"/>
+            	 				<img src="/img/sqzwfx.jpg"/>
             	 				<a href="">分享</a>
             	 			</span>
                                 </div>
@@ -241,36 +219,35 @@
                                         <p>联想集团有限公司&nbsp;&nbsp;|&nbsp;&nbsp;在招职位</p>
                                     </div>
                                     <div class="sqzwright2r1">
-                                        <img src="img/zxgt.jpg"/>
+                                        <img src="/img/zxgt.jpg"/>
                                         <a href="">在线沟通</a>
                                     </div>
                                 </div>
                                 <div class="zwjs">
                                     <h4>职位介绍</h4>
-                                    <p>性别:不限&nbsp;语言：熟练的英语</p>
-                                    <p>岗位职责</p>
-                                    <p>主要职责</p>
-                                    <p>1.建立公司人力资源体系，人力资源体系</p>
-                                    <p>2.建立公司人力资源体系，人力资源体系</p>
-                                    <p>3.建立公司人力资源体系，人力资源体系</p>
-                                    <p>4.建立公司人力资源体系，人力资源体系</p>
-                                    <p>5.建立公司人力资源体系，人力资源体系</p>
-                                    <p>6.建立公司人力资源体系，人力资源体系</p>
-                                    <p>7.建立公司人力资源体系，人力资源体系建立公司人力资源体系，人力资源体系</p>
+                                    {!!$id_arr->content!!}
                                     <div class="jubao">
                                         <div class="jubaoleft">
                                             注意：提供凡在中国职业培训王提供凡在中国职业培训王提供凡在中国职业培训王
                                         </div>
                                         <div class="jubaoright">
-                                            <img src="img/sqzwjb.jpg"/>
-                                            <a href="javascript:;" class="jinggao" style="color: #666666;">举报</a>
+                                            <img src="/img/sqzwjb.jpg"/>
+                                            @if(auth()->check())
+                                                @if(auth()->user()->isPerson())
+                                                <a class="jinggao report-btn" style="color: #666666;">举报</a>
+                                                @else
+                                                <a href="javascript:alert('只有个人会员才能举报');" class="jinggao" style="color: #666666;">举报</a>
+                                                @endif
+                                            @else
+                                            <a href="javascript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}';" class="jinggao" style="color: #666666;">举报</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="sqwzgap"></div>
                             <div class="likezw">
-                                <p class="likezw1"><img src="img/like1.jpg"/><span>您感兴趣的职位</span></p>
+                                <p class="likezw1"><img src="/img/like1.jpg"/><span>您感兴趣的职位</span></p>
                                 <p class="likezw2">
                                     <input type="checkbox" name="" id="" value="" />全选
                                     <a href="">申请职位</a>
@@ -378,46 +355,6 @@
 
 
     @section('footer')
-            <!-- 申请职位成功弹窗-->
-           <!--  <div class="layer1">
-
-           </div>
-           <div class="tip1">
-               <p><img src="img/shnegqingsucc.jpg"/>申请职位成功！</p>
-               <span class="guanbi">关闭</span>
-           </div> -->
-            <!-- 举报弹窗-->
-            <div class="tip2">
-                <div class="tip21">
-                    <p class="p1">
-                        <span class="sp1">举报</span>
-                        <span class="sp2"><img src="img/shnegqingsucc1.jpg"/></span>
-                    </p>
-                    <p class="p2">
-                        <select name="">
-                            <option value="">请选择培训课程</option>
-                        </select>
-                    </p>
-                    <p class="p3">
-                        <textarea name="" rows="" cols="" placeholder="填写举报内容"></textarea>
-                    </p>
-                </div>
-
-                <div class="jubaocall">
-                    <div class="jubaocallleft">
-                        <p>
-                            举报投诉电话：<i>400-0000-0000</i>
-                        </p>
-                        <p>
-                            投诉邮箱：<i>65432789@qq.com</i>
-                        </p>
-                    </div>
-                    <div class="jubaocallright">
-                        确定
-                    </div>
-                </div>
-            </div>
-
             <div class="jobselect-cover"></div>
             <div class="jobselect-mask" id="xzhy">
                 <h2>选择行业<span>最多只能选择五个 ！</span><a href="javascript:;" class="job-close"></a></h2>
@@ -491,7 +428,7 @@
                     <a class="operate-reset" href="javascript:;">取消</a>
                 </div>
             </div>
-            @if(auth()->user()->isPerson())
+            @if(auth()->check() && auth()->user()->isPerson())
             <div class="layer-popup"> </div>
             <div class="tip-popup">
                 <div class="shengqingtiptop-pop">
@@ -522,6 +459,45 @@
             </div>
 
             @endif
+
+            <!-- 举报弹窗-->
+            <div class="report-layer"> </div>
+            <div class="report-mask form" action="{{route('jubao')}}">
+                <div class="report-form">
+                    <p class="p1">
+                        <span class="sp1">举报</span>
+                        <span class="sp2"><img src="/img/shnegqingsucc1.jpg"/></span>
+                    </p>
+                    <p class="p2">
+                        举报<span class="color-blue">{{$userinfo[0]['business_name']}}</span>发布的<span class="color-blue">{{$id_arr->title}}</span>职位
+                        <!-- <select name=""> -->
+                            <!-- <option value="">请选择培训课程</option> -->
+                        <!-- </select> -->
+                    </p>
+                    <p class="p3">
+                        <textarea name="content" rows="" cols="" placeholder="填写举报内容"></textarea>
+                        <input type="hidden" name="business_name" value="{{$userinfo[0]['business_name']}}">
+                        <input type="hidden" name="business_id" value="{{$userinfo[0]['user_id']}}">
+                        <input type="hidden" name="person_id" value="{{auth()->check() ? auth()->id() : 0 }}">
+                        <input type="hidden" name="job_id" value="{{$id_arr->id}}">
+                        <input type="hidden" name="job_title" value="{{$id_arr->title}}">
+                        {{csrf_field()}}
+                    </p>
+                </div>
+                <div class="report-call">
+                    <div class="report-call-left">
+                        <p>
+                            举报投诉电话：<i>{{$boot_config['link3']}}</i>
+                        </p>
+                        <p>
+                            投诉邮箱：<i>65432789@qq.com</i>
+                        </p>
+                    </div>
+                    <div onclick="model(this, '', function(){$('.report-form .sp2').click();})" class="report-call-right">
+                        确定
+                    </div>
+                </div>
+            </div>
     @parent
     @stop
 
@@ -531,31 +507,21 @@
             <script type="text/javascript" src="/js/alert.min.js"></script>
 
             <script type="text/javascript">
-                //	导航下拉
-                /*$('.mian_nav .list>li').hover(function() {
-                    $(this).find('.dump').stop().slideDown();
-                }, function() {
-                    $(this).find('.dump').stop().slideUp();
-                })
-                $('.toudijianli').click(function(){
-                    $('.tip1').show();
-                    $('.layer1').show();
-                    $('.tip').hide();
-                    $('.layer').hide();
-                })
-                $('.guanbi').click(function(){
-                    $('.tip1').hide();
-                    $('.layer1').hide();
-                })
-                $('.jinggao').click(function(){
-                    $('.tip2').show();
-                })
-                $('.tip2 .tip21 .p1 .sp2').click(function(){
-                    $('.tip2').hide();
-                })
-                $('.sqzwNavlist p a').ckick(function(){
-                    $(this).addClass('sqzwNavliston');
-                })*/
+                /*
+                 举报弹框*/
+                var payHeight = $(document).height();
+                $(".report-layer").height(payHeight);
+                $(".report-btn").click(function(){
+                    $(".report-layer").fadeIn("fast");
+                    $(".report-mask").fadeIn("fast").css({
+                        left: ($(window).width() - $('.report-mask').outerWidth())/2,
+                        top: ($(window).height() - $('.report-mask').outerHeight())/2
+                    });
+                });
+                $(".report-form .sp2").click(function(){
+                    $(".report-layer").fadeOut("fast");
+                    $(".report-mask").fadeOut("fast");
+                });
 
                 /*
                  申请职位弹框*/

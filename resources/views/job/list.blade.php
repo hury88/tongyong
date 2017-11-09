@@ -4,7 +4,6 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
-    <link rel="stylesheet" type="text/css" href="/plugins/pop-up.css"/>
 @stop
 @section('bodyNextLabel')
     <body>
@@ -89,7 +88,7 @@
                     <!--开始-->
                     <div class="zplbxzwz">
                         <div class="zplbxzwz1">
-                            您已选择：<img src="img/sqzwwz.jpg"><i>合肥</i><img src="/img/zplbxx5.jpg">
+                            您已选择：<img src="img/sqzwwz.jpg"><i>合肥</i><img src="img/zplbxx5.jpg">
                         </div>
                         <div class="zplbxzwz2">
                             <div class="zplbxzwz2a">
@@ -195,7 +194,7 @@
                                     }
                                     ?>
                                     <p>{{$as}}</p>
-                                    <a class="shenqingzhiwei17" recruit_id="{{$val['id']}}" business_name="{{$val['business_name']}}" href="javascript:;">申请职位</a>
+                                    <a href="javascript:jobRequest({{$val['id']}}, '{{$val['business_name']}}')">申请职位</a>
                                 </div>
                             </li>
                               @endforeach
@@ -266,11 +265,10 @@
                                 <div class="job-lists-dv">
                                     <p class="job-big-type" title="{{$v}}"><i class="big-type-icon"></i>{{$v}}</p>
                                     <ul class="job-small-type" style="max-height: 195px;overflow-y: auto">
-                                       @if($k<390)
+        
                                         @foreach($positionids[$k] as $k1=>$v1)
                                             <li class="c{{$k1}} @if(in_array($k1,$positionidarr)) select-item @endif" data-id="{{$k1}}">{{$v1}}</li>
                                         @endforeach
-                                       @endif
                                     </ul>
                                 </div>
                             @endforeach
@@ -284,34 +282,32 @@
                 </div>
             </div>
 
-<div class="layer-popup"> </div>
-<div class="tip-popup">
-    <div class="shengqingtiptop-pop">
+<!-- <div class="layer"> </div>
+ <div class="tip">
+    <div class="shengqingtiptop">
         <span>申请职位</span>
         <a class="close"></a>
     </div>
-    <div class="shengqingtipbom-pop form" action="{{route('job.request')}}">
-        <div class="shengqingtipbom1-pop">
-            <input type="hidden" name="business_name" id="business_name">
-            <input type="hidden" name="recruit_id" id="recruit_id">
-            {{csrf_field()}}
-            <span class="applyjob-intro"><b>*</b>选择简历</span>
-            <select class="apply-jobselect" name="cvs_id">
-                @foreach(auth::user()->hasManyCVS()->get(['id','nid'])->toArray() as $v)
-                <option value="{{$v['id']}}">{{$v['nid']}}</option>
-                @endforeach
+    <div class="shengqingtipbom">
+        <div class="shengqingtipbom1">
+            <span class="applyjob-intro"><img src="img/close1.png"/>选择简历</span>
+            <select class="apply-jobselect" name="">
+                <option value="">请选择您要投放的简历</option>
+                <option value="">请选择您要投放的简历</option>
+                <option value="">请选择您要投放的简历</option>
+                <option value="">请选择您要投放的简历</option>
             </select>
         </div>
-        <!-- <div class="shengqingtipbom2-pop">
-            <span class="applyjob-intro"><b>*</b>验证码</span>
+        <div class="shengqingtipbom2">
+            <span class="applyjob-intro"><img src="img/close1.png"/>验证码</span>
             <div class="apply-job-inp">
                 <input type="text" name="" id="" value="" placeholder="请填写验证码"/>
-                <img src="/img/apply-img_01.jpg"/>
+                <img src="img/apply-img_01.jpg"/>
             </div>
-        </div>-->
-        <div class="apply-submit"><input onclick="return job(this)" type="submit" value="投递简历"/></div>
+        </div>
+        <div class="apply-submit"><input type="submit" value="投递简历"/></div>
     </div>
-</div>
+ </div> -->
 @stop {{-- end content --}}
 
 
@@ -366,31 +362,34 @@
 @section('scripts')
   @parent
 @include('partial.dialog')
-
 <script>
-    /*
-     申请职位弹框*/
-    var payHeight = $(document).height();
-    $(".layer-popup").height(payHeight);
-    $(".shenqingzhiwei17").click(function(){
-        $("#business_name").val($(this).attr("business_name"))
-        $("#recruit_id").val($(this).attr("recruit_id"))
-        $(".layer-popup").fadeIn("fast");
-        $(".tip-popup").fadeIn("fast").css({
-            left: ($(window).width() - $('.tip-popup').outerWidth())/2,
-            top: ($(window).height() - $('.tip-popup').outerHeight())/2
-        });
-    });
-
-    $(".shengqingtiptop-pop .close").click(function(){
-        $(".layer-popup").fadeOut("fast");
-        $(".tip-popup").fadeOut("fast");
-    });
-    function job(obj)
-    {
-        $(".layer-popup").fadeOut("fast");
-        $(".tip-popup").fadeOut("fast");
-        return model(obj);
+    //提交表单
+    function jobRequest(recruit_id, business_name){
+        //读取信息
+         // var hiddenForm = new FormData();
+        // $(that).attr('disabled',true);//按钮锁定
+        $.ajax({
+            url  : "{{route('job.request')}}",
+            type : "post",
+            dataType : 'json',
+            data : {
+                recruit_id : recruit_id,
+                business_name : business_name,
+                cvs_id : 23,
+            },
+            headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
+            success : function(response){
+            var state = response.state,
+                title = response.title,
+                message = response.message,
+                status = response.status,
+                redirect = response.redirect;
+                handing(status,state,title,message,redirect,function(){
+                    // $(that).removeAttr('disabled');//解除锁定
+                });
+            }
+        })
+        return false;
     }
 </script>
 @stop

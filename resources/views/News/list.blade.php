@@ -47,7 +47,7 @@
                                         <li>
                                             <div class="xwdtTop">
                                                 <div class="xwdtTopleft">
-                                                    <img src="img/xwdt4.jpg"/>
+                                                    <img src="/img/xwdt4.jpg"/>
                                                 </div>
                                                 <div class="xwdtTopright">
                                                     <p class="ps1">热门资讯</p>
@@ -67,7 +67,7 @@
                                         <li>
                                             <div class="xwdtTop">
                                                 <div class="xwdtTopleft">
-                                                    <img src="img/xwdt5.jpg"/>
+                                                    <img src="/img/xwdt5.jpg"/>
                                                 </div>
                                                 <div class="xwdtTopright">
                                                     <p class="ps1">最新招聘职位</p>
@@ -100,7 +100,7 @@
                                         <li>
                                             <div class="xwdtTop">
                                                 <div class="xwdtTopleft">
-                                                    <img src="img/xwdt5.jpg"/>
+                                                    <img src="/img/xwdt5.jpg"/>
                                                 </div>
                                                 <div class="xwdtTopright">
                                                     <p class="ps1">热门培训</p>

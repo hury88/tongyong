@@ -61,4 +61,4 @@ require __DIR__.'/web/about.php';
 //新闻动态
 require __DIR__.'/web/news.php';
 //utilities
-// require __DIR__.'/web/utilities.php';
+require __DIR__.'/web/utilities.php';

@@ -63,7 +63,7 @@ class LoginController extends Controller
         }
 
         return redirect('/login')
-            ->withInput($request->only($this->getInputUsername()))
+            ->withInput($request->only($this->getInputUsername(), 'r'))
             ->withErrors([
                 $this->getInputUsername() => $this->getFailedLoginMessage(),
             ]);
