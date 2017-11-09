@@ -15,9 +15,9 @@ $map = array();
 $action_type_id =   I('get.action_type_id', 0,'intval');/*if(!empty($type))*/$map['action_type_id'] = $action_type_id;
 $status =   I('get.status', 0,'intval');if($status)$map['status'] = $status;
 ###########################筛选开始
-if ($status) {
+if ($status || $action_type_id ==15) {
   $map['user_id'] = 0;
-  $map['status'] = $status;
+  // $map['status'] = $status;
 }
 ########################分页配置开始
 $psize = I('get.psize',30,'intval');
@@ -64,7 +64,10 @@ $tr = new Output;
                  case 8: //'certification_person.ok'
                  $th = ['真实姓名', '性别', '出生年月', '身份证号', '正面照', '背面照', '操作'];
                  break;
-
+                 case 15: //'compliant.new'
+                 case 16: //'compliant.handled'
+                 $th = ['举报标题', '举报者', '操作'];
+                 break;
                  default:
                    # code...
                  break;
@@ -85,6 +88,7 @@ $tr = new Output;
                    break;
                  case 7: case 8: $person = M('persons')->field('*')->where(['user_id' => $user_id])->find();
                    break;
+                 case 15: case 16: $person = M('persons')->field('*')->where(['user_id' => $sender_id])->find();
                  default:
                    break;
                }
@@ -138,6 +142,18 @@ $tr = new Output;
                      ->td($person['card'])
                      ->td_img($person['card_front'])
                      ->td_img($person['card_back'])
+                     ->td($rcao)
+                  ;
+              ?>
+              <?php break; ?>
+              <?php case 15: case 16:
+                  if ($action_type_id == 15) { //申请
+                    $rcao = '<a class="exes" data-typeid="16" data-send="complaint" data-action="handled" data-uid="'.$person['user_id'].'" data-nid="'.$id.'">处理<i title="点击修改" class="layui-icon"></i></a>';
+                  } elseif($action_type_id == 16) { //拒绝
+                    $rcao = '已处理:'.$content;
+                  }
+                  $tr->td($title)
+                     ->td($content)
                      ->td($rcao)
                   ;
               ?>

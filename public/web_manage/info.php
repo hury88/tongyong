@@ -11,7 +11,8 @@ $gourl=getUrl(queryString(true),$showname);
 
 $group_action = [
   'certification' => '企业会员实名认证',
-  'certification_person' => '个人会员实名认证'
+  'certification_person' => '个人会员实名认证',
+  'complaint' => '举报',
 ];
 
 //条件
@@ -19,7 +20,7 @@ $map = array();
 
 ###########################筛选开始
 // $action_type_id =   I('get.action_type_id',16,'intval');/*if(!empty($type))*/$map['action_type_id'] = $action_type_id;
-$map['id'] = ['in','1,2,6'];
+$map['id'] = ['in','1,2,6,15'];
 ###########################筛选开始
 // $map['user_id'] = 0;
 ########################分页配置开始

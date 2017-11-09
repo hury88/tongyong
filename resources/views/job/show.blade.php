@@ -460,6 +460,7 @@
 
             @endif
 
+            @if(auth()->check() && auth()->user()->isPerson())
             <!-- 举报弹窗-->
             <div class="report-layer"> </div>
             <div class="report-mask form" action="{{route('jubao')}}">

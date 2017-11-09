@@ -30,6 +30,8 @@ return [
         'resume:fromRefuse' => '您在%s的职位申请已被拒绝',//12
         'resume:toRefuse' => '您刚刚拒绝了%s发出的面试邀请',//13
         'resume:ok' => '%s向您发出了面试邀请',//14
+        'complaint:new' => '有新的举报',//15
+        'complaint:handled' => '举报已处理',//16
     ],
 
     'all_title'   => '短消息',

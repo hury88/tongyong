@@ -24,7 +24,7 @@ $map = array();
 ###########################筛选开始
 // $action_type_id =   I('get.action_type_id', 0,'intval');/*if(!empty($type))*/$map['action_type_id'] = $action_type_id;
 $status =   I('get.status', 0,'intval');if($status)$map['status'] = $status;
-$map['action_type_id'] = ['not in', '1,2,3,6,7,8'];
+$map['action_type_id'] = ['not in', config('allowed_action_types_id')];
 $map['user_id'] = 0;
 ###########################筛选开始
 ########################分页配置开始

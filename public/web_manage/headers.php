@@ -53,11 +53,11 @@ require WEB_ROOT.'./include/chkuser.inc.php';
             </a>
             <a href="info.php" target="righthtml">
                 <img src="images/bug5.png" />
-                <p>系统消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['in', '1,2,3,6,7,8']])->count() ?>)</b></p>
+                <p>系统消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['in', config('allowed_action_types_id')]])->count() ?>)</b></p>
             </a>
             <a href="info_common.php" target="righthtml">
                 <img src="images/bug5.png" />
-                <p>普通消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['not in', '1,2,3,6,7,8']])->count() ?>)</b></p>
+                <p>普通消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['not in', config('allowed_action_types_id')]])->count() ?>)</b></p>
             </a>
 
 	<? }elseif($_SESSION['Admin_BigMyMenu']=="guwen"){}else{?>

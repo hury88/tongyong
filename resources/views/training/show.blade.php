@@ -4,6 +4,7 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/common_zhiyepeixun.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zhiyepeixun.css"/>
+    <link rel="stylesheet" type="text/css" href="/plugins/report.css"/>
 @stop
 @section('bodyNextLabel')
 <body>
@@ -40,7 +41,18 @@
                         <div class="dagang1Right1_3">
                             <span class="price">价格:<i>￥{{$id_arr->price}}</i></span>
                             <span class="erweima"><img src="/img/xlsys.png"/>扫码关注我们了解更多培训信息</span>
-                            <a href="javasript:void(0);" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
+                            @if(auth()->check())
+                                @if(auth()->user()->isPerson())
+                                <!-- <a class="jinggao report-btn" style="color: #666666;">举报</a> -->
+                                <a href="javasript:javascript:;" class="jbd report-btn"><img src="/img/jbd.jpg"/>举报</a>
+                                @else
+                                <!-- <a href="javascript:alert('只有个人会员才能举报');" class="jinggao" style="color: #666666;">举报</a> -->
+                                <a href="javasript:alert('只有个人会员才能举报');" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
+                                @endif
+                            @else
+                            <!-- <a href="javascript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}';" class="jinggao" style="color: #666666;">举报</a> -->
+                            <a href="javasript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}';" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
+                            @endif
                         </div>
                         @if(auth()->check() && App\Order::ofEncroll(auth()->id(), $id_arr->id)->first())
                         <div class="dagang1Right1_2">
@@ -177,6 +189,48 @@
             });
         </script>
     </div>
+
+    @if(auth()->check() && auth()->user()->isPerson())
+    <!-- 举报弹窗-->
+    <div class="report-layer"> </div>
+    <div class="report-mask form" action="{{route('jubao')}}">
+        <div class="report-form">
+            <p class="p1">
+                <span class="sp1">举报</span>
+                <span class="sp2"><img src="/img/shnegqingsucc1.jpg"/></span>
+            </p>
+            <p class="p2">
+                举报<span class="color-blue">{{$userinfo[0]['business_name']}}</span>发布的<span class="color-blue">{{$id_arr->title}}</span>职位
+                <!-- <select name=""> -->
+                    <!-- <option value="">请选择培训课程</option> -->
+                <!-- </select> -->
+            </p>
+            <p class="p3">
+                <textarea name="content" rows="" cols="" placeholder="填写举报内容"></textarea>
+                <input type="hidden" name="business_name" value="{{$userinfo[0]['business_name']}}">
+                <input type="hidden" name="business_id" value="{{$userinfo[0]['user_id']}}">
+                <input type="hidden" name="person_id" value="{{auth()->check() ? auth()->id() : 0 }}">
+                <input type="hidden" name="job_id" value="{{$id_arr->id}}">
+                <input type="hidden" name="job_title" value="{{$id_arr->title}}">
+                {{csrf_field()}}
+            </p>
+        </div>
+        <div class="report-call">
+            <div class="report-call-left">
+                <p>
+                    举报投诉电话：<i>{{$boot_config['link3']}}</i>
+                </p>
+                <p>
+                    投诉邮箱：<i>65432789@qq.com</i>
+                </p>
+            </div>
+            <div onclick="model(this, '', function(){$('.report-form .sp2').click();})" class="report-call-right">
+                确定
+            </div>
+        </div>
+    </div>
+    @endif
+
     @stop {{-- end content --}}
 
 
@@ -186,4 +240,21 @@
 
     @section('scripts')
     @parent <script type="text/javascript" src="/js/alert.min.js"></script>
+    <script>
+        /*
+         举报弹框*/
+        var payHeight = $(document).height();
+        $(".report-layer").height(payHeight);
+        $(".report-btn").click(function(){
+            $(".report-layer").fadeIn("fast");
+            $(".report-mask").fadeIn("fast").css({
+                left: ($(window).width() - $('.report-mask').outerWidth())/2,
+                top: ($(window).height() - $('.report-mask').outerHeight())/2
+            });
+        });
+        $(".report-form .sp2").click(function(){
+            $(".report-layer").fadeOut("fast");
+            $(".report-mask").fadeOut("fast");
+        });
+    </script>
     @stop

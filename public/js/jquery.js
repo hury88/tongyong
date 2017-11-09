@@ -35,6 +35,7 @@ function model(that, actionUrl, callback){
 		    message = response.message,
 		    status = response.status,
 		    redirect = response.redirect;
+		    if (state == n_s) {if(typeof callback != 'undefined') callback()};
 
 		handing(status,state,title,message,redirect,function(){
 			if (is_yzm(status, state)) {

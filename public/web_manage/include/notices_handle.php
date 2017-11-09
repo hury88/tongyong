@@ -26,11 +26,21 @@ switch ($send) {
         $userHasOneTable = 'persons';
         certification($userHasOneTable);
         break;
-
+    case 'complaint':// 举报
+        if($action == 'handled') {
+          creatNotices($uid, $typeid, $nid, $message);
+          if (readNotice($nid)) {
+            exit('举报处理完毕:'.$message);
+          }
+        }
+        exit('处理失败');
+        break;
     default:
         # code...
         break;
 }
+exit('未识别的操作');
+
 
 function certification($table)
 {
@@ -70,7 +80,6 @@ function creatNotices($user_id, $action_type_id, $source_id, $content = '', $tit
             $title = config("templates.{$action['source_type']}:{$action['action']}");
         }
     }
-
     return M('notices')->insert([
         'user_id'        => $user_id,
         'sender_id'      => 0,
