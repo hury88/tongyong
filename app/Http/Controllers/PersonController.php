@@ -337,6 +337,27 @@ class PersonController extends base\UserController
 
     public function jianlipostadd(Request $request, $id)
     {
+        dd($requset);
+        $rules = [
+            'title' => 'required',
+            'ftitle' => 'required',
+            'from' => 'required',
+            'destination' => 'required',
+            'introduce' => 'required',
+            'content' => 'required',
+            'starttime' => 'required|date',
+            'endtime' => 'required|date',
+            'bstarttime' => 'required|date',
+            'bendtime' => 'required|date',
+            'content' => 'required',
+            'content2' => 'required',
+        ];
+        $errors = $validator->errors(); // 输出的错误，自己打印看下
+        if ($validator->fails()) {
+            $this->error = noticeResponseJson(412, '执行失败', $errors);
+            return false;
+        }
+
         $user = \Auth::id();
         if ($user) {
             $info = $request->all();

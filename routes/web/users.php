@@ -67,16 +67,16 @@ Route::group(['prefix' => 'person', 'roles' => [0,1], 'middleware' => ['auth', '
     Route::get('jianli/down', 'PersonController@jianlidown');
     Route::get('jianli/wdsc', 'PersonController@jianliwdsc');
 
-    Route::get('jianli/postadd/{id}', 'PersonController@jianlipostadd');
-    Route::get('jianli/postadd2/{id}', 'PersonController@jianlipostadd2');
-    Route::get('jianli/postadd3/{id}', 'PersonController@jianlipostadd3');
-    Route::get('jianli/postadd4/{id}', 'PersonController@jianlipostadd4');
-    Route::get('jianli/postadd5/{id}', 'PersonController@jianlipostadd5');
-    Route::get('jianli/postadd6/{id}', 'PersonController@jianlipostadd6');
-    Route::get('jianli/postadd7/{id}', 'PersonController@jianlipostadd7');
-    Route::get('jianli/postadd8/{id}', 'PersonController@jianlipostadd8');
-    Route::get('jianli/postadd9/{id}', 'PersonController@jianlipostadd9');
-    Route::get('jianli/postadd10/{id}', 'PersonController@jianlipostadd10');
+    Route::get('jianli/postadd/{id?}', 'PersonController@jianlipostadd')->name('cvs_add');
+    Route::get('jianli/postadd2/{id}', 'PersonController@jianlipostadd2')->name('cvs_add2');
+    Route::get('jianli/postadd3/{id}', 'PersonController@jianlipostadd3')->name('cvs_add3');
+    Route::get('jianli/postadd4/{id}', 'PersonController@jianlipostadd4')->name('cvs_add4');
+    Route::get('jianli/postadd5/{id}', 'PersonController@jianlipostadd5')->name('cvs_add5');
+    Route::get('jianli/postadd6/{id}', 'PersonController@jianlipostadd6')->name('cvs_add6');
+    Route::get('jianli/postadd7/{id}', 'PersonController@jianlipostadd7')->name('cvs_add7');
+    Route::get('jianli/postadd8/{id}', 'PersonController@jianlipostadd8')->name('cvs_add8');
+    Route::get('jianli/postadd9/{id}', 'PersonController@jianlipostadd9')->name('cvs_add9');
+    Route::get('jianli/postadd10/{id}', 'PersonController@jianlipostadd10')->name('cvs_add10');
 
 
     Route::get('jianli/top/{id}', 'PersonController@jianlitop');

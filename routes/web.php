@@ -21,8 +21,8 @@ Route::get('help', [ 'uses' => 'NewsController@helplist']);
 Route::get('weixin', function(){
     return view('weixin');
 });
-Route::get('yzm', function(){
-    return view('yzm');
+Route::get('yzm/{id}', function($id){
+    return view('yzm', ['id' => $id]);
 });
 Route::get('editor', function(){
     return view('partial/editor');

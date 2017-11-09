@@ -1,7 +1,7 @@
 Recaptcha
 =========
 
-A reCAPTCHA Validator for Laravel 5. 
+A reCAPTCHA Validator for Laravel 5.
 
 > (Looking for a Laravel 4 version? Pull the latest 1.x tag. For Laravel 5.0, pull the latest 2.0 tag.)
 
@@ -20,7 +20,7 @@ Add the following line to the `require` section of `composer.json`:
 ## Setup
 
 1. In `/config/app.php`, add the following to `providers`:
-  
+
   ```
   Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
   ```
@@ -30,10 +30,10 @@ Add the following line to the `require` section of `composer.json`:
   ```
 2. Run `php artisan vendor:publish --provider="Greggilbert\Recaptcha\RecaptchaServiceProvider"`.
 3. In `/config/recaptcha.php`, enter your reCAPTCHA public and private keys.
-  * If you are not using the most recent version of reCAPTCHA, set `version` to 1. 
+  * If you are not using the most recent version of reCAPTCHA, set `version` to 1.
   * If you are upgrading to v2 of reCAPTCHA, note that your keys from the previous version will not work, and you need to generate a new set in [the reCAPTCHA admin](https://www.google.com/recaptcha/admin).
 4. The package ships with a default validation message, but if you want to customize it, add the following line into `resources/lang/[lang]/validation.php`:
-  
+
   ```php
       "recaptcha" => 'The :attribute field is not correct.',
   ```

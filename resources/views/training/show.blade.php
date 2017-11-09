@@ -47,7 +47,7 @@
                                 <a href="javasript:javascript:;" class="jbd report-btn"><img src="/img/jbd.jpg"/>举报</a>
                                 @else
                                 <!-- <a href="javascript:alert('只有个人会员才能举报');" class="jinggao" style="color: #666666;">举报</a> -->
-                                <a href="javasript:alert('只有个人会员才能举报');" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
+                                <a href="javascript:alert('只有个人会员才能举报');" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
                                 @endif
                             @else
                             <!-- <a href="javascript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}';" class="jinggao" style="color: #666666;">举报</a> -->
@@ -56,11 +56,11 @@
                         </div>
                         @if(auth()->check() && App\Order::ofEncroll(auth()->id(), $id_arr->id)->first())
                         <div class="dagang1Right1_2">
-                            <a href="javasript:void(0);" class="aaa2">已报名</a>
+                            <a href="javascript:void(0);" class="aaa2">已报名</a>
                         </div>
                         @else
                         <div class="dagang1Right1_2 form" action="{{route('orders.create', $id_arr->id)}}">
-                            <a href="javasript:void(0);" class="aaa1">免费试看</a>
+                            <a href="javascript:void(0);" class="aaa1">免费试看</a>
                             {{csrf_field()}}
                             <a href="javascript:;" onclick="return model(this)" class="aaa2">我要报名</a>
                         </div>

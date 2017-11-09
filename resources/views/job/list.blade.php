@@ -127,7 +127,7 @@
                     <!--开始-->
                     <div class="zplbxzwz">
                         <div class="zplbxzwz1">
-                            您已选择：<img src="img/sqzwwz.jpg"><i>合肥</i><img src="img/zplbxx5.jpg">
+                            您已选择：<img src="/img/sqzwwz.jpg"><i>合肥</i><img src="/img/zplbxx5.jpg">
                         </div>
                         <div class="zplbxzwz2">
                             <div class="zplbxzwz2a">

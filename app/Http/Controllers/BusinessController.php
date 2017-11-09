@@ -40,7 +40,9 @@ class BusinessController extends base\UserController
     {
         $user = \Auth::user()->relationsToArray();
         $notices = Notice::auth()->desc()->take(6)->get(['title', 'created_at']);
-        return view('business.profile', compact('user', 'notices'));
+        $orders = \Auth::user()->hasManyOrder()->orderBy('created_at', 'desc')->take(4)->get(['*'])->toArray();
+        $compact['ckey'] = '';
+        return view('business.profile', compact('user', 'notices', 'orders'));
     }
 
     /**
@@ -109,7 +111,7 @@ class BusinessController extends base\UserController
                 break;
         }
         if ($resume->save()) {
-            return handleResponseJson(201, '操作成功');
+            return handleResponseJson(201, '操作成功', '?');
         }
         return handleResponseJson(412, '操作失败,请稍后再试');
     }

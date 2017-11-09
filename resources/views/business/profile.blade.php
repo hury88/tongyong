@@ -21,7 +21,7 @@
         </div>
         <div class="mem-index-recruit clearfix">
             <div class="index-recruit-left fl">
-                <h3>职位招聘<i>有人投简历 0 份</i></h3>
+                <h3 style="cursor:pointer" onclick="window.location.href='{{route('b_resume')}}'">职位招聘<i>有人投简历 {{\Auth::user()->hasManyResume('business_id')->count()}} 份</i></h3>
                 <ul class="index-recruit-ul">
                     <li class="index-recruit-li">
                         <p>高端招聘</p>
@@ -38,7 +38,7 @@
                 </ul>
             </div>
             <div class="index-recruit-left fr">
-                <h3>职业培训管理<a href="javascript:;">查看更多 > </a></h3>
+                <h3>职业培训管理<a href="{{route('b_training')}}">查看更多 > </a></h3>
                 <ul class="index-recruit-ul">
                     @if(true || $user['has2'])
                     <li class="index-recruit-li">
@@ -72,7 +72,7 @@
         </div>
         <div class="mem-index-recruit">
             <div class="index-orderlists">
-                <h3>订单管理<a href="javascript:;">查看更多 ></a></h3>
+                <h3>订单管理<a href="{{route('b_order')}}">查看更多 ></a></h3>
                 <div class="order-manager-content">
                     <form>
                         <table>
@@ -84,32 +84,22 @@
                                 <th>到账时间</th>
                                 <th>状态</th>
                             </tr>
+                            @foreach($orders as $row)<?php extract($row) ?>
                             <tr>
-                                <td>123455656767</td>
-                                <td>张三</td>
+                                <td>{{$orderno}}</td>
+                                <td>{{$buyer_name}}</td>
                                 <td class="manager-fourtd">
-                                    <img class="order-mess-img" src="img/brand-img.png"/>
+                                    <img class="order-mess-img" src="{{img($training_img)}}"/>
                                     <div class="order-name">
-                                        <p>2017联想集团《技能培训》视频教程</p>
-                                        <span>在线支付</span>
-                                    </div></td>
-                                <td class="pro-price">￥29.00</td>
-                                <td>2017-06-29</td>
-                                <td>未提现</td>
+                                        <p>{{$training_title}}</p>
+                                        <span>{{$pay_style}}</span>
+                                    </div>
+                                </td>
+                                <td class="pro-price">￥{{$price}}</td>
+                                <td>{{$status}}</td>
+                                <td>{{$created_at}}</td>
                             </tr>
-                            <tr>
-                                <td>123455656767</td>
-                                <td>张三</td>
-                                <td class="manager-fourtd">
-                                    <img class="order-mess-img" src="img/brand-img.png"/>
-                                    <div class="order-name">
-                                        <p>2017联想集团《技能培训》视频教程</p>
-                                        <span>在线支付</span>
-                                    </div></td>
-                                <td class="pro-price">￥29.00</td>
-                                <td>2017-06-29</td>
-                                <td>未提现</td>
-                            </tr>
+                            @endforeach
                         </table>
                     </form>
                 </div>
@@ -124,7 +114,7 @@
            <ul class="mem-message-ul">
             @foreach($notices as $row)
                <li class="mem-message-li">
-                   <a href="javascript:;">{{$row['title']}}{!! $row['status'] == 1 ? '<i></i>' : '' !!}</a>
+                   <a href="{{route('b_notices')}}">{{$row['title']}}{!! $row['status'] == 1 ? '<i></i>' : '' !!}</a>
                    <p>{{$row['created_at']}}</p>
                </li>
            @endforeach

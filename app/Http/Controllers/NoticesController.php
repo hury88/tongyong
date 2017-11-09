@@ -45,8 +45,8 @@ class NoticesController extends Controller
      */
     public function index()
     {
-        $paginator = Notice::auth()->desc()->paginate(20);
-        $pagenewslist = $paginator->toArray();
+        $paginator = Notice::auth()->desc()->paginate(7);
+        $pagenewslist = $paginator->toArray(10);
         Notice::auth()->where('status', 1)->update(['status' => 2]);
         // $notices = $data['notices'] = $data['data'];
         // unset($data['data']);

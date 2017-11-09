@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="resume-table-content" id="add_jbxx">
-                        <form onsubmit="return ck_jladd1(this)">
+                        <form class="form" action="{{route('cvs_add')}}">
                             {{ csrf_field() }}
                             <div class="form-line clearfix">
                                 <div class="form-line clearfix">
@@ -170,7 +170,7 @@
                             </div>
                             <div class="form-line clearfix">
                                 <div class="resume-table-trsix fr">
-                                    <input class="resume-table-inp" type="submit" value="保存"/>
+                                    <input class="model resume-table-inp" type="submit" value="保存"/>
                                 </div>
                             </div>
                         </form>
@@ -830,4 +830,5 @@
 @section('scripts')
     @parent
     <script src="/js/ckform.js" type="text/javascript"></script>
+    @include('partial.dialog')
 @stop

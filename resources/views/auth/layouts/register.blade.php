@@ -42,11 +42,11 @@
                                     <input name="password2" type="password" placeholder="请确认密码"/>
                                     <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
-                                @yield('protocal')
                                 <div class="register-form-dv">
                                     <input name="yzm" class="form-code-inp" type="text" placeholder="请输入手机验证码"/>
                                     <input id="mobile" class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
+                                @yield('protocal')
                                 <div class="register-form-inp">
                                     <input class="submit" type="submit" value="注册"/>
                                 </div>
@@ -71,11 +71,11 @@
                                     <input name="password2" type="password" placeholder="请确认密码"/>
                                     <!-- <a href="javascript:;" class=""></a> -->
                                 </div>
-                                @yield('protocal')
                                 <div class="register-form-dv">
                                     <input name="yzm" class="form-code-inp" type="text" placeholder="请输入邮箱验证码"/>
                                     <input id="mail" class="form-code-get" type="button" value="获取验证码"/>
                                 </div>
+                                @yield('protocal')
                                 <div class="register-form-inp">
                                     <input class="submit" type="submit" value="注册"/>
                                 </div>

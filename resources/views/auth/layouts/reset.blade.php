@@ -9,7 +9,6 @@
     <div class="pager_wrap login_wrap">
 @stop
 @section('content')
-            <script type="text/javascript" src="/js/jquery.js"></script>
         @section('navigation')
         @stop
         @section('tophelp')
@@ -28,14 +27,11 @@
                     </div>
                     @yield("neirong")
                 </div>
-                <div class="login-register-box">
-                    <p class="login-footer-p">{{$boot_config['copyright']}} <span>|</span> <a href="http://www.semfw.cn" target="_blank" class="active"><b>技术支持：科威网络</b></a></p>
-                </div>
+                @include('partial.copyright')
             </div>
 @stop
 
 
 @section('scripts')
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/alert.min.js"></script>
+    @include('partial.dialog')
 @stop

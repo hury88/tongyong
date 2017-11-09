@@ -125,6 +125,13 @@ class WithData
                 'title.required' => '标题 项必填',
                 'content.required' => '详情内容 项必填',
             ];
+        } else {
+            $rules = [
+                'title' => 'required',
+            ];
+            $message = [
+                'title.required' => '标题 项必填',
+            ];
         }
 
 
@@ -376,9 +383,9 @@ class WithData
 	{
 		if (isset($this->data[$get])) {
 		    $val = $this->data[$get];
-		    if( $filter) {
+		   /* if( $filter) {
                 $val = call_user_func($filter, $val);
-            }
+            }*/
 			return $val ? : $default;
 		}
 		return $default;

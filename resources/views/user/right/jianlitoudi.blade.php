@@ -32,8 +32,8 @@
         </tr>
         @endforeach
     </table>
-    <div class="resume-select-all color-blue">
+    <!-- <div class="resume-select-all color-blue">
         <label><input name="orderselect" type="checkbox"/>全选</label>
         <a href="javascript:;" class="delete-select-tr">删除</a>
-    </div>
+    </div> -->
 </div>

@@ -170,4 +170,9 @@ class Training extends Model
         $field = array_unique($match[1]);
         return [$field ? : [], $flag];
     }
+
+    public function getEnrollNumAttribute()
+    {
+        return isset($this->attributes['enroll_num']) ? $this->attributes['enroll_num'] : 0;
+    }
 }

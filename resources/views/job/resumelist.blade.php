@@ -111,12 +111,12 @@
                         </ul>
                     </div>
                     <div class="zplbban">
-                        <img src="img/zplb1.jpg" style="width: 100%;"/>
+                        <img src="/img/zplb1.jpg" style="width: 100%;"/>
                     </div>
                     <!--开始-->
                     <div class="zplbxzwz">
                         <div class="zplbxzwz1">
-                            您已选择：<img src="img/sqzwwz.jpg"><i>合肥</i><img src="img/zplbxx5.jpg">
+                            您已选择：<img src="/img/sqzwwz.jpg"><i>合肥</i><img src="/img/zplbxx5.jpg">
                         </div>
                         <div class="zplbxzwz2">
                             <div class="zplbxzwz2a">
@@ -173,7 +173,7 @@
                             </ul>
                             <div class="qzzptTxt" style="display: none;">
                                 <div class="qzzptTxtl">
-                                    <p><img src="img/zqzpt3.jpg"/></p>
+                                    <p><img src="/img/zqzpt3.jpg"/></p>
                                     <a href="">更多详情</a>
                                 </div>
                                 <div class="qzzptTxtr">
@@ -202,7 +202,7 @@
                             </ul>
                             <div class="qzzptTxt" style="display: none;">
                                 <div class="qzzptTxtl">
-                                    <p><img src="img/zqzpt3.jpg"/></p>
+                                    <p><img src="/img/zqzpt3.jpg"/></p>
                                     <a href="">更多详情</a>
                                 </div>
                                 <div class="qzzptTxtr">
@@ -231,7 +231,7 @@
                             </ul>
                             <div class="qzzptTxt" style="display: none;">
                                 <div class="qzzptTxtl">
-                                    <p><img src="img/zqzpt3.jpg"/></p>
+                                    <p><img src="/img/zqzpt3.jpg"/></p>
                                     <a href="">更多详情</a>
                                 </div>
                                 <div class="qzzptTxtr">
@@ -260,7 +260,7 @@
                             </ul>
                             <div class="qzzptTxt" style="display: none;">
                                 <div class="qzzptTxtl">
-                                    <p><img src="img/zqzpt3.jpg"/></p>
+                                    <p><img src="/img/zqzpt3.jpg"/></p>
                                     <a href="">更多详情</a>
                                 </div>
                                 <div class="qzzptTxtr">
@@ -289,7 +289,7 @@
                             </ul>
                             <div class="qzzptTxt" style="display: none;">
                                 <div class="qzzptTxtl">
-                                    <p><img src="img/zqzpt3.jpg"/></p>
+                                    <p><img src="/img/zqzpt3.jpg"/></p>
                                     <a href="">更多详情</a>
                                 </div>
                                 <div class="qzzptTxtr">
@@ -318,7 +318,7 @@
                             </ul>
                             <div class="qzzptTxt" style="display: none;">
                                 <div class="qzzptTxtl">
-                                    <p><img src="img/zqzpt3.jpg"/></p>
+                                    <p><img src="/img/zqzpt3.jpg"/></p>
                                     <a href="">更多详情</a>
                                 </div>
                                 <div class="qzzptTxtr">
