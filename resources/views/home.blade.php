@@ -89,39 +89,14 @@
 <div class="warp">
     <div class="radius">
         <div id="radius">
+            @foreach($zyzpjj as $key=>$val)
             <div class="oDiv o1">
-                <h2>高端招聘</h2>
-                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
-                <a href="###">更多>></a>
-                <img src="/img/zhi_11.png" alt=""/>
+                <h2>{{$val->title}}</h2>
+                <p>{{$val->content}}</p>
+                <a href="{{$val->linkurl}}">更多>></a>
+                <img src="/img/zhi_1{{$key+1}}.png" alt=""/>
             </div>
-            <div class="oDiv4 o1">
-                <h2>企业招聘</h2>
-
-                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
-                <a href="###">更多>></a>
-                <img src="/img/zhi_12.png" alt=""/>
-            </div>
-            <div class="oDiv3 o1">
-                <h2>校园招聘</h2>
-
-                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
-                <a href="###">更多>></a>
-                <img src="/img/zhi_13.png" alt=""/>
-            </div>
-
-            <div class="oDiv2 o1">
-                <h2>求职者平台</h2>
-                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务 ...</p>
-                <a href="###">更多>></a>
-                <img src="/img/zhi_14.png" alt=""/>
-            </div>
-            <div class="oDiv1 o1">
-                <h2>院校信息发布</h2>
-                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
-                <a href="###">更多>></a>
-                <img src="/img/zhi_15.png" alt=""/>
-            </div>
+            @endforeach
         </div>
         <div class="ra_con">
             <h2>职业招聘</h2>

@@ -36,7 +36,7 @@
                                     <li>
                                         <div class="dxinwenw1All">
                                             <div class="dxinwenw1Left">
-                                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}"><img src="{{img($val['img1'])}}" width="180"/></a>
+                                                <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}"><img src="{{img($val['img1'])}}"/></a>
                                             </div>
                                             <div class="dxinwenw1Right">
                                                 <p class="jiazhou"><a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[0]['path'],$val['id'])}}">{{str_limit($val['title'],45,"...")}}</a></p>
@@ -63,7 +63,7 @@
                                     <div class="gjlhbxConright">
                                         <ul class="gjlhbxConright1">
                                               @foreach($xueyuangood as $val)
-                                            <li style="width: 33.3%;float: left;margin-right: 0;">
+                                            <li>
                                                 <a href="{{u($GLOBALS['pid_path'],$GLOBALS['ty_path'],$sanlist[1]['path'],$val['id'])}}">
                                                     <p class="pf2" style="text-align: center"><img src="{{img($val['img2'])}}"/></p>
                                                     <p class="pf1">{{$val['title']}}</p>

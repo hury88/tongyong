@@ -1,4 +1,4 @@
-.gjlhbx{
+?.gjlhbx{
 	width: 100%;
 	background: #f4f4f4;
 	margin-top: -5px;
@@ -11,7 +11,6 @@
 .gjlhbxCon{
 	padding: 25px;
 	background: #fff;
-	border: 1px solid #e7e7e6;
 }
 .gjlhbxConleftbom1{
 	border: 1px solid #d3dbd5;
@@ -39,10 +38,10 @@
 }
 .gjlhbxCon1{
 	overflow: hidden;
-	border: 1px solid #e3e2e2;
 }
 .gjlhbxConleft{
-	width: 20%;
+	width:229px;
+	height: 412px;
 	float: left;
 	position: relative;
 }
@@ -55,23 +54,31 @@
     margin-left: 5%;
 }
 .gjlhbxConleft img{
-	width: 100%;
+	width: 229px;
+	height: 412px;
 }
 .gjlhbxConright{
-	    width: 74%;
+     width: 812px;
+	height: 409px;
     float: left;
-    height: 298px;
-    padding: 30px;
+	border-right: 1px solid #e3e2e2;
+	border-top: 1px solid #e3e2e2;
+	border-bottom: 1px solid #e3e2e2;
 }
 .gjlhbxCon ul li .inter1{
 	color: #444444;
 	font-size: 24px;
 	padding-bottom: 20px;
 }
+.gjlhbxConright  .gjlhbxConright1{
+	overflow: hidden;
+	margin-right: -1px;
+}
 .gjlhbxConright  .gjlhbxConright1 li{
-	    width: 31.3%;
+	    width:270px;
+	height: 412px;
     float: left;
-    margin-right: 20px;
+   border-right: 1px solid #e3e2e2;
 }
 .gjlhbxConright  .gjlhbxConright1 li:last-child{
 	margin-right: 0;
@@ -97,34 +104,99 @@
 	color: #666666;
 	line-height: 1.5;
 	text-indent: 2em;
-	padding: 5px 0;
+	height:146px;
+	overflow: hidden;
+	padding: 5px 22px;
+}
+.gjlhbxConright  .gjlhbxConright1 li .pf2{
+	width:270px;
+	height: 132px;
+	display: table-cell;
+	vertical-align: middle;
+	line-height:132px;
+	margin:34px auto 30px auto;
+	text-indent: 0;
+	padding:30px 0 0 0;
 }
 .gjlhbxConright  .gjlhbxConright1 li a.more{
 	float: right;
 	color: #d71518;
+}
+/*国际联合办学*/
+.gjlhbxConright  .gjlhbxConright1 .school_li_pic{
+	width: 241px;
+	height: 380px;
+	overflow: hidden;
+	margin-left: 22px;
+	margin-top: 30px;
+	border: none;
+}
+.gjlhbxConright  .gjlhbxConright1 .school_li_pic .gjlhbxConright2{
+	width:241px;
+	height:244px;
+	position: relative;
+	overflow: hidden;
+}
+.gjlhbxConright  .gjlhbxConright1  .school_li_pic .gjlhbxConright2 img{
+	width:241px;
+	height:244px;
+	display: block;
+}
+.gjlhbxConright  .gjlhbxConright1  .school_li_pic .gjlhbxConright2 .gjlhbxConright21{
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	color: #fff;
+	background: rgba(0,0,0,.7);
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: keep-all;
+}
+.gjlhbxConright  .gjlhbxConright1 .school_li_pic p{
+	color: #666666;
+	line-height:22px;
+	text-indent:0;
+	height:66px;
+	overflow: hidden;
+	padding:0;
+	margin: 10px auto;
+}
+.gjlhbxConright  .gjlhbxConright1 .school_li_pic p a{
+	text-indent:2em;
 }
 .gjlhbxCon ul li{
 	margin-bottom: 55px;
 }
 .gjlhbxConright .gjlhbxConright9{
 	overflow: hidden;
+	width: 789px;
+	padding: 26px 0 0 31px;
 }
 .gjlhbxConright .gjlhbxConright9 li{
-	width: 49%;
+	width:50%;
 	float: left;
 	overflow: hidden;
+	margin-bottom: 25px !important;
 }
 .gjlhbxConright .gjlhbxConright9 li .gjlhbxConright9left{
-	width: 50%;
+	width:167px;
+	height: 167px;
 	float: left;
 }
 .gjlhbxConright .gjlhbxConright9 li .gjlhbxConright9left img{
-	width: 90%;
+	width:167px;
+	height: 167px;
     display: block;
     margin: 0 auto;
 }
 .gjlhbxConright .gjlhbxConright9 li .gjlhbxConright9right{
-	width: 50%;
+	width:187px;
+	height: 167px;
+	padding: 0 20px;
 	float: left;
 }
 .gjlhbxConright .gjlhbxConright9 li .gjlhbxConright9right p a{
@@ -352,11 +424,12 @@
     margin-top: 10px;
 }
 .liuxue ul li .liuxueRight{
-	width: 20%;
-	float: left;
+	width:155px;
+	float: right;
 }
 .liuxue ul li .liuxueRight img{
 	width: 155px;
+	height: 155px;
 	float: right;
 }
 .liuxue ul{
@@ -457,7 +530,12 @@
 	width: 1100px;
 	margin: 0 auto;
 }
-.tesell ul,.youxuell ul{
+.youxuell ul{
+	overflow: hidden;
+	margin-bottom: 15px;
+	margin-right: -20px;
+}
+.tesell ul{
 	overflow: hidden;
 	margin-bottom: 15px;
 }
@@ -472,10 +550,14 @@
 	display: block;
 }
 .tesell ul li .tesellTop a img,.youxuell ul li .tesellTop a img{
-	width: 100%;
+	width:258px;
+	height: 258px;
 }
 .tesell ul li .tesellTop,.youxuell ul li .tesellTop{
 	position: relative;
+	width:258px;
+	height: 258px;
+	overflow: hidden;
 }
 .tesell ul li .tesellTop .tesellTop1,.youxuell ul li .tesellTop .tesellTop1{
 	position: absolute;
@@ -551,15 +633,17 @@
 	overflow: hidden;
 }
 .guojiyouxue ul li{
-	width: 32.3%;
+	width:358px;
+	height: 358px;
     float: left;
-    margin-right: 15px;
+    margin-right:13px;
 }
 .guojiyouxue ul .list1{
 	position: relative;
 }
 .guojiyouxue ul .list1 img{
-	width: 100%;
+	width: 358px;
+	height: 358px;
 }
 .guojiyouxue ul .list3{
 	margin-right: 0;
@@ -600,6 +684,12 @@
 }
 .list2Top{
 	position: relative;
+	width: 358px;
+	height:140px;
+}
+.list2Top img{
+	width: 358px;
+	height:140px;
 }
 .list2Top .zxbm{
 	
@@ -619,14 +709,27 @@
 }
 .list2Center{
 	overflow: hidden;
+	width: 358px;
+	height: 93px;
+	margin-top: 17px;
+	margin-bottom: 0;
 }
 .list2Center .list2CenterLeft{
-	width: 27%;
+	width:93px;
+	height: 93px;
+	overflow: hidden;
     float: left;
     margin-right: 10px;
 }
+.list2Center .list2CenterLeft img{
+	width:93px !important;
+	height: 93px;
+}
 .list2Center .list2CenterRight{
-	width: 70%;
+	width:245px;
+	height: 93px;
+	padding-right: 10px;
+	overflow: hidden;
     float: left;
 }
 .list2Center .list2CenterRight .pu1 a{
@@ -674,22 +777,33 @@
 	margin: 0 auto;
 }
 .kyzxConleft{
-	width: 30%;
+	width:167px;
+	height: 167px;
+	margin-right: 20px;
 	float: left;
 }
 .kyzxConleft img{
-	width: 90%;
+	width:167px;
+	height: 167px;
 }
 .kyzxConright{
-	    width: 66%;
-    float: left;
-    padding-right: 20px;
+	width:338px;
+	float: left;
+	height: 167px;
+	overflow: hidden;
+	position: relative;
+}
+.kyzxall1 .certical-lists-warp{
+	overflow: hidden;
+	margin-right: -46px;
 }
 .kyzxCon{
 	overflow: hidden;
-	width: 50%;
+	width: 527px;
+	height: 167px;
 	float: left;
-	margin-bottom: 20px;
+	margin-right: 46px;
+	margin-bottom: 40px;
 }
 .kyzxall1{
 	overflow: hidden;
@@ -703,6 +817,8 @@
 }
 .kyzxConright .a2{
 	color:#666666;
+	display: block;
+	margin-bottom: 42px;
 }
 .kyzxConright .a3{
 	color: #fff;
@@ -710,6 +826,9 @@
 	font-size: 14px;
 	padding: 10px;
 	margin-top: 10px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
 }
 .yxlbCon{
 	padding-bottom: 40px;
@@ -744,16 +863,25 @@
 	background: #fff;
 	padding: 70px;
 }
-.yxbaozhang ul{
-	overflow: hidden;
+.yxbaozhang .tour_yxbz{
 	width: 1100px;
 	margin: 0 auto;
 	padding-top: 50px;
 }
+.yxbaozhang ul{
+	overflow: hidden;
+	margin-right: -57px;
+}
 .yxbaozhang ul li{
-	width: 20%;
+	width:174px;
+	margin-right: 57px;
     float: left;
+	overflow: hidden;
   text-align: center;
+}
+.yxbaozhang ul li img{
+	width: 174px;
+	height: 174px;
 }
 .yxbaozhang ul li a p{
 	text-align: center;
@@ -838,7 +966,7 @@
     font-size: 18px;
 }
 .lianluxq2 .erweima{
-	background: url(../img/xianluXqk.jpg) no-repeat;
+	background: url(../images/xianluxqk.jpg) no-repeat;
 	background-size: 100%;
     padding: 20px 10px 10px 10px;
     margin-left: 135px;
@@ -906,22 +1034,23 @@
 	overflow: hidden;
 }
 .huobaox ul li{
-	width: 32.4%;
+	width:358px;
+	height: 358px;
     float: left;
     position: relative;
-    margin-right: 10px;
+    margin-right:13px;
 }
 .huobaox ul li a{
 	display: block;
 }
 .huobaox ul li a img{
-	width: 100%;
+	width:358px;
+	height: 358px;
 }
 .huobaox ul li .huobaoxlBom{
 	    position: absolute;
     left: 0;
     bottom: 5px;
-    background: rgba(0,0,0,.3);
     width: 99%;
     padding: 10px 0;
 }
@@ -933,6 +1062,7 @@
 }
 .huobaox ul li .huobaoxlBom .p1{
 	padding-bottom: 15px;
+	font-size: 16px;
 }
 .huobaox ul li .huobaoxlBom .p1 a{
 	font-size: 16px;
@@ -953,7 +1083,7 @@
 }
 .dguojiliux p a{
 	color: #333333;
-    padding: 9px 0;
+    padding: 9px 20px;
 }
 .dguojiliux p a i{
 	width: 6px;
@@ -964,9 +1094,16 @@
 }
 .gjlhbxConright .gjlhbxConright1 li .pf1{
 	text-align: center;
+	font-size: 18px;
+	color: #323333;
+	padding: 5px 0;
+	height: auto;
+	text-indent: 0;
 }
 .gjlhbxConright .gjlhbxConright1 li .pf2 img{
 	text-align: center;
+	vertical-align: middle;
+	line-height: 132px;
 }
 .dxinwenwAll{
 	overflow: hidden;
@@ -974,31 +1111,44 @@
 	background: #fff;
 }
 .dxinwenwAll .dxinwenwLeft{
-	width: 20%;
+	width:229px;
+	height: 412px;
 	float: left;
 }
 .dxinwenwAll .dxinwenwLeft img{
-	width: 100%;
+	width: 229px;
+	height: 412px;
 }
 .dxinwenwAll .dxinwenwRight{
-	    width: 74%;
-    float: left;
-    padding: 0 30px;
+	width:789px;
+	padding:26px 0 0 31px;
+    float:right;
+	border-top: 1px solid #e3e2e2;
+	border-right: 1px solid #e3e2e2;
+	border-bottom: 1px solid #e3e2e2;
 }
 .dxinwenwAll .dxinwenwRight ul li{
 	width: 50%;
 	float: left;
-	margin-bottom: 10px;
+	margin-bottom:25px;
 }
 .dxinwenw1All{
 	overflow: hidden;
 }
 .dxinwenw1Left{
-	width: 50%;
+	width:167px;
+	height: 167px;
 	float: left;
 }
+.dxinwenw1Left img{
+	width:167px;
+	height: 167px;
+}
 .dxinwenw1Right{
-	width: 50%;
+	width:187px;
+	height: 167px;
+	overflow:hidden;
+	padding: 0 20px;
 	float: left;
 }
 .dxinwenw{
@@ -1027,7 +1177,7 @@
 	 border-bottom:1px dashed #dddddd;
 	 height:36px;
 	 text-indent: 1em;
-	 background: url(../img/dian.jpg) no-repeat;
+	 background: url(../images/dian.jpg) no-repeat;
  }
 .zhiyezhengshu ul li a{
 color:#999;

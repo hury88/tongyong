@@ -123,7 +123,7 @@ class NewsController extends Controller
         }
         $news = new News();
 
-        $pagenewslist=$news->v_seachpages($key,[$GLOBALS['pid']],["id",'ty',"title","sendtime","user_id","content"],9,9);
+        $pagenewslist=$news->v_seachpages($key,[$GLOBALS['pid']],["id",'pid','ty',"title","sendtime","user_id","content"],9,9);
 
         return view('news/seach', compact("pagenewslist","key","ckey"));
     }

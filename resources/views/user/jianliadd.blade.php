@@ -420,8 +420,8 @@
                                 </div>
                                 <div class="form-line-right fr">
                                     <span class="resume-table-trone"><b>*</b>学历/学位：</span>
-                                    <div class="resume-table-trseven" colspan="3">
-                                        <input type="text" class="resume-company-name" name="xl[]"/>
+                                    <div class="resume-table-trtwo">
+                                        <input class="resume-table-inp" type="text" name="xl[]"/>
                                     </div>
                                 </div>
                                 </div>
@@ -524,9 +524,10 @@
                                 <div class="form-line clearfix">
                                     <div class="form-line-left fl">
                                         <span class="resume-table-trone"><b>*</b>掌握程度：</span>
-                                        <div class="resume-table-trseven" colspan="3">
-                                            <input type="text" class="resume-company-name"   name="zwcd[]"/>
+                                        <div class="resume-table-trtwo">
+                                            <input class="resume-table-inp" type="text"  name="zwcd[]"/>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
