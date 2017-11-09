@@ -20,7 +20,7 @@ require WEB_ROOT.'./include/chkuser.inc.php';
         	<img src="images/logo.png" />
         </div>
 
-        <div class="daohang fl" style="width:1000px">
+        <div class="daohang fl" style="width:800px">
 			<? if ($_SESSION['Admin_BigMyMenu']=="super"){?>
 
         	<a href="mains.php"  class="on" target="righthtml">
@@ -59,21 +59,7 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                 <img src="images/bug5.png" />
                 <p>普通消息<b style="color:red">(<?php echo M('notices')->where(['user_id' => 0, 'status' => 1, 'action_type_id' => ['not in', '1,2,3,6,7,8']])->count() ?>)</b></p>
             </a>
-            <a style="opacity:.8;border:2px solid rgba(0,0,0,.1)" id="menu" href="javascript:void(0);">
-                <img src="images/bug2.png" />
-                <p>隐藏菜单</p>
-            </a>
-            <script>
-                $('#menu').on('click',menueClose)
-                function menueClose(){
-                    $('#menu').off('click',menueClose).on('click',menueOpen).find('p').text('显示菜单')
-                    window.parent.document.getElementsByTagName('frameset')[1].cols = '0,*'
-                }
-                function menueOpen(){
-                    $('#menu').off('click',menueOpen).on('click',menueClose).find('p').text('隐藏菜单')
-                    window.parent.document.getElementsByTagName('frameset')[1].cols = '187,*'
-                }
-            </script>
+
 	<? }elseif($_SESSION['Admin_BigMyMenu']=="guwen"){}else{?>
         	<a href="mains.php" style="background:url(images/hover.png) 0 0 repeat-x;" target="righthtml">
             	<img src="images/bug1.png" />

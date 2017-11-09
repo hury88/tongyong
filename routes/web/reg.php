@@ -41,7 +41,6 @@ use Illuminate\Http\Request;
 // 个人注册页 验证码发送器
 Route::group(['middleware' => 'personRegister'], function () {
     Route::post('/yzm/mobile', function (Request $request) {
-
         // 生成验证码
         $yzm = new YZM($request->telphone);
         $code = $yzm->push();

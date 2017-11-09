@@ -39,7 +39,7 @@ require WEB_ROOT.'./include/chkuser.inc.php';
         ?>
         <li class="yiji_li">
           <a href="javascript:void(0);" class="yiji_a"><?php echo cutstr($bd1['catname'],12,'')?></a>
-          <ul class="erji clr" style="display:none">
+          <ul class="erji clr" style="display:block">
             <?php
             ////循环二级分类
             if ($_SESSION['Admin_BigMyMenu']=="super"){

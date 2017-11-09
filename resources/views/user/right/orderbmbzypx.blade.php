@@ -1,6 +1,7 @@
 <?php
 $key=$_GET['key'];
 $typeid=(int)$_GET['typeid'];
+
 ?>
 <h3>职业培训报名表</h3>
 <div class="nation-edu-cate clearfix">
@@ -55,9 +56,9 @@ $typeid=(int)$_GET['typeid'];
             </td>
             <td>{{substr($val['created_at'],0,10)}}</td>
             <td>
-                <a href="javascript:void(0);">下载报名表</a><br>
-                <a href="javascript:void(0);">打印报名表</a><br>
-                <a href="javascript:void(0);">完善报名表</a>
+                <a href="{{route('p_e_v')}}?typeid={{$typeid}}&id={{$val['training_id']}}&eid={{$val['id']}}">下载报名表</a><br>
+                <a href="{{route('p_e_v')}}?typeid={{$typeid}}&id={{$val['training_id']}}&eid={{$val['id']}}">打印报名表</a><br>
+                <a href="{{route('p_e_v')}}?typeid={{$typeid}}&id={{$val['training_id']}}&eid={{$val['id']}}" >完善报名表</a>
                 {{--                    <a href="{{route('p_e_v')}}?pid=2" >完善报名表</a>--}}
             </td>
         </tr>

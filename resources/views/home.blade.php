@@ -46,38 +46,38 @@
         <ul class="clearfix">
             <li>
                 <p></p>
-                <a href="javascript:;">职业招聘</a>
+                <a href="{{u('job')}}">职业招聘</a>
             </li>
             <li>
                 <p></p>
-                <a href="javascript:;">职业培训</a>
+                <a href="{{u('training')}}">职业培训</a>
             </li>
             <li>
                 <p></p>
-                <a href="/certicate">职业证书</a>
+                <a href="{{u('certicate')}}">职业证书</a>
             </li>
             <li>
                 <p></p>
-                <a href="/education">国际教育</a>
+                <a href="{{u('education')}}">国际教育</a>
             </li>
         </ul>
     </div>
     <div class="content_ad">
         <div class="ad_con">
             <div class="fl">
-                <a href="###">
+                <a href="{{u('business')}}">
                     <h2><strong>企业注册</strong>发布招聘信息</h2>
                     <p>ENTERPRISE REGISTRATION</p>
                 </a>
             </div>
             <div class="fl ad_title">
-                <a href="###">
+                <a href="{{u('job')}}">
                     <h2>查看<br/>职业招聘</h2>
                     <p>[TO VIEW]</p>
                 </a>
             </div>
             <div class="fr" style="text-align: right;">
-                <a href="###">
+                <a href="{{u('person')}}">
                     <h2><strong>学生注册</strong>发布求职信息</h2>
                     <p>PERSONAL REGISTRATION</p>
                 </a>
@@ -93,34 +93,34 @@
                 <h2>高端招聘</h2>
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="/img/zhi_10.png" alt=""/>
+                <img src="/img/zhi_11.png" alt=""/>
             </div>
-            <div class="oDiv1 o1">
-                <h2>院校信息发布</h2>
+            <div class="oDiv4 o1">
+                <h2>企业招聘</h2>
+
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="/img/zhi_03.png" alt=""/>
+                <img src="/img/zhi_12.png" alt=""/>
             </div>
-            <div class="oDiv2 o1">
-                <h2>求职者平台</h2>
-                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务 ...</p>
-                <a href="###">更多>></a>
-                <img src="/img/zhi_07.png" alt=""/>
-            </div>
-
             <div class="oDiv3 o1">
                 <h2>校园招聘</h2>
 
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="/img/zhi_15.png" alt=""/>
+                <img src="/img/zhi_13.png" alt=""/>
             </div>
-            <div class="oDiv4 o1">
-                <h2>高端招聘</h2>
 
+            <div class="oDiv2 o1">
+                <h2>求职者平台</h2>
+                <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务 ...</p>
+                <a href="###">更多>></a>
+                <img src="/img/zhi_14.png" alt=""/>
+            </div>
+            <div class="oDiv1 o1">
+                <h2>院校信息发布</h2>
                 <p>专业的助教团队陪伴整个培训过程，确保学员学习质量 3.毕业之后会进行一对一跟踪服务，保证学员达到出师水平 ...</p>
                 <a href="###">更多>></a>
-                <img src="/img/zhi_19.png" alt=""/>
+                <img src="/img/zhi_15.png" alt=""/>
             </div>
         </div>
         <div class="ra_con">

@@ -20,7 +20,8 @@
 		    	    <a href="/person"><p>修改头像</p></a>
 		    	</div>
 		    	<div class="personal-username">欢迎回来，{{$user['member_name']}}</div>
-		    	<form action="{{ route('logout')}}" method="post"><a class="quit-personal" href="javascript:;">退出</a>{!! csrf_field() !!}</form>
+
+		    	<form action="{{ route('logout')}}" method="post"><a class="quit-personal" href="javascript:;"><button style="background: #d81618">退出</button></a>{!! csrf_field() !!}</form>
 	        	@section('menu_left')
 					@if (empty($GLOBALS['uri'][1]))
 						@include('user.left.person')
