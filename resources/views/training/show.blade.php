@@ -51,7 +51,7 @@
                                 @endif
                             @else
                             <!-- <a href="javascript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}';" class="jinggao" style="color: #666666;">举报</a> -->
-                            <a href="javasript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}';" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
+                            <a href="javascript:if(confirm('未登录,去登陆后再来举报'))window.location.href='{{route('login'). _r_('?r=%s')}}'" class="jbd"><img src="/img/jbd.jpg"/>举报</a>
                             @endif
                         </div>
                         @if(auth()->check() && App\Order::ofEncroll(auth()->id(), $id_arr->id)->first())
@@ -200,17 +200,18 @@
                 <span class="sp2"><img src="/img/shnegqingsucc1.jpg"/></span>
             </p>
             <p class="p2">
-                举报<span class="color-blue">{{$userinfo[0]['business_name']}}</span>发布的<span class="color-blue">{{$id_arr->title}}</span>职位
+                举报<span class="color-blue">{{$id_arr->qyname}}</span>发布的<span class="color-blue">{{$id_arr->title}}</span>培训
                 <!-- <select name=""> -->
                     <!-- <option value="">请选择培训课程</option> -->
                 <!-- </select> -->
             </p>
             <p class="p3">
                 <textarea name="content" rows="" cols="" placeholder="填写举报内容"></textarea>
-                <input type="hidden" name="business_name" value="{{$userinfo[0]['business_name']}}">
-                <input type="hidden" name="business_id" value="{{$userinfo[0]['user_id']}}">
+                <input type="hidden" name="business_name" value="{{$id_arr->qyname}}">
+                <input type="hidden" name="business_id" value="{{$id_arr->user_id}}">
                 <input type="hidden" name="person_id" value="{{auth()->check() ? auth()->id() : 0 }}">
                 <input type="hidden" name="job_id" value="{{$id_arr->id}}">
+                <input type="hidden" name="ext" value="培训">
                 <input type="hidden" name="job_title" value="{{$id_arr->title}}">
                 {{csrf_field()}}
             </p>
@@ -221,7 +222,7 @@
                     举报投诉电话：<i>{{$boot_config['link3']}}</i>
                 </p>
                 <p>
-                    投诉邮箱：<i>65432789@qq.com</i>
+                    投诉邮箱：<i>{{$boot_config['email']}}</i>
                 </p>
             </div>
             <div onclick="model(this, '', function(){$('.report-form .sp2').click();})" class="report-call-right">

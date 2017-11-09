@@ -10,6 +10,7 @@
     -moz-opacity: 0.6;
     display:none;
 }
+.color-blue {color:#3481bc !important}
 .report-mask{
     width:434px;
     height: 308px;

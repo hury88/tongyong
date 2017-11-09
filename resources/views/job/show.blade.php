@@ -6,9 +6,6 @@
     <link rel="stylesheet" type="text/css" href="/css/zhiyezhaopin.css"/>
     <link rel="stylesheet" type="text/css" href="/plugins/pop-up.css"/>
     <link rel="stylesheet" type="text/css" href="/plugins/report.css"/>
-    <style>
-        .color-blue {color:#3481bc !important}
-    </style>
 @stop
 @section('bodyNextLabel')
     <body>
@@ -69,6 +66,11 @@
                         <a href="javascript:void(0);">{{$id_arr->title}}</a>
                     </div>
                     <div class="sqzwAll">
+                   @if($userinfo)
+                    <?php $business_name = $userinfo[0]['business_name'];$business_id=$userinfo[0]['user_id'] ?>
+                   @else
+                    <?php $business_name = $boot_config['sitename'];$business_id=0 ?>
+                   @endif
                    @if($userinfo)
                             <div class="sqzwleft">
                                 <img src="{{img($userinfo[0]['logo'])}}"/>
@@ -158,7 +160,7 @@
                                     <span>{{$id_arr->title}}</span>
                                     @if(auth()->check())
                                         @if(auth()->user()->isPerson())
-                                        <a class="shenqingzhiwei17" recruit_id="{{$id_arr->id}}" business_name="{{$userinfo[0]['business_name']}}" href="javascript:;">申请职位</a>
+                                        <a class="shenqingzhiwei17" recruit_id="{{$id_arr->id}}" business_name="{{$business_name}}" href="javascript:;">申请职位</a>
                                         @else
                                         <a href="javascript:alert('只有个人会员才能申请职位');">申请职位</a>
                                         @endif
@@ -454,31 +456,32 @@
                             <img src="/img/apply-img_01.jpg"/>
                         </div>
                     </div>-->
-                    <div class="apply-submit"><input onclick="return job(this)" type="submit" value="投递简历"/></div>
+                    <div class="apply-submit"><input onclick="return job(this)" type="submit" value="投递简历"/><span class="fl">&emsp;</span><input onclick="window.location.href='/person/jianli'" type="button" value="去创建简历"/></div>
                 </div>
             </div>
 
             @endif
-
             @if(auth()->check() && auth()->user()->isPerson())
             <!-- 举报弹窗-->
             <div class="report-layer"> </div>
-            <div class="report-mask form" action="{{route('jubao')}}">
+            <div class="report-mask form" style="height:330px" action="{{route('jubao')}}">
                 <div class="report-form">
                     <p class="p1">
                         <span class="sp1">举报</span>
                         <span class="sp2"><img src="/img/shnegqingsucc1.jpg"/></span>
                     </p>
+                    <br>
                     <p class="p2">
-                        举报<span class="color-blue">{{$userinfo[0]['business_name']}}</span>发布的<span class="color-blue">{{$id_arr->title}}</span>职位
+                        举报<span class="color-blue">{{$business_name}}</span>发布的<span class="color-blue">{{$id_arr->title}}</span>职位
                         <!-- <select name=""> -->
                             <!-- <option value="">请选择培训课程</option> -->
                         <!-- </select> -->
                     </p>
+                    <br>
                     <p class="p3">
                         <textarea name="content" rows="" cols="" placeholder="填写举报内容"></textarea>
-                        <input type="hidden" name="business_name" value="{{$userinfo[0]['business_name']}}">
-                        <input type="hidden" name="business_id" value="{{$userinfo[0]['user_id']}}">
+                        <input type="hidden" name="business_name" value="{{$business_name}}">
+                        <input type="hidden" name="business_id" value="{{$business_id}}">
                         <input type="hidden" name="person_id" value="{{auth()->check() ? auth()->id() : 0 }}">
                         <input type="hidden" name="job_id" value="{{$id_arr->id}}">
                         <input type="hidden" name="job_title" value="{{$id_arr->title}}">
@@ -491,7 +494,7 @@
                             举报投诉电话：<i>{{$boot_config['link3']}}</i>
                         </p>
                         <p>
-                            投诉邮箱：<i>65432789@qq.com</i>
+                            投诉邮箱：<i>{{$boot_config['email']}}</i>
                         </p>
                     </div>
                     <div onclick="model(this, '', function(){$('.report-form .sp2').click();})" class="report-call-right">
@@ -499,6 +502,7 @@
                     </div>
                 </div>
             </div>
+            @endif
     @parent
     @stop
 

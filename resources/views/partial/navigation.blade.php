@@ -42,7 +42,7 @@
                 <li> <a href="{{ u('news', 'seach')}}" style="margin-left: 30px;">搜索</a> </li>
             @if(auth()->check())
                 <li> <a href="{{ u('user')}}" style="margin-left: 15px;font-size:16px;"><em style="font-size:12px;">您好</em>，{{auth()->user()->member_name}}</a> </li>
-                <li> <form action="{{ route('logout')}}" method="post"><a href="javascript:;"><button>退出</button></a>{!! csrf_field() !!}</form> </li>
+                <li> <form action="{{ route('logout')}}" method="post"><a href="javascript:;"><button>退出</button></a>{{csrf_field()}}</form> </li>
             @else
                 <li> <a href="{{ u('register')}}" style="margin-left: 15px;">注册</a> </li>
                 <li> <a href="{{ u('login')}}">登录</a> </li>
