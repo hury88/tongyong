@@ -1,6 +1,7 @@
 <?php
 $key=$_GET['key'];
 $typeid=(int)$_GET['typeid'];
+$pid=v_id($typeid,'pid','news_cats');
 ?>
 <h3>职业证书报名表</h3>
 <div class="nation-edu-cate clearfix">
@@ -46,9 +47,9 @@ $typeid=(int)$_GET['typeid'];
                 <td class="edu-table-firsttd"><a href="{{$val['path']}}" style="display: block" target="_blank">{{$val['title']}}</a></td>
                 <td>{{substr($val['created_at'],0,10)}}</td>
                 <td>
-                    <a href="javascript:void(0);">下载报名表</a><br>
-                    <a href="javascript:void(0);">打印报名表</a><br>
-                    <a href="javascript:void(0);">完善报名表</a>
+                    <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}">下载报名表</a><br>
+                    <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}">打印报名表</a><br>
+                    <a href="{{route('p_e_v')}}?typeid={{$typeid}}&tid={{$val['tid']}}&eid={{$val['id']}}" >完善报名表</a>
                     {{--                    <a href="{{route('p_e_v')}}?pid=3" >完善报名表</a>--}}
                 </td>
             </tr>
