@@ -58,6 +58,10 @@ require WEB_ROOT.'./include/chkuser.inc.php';
                     <td height="23">&nbsp;
                         <?=$_SERVER["SERVER_SOFTWARE"]?></td>
                   </tr>
+                <tr>
+                    <td height="23">&nbsp;mysql版本：</td>
+                    <td height="23">&nbsp;mysql5.5</td>
+                </tr>
                   <tr>
                     <td height="23">&nbsp;服务器操作系统：</td>
                     <td height="23">&nbsp;

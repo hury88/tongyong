@@ -21,7 +21,7 @@
         </div>
         <div class="order-center-right fr">
             <div class="integral"><img src="/img/jf-icon.png"/><span>12</span></div>
-            <a href="javascript:;" class="my-apply">我要应聘</a>
+            <a href="{{u('job')}}" class="my-apply">我要应聘</a>
         </div>
     </div>
 </div>

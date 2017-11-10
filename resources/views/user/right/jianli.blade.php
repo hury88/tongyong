@@ -16,7 +16,7 @@
                 <td>{{$vf->gzxz}}</td>
                 <td>{{$vf->downs}}/{{$vf->hits}}</td>
                 <td>{{$vf->msyqs}}</td>
-                <td>{{$vf->addtime}}</td>
+                <td>{{date('Y-m-d H:i:s',$vf->addtime)}}</td>
                 <td>
                     <p class="my-resume-operate">
                         <a href="{{u("person","jianli","edit",$vf->id)}}">修改</a>

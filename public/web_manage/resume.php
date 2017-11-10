@@ -77,7 +77,7 @@ list($data,$pagestr) = Page::paging($pageConfig);
 	                            <td><?=$tel?></td>
 	                            <td><?=$cszy?></td>
 	                            <td><?php echo $year.'-'.$month?></td>
-							    <td><a href="javascript:vopid(0)"> 查看详情</a></td>
+							    <td><a href="javascript:;"> 查看详情</a></td>
 	                            <td><?=date('Y-m-d H:i:s',$addtime)?></td>
 	                        </tr>
 						<?php endforeach ?>
