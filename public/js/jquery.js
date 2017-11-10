@@ -47,7 +47,7 @@ function model(that, actionUrl, callback){
      },
      error : function(){
      	$(that).removeAttr('disabled');
-		dialog(3,["提交出错 : 请刷新页面重试!", "系统错误"],{cancel:"取消",confirm:["刷新", "?"]});
+		dialog(3,["提交出错 : 请刷新页面重试!", "系统错误"],{cancel:"取消"});
      }
     })
     return false;

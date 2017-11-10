@@ -1,5 +1,5 @@
 @extends('auth.layouts/reset')
-@section('title')确认账号 @parent @stop
+@section('title')重置密码 @parent @stop
 @section('daohang')
     <img src="/img/circle.png"/>
     <span class="active-line"><i>确认账号</i></span>
@@ -16,18 +16,18 @@
     <div class="findpwd-step1">
         <h2>安全验证</h2>
         <div class="findpwd-step1-form">
-            <form method="post" action="{{route('password.request4')}}">
+            <form class="form" method="post" action="{{route('password.post3')}}">
                 {{csrf_field()}}
                 <div class="findpwd-step1-code">
-                    <input class="findpwd-step3" name="pwd" type="password" placeholder="请输入您的新密码"/>
+                    <input class="findpwd-step3" name="new" type="password" placeholder="请输入您的新密码"/>
                     <a class="small-key" href="javascript:;"></a>
                 </div>
                 <div class="findpwd-step1-code">
-                    <input class="findpwd-step3" name="pwd1" type="password" placeholder="请确认新密码"/>
+                    <input class="findpwd-step3" name="password2" type="password" placeholder="请确认新密码"/>
                     <a class="small-key" href="javascript:;"></a>
                 </div>
                 <div class="findpwd-step1-sub">
-                    <input type="submit" value="下一步"/>
+                    <input class="model" type="submit" value="下一步"/>
                 </div>
             </form>
         </div>

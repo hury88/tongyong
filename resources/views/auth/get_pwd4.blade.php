@@ -1,5 +1,5 @@
 @extends('auth.layouts/reset')
-@section('title')确认账号 @parent @stop
+@section('title')密码成功找回 @parent @stop
 @section('daohang')
     <img src="/img/circle.png"/>
     <span class="active-line"><i>确认账号</i></span>
@@ -17,10 +17,10 @@
         {{csrf_field()}}
         <h2>密码成功找回</h2>
         <div class="findpwd-back-notice1"><img src="/img/smile.png"/>恭喜您成功找回密码</div>
-        <div class="findpwd-back-notice2"><p>尊敬的用户，您已成功找回密码，<em>5</em>秒后页面将自动登录！</p></div>
+        <div class="findpwd-back-notice2"><p>尊敬的用户，您已成功找回密码，<em>5</em>秒后页面将跳转至登录页面！</p></div>
         <a href="/" class="go-back">返回首页</a>
     </div>
-
+    <script src="/js/jquery.js"></script>
     <script type="text/javascript">
         $(function(){
             var t=setTimeout(function(){
@@ -35,7 +35,7 @@
                         jianyimiao()
                     },1000);
                 }else{
-                    location.href='/';
+                    location.href="{{route('login')}}";
                 }
 
             }

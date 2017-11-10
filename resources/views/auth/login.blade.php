@@ -45,7 +45,7 @@
                   {{ csrf_field() }}
               </form>
               <div class="other-link">
-                  <a href="{{route('password.request')}}">忘记密码?</a><span>|</span><a href="{{u('register', request()->has('org')?'org':'person')}}{{$_r0_}}">用户注册</a>
+                  <a href="{{route('password.get1')}}">忘记密码?</a><span>|</span><a href="{{u('register', request()->has('org')?'org':'person')}}{{$_r0_}}">用户注册</a>
               </div>
                <div class="third-login">
                    <h3>使用第三方登录</h3>

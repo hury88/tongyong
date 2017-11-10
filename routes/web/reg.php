@@ -31,10 +31,16 @@ Route::group(['prefix' => 'register'], function () {
 
 
 // Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@get_pwd1')->name('password.request');
-Route::post('password/reset2', 'Auth\ForgotPasswordController@get_pwd2')->name('password.request2');
-Route::post('password/reset3', 'Auth\ForgotPasswordController@get_pwd3')->name('password.request3');
-Route::post('password/reset4', 'Auth\ForgotPasswordController@get_pwd4')->name('password.request4');
+Route::get('password/reset', 'Auth\ForgotPasswordController@get_pwd1')->name('password.get1');
+Route::get('password/reset/next', 'Auth\ForgotPasswordController@get_pwd2')->name('password.get2');
+Route::get('password/reset/then', 'Auth\ForgotPasswordController@get_pwd3')->name('password.get3');
+Route::get('password/reset/last', 'Auth\ForgotPasswordController@get_pwd4')->name('password.get4');
+Route::post('password/reset', 'Auth\ForgotPasswordController@post_pwd1')->name('password.post1');
+Route::post('password/reset/next', 'Auth\ForgotPasswordController@post_pwd2')->name('password.post2');
+Route::post('password/reset/then', 'Auth\ForgotPasswordController@post_pwd3')->name('password.post3');
+Route::post('password/reset/last', 'Auth\ForgotPasswordController@post_pwd4')->name('password.post4');
+
+Route::post('password/yzm', 'Auth\ForgotPasswordController@yzm')->name('password.yzm');
 
 use Illuminate\Http\Request;
 

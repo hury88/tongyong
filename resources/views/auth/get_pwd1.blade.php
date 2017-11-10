@@ -16,7 +16,7 @@
     <div class="findpwd-step1">
         <h2>确认账号</h2>
         <div class="findpwd-step1-form">
-            <form class="form" method="post" action="{{route('password.request2')}}">
+            <form class="form" method="post" action="{{route('password.post1')}}">
                 {{csrf_field()}}
                 <div class="findpwd-step1-div">
                     <input type="text" name="username" placeholder="请输入邮箱/手机号"/>
@@ -36,20 +36,4 @@
 
 @section('scripts')
 @parent
-<script type="text/javascript">
-    $('#submit').click(function () {
-        var telemail=$('#telemail').val()
-        var yzm=$('#yzm').val()
-        if(!telemail){
-            alert('请输入你注册时邮箱/手机');
-            $('#telemail').focus()
-            return false
-        }
-        if(!yzm){
-            alert('请输入验证码');
-            $('#telemail').focus()
-            return false
-        }
-    })
-</script>
 @stop

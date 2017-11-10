@@ -1,6 +1,5 @@
 @extends('auth.layouts/reset')
-@section('title')确认账号 @parent @stop
-<?php dd($GLOBALS);?>
+@section('title')安全验证 @parent @stop
 @section('daohang')
     <img src="/img/circle.png"/>
     <span class="active-line"><i>确认账号</i></span>
@@ -17,14 +16,14 @@
     <div class="findpwd-step1">
         <h2>安全验证</h2>
         <div class="findpwd-step1-form">
-            <form method="post" action="{{route('password.request3')}}">
+            <form class="form" method="post" action="{{route('password.post2')}}">
                 {{csrf_field()}}
                 <div class="findpwd-step1-code">
                     <input class="findpwd-step2" name="sjyzm" type="text" placeholder="请输入邮箱验证码"/>
-                    <input class="form-code-get" type="button" value="获取验证码"/>
+                    <input class="form-code-get" onclick="model(this, '{{route('password.yzm')}}')" type="button" value="获取验证码"/>
                 </div>
                 <div class="findpwd-step1-sub">
-                    <input type="submit" value="下一步"/>
+                    <input class="model" type="submit" value="下一步" id="submit"/>
                 </div>
             </form>
         </div>
